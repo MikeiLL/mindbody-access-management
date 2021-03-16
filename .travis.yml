@@ -5,6 +5,9 @@ php:
   - 7.1
   - hhvm
 
+services:
+  - mysql
+
 cache:
   directories:
     - vendor
