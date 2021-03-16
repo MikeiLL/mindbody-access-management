@@ -18,6 +18,11 @@ install:
   - composer global require squizlabs/php_codesniffer
   - composer install --prefer-dist
 
+matrix:
+  include:
+    - php: 7.2
+      env: WP_VERSION=latest
+
 before_script:
   - mysql -e 'create database wordpress_test;'
   - cp .env.test .env
