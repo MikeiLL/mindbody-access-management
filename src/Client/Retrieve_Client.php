@@ -194,7 +194,7 @@ class Retrieve_Client extends Interfaces\Retrieve {
      * Get @array of MBO Client IDs
      *
      * @param $clientID
-     ^ @return array _single_ (first) Client from Mindbody
+     * @return array _single_ (first) Client from Mindbody
      */
     public function get_client( $clientID ){
     		
@@ -418,7 +418,7 @@ class Retrieve_Client extends Interfaces\Retrieve {
         $this->get_mbo_results();
 		
 		$result = $this->mb->GetActiveClientMemberships(['clientId' => $client_id]); // UniqueID ??
-				
+		
 		return $result['ClientMemberships'];
     }
     
