@@ -1,29 +1,36 @@
 sudo: false
 
 language: php
+php:
+  - 7.1
+
+cache:
+  directories:
+    - vendor
+    - $HOME/.composer/cache
+
+install:
+  - composer self-update && composer --version
+  - export PATH="$HOME/.composer/vendor/bin:$PATH"
+  - composer global require squizlabs/php_codesniffer
+  - composer install --prefer-dist
+
+before_script:
+  - mysql -e 'create database wordpress_test;'
+  - cp .env.test .env
+  - svn export --quiet https://develop.svn.wordpress.org/trunk/tests/phpunit/includes/ tests-includes
+
+script:
+  - phpcs --standard=ruleset.xml --extensions=php --ignore=web/wp/,vendor/,tests/,tests-includes/ -n -s .
+  - phpunit
 
 notifications:
   email:
     on_success: never
-    on_failure: change
+    on_failure: never
 
 branches:
   only:
     - master
 
-php:
-  - 7.1
 
-matrix:
-  include:
-    - php: 7.1
-    - php: 7.2
-      env: WP_VERSION=latest
-
-before_script:
-  - export PATH="$HOME/.composer/vendor/bin:$PATH"
-  - composer global require "phpunit/phpunit=4.8.*|5.7.*"
-
-script:
-  - phpunit
-  - WP_MULTISITE=1 phpunit
