@@ -20,7 +20,7 @@ class Test_Get_Token extends MZMBOAccess_WPUnitTestCase {
         
         $result = $mbo_api->TokenIssue();
                 
-        $this->assertTrue(ctype_alnum($result));
+        $this->assertTrue(ctype_alnum($result->AccessToken));
                         
         $basic_options_set = array(
             'mz_source_name' => MBO_Access_Test_Options::$_MYSOURCENAME,

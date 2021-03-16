@@ -122,6 +122,12 @@ class Tests_Retrieve_Client extends MZMBOAccess_WPUnitTestCase {
         }
 	}
 	
+	/**
+     * @runInSeparateProcess
+	 * @preserveGlobalState disabled
+	 * // prevent headers already sent error
+	 * // see: https://phpunit.de/manual/6.5/en/appendixes.annotations.html#appendixes.annotations.runInSeparateProcess
+     */
 	public function test_log_client_in() {
 		
 		if ( empty(MBO_Access_Test_Options::$_CLIENTPASSWORD) ) return; // can't login yet.
@@ -138,12 +144,10 @@ class Tests_Retrieve_Client extends MZMBOAccess_WPUnitTestCase {
         $validation_result = $client_object->validate_client($credentials);
         
         $this->assertTrue(!empty($validation_result['ValidateLoginResult']['GUID']));
+                
+        $session_result = $client_object->create_client_session($validation_result['ValidateLoginResult']['Client']);
         
-        $deeper_client_info = $client_object->get_clients([$validateLogin['ValidateLoginResult']['GUID']]);
-        
-        $session_result = $client_object->create_client_session($validation_result);
-        
-        $this->assertTrue($session_result);
+        $this->assertTrue( (bool) $validation_result );
         
         $is_or_is_not = $client_object->check_client_logged();
         
@@ -198,19 +202,30 @@ class Tests_Retrieve_Client extends MZMBOAccess_WPUnitTestCase {
         parent::setUp();
         		                
         $client_object = new MZ_MBO_Access\Client\Retrieve_Client;
+
+        $bad_credentials = [
+        	'Username' => MBO_Access_Test_Options::$_CLIENTEMAIL,
+       		'Password' => "abitoks"
+        ];
         
-        $client_id = $client_object->Id
-        
+        $failed_validation_result = $client_object->validate_client($bad_credentials);
+		
+		$this->assertTrue($failed_validation_result['ValidateLoginResult']['Status'] == 'InvalidParameters');
+
+		$this->assertTrue($failed_validation_result['ValidateLoginResult']['ErrorCode'] == 315);
+		
         $credentials = [
         	'Username' => MBO_Access_Test_Options::$_CLIENTEMAIL,
        		'Password' => MBO_Access_Test_Options::$_CLIENTPASSWORD
         ];
         
-        $validation_result = $client_object->validate_client($credentials);
+		$validation_result = $client_object->validate_client($credentials);
         
         $this->assertTrue(!empty($validation_result['ValidateLoginResult']['GUID']));
         
-        $session_result = $client_object->create_client_session($validation_result);
+        $session_result = $client_object->create_client_session($validation_result['ValidateLoginResult']['Client']);
+
+		$client_id = $validation_result['ValidateLoginResult']['Client']['ID'];
         
         $client_details = $client_object->get_client_details_from_session( $client_id );
         
@@ -227,8 +242,8 @@ class Tests_Retrieve_Client extends MZMBOAccess_WPUnitTestCase {
         			'get_client_contracts: ' => $get_client_contracts,
         			'get_client_purchases: ' => $get_client_purchases,
         			'get_client_services: ' => $get_client_services] as $k => $v) {
-        	print_r($k);
-        	print_r($v);
+        	// print_r($k);
+        	// print_r($v);
         }
         $this->assertTrue(is_array($client_active_memberships));
         $this->assertTrue(isset($get_client_account_balance));
