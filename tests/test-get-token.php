@@ -1,49 +1,52 @@
 <?php
-require_once('MZMBOAccess_WPUnitTestCase.php');
-require_once('MBO_Access_Test_Options.php');
 
-class Test_Get_Token extends MZMBOAccess_WPUnitTestCase {
+require_once 'MZMBOAccess_WPUnitTestCase.php';
+require_once 'MBO_Access_Test_Options.php';
 
-	public function tearDown() {
-		parent::tearDown();
-	}
+class Test_Get_Token extends MZMBOAccess_WPUnitTestCase
+{
 
-	public function test_get_access_token() {
+
+    public function tearDown()
+    {
+        parent::tearDown();
+    }
+
+    public function test_get_access_token()
+    {
 
         parent::setUp();
 
         $this->assertTrue(class_exists('MZ_Mindbody\Inc\Libraries\MBO_V6_API'));
-		
+
         $basic_options = get_option('mz_mbo_basic');
 
         $mbo_api = new MZ_Mindbody\Inc\Libraries\MBO_V6_API($basic_options);
-        
+
         $result = $mbo_api->TokenIssue();
-                
+
         $this->assertTrue(ctype_alnum($result->AccessToken));
-                        
+
         $basic_options_set = array(
-            'mz_source_name' => MBO_Access_Test_Options::$_MYSOURCENAME,
-            'mz_source_name' => MBO_Access_Test_Options::$_MYSOURCENAME,
+            'mz_source_name'       => MBO_Access_Test_Options::$_MYSOURCENAME,
+            'mz_source_name'       => MBO_Access_Test_Options::$_MYSOURCENAME,
             'mz_mindbody_password' => 'sdfg',
-            'mz_mbo_app_name' => 'sdfg',
-            'mz_mbo_api_key' => 'wert',
-			'sourcename_not_staff' => 'on',
-            'mz_mindbody_siteID' => '-99'
+            'mz_mbo_app_name'      => 'sdfg',
+            'mz_mbo_api_key'       => 'wert',
+            'sourcename_not_staff' => 'on',
+            'mz_mindbody_siteID'   => '-99',
         );
-        
-        update_option( 'mz_mbo_basic', $basic_options_set, '', 'yes' );
-        
-        update_option( 'mz_mbo_token', [] );
-        
+
+        update_option('mz_mbo_basic', $basic_options_set, '', 'yes');
+
+        update_option('mz_mbo_token', array());
+
         $bad_basic_options = get_option('mz_mbo_basic');
 
         $bad_mbo_api = new MZ_Mindbody\Inc\Libraries\MBO_V6_API($bad_basic_options);
-        
-        $result_error = $bad_mbo_api->TokenIssue();
-                        
-        $this->assertTrue($result_error->Error->Code == 'DeniedAccess');
-        
-	}
 
+        $result_error = $bad_mbo_api->TokenIssue();
+
+        $this->assertTrue($result_error->Error->Code == 'DeniedAccess');
+    }
 }

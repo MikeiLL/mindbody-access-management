@@ -10,26 +10,30 @@ use MZ_MBO_Access as NS;
  * Defines the plugin name, version, and two examples hooks for how to
  * enqueue the admin-specific stylesheet and JavaScript.
  *
- * @link       http://mzoo.org
- * @since      1.0.0
+ * @link  http://mzoo.org
+ * @since 1.0.0
  *
- * @author    Mike iLL/mZoo.org
+ * @author Mike iLL/mZoo.org
  */
-class Admin {
-
-	/**
-	 * Notify Admin when plugin deactivated.
-	 *
-	 * TODO: abstract, maybe
-	 *
-	 * @since    2.5.7
-	 */
-	public function admin_notice() {
-		echo wp_kses_post( sprintf(
-			'<div class="notice notice-error"><p>%s</p></div>',
-			__( "Missing Plugin Dependency MZ Mindbody Api.", NS\PLUGIN_TEXT_DOMAIN )
-		  ) );
-	}
+class Admin
+{
 
 
+
+    /**
+     * Notify Admin when plugin deactivated.
+     *
+     * TODO: abstract, maybe
+     *
+     * @since 2.5.7
+     */
+    public function admin_notice()
+    {
+        echo wp_kses_post(
+            sprintf(
+                '<div class="notice notice-error"><p>%s</p></div>',
+                __('Missing Plugin Dependency MZ Mindbody Api.', NS\PLUGIN_TEXT_DOMAIN)
+            )
+        );
+    }
 }

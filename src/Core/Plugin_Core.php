@@ -1,4 +1,5 @@
 <?php
+
 namespace MZ_MBO_Access\Core;
 
 use MZ_MBO_Access as NS;
@@ -11,15 +12,17 @@ use MZ_MBO_Access\Session as Session;
  * The core plugin class.
  * Defines internationalization, admin-specific hooks, and public-facing site hooks.
  *
- * @link       http://mzoo.org
- * @since      1.0.0
+ * @link  http://mzoo.org
+ * @since 1.0.0
  *
- * @author     Mike iLL/mZoo.org
+ * @author Mike iLL/mZoo.org
  */
 class Plugin_Core
 {
+
+
     /**
-     * @var MZ_Mindbody_API The one true MZ_Mindbody_API
+     * @var   MZ_Mindbody_API The one true MZ_Mindbody_API
      * @since 1.0.1
      */
     private static $instance;
@@ -28,81 +31,81 @@ class Plugin_Core
      * The loader that's responsible for maintaining and registering all hooks that power
      * the plugin.
      *
-     * @var      Loader $loader Maintains and registers all hooks for the plugin.
+     * @var Loader $loader Maintains and registers all hooks for the plugin.
      */
     protected $loader;
 
     /**
      * The unique identifier of this plugin.
      *
-     * @since    1.0.1
-     * @access   protected
-     * @var      string $plugin_base_name The string used to uniquely identify this plugin.
+     * @since  1.0.1
+     * @access protected
+     * @var    string $plugin_base_name The string used to uniquely identify this plugin.
      */
     protected $plugin_basename;
 
     /**
      * The current version of the plugin.
      *
-     * @since    1.0.1
-     * @access   protected
-     * @var      string $version The current version of the plugin.
+     * @since  1.0.1
+     * @access protected
+     * @var    string $version The current version of the plugin.
      */
     protected $version;
 
     /**
      * Format for date display, specific to MBO API Plugin.
      *
-     * @since    1.0.1
-     * @access   public
-     * @var      string $date_format WP date format option.
+     * @since  1.0.1
+     * @access public
+     * @var    string $date_format WP date format option.
      */
     public static $date_format;
 
     /**
      * Format for time display, specific to MBO API Plugin.
      *
-     * @since    1.0.1
-     * @access   public
-     * @var      string $time_format
+     * @since  1.0.1
+     * @access public
+     * @var    string $time_format
      */
     public static $time_format;
 
     /**
-     * Timezone string returned by wordpress get_timezone function.
+     * Timezone string returned by WordPress get_timezone function.
      *
      * For example 'US/Eastern'
      *
-     * @since    1.0.1
-     * @access   protected
-     * @var      string $timezone PHP Date formatting string.
+     * @since  1.0.1
+     * @access protected
+     * @var    string $timezone PHP Date formatting string.
      */
     public static $timezone;
 
     /**
-     * Wordpress option for start of week.
+     * WordPress option for start of week.
      *
-     * @since    1.0.1
-     * @access   protected
-     * @var      integer $start_of_week.
+     * @since  1.0.1
+     * @access protected
+     * @var    integer $start_of_week.
      */
     public static $start_of_week;
 
-	/**
-	 * @var MZ_Access_Session
-	 * @accesZ private
-	 */
-	private $session;
-	
+    /**
+     * @var    MZ_Access_Session
+     * @accesZ private
+     */
+    private $session;
+
     /**
      * Initialize and define the core functionality of the plugin.
      */
     public function __construct()
     {
 
-        $this->plugin_name = NS\PLUGIN_NAME;
-        $this->version = NS\PLUGIN_VERSION;
-        $this->plugin_basename = NS\PLUGIN_BASENAME;
+        $this->plugin_name        = NS\PLUGIN_NAME;
+        $this->version            = NS\PLUGIN_VERSION;
+        $this->plugin_basename    = NS\PLUGIN_BASENAME;
         $this->plugin_text_domain = NS\PLUGIN_TEXT_DOMAIN;
 
         $this->load_dependencies();
@@ -111,33 +114,38 @@ class Plugin_Core
         $this->define_public_hooks();
         $this->register_shortcodes();
         $this->add_settings_page();
-        
+
         $this->session = Session\MZ_Access_Session::instance();
     }
-    
-    /**
-	 * Cloning is forbidden.
-	 * @since 1.0.0
-	 */
-	public function __clone() {
-		_doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; huh?', NS\PLUGIN_TEXT_DOMAIN ), '2.1' );
-	}
 
-	/**
-	 * Unserializing instances of this class is forbidden.
-	 * @since 1.0.0
-	 */
-	public function __wakeup() {
-		_doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; huh?', NS\PLUGIN_TEXT_DOMAIN ), '2.1' );
-	}
-	
-	
-	/**
+    /**
+     * Cloning is forbidden.
+     *
+     * @since 1.0.0
+     */
+    public function __clone()
+    {
+        _doing_it_wrong(__FUNCTION__, __('Cheatin&#8217; huh?', NS\PLUGIN_TEXT_DOMAIN), '2.1');
+    }
+
+    /**
+     * Unserializing instances of this class is forbidden.
+     *
+     * @since 1.0.0
+     */
+    public function __wakeup()
+    {
+        _doing_it_wrong(__FUNCTION__, __('Cheatin&#8217; huh?', NS\PLUGIN_TEXT_DOMAIN), '2.1');
+    }
+
+
+    /**
      * Return our session instance
      */
-	public function getSession() {
-		return $this->session;
-	}
+    public function getSession()
+    {
+        return $this->session;
+    }
 
 
     /**
@@ -148,12 +156,11 @@ class Plugin_Core
      * - Admin - Defines all hooks for the admin area.
      * - Frontend - Defines all hooks for the public side of the site.
      *
-     * @access    private
+     * @access private
      */
     private function load_dependencies()
     {
         $this->loader = new Loader();
-
     }
 
     /**
@@ -162,7 +169,7 @@ class Plugin_Core
      * Uses the Internationalization_I18n class in order to set the domain and to register the hook
      * with WordPress.
      *
-     * @access    private
+     * @access private
      */
     private function set_locale()
     {
@@ -170,50 +177,49 @@ class Plugin_Core
         $plugin_i18n = new Internationalization_I18n($this->plugin_text_domain);
 
         $this->loader->add_action('plugins_loaded', $plugin_i18n, 'load_plugin_textdomain');
-
     }
 
     /**
      * Register all of the hooks related to the admin area functionality
      * of the plugin.
      *
-     * @access    private
+     * @access private
      */
     private function define_admin_hooks()
     {
 
         /*
-         * Additional Hooks go here
-         *
-         * e.g.
-         *
-         * //admin menu pages
-         * $this->loader->add_action('admin_menu', $plugin_admin, 'add_plugin_admin_menu');
-         *
-         *  //plugin action links
-         * $this->loader->add_filter( 'plugin_action_links_' . $this->plugin_basename, $plugin_admin, 'add_additional_action_link' );
-         *
-         */
+        * Additional Hooks go here
+        *
+        * e.g.
+        *
+        * //admin menu pages
+        * $this->loader->add_action('admin_menu', $plugin_admin, 'add_plugin_admin_menu');
+        *
+        *  //plugin action links
+        * $this->loader->add_filter( 'plugin_action_links_' . $this->plugin_basename, $plugin_admin, 'add_additional_action_link' );
+        *
+        */
     }
 
     /**
      * Register all of the hooks related to the public-facing functionality
      * of the plugin.
      *
-     * @access    private
+     * @access private
      */
     private function define_public_hooks()
     {
-        $access_portal = new Access\Access_Portal;
-        $client_portal = new Client\Client_Portal;
+        $access_portal = new Access\Access_Portal();
+        $client_portal = new Client\Client_Portal();
 
         // Start Ajax Access Management
         $this->loader->add_action('wp_ajax_nopriv_ajax_login_check_access_permissions', $access_portal, 'ajax_login_check_access_permissions');
         $this->loader->add_action('wp_ajax_ajax_login_check_access_permissions', $access_portal, 'ajax_login_check_access_permissions');
-        
+
         $this->loader->add_action('wp_ajax_nopriv_ajax_check_access_permissions', $access_portal, 'ajax_check_access_permissions');
         $this->loader->add_action('wp_ajax_ajax_check_access_permissions', $access_portal, 'ajax_check_access_permissions');
-        
+
         // Start Ajax Client Check Logged
         $this->loader->add_action('wp_ajax_nopriv_ajax_register_for_class', $client_portal, 'ajax_register_for_class');
         $this->loader->add_action('wp_ajax_ajax_register_for_class', $client_portal, 'ajax_register_for_class');
@@ -241,7 +247,6 @@ class Plugin_Core
         // Start Ajax Check Client Logged Status
         $this->loader->add_action('wp_ajax_nopriv_ajax_check_client_logged', $client_portal, 'ajax_check_client_logged');
         $this->loader->add_action('wp_ajax_ajax_check_client_logged', $client_portal, 'ajax_check_client_logged');
-
     }
 
 
@@ -265,7 +270,7 @@ class Plugin_Core
     /**
      * The reference to the class that orchestrates the hooks with the plugin.
      *
-     * @return    Loader    Orchestrates the hooks of the plugin.
+     * @return Loader    Orchestrates the hooks of the plugin.
      */
     public function get_loader()
     {
@@ -275,8 +280,8 @@ class Plugin_Core
     /**
      * Retrieve the version number of the plugin.
      *
-     * @since     1.0.0
-     * @return    string    The version number of the plugin.
+     * @since  1.0.0
+     * @return string    The version number of the plugin.
      */
     public function get_version()
     {
@@ -286,8 +291,8 @@ class Plugin_Core
     /**
      * Retrieve the text domain of the plugin.
      *
-     * @since     1.0.0
-     * @return    string    The text domain of the plugin.
+     * @since  1.0.0
+     * @return string    The text domain of the plugin.
      */
     public function get_plugin_text_domain()
     {
@@ -297,7 +302,7 @@ class Plugin_Core
     /**
      * Add our settings page
      *
-     * @since     1.0.0
+     * @since 1.0.0
      */
     public function add_settings_page()
     {
@@ -310,12 +315,11 @@ class Plugin_Core
      *
      * - Events - The Events Class which displays events and loads necessary assets.
      *
-     * @access    private
+     * @access private
      */
     private function register_shortcodes()
     {
         $Access_Display = new Access\Access_Display();
         $Access_Display->register('mbo-client-access');
     }
-
 }

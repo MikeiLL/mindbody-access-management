@@ -1,28 +1,30 @@
 <?php
-namespace MZ_MBO_Access\Core;
 
+namespace MZ_MBO_Access\Core;
 
 /**
  * Fired during plugin deactivation
  *
  * This class defines all code necessary to run during the plugin's deactivation.
  *
- * @link       http://mzoo.org
- * @since      1.0.0
+ * @link  http://mzoo.org
+ * @since 1.0.0
  *
- * @author     Mike iLL/mZoo.org
+ * @author Mike iLL/mZoo.org
  **/
-class Deactivator {
+class Deactivator
+{
 
-	/**
-	 * Short Description.
-	 *
-	 * Long Description.
-	 *
-	 * @since    1.0.1
-	 */
-	public static function deactivate() {
-        
-	}
 
+
+    /**
+     * Short Description.
+     *
+     * Long Description.
+     *
+     * @since 1.0.1
+     */
+    public static function deactivate()
+    {
+    }
 }
