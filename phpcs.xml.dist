@@ -1,8 +1,9 @@
 <?xml version="1.0"?>
 <ruleset name="WordPress Coding Standards for Plugins">
-	
-  <description>MZ MBO Coding Standards</description>
-  <rule ref="WordPress"/>
+	<description>Generally-applicable sniffs for WordPress plugins</description>
+
+	<rule ref="WordPress-Core" />
+	<rule ref="WordPress-Docs" />
 
 	<!-- Check all PHP files in directory tree by default. -->
 	<arg name="extensions" value="php"/>
@@ -14,4 +15,3 @@
 	<exclude-pattern>*/node_modules/*</exclude-pattern>
 	<exclude-pattern>*/vendor/*</exclude-pattern>
 </ruleset>
-
