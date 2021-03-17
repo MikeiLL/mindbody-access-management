@@ -34,9 +34,9 @@
 	},
 	"scripts": {
 		"lint": [
-		  "phpcs --extensions=php --standard=PSR12 ."
+		  "phpcs --extensions=php --standard=PSR12 src *.php"
 		],
-    "fix": ["phpcbf --extensions=php --standard=PSR12 ."]
+    "fix": ["phpcbf --extensions=php --standard=PSR12 src *.php"]
 	},
 	"autoload": {
 		"psr-4": {
