@@ -16,11 +16,11 @@
  * Text Domain:     mz-mbo-access
  * Domain Path:     /languages
 */
-namespace MZ_MBO_Access;
+namespace MzMBO_Access;
 
-use MZ_MBO_Access as NS;
-use MZ_Mindbody;
-use MZ_Mindbody\Inc\Core as Core;
+use MzMBO_Access as NS;
+use MzMindbody;
+use MzMindbody\Inc\Core as Core;
 
 if (! defined('WPINC')) {
     die;
@@ -83,7 +83,7 @@ if (file_exists($wp_mbo_access_autoload)) {
     include_once $wp_mbo_access_autoload;
 }
 
-if (! class_exists('\MZ_MBO_Access\Core\Plugin_Core')) {
+if (! class_exists('\MzMboAccess\Core\PluginCore')) {
     exit('MZ MBO Access requires Composer autoloading, which is not configured');
 }
 
@@ -103,7 +103,7 @@ register_activation_hook(__FILE__, array( __NAMESPACE__ . '\Core\Activator', 'ac
 // register_deactivation_hook( __FILE__, array( NS . '\Core\Deactivator', 'deactivate' ) );
 
 
-class MZ_MBO_Access
+class MzMBO_Access
 {
 
 
@@ -116,9 +116,9 @@ class MZ_MBO_Access
     private static $instance;
 
     /**
-     * Main MZ_Mindbody Instance.
+     * Main MzMindbody Instance.
      *
-     * Insures that only one instance of MZ_Mindbody exists in memory at any one
+     * Insures that only one instance of MzMindbody exists in memory at any one
      * time. Also prevents needing to define globals all over the place.
      *
      * Totally borrowed from Easy_Digital_Downloads, and certainly used with some ignorance
@@ -128,13 +128,13 @@ class MZ_MBO_Access
      * @static
      * @staticvar array $instance
      * @see       MZMBO()
-     * @return    object|MZ_MBO_Access The one true MZ_MBO_Access
+     * @return    object|MzMBO_Access The one true MzMBO_Access
      */
     public static function instance()
     {
 
-        if (! isset(self::$instance) && ! ( self::$instance instanceof Plugin_Core )) {
-            self::$instance = new NS\Core\Plugin_Core();
+        if (! isset(self::$instance) && ! ( self::$instance instanceof PluginCore )) {
+            self::$instance = new NS\Core\PluginCore();
             self::$instance->run();
         }
 
@@ -145,9 +145,9 @@ class MZ_MBO_Access
 /**
  * Begins execution of the plugin
  *
- * The main function for that returns MZ_MBO_Access
+ * The main function for that returns MzMBO_Access
  *
- * The main function responsible for returning the one true MZ_MBO_Access
+ * The main function responsible for returning the one true MzMBO_Access
  * Instance to functions everywhere.
  *
  * Borrowed from Easy_Digital_Downloads.
@@ -165,17 +165,17 @@ class MZ_MBO_Access
  * can interact with the plugin's hooks contained within.
  *
  * @since  1.4
- * @return object|MZ_MBO_Access The one true MZ_MBO_Access Instance.
+ * @return object|MzMBO_Access The one true MzMBO_Access Instance.
  */
 if (! function_exists('MBO_Access')) {
     function MBO_Access()
     {
-        return NS\MZ_MBO_Access::instance();
+        return NS\MzMBO_Access::instance();
     }
 }
 
 // Check the minimum required PHP version and run the plugin.
-if (version_compare(PHP_VERSION, 'MZ_Mindbody\MINIMUM_PHP_VERSION', '>=')) {
+if (version_compare(PHP_VERSION, 'MzMindbody\MINIMUM_PHP_VERSION', '>=')) {
     add_action('init', __NAMESPACE__ . '\\mz_mbo_access_plugin_init');
 }
 
@@ -188,9 +188,9 @@ function deactivate()
 
 function mz_mbo_access_plugin_init()
 {
-    if (defined('MZ_Mindbody\PLUGIN_NAME_DIR')) {
+    if (defined('MzMindbody\PLUGIN_NAME_DIR')) {
         // MZ Mindbody API plugin is activated, add the hooks
-        // Get MZ_MBO_Access Instance.
+        // Get MzMBO_Access Instance.
         MBO_Access();
     } else {
         add_action('admin_init', __NAMESPACE__ . '\\deactivate');

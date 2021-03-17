@@ -274,7 +274,7 @@
                         {
                             dataType: 'json',
                             url: mz_mindbody_access.ajaxurl,
-                            data: {action: 'ajax_client_log_out', nonce: mz_mindbody_access.logout_nonce},
+                            data: {action: 'ajaxClientLogOut', nonce: mz_mindbody_access.logout_nonce},
                             beforeSend: function () {
                                 mz_mindbody_access_state.action = 'processing';
                                 render_mbo_access_activity();
@@ -323,7 +323,7 @@
                     {
                         dataType: 'json',
                         url: mz_mindbody_access.ajaxurl,
-                        data: {action: 'ajax_check_client_logged', nonce: 'mz_check_client_logged'},
+                        data: {action: 'ajaxCheckClientLogged', nonce: 'mz_check_client_logged'},
                         success: function (json) {
                             if (json.type == "success") {
                                 mz_mindbody_access_state.logged_in = (json.message == 1 ? true : false);

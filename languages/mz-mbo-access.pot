@@ -72,88 +72,88 @@ msgstr ""
 msgid "Missing Plugin Dependency MZ Mindbody Api."
 msgstr ""
 
-#: src/Backend/Settings_Page.php:44
+#: src/Backend/SettingsPage.php:44
 msgid "MZ MBO Access Settings"
 msgstr ""
 
-#: src/Backend/Settings_Page.php:52
+#: src/Backend/SettingsPage.php:52
 msgid "API Version 5"
 msgstr ""
 
-#: src/Backend/Settings_Page.php:86
+#: src/Backend/SettingsPage.php:86
 msgid "Debug Output"
 msgstr ""
 
-#: src/Backend/Settings_Page.php:97
+#: src/Backend/SettingsPage.php:97
 msgid "Access Level One Services"
 msgstr ""
 
-#: src/Backend/Settings_Page.php:98 src/Backend/Settings_Page.php:110
+#: src/Backend/SettingsPage.php:98 src/Backend/SettingsPage.php:110
 msgid "Comma separated list (or single) MBO Service(s) or Contract(s)"
 msgstr ""
 
-#: src/Backend/Settings_Page.php:109
+#: src/Backend/SettingsPage.php:109
 msgid "Access Level Two Services"
 msgstr ""
 
-#: src/Backend/Settings_Page.php:121
+#: src/Backend/SettingsPage.php:121
 msgid "Shortcodes and Atts"
 msgstr ""
 
-#: src/Backend/Settings_Page.php:132
+#: src/Backend/SettingsPage.php:132
 msgid "Server Check"
 msgstr ""
 
-#: src/Backend/Settings_Page.php:141
+#: src/Backend/SettingsPage.php:141
 msgid "Restricted content here between both tags"
 msgstr ""
 
-#: src/Backend/Settings_Page.php:143
+#: src/Backend/SettingsPage.php:143
 msgid "(url string) URL to redirect users with level one access."
 msgstr ""
 
-#: src/Backend/Settings_Page.php:144
+#: src/Backend/SettingsPage.php:144
 msgid "(url string) URL to redirect users with level two access."
 msgstr ""
 
-#: src/Backend/Settings_Page.php:145
+#: src/Backend/SettingsPage.php:145
 msgid ""
 "((url string) URL to redirect users to who are logged in but don't have "
 "access."
 msgstr ""
 
-#: src/Backend/Settings_Page.php:146
+#: src/Backend/SettingsPage.php:146
 msgid "(string) Message inviting user to submit form."
 msgstr ""
 
-#: src/Backend/Settings_Page.php:147
+#: src/Backend/SettingsPage.php:147
 msgid "(string) Password Reset button text. Blank string to remove button."
 msgstr ""
 
-#: src/Backend/Settings_Page.php:148
+#: src/Backend/SettingsPage.php:148
 msgid "(string) Link to MBO Site button text. Blank string to remove button."
 msgstr ""
 
-#: src/Backend/Settings_Page.php:149
+#: src/Backend/SettingsPage.php:149
 msgid "(string) Message preceding list of items required for access."
 msgstr ""
 
-#: src/Backend/Settings_Page.php:150
+#: src/Backend/SettingsPage.php:150
 msgid "(string) Message alerting client that access has expired."
 msgstr ""
 
-#: src/Backend/Settings_Page.php:151
+#: src/Backend/SettingsPage.php:151
 #, php-format
 msgid ""
 "(int/list) (Default %1$d) Levels of access required to access content %1$d, "
 "%2$d or %3$s"
 msgstr ""
 
-#: src/Backend/Settings_Page.php:154
+#: src/Backend/SettingsPage.php:154
 msgid "Note"
 msgstr ""
 
-#: src/Backend/Settings_Page.php:155
+#: src/Backend/SettingsPage.php:155
 #, php-format
 msgid ""
 "If %1$s %2$s or %3$s are included, the login form will redirect to one of "
@@ -161,79 +161,79 @@ msgid ""
 "tags will display when page is reloaded by logged in client."
 msgstr ""
 
-#: src/Backend/Settings_Page.php:174
+#: src/Backend/SettingsPage.php:174
 msgid "SOAP installed! "
 msgstr ""
 
-#: src/Backend/Settings_Page.php:178
+#: src/Backend/SettingsPage.php:178
 msgid "SOAP is not installed. "
 msgstr ""
 
-#: src/Backend/Settings_Page.php:185
+#: src/Backend/SettingsPage.php:185
 msgid "PEAR installed! "
 msgstr ""
 
-#: src/Backend/Settings_Page.php:189
+#: src/Backend/SettingsPage.php:189
 msgid "PEAR is not installed. "
 msgstr ""
 
-#: src/Backend/Settings_Page.php:197
+#: src/Backend/SettingsPage.php:197
 msgid ""
 "MZ Mindbody API requires SOAP and PEAR. Please contact your hosting provider "
 "or enable via your CPANEL of php.ini file."
 msgstr ""
 
-#: src/Backend/Settings_Page.php:204
+#: src/Backend/SettingsPage.php:204
 msgid ""
 "Congratulations. Your server appears to be configured to integrate with "
 "mindbodyonline."
 msgstr ""
 
-#: src/Backend/Settings_Page.php:211
+#: src/Backend/SettingsPage.php:211
 msgid "Test Credentials"
 msgstr ""
 
-#: src/Client/Client_Portal.php:135
+#: src/Client/ClientPortal.php:135
 msgid "Logged Out"
 msgstr ""
 
-#: src/Client/Client_Portal.php:288
+#: src/Client/ClientPortal.php:288
 msgid "You are already booked at this time."
 msgstr ""
 
-#: src/Client/Client_Portal.php:307
+#: src/Client/ClientPortal.php:307
 msgid "Registered via MindBody"
 msgstr ""
 
-#: src/Client/Client_Portal.php:363
+#: src/Client/ClientPortal.php:363
 msgid "Leave this empty-slash-blank"
 msgstr ""
 
-#: src/Client/Client_Portal.php:364
+#: src/Client/ClientPortal.php:364
 msgid "Email"
 msgstr ""
 
-#: src/Client/Client_Portal.php:365
+#: src/Client/ClientPortal.php:365
 msgid "First Name"
 msgstr ""
 
-#: src/Client/Client_Portal.php:366
+#: src/Client/ClientPortal.php:366
 msgid "Last Name"
 msgstr ""
 
-#: src/Client/Client_Portal.php:367
+#: src/Client/ClientPortal.php:367
 msgid "Sign up"
 msgstr ""
 
-#: src/Client/Client_Portal.php:443
+#: src/Client/ClientPortal.php:443
 msgid "Congratulations. You are now logged in with your new Mindbody account."
 msgstr ""
 
-#: src/Client/Client_Portal.php:445
+#: src/Client/ClientPortal.php:445
 msgid "Sign-up for some classes."
 msgstr ""
 
-#: src/Client/Client_Portal.php:457
+#: src/Client/ClientPortal.php:457
 msgid "Try Again"
 msgstr ""
 
@@ -264,12 +264,12 @@ msgstr ""
 msgid "Please Login"
 msgstr ""
 
-#: src/Core/Plugin_Core.php:123 src/Core/Plugin_Core.php:131
-#: src/Session/MZ_Access_Session.php:228 src/Session/MZ_Access_Session.php:236
+#: src/Core/PluginCore.php:123 src/Core/PluginCore.php:131
+#: src/Session/MzAccess_Session.php:228 src/Session/MzAccess_Session.php:236
 msgid "Cheatin&#8217; huh?"
 msgstr ""
 
-#: src/Session/MZ_Access_Session.php:217
+#: src/Session/MzAccess_Session.php:217
 msgid ""
 "Another plugin is attempting to start a session with WordPress. WP Session "
 "Manager will not work!"

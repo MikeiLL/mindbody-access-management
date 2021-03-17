@@ -35,7 +35,7 @@ abstract class MZMBOAccess_WPUnitTestCase extends \WP_UnitTestCase
 
         add_option('mz_mbo_basic', $basic_options_set, '', 'yes');
 
-        $tm = new MZ_Mindbody\Inc\Common\Token_Management();
+        $tm = new MzMindbody\Inc\Common\Token_Management();
 
         $token = $tm->serve_token();
 

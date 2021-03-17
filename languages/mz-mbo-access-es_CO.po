@@ -82,63 +82,63 @@ msgstr "Error. Por favor, intenta de nuevo."
 msgid "Missing Plugin Dependency MZ Mindbody Api."
 msgstr "Falta Plugin Dependencia MZ Mindbody Api."
 
-#: src/Backend/Settings_Page.php:44
+#: src/Backend/SettingsPage.php:44
 #, fuzzy
 msgid "MZ MBO Access Settings"
 msgstr "Configuración de acceso a MZ MBO"
 
-#: src/Backend/Settings_Page.php:52
+#: src/Backend/SettingsPage.php:52
 msgid "API Version 5"
 msgstr "API Versión 5"
 
-#: src/Backend/Settings_Page.php:86
+#: src/Backend/SettingsPage.php:86
 msgid "Debug Output"
 msgstr "Salida de depuracián"
 
-#: src/Backend/Settings_Page.php:97
+#: src/Backend/SettingsPage.php:97
 #, fuzzy
 msgid "Access Level One Services"
 msgstr "Acceso a servicios de nivel uno"
 
-#: src/Backend/Settings_Page.php:98 src/Backend/Settings_Page.php:110
+#: src/Backend/SettingsPage.php:98 src/Backend/SettingsPage.php:110
 #, fuzzy
 msgid "Comma separated list (or single) MBO Service(s) or Contract(s)"
 msgstr ""
 "Lista (o única) Servicio(s) de MBO o Contrato(s) separado(s) por comas (o "
 "único)"
 
-#: src/Backend/Settings_Page.php:109
+#: src/Backend/SettingsPage.php:109
 #, fuzzy
 msgid "Access Level Two Services"
 msgstr "Acceso a servicios de nivel dos"
 
-#: src/Backend/Settings_Page.php:121
+#: src/Backend/SettingsPage.php:121
 #, fuzzy
 msgid "Shortcodes and Atts"
 msgstr "Shortcodes and Atts"
 
-#: src/Backend/Settings_Page.php:132
+#: src/Backend/SettingsPage.php:132
 msgid "Server Check"
 msgstr "Control de servidor"
 
-#: src/Backend/Settings_Page.php:141
+#: src/Backend/SettingsPage.php:141
 #, fuzzy
 msgid "Restricted content here between both tags"
 msgstr "Contenido restringido aquí entre ambas etiquetas"
 
-#: src/Backend/Settings_Page.php:143
+#: src/Backend/SettingsPage.php:143
 #, fuzzy
 msgid "(url string) URL to redirect users with level one access."
 msgstr ""
 "(cadena URL) URL para redirigir a los usuarios con acceso de nivel uno."
 
-#: src/Backend/Settings_Page.php:144
+#: src/Backend/SettingsPage.php:144
 #, fuzzy
 msgid "(url string) URL to redirect users with level two access."
 msgstr ""
 "(cadena URL) URL para redirigir a los usuarios con acceso de nivel dos."
 
-#: src/Backend/Settings_Page.php:145
+#: src/Backend/SettingsPage.php:145
 #, fuzzy
 msgid ""
 "((url string) URL to redirect users to who are logged in but don't have "
@@ -147,37 +147,37 @@ msgstr ""
 "((url string) URL para redirigir a los usuarios a los usuarios que han "
 "iniciado sesión pero no tienen acceso."
 
-#: src/Backend/Settings_Page.php:146
+#: src/Backend/SettingsPage.php:146
 #, fuzzy
 msgid "(string) Message inviting user to submit form."
 msgstr "(cadena) Mensaje invitando al usuario a enviar el formulario."
 
-#: src/Backend/Settings_Page.php:147
+#: src/Backend/SettingsPage.php:147
 #, fuzzy
 msgid "(string) Password Reset button text. Blank string to remove button."
 msgstr ""
 "(cadena) Texto del botón de restablecimiento de contraseña. Cadena en blanco "
 "para eliminar el botón."
 
-#: src/Backend/Settings_Page.php:148
+#: src/Backend/SettingsPage.php:148
 #, fuzzy
 msgid "(string) Link to MBO Site button text. Blank string to remove button."
 msgstr ""
 "(cadena) Enlace al texto del botón Sitio de MBO. Cadena en blanco para "
 "eliminar el botón."
 
-#: src/Backend/Settings_Page.php:149
+#: src/Backend/SettingsPage.php:149
 #, fuzzy
 msgid "(string) Message preceding list of items required for access."
 msgstr ""
 "(cadena) Mensaje anterior lista de elementos necesarios para el acceso."
 
-#: src/Backend/Settings_Page.php:150
+#: src/Backend/SettingsPage.php:150
 #, fuzzy
 msgid "(string) Message alerting client that access has expired."
 msgstr "(cadena) Mensaje que alerta al cliente de que el acceso ha caducado."
 
-#: src/Backend/Settings_Page.php:151
+#: src/Backend/SettingsPage.php:151
 #, fuzzy, php-format
 msgid ""
 "(int/list) (Default %1$d) Levels of access required to access content %1$d, "
@@ -186,11 +186,11 @@ msgstr ""
 "(int/list) (Predeterminado %1$d) Niveles de acceso necesarios para acceder "
 "al contenido %1$d, %2$d o %3$s"
 
-#: src/Backend/Settings_Page.php:154
+#: src/Backend/SettingsPage.php:154
 msgid "Note"
 msgstr "Nota"
 
-#: src/Backend/Settings_Page.php:155
+#: src/Backend/SettingsPage.php:155
 #, fuzzy, php-format
 msgid ""
 "If %1$s %2$s or %3$s are included, the login form will redirect to one of "
@@ -202,23 +202,23 @@ msgstr ""
 "existe, entre las etiquetas de shortcode se mostrará cuando el cliente que "
 "haya iniciado sesión vuelva a cargar la página."
 
-#: src/Backend/Settings_Page.php:174
+#: src/Backend/SettingsPage.php:174
 msgid "SOAP installed! "
 msgstr "¡SOAP instalado!"
 
-#: src/Backend/Settings_Page.php:178
+#: src/Backend/SettingsPage.php:178
 msgid "SOAP is not installed. "
 msgstr "SOAP no está instalado."
 
-#: src/Backend/Settings_Page.php:185
+#: src/Backend/SettingsPage.php:185
 msgid "PEAR installed! "
 msgstr "¡PEAR instalado!"
 
-#: src/Backend/Settings_Page.php:189
+#: src/Backend/SettingsPage.php:189
 msgid "PEAR is not installed. "
 msgstr "PERA no está instalado."
 
-#: src/Backend/Settings_Page.php:197
+#: src/Backend/SettingsPage.php:197
 msgid ""
 "MZ Mindbody API requires SOAP and PEAR. Please contact your hosting provider "
 "or enable via your CPANEL of php.ini file."
@@ -226,7 +226,7 @@ msgstr ""
 "MZ Mindbody API requiere PEAR y SOAP. Por favor, póngase en contacto con su "
 "proveedor de hosting o activar a través de su CPANEL del archivo php.ini."
 
-#: src/Backend/Settings_Page.php:204
+#: src/Backend/SettingsPage.php:204
 msgid ""
 "Congratulations. Your server appears to be configured to integrate with "
 "mindbodyonline."
@@ -234,51 +234,51 @@ msgstr ""
 "Felicidades. El servidor parece configurarse para integrar con "
 "mindbodyonline."
 
-#: src/Backend/Settings_Page.php:211
+#: src/Backend/SettingsPage.php:211
 msgid "Test Credentials"
 msgstr "Credenciales de prueba"
 
-#: src/Client/Client_Portal.php:135
+#: src/Client/ClientPortal.php:135
 msgid "Logged Out"
 msgstr "Sesión cerrada"
 
-#: src/Client/Client_Portal.php:288
+#: src/Client/ClientPortal.php:288
 msgid "You are already booked at this time."
 msgstr "Ya estás reservado en este momento."
 
-#: src/Client/Client_Portal.php:307
+#: src/Client/ClientPortal.php:307
 msgid "Registered via MindBody"
 msgstr "Registrado vía MindBody"
 
-#: src/Client/Client_Portal.php:363
+#: src/Client/ClientPortal.php:363
 msgid "Leave this empty-slash-blank"
 msgstr "Esto deja vacío-slash-blanco"
 
-#: src/Client/Client_Portal.php:364
+#: src/Client/ClientPortal.php:364
 msgid "Email"
 msgstr "Correo"
 
-#: src/Client/Client_Portal.php:365
+#: src/Client/ClientPortal.php:365
 msgid "First Name"
 msgstr "Primer nombre"
 
-#: src/Client/Client_Portal.php:366
+#: src/Client/ClientPortal.php:366
 msgid "Last Name"
 msgstr "Apellido"
 
-#: src/Client/Client_Portal.php:367
+#: src/Client/ClientPortal.php:367
 msgid "Sign up"
 msgstr "Registrarse"
 
-#: src/Client/Client_Portal.php:443
+#: src/Client/ClientPortal.php:443
 msgid "Congratulations. You are now logged in with your new Mindbody account."
 msgstr "Felicidades. Ahora está conectado con tu cuenta nueva de Mindbody."
 
-#: src/Client/Client_Portal.php:445
+#: src/Client/ClientPortal.php:445
 msgid "Sign-up for some classes."
 msgstr "Inscribirse en algunas clases."
 
-#: src/Client/Client_Portal.php:457
+#: src/Client/ClientPortal.php:457
 msgid "Try Again"
 msgstr "Vuelva a intentarlo"
 
@@ -313,12 +313,12 @@ msgstr "Inicio de sesión no válido."
 msgid "Please Login"
 msgstr "Por favor Inicie Sesion"
 
-#: src/Core/Plugin_Core.php:123 src/Core/Plugin_Core.php:131
-#: src/Session/MZ_Access_Session.php:228 src/Session/MZ_Access_Session.php:236
+#: src/Core/PluginCore.php:123 src/Core/PluginCore.php:131
+#: src/Session/MzAccess_Session.php:228 src/Session/MzAccess_Session.php:236
 msgid "Cheatin&#8217; huh?"
 msgstr "¿Haciendo trampas, eh?"
 
-#: src/Session/MZ_Access_Session.php:217
+#: src/Session/MzAccess_Session.php:217
 #, fuzzy
 msgid ""
 "Another plugin is attempting to start a session with WordPress. WP Session "
