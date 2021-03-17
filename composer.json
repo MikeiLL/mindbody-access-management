@@ -8,7 +8,7 @@
     "plugin",
     "session"
   ],
-	"homepage": "https://github.com/MikeiLL/mz-mindbody-api",
+	"homepage": "https://github.com/MikeiLL/mz-mbo-access",
 	"license"          : "GPL-2.0-or-later",
 	"minimum-stability": "dev",
 	"authors": [
@@ -24,7 +24,19 @@
 		"php": ">=7.1",
 		"composer/installers": "~1.0",
 		"ericmann/sessionz": "^0.3",
-		"squizlabs/php_codesniffer": "*"
+		"squizlabs/php_codesniffer": "*",
+    "wp-coding-standards/wpcs": "*"
+	},
+	"config": {
+	  "optimize-autoloader": true,
+	  "preferred-install": "dist",
+	  "sort-packages": true
+	},
+	"scripts": {
+		"lint": [
+		  "phpcs --extensions=php --standard=PSR12 ."
+		],
+    "fix": ["phpcbf --extensions=php --standard=PSR12 ."]
 	},
 	"autoload": {
 		"psr-4": {

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f23f7fcd147f578b3194972d1bf66cc6",
+    "content-hash": "ca473be34a2f07a80c9f8bd48f2efda7",
     "packages": [
         {
             "name": "composer/installers",
@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/installers.git",
-                "reference": "df100b004465aa07b686f1c2245bbb4794498b07"
+                "reference": "1b94b414035400a8be5c694048a0e711a86b1080"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/installers/zipball/df100b004465aa07b686f1c2245bbb4794498b07",
-                "reference": "df100b004465aa07b686f1c2245bbb4794498b07",
+                "url": "https://api.github.com/repos/composer/installers/zipball/1b94b414035400a8be5c694048a0e711a86b1080",
+                "reference": "1b94b414035400a8be5c694048a0e711a86b1080",
                 "shasum": ""
             },
             "require": {
@@ -129,6 +129,7 @@
                 "sydes",
                 "sylius",
                 "symfony",
+                "tastyigniter",
                 "typo3",
                 "wordpress",
                 "yawik",
@@ -153,7 +154,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-01-14T20:30:14+00:00"
+            "time": "2021-03-08T12:02:54+00:00"
         },
         {
             "name": "defuse/php-encryption",
@@ -321,62 +322,6 @@
                 "source": "https://github.com/paragonie/random_compat"
             },
             "time": "2020-10-15T10:06:57+00:00"
-        },
-        {
-            "name": "squizlabs/php_codesniffer",
-            "version": "4.0.x-dev",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
-                "reference": "d349f073b0909f1f3d3beaa4637fe84cc150254f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/d349f073b0909f1f3d3beaa4637fe84cc150254f",
-                "reference": "d349f073b0909f1f3d3beaa4637fe84cc150254f",
-                "shasum": ""
-            },
-            "require": {
-                "ext-simplexml": "*",
-                "ext-tokenizer": "*",
-                "ext-xmlwriter": "*",
-                "php": ">=7.2.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^8.0 || ^9.0"
-            },
-            "bin": [
-                "bin/phpcs",
-                "bin/phpcbf"
-            ],
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.x-dev"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Greg Sherwood",
-                    "role": "lead"
-                }
-            ],
-            "description": "PHP_CodeSniffer tokenizes PHP, JavaScript and CSS files and detects violations of a defined set of coding standards.",
-            "homepage": "https://github.com/squizlabs/PHP_CodeSniffer",
-            "keywords": [
-                "phpcs",
-                "standards"
-            ],
-            "support": {
-                "issues": "https://github.com/squizlabs/PHP_CodeSniffer/issues",
-                "source": "https://github.com/squizlabs/PHP_CodeSniffer",
-                "wiki": "https://github.com/squizlabs/PHP_CodeSniffer/wiki"
-            },
-            "time": "2021-03-16T23:06:03+00:00"
         }
     ],
     "packages-dev": [],
