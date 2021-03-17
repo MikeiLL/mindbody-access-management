@@ -1,21 +1,21 @@
 <?php
 
-namespace MZ_MBO_Access\Client;
+namespace MzMBO_Access\Client;
 
-use MZ_Mindbody as MZ;
-use MZ_MBO_Access as NS;
-use MZ_Mindbody\Inc\Core as Core;
-use MZ_Mindbody\Inc\Common as Common;
-use MZ_Mindbody\Inc\Libraries as Libraries;
-use MZ_Mindbody\Inc\Schedule as Schedule;
-use MZ_Mindbody\Inc\Common\Interfaces as Interfaces;
+use MzMindbody as MZ;
+use MzMBO_Access as NS;
+use MzMindbody\Inc\Core as Core;
+use MzMindbody\Inc\Common as Common;
+use MzMindbody\Inc\Libraries as Libraries;
+use MzMindbody\Inc\Schedule as Schedule;
+use MzMindbody\Inc\Common\Interfaces as Interfaces;
 
 /*
  * Class that holds Client Interface Methods for Ajax requests
  *
  *
  */
-class Client_Portal extends Retrieve_Client
+class ClientPortal extends Retrieve_Client
 {
 
 
@@ -68,21 +68,21 @@ class Client_Portal extends Retrieve_Client
      */
     public function __construct()
     {
-        $this->date_format = Core\MZ_Mindbody_Api::$date_format;
-        $this->time_format = Core\MZ_Mindbody_Api::$time_format;
+        $this->date_format = Core\MzMindbody_Api::$date_format;
+        $this->time_format = Core\MzMindbody_Api::$time_format;
         parent::__construct();
     }
 
     /**
      * Client Log In
      */
-    public function ajax_client_log_in()
+    public function ajaxClientLogIn()
     {
 
         check_ajax_referer($_REQUEST['nonce'], 'mz_signup_nonce', false);
 
         // Create the MBO Object
-        $this->get_mbo_results();
+        $this->getMboResults();
 
         // Init message
         $result['message'] = '';
@@ -127,7 +127,7 @@ class Client_Portal extends Retrieve_Client
     /**
      * Client Log Out
      */
-    public function ajax_client_log_out()
+    public function ajaxClientLogOut()
     {
 
         check_ajax_referer($_REQUEST['nonce'], 'mz_client_log_out', false);
@@ -165,7 +165,7 @@ class Client_Portal extends Retrieve_Client
      *
      * Function run by ajax to continually check if client is logged in
      */
-    public function ajax_check_client_logged()
+    public function ajaxCheckClientLogged()
     {
 
         check_ajax_referer($_REQUEST['nonce'], 'mz_check_client_logged', false);
@@ -217,7 +217,7 @@ class Client_Portal extends Retrieve_Client
      *
      * Like Get Clients (above), but return only the first client.
      */
-    public function ajax_get_client_details()
+    public function ajaxGetClientDetails()
     {
 
         check_ajax_referer($_REQUEST['nonce'], 'mz_client_request', false);

@@ -1,13 +1,13 @@
 <?php
 
-namespace MZ_MBO_Access\Backend;
+namespace MzMBO_Access\Backend;
 
-use MZ_Mindbody as MZ;
-use MZ_MBO_Access as NS;
-use MZ_MBO_Access\Core as Core;
-use MZ_MBO_Access\Common as Common;
-use MZ_Mindbody\Inc\Libraries as Libraries;
-use MZ_MBO_Access\Schedule as Schedule;
+use MzMindbody as MZ;
+use MzMBO_Access as NS;
+use MzMBO_Access\Core as Core;
+use MzMBO_Access\Common as Common;
+use MzMindbody\Inc\Libraries as Libraries;
+use MzMBO_Access\Schedule as Schedule;
 
 /**
  * This file contains the class which holds all the actions and methods to create the admin dashboard sections
@@ -17,7 +17,7 @@ use MZ_MBO_Access\Schedule as Schedule;
  *
  * @since 2.1.0
  *
- * @package MZ_MBO_Access
+ * @package MzMBO_Access
  */
 /**
  * Actions/Filters
@@ -27,7 +27,7 @@ use MZ_MBO_Access\Schedule as Schedule;
  * @since 1.0.0
  */
 
-class Settings_Page
+class SettingsPage
 {
 
 
@@ -36,7 +36,7 @@ class Settings_Page
 
     public function __construct()
     {
-        self::$wposa_obj = MZ\Inc\Core\MZ_Mindbody_Api::$settings_page::$wposa_obj;
+        self::$wposa_obj = MZ\Inc\Core\MzMindbody_Api::$settings_page::$wposa_obj;
     }
 
     public function addSections()

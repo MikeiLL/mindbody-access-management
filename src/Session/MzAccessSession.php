@@ -1,6 +1,6 @@
 <?php
 
-namespace MZ_MBO_Access\Session;
+namespace MzMBO_Access\Session;
 
 use EAMann\Sessionz\Handlers\EncryptionHandler;
 use EAMann\Sessionz\Handlers\MemoryHandler;
@@ -12,11 +12,11 @@ use EAMann\WPSession\CacheHandler;
 use EAMann\WPSession\DatabaseHandler;
 
 /**
- * MZ_Access_Session wrapper Class
+ * MzAccess_Session wrapper Class
  *
  * @since 1.0.1
  */
-class MZ_Access_Session
+class MzAccess_Session
 {
 
 
@@ -190,11 +190,11 @@ class MZ_Access_Session
     }
 
     /**
-     * Main MZ_Access_Session Instance
+     * Main MzAccess_Session Instance
      *
      * Ensures only one instance is loaded or can be loaded.
      *
-     * @return MZ_Access_Session - Main instance
+     * @return MzAccess_Session - Main instance
      * @since  1.0.1
      * @static
      */

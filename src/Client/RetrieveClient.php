@@ -1,15 +1,15 @@
 <?php
 
-namespace MZ_MBO_Access\Client;
+namespace MzMBO_Access\Client;
 
-use MZ_Mindbody as MZ;
-use MZ_MBO_Access as NS;
-use MZ_MBO_Access\Session as Session;
-use MZ_Mindbody\Inc\Core as Core;
-use MZ_Mindbody\Inc\Common as Common;
-use MZ_Mindbody\Inc\Libraries as Libraries;
-use MZ_Mindbody\Inc\Schedule as Schedule;
-use MZ_Mindbody\Inc\Common\Interfaces as Interfaces;
+use MzMindbody as MZ;
+use MzMBO_Access as NS;
+use MzMBO_Access\Session as Session;
+use MzMindbody\Inc\Core as Core;
+use MzMindbody\Inc\Common as Common;
+use MzMindbody\Inc\Libraries as Libraries;
+use MzMindbody\Inc\Schedule as Schedule;
+use MzMindbody\Inc\Common\Interfaces as Interfaces;
 use EAMann\Sessionz as Sessionz;
 
 /*
@@ -90,9 +90,9 @@ class Retrieve_Client extends Interfaces\Retrieve
      */
     public function __construct()
     {
-        $this->date_format = Core\MZ_Mindbody_Api::$date_format;
-        $this->time_format = Core\MZ_Mindbody_Api::$time_format;
-        $this->session     = Session\MZ_Access_Session::instance();
+        $this->date_format = Core\MzMindbody_Api::$date_format;
+        $this->time_format = Core\MzMindbody_Api::$time_format;
+        $this->session     = Session\MzAccess_Session::instance();
     }
 
     /**
@@ -197,7 +197,7 @@ class Retrieve_Client extends Interfaces\Retrieve
     {
 
         // Create the MBO Object using API VERSION 5!
-        $this->get_mbo_results(5);
+        $this->getMboResults(5);
 
         $result = $this->mb->ValidateLogin(
             array(
@@ -222,7 +222,7 @@ class Retrieve_Client extends Interfaces\Retrieve
     public function get_client($clientID)
     {
 
-        $this->get_mbo_results();
+        $this->getMboResults();
 
         $result = $this->mb->GetClients(
             array(
@@ -247,7 +247,7 @@ class Retrieve_Client extends Interfaces\Retrieve
     {
 
         if (! empty($client_info['ID'])) {
-            $sanitized_client_info = MZ\MZMBO()->helpers->array_map_recursive('sanitize_text_field', $client_info);
+            $sanitized_client_info = MZ\MZMBO()->helpers->arrayMapRecursive('sanitize_text_field', $client_info);
 
             $client_info_with_access = array_merge(array( 'access_level' => 0 ), $sanitized_client_info);
 
@@ -276,7 +276,7 @@ class Retrieve_Client extends Interfaces\Retrieve
         $previous_session = (array) $this->session->get('MBO_Client')->mbo_result;
 
         if (! empty($previous_session['ID'])) {
-            $sanitized_additional_info = MZ\MZMBO()->helpers->array_map_recursive('sanitize_text_field', $additional_info);
+            $sanitized_additional_info = MZ\MZMBO()->helpers->arrayMapRecursive('sanitize_text_field', $additional_info);
 
             $new_session = array_merge($previous_session, $sanitized_additional_info);
 
@@ -316,7 +316,7 @@ class Retrieve_Client extends Interfaces\Retrieve
     {
 
         // Crate the MBO Object
-        $this->get_mbo_results();
+        $this->getMboResults();
 
         $requiredFields = $this->mb->GetRequiredClientFields();
 
@@ -336,7 +336,7 @@ class Retrieve_Client extends Interfaces\Retrieve
     {
 
         // Crate the MBO Object
-        $this->get_mbo_results();
+        $this->getMboResults();
 
         $signup_result = $this->mb->AddClient($client_fields);
 
@@ -444,7 +444,7 @@ class Retrieve_Client extends Interfaces\Retrieve
     {
 
         // Create the MBO Object
-        $this->get_mbo_results();
+        $this->getMboResults();
 
         $result = $this->mb->GetActiveClientMemberships(array( 'clientId' => $client_id )); // UniqueID ??
 
@@ -516,7 +516,7 @@ class Retrieve_Client extends Interfaces\Retrieve
     {
 
         // Create the MBO Object
-        $this->get_mbo_results();
+        $this->getMboResults();
 
         $result = $this->mb->GetClientContracts(array( 'clientId' => $client_id )); // UniqueID ??
 
@@ -573,7 +573,7 @@ class Retrieve_Client extends Interfaces\Retrieve
     {
 
         // Create the MBO Object
-        $this->get_mbo_results();
+        $this->getMboResults();
 
         $result = $this->mb->GetClientPurchases(array( 'ClientId' => $client_id )); // NOT "UniqueID"
 
@@ -591,7 +591,7 @@ class Retrieve_Client extends Interfaces\Retrieve
     {
 
         // Create the MBO Object
-        $this->get_mbo_results();
+        $this->getMboResults();
 
         $result = $this->mb->GetClientServices(array( 'clientId' => $client_id )); // UniqueID ??
 
@@ -610,7 +610,7 @@ class Retrieve_Client extends Interfaces\Retrieve
     {
 
         // Crate the MBO Object
-        $this->get_mbo_results();
+        $this->getMboResults();
 
         $result = $this->mb->SendPasswordResetEmail($clientID);
 
@@ -647,13 +647,13 @@ class Retrieve_Client extends Interfaces\Retrieve
      *
      * @return array of MBO schedule data
      */
-    public function get_mbo_results($api_version = 6)
+    public function getMboResults($api_version = 6)
     {
 
         if ($api_version == 6) {
-            $this->mb = $this->instantiate_mbo_API();
+            $this->mb = $this->instantiateMboApi();
         } else {
-            $this->mb = $this->instantiate_mbo_API(5);
+            $this->mb = $this->instantiateMboApi(5);
         }
 
         if (! $this->mb || $this->mb == 'NO_API_SERVICE') {
@@ -672,7 +672,7 @@ class Retrieve_Client extends Interfaces\Retrieve
      *
      * @return @type array of Objects from Single_event class, in Date (and time) sequence.
      */
-    public function sort_classes_by_date_then_time($client_schedule = array())
+    public function sortClassesByDateThenTime($client_schedule = array())
     {
 
         $classesByDateThenTime = array();

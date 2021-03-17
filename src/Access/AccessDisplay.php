@@ -1,17 +1,17 @@
 <?php
 
-namespace MZ_MBO_Access\Access;
+namespace MzMBO_Access\Access;
 
-use MZ_MBO_Access as NS;
-use MZ_Mindbody as MZ;
-use MZ_MBO_Access\Core as Core;
-use MZ_MBO_Access\Session as Session;
-use MZ_MBO_Access\Client as Client;
-use MZ_Mindbody\Inc\Site as Site;
-use MZ_Mindbody\Inc\Common as Common;
-use MZ_Mindbody\Inc\Common\Interfaces as Interfaces;
+use MzMBO_Access as NS;
+use MzMindbody as MZ;
+use MzMBO_Access\Core as Core;
+use MzMBO_Access\Session as Session;
+use MzMBO_Access\Client as Client;
+use MzMindbody\Inc\Site as Site;
+use MzMindbody\Inc\Common as Common;
+use MzMindbody\Inc\Common\Interfaces as Interfaces;
 
-class Access_Display extends Interfaces\Shortcode_Script_Loader
+class Access_Display extends Interfaces\ShortcodeScriptLoader
 {
 
 
@@ -288,7 +288,7 @@ class Access_Display extends Interfaces\Shortcode_Script_Loader
         $this->schedule_object = new Retrieve_Schedule($atts);
 
         // Call the API and if fails, return error message.
-        if (false == $this->schedule_object->get_mbo_results()) {
+        if (false == $this->schedule_object->getMboResults()) {
             echo '<div>' . __('Error returning schedule from Mindbody in Access Display.', NS\PLUGIN_TEXT_DOMAIN) . '</div>';
         }
 
@@ -306,7 +306,7 @@ class Access_Display extends Interfaces\Shortcode_Script_Loader
         $grid_schedule       = '';
         if ($this->display_type == 'grid' || $this->display_type == 'both') :
             ob_start();
-            $grid_schedule = $this->schedule_object->sort_classes_by_time_then_date();
+            $grid_schedule = $this->schedule_object->sortClassesByTimeThenDate();
             // Update the data array
             $this->template_data['grid_schedule'] = $grid_schedule;
             $template_loader->get_template_part('grid_schedule');
@@ -315,7 +315,7 @@ class Access_Display extends Interfaces\Shortcode_Script_Loader
 
         if ($this->display_type == 'horizontal' || $this->display_type == 'both') :
             ob_start();
-            $horizontal_schedule = $this->schedule_object->sort_classes_by_date_then_time();
+            $horizontal_schedule = $this->schedule_object->sortClassesByDateThenTime();
             // Update the data array
             $this->template_data['horizontal_schedule'] = $horizontal_schedule;
             $template_loader->get_template_part('horizontal_schedule');

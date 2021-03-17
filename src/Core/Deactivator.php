@@ -1,6 +1,6 @@
 <?php
 
-namespace MZ_MBO_Access\Core;
+namespace MzMBO_Access\Core;
 
 /**
  * Fired during plugin deactivation

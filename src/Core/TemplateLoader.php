@@ -1,9 +1,9 @@
 <?php
 
-namespace MZ_MBO_Access\Core;
+namespace MzMBO_Access\Core;
 
-use MZ_Mindbody\Inc\Libraries as Libraries;
-use MZ_MBO_Access as NS;
+use MzMindbody\Inc\Libraries as Libraries;
+use MzMBO_Access as NS;
 
 class Template_Loader extends Libraries\Gamajo_Template_Loader
 {

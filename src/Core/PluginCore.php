@@ -1,12 +1,12 @@
 <?php
 
-namespace MZ_MBO_Access\Core;
+namespace MzMBO_Access\Core;
 
-use MZ_MBO_Access as NS;
-use MZ_MBO_Access\Access as Access;
-use MZ_MBO_Access\Client as Client;
-use MZ_MBO_Access\Backend as Backend;
-use MZ_MBO_Access\Session as Session;
+use MzMBO_Access as NS;
+use MzMBO_Access\Access as Access;
+use MzMBO_Access\Client as Client;
+use MzMBO_Access\Backend as Backend;
+use MzMBO_Access\Session as Session;
 
 /**
  * The core plugin class.
@@ -17,12 +17,12 @@ use MZ_MBO_Access\Session as Session;
  *
  * @author Mike iLL/mZoo.org
  */
-class Plugin_Core
+class PluginCore
 {
 
 
     /**
-     * @var   MZ_Mindbody_API The one true MZ_Mindbody_API
+     * @var   MzMindbody_API The one true MzMindbody_API
      * @since 1.0.1
      */
     private static $instance;
@@ -92,7 +92,7 @@ class Plugin_Core
     public static $start_of_week;
 
     /**
-     * @var    MZ_Access_Session
+     * @var    MzAccess_Session
      * @accesZ private
      */
     private $session;
@@ -115,7 +115,7 @@ class Plugin_Core
         $this->register_shortcodes();
         $this->add_settings_page();
 
-        $this->session = Session\MZ_Access_Session::instance();
+        $this->session = Session\MzAccess_Session::instance();
     }
 
     /**
@@ -211,7 +211,7 @@ class Plugin_Core
     private function define_public_hooks()
     {
         $access_portal = new Access\Access_Portal();
-        $client_portal = new Client\Client_Portal();
+        $client_portal = new Client\ClientPortal();
 
         // Start Ajax Access Management
         $this->loader->add_action('wp_ajax_nopriv_ajax_login_check_access_permissions', $access_portal, 'ajax_login_check_access_permissions');
@@ -233,20 +233,20 @@ class Plugin_Core
         $this->loader->add_action('wp_ajax_ajax_generate_signup_form', $client_portal, 'ajax_generate_mbo_signup_form');
 
         // Start Ajax Client Log In
-        $this->loader->add_action('wp_ajax_nopriv_ajax_client_log_in', $client_portal, 'ajax_client_log_in');
-        $this->loader->add_action('wp_ajax_ajax_client_log_in', $client_portal, 'ajax_client_log_in');
+        $this->loader->add_action('wp_ajax_nopriv_ajaxClientLogIn', $client_portal, 'ajaxClientLogIn');
+        $this->loader->add_action('wp_ajax_ajaxClientLogIn', $client_portal, 'ajaxClientLogIn');
 
         // Start Ajax Client Log Out
-        $this->loader->add_action('wp_ajax_nopriv_ajax_client_log_out', $client_portal, 'ajax_client_log_out');
-        $this->loader->add_action('wp_ajax_ajax_client_log_out', $client_portal, 'ajax_client_log_out');
+        $this->loader->add_action('wp_ajax_nopriv_ajaxClientLogOut', $client_portal, 'ajaxClientLogOut');
+        $this->loader->add_action('wp_ajax_ajaxClientLogOut', $client_portal, 'ajaxClientLogOut');
 
         // Start Ajax Display Client Schedule
         $this->loader->add_action('wp_ajax_nopriv_ajax_display_client_schedule', $client_portal, 'ajax_display_client_schedule');
         $this->loader->add_action('wp_ajax_ajax_display_client_schedule', $client_portal, 'ajax_display_client_schedule');
 
         // Start Ajax Check Client Logged Status
-        $this->loader->add_action('wp_ajax_nopriv_ajax_check_client_logged', $client_portal, 'ajax_check_client_logged');
-        $this->loader->add_action('wp_ajax_ajax_check_client_logged', $client_portal, 'ajax_check_client_logged');
+        $this->loader->add_action('wp_ajax_nopriv_ajaxCheckClientLogged', $client_portal, 'ajaxCheckClientLogged');
+        $this->loader->add_action('wp_ajax_ajaxCheckClientLogged', $client_portal, 'ajaxCheckClientLogged');
     }
 
 
@@ -306,7 +306,7 @@ class Plugin_Core
      */
     public function add_settings_page()
     {
-        $settings_page = new Backend\Settings_Page();
+        $settings_page = new Backend\SettingsPage();
         $settings_page->addSections();
     }
 

@@ -1,8 +1,8 @@
 <?php
 
-namespace MZ_MBO_Access\Admin;
+namespace MzMBO_Access\Admin;
 
-use MZ_MBO_Access as NS;
+use MzMBO_Access as NS;
 
 /**
  * The admin-specific functionality of the plugin.
