@@ -12,9 +12,13 @@ cache:
     - vendor
     - $HOME/.composer/cache
 
+before_install:
+  - export PATH="$HOME/.composer/vendor/bin:$PATH"
+  # Unless we need XDebug, disable it for improved performance.
+  - phpenv config-rm xdebug.ini || return 0
+
 install:
   - composer self-update && composer --version
-  - export PATH="$HOME/.composer/vendor/bin:$PATH"
   - composer global require squizlabs/php_codesniffer
   - composer install --prefer-dist
 
@@ -28,12 +32,11 @@ matrix:
 before_script:
   - mysql -e 'create database wordpress_test;'
   - cp .env.test .env
-  - sudo ln -s ~/.composer/vendor/bin/phpcs /usr/local/bin/phpcs
   - bash bin/install-wp-tests.sh wordpress_test root '' localhost $WP_VERSION $SKIP_DB_CREATE
   - svn export --quiet https://develop.svn.wordpress.org/trunk/tests/phpunit/includes/ tests-includes
 
 script:
-  - phpcs --standard=phpunit.ruleset.xml --extensions=php --ignore=web/wp/,vendor/,tests/,tests-includes/ -n -s .
+  - ./vendor/bin/phpcs --standard=phpunit.ruleset.xml --extensions=php --ignore=web/wp/,vendor/,tests/,tests-includes/ -n -s .
   - phpunit
 
 notifications:
