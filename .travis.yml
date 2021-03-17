@@ -36,7 +36,7 @@ before_script:
   - svn export --quiet https://develop.svn.wordpress.org/trunk/tests/phpunit/includes/ tests-includes
 
 script:
-  - ./vendor/bin/phpcs --standard=phpunit.ruleset.xml --extensions=php --ignore=web/wp/,vendor/,tests/,tests-includes/ -n -s .
+  - ./vendor/bin/phpcs --standard=ruleset.xml --extensions=php --ignore=web/wp/,vendor/,tests/,tests-includes/ -n -s .
   - phpunit
 
 notifications:
