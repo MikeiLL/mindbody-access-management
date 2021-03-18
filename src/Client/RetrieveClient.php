@@ -1,15 +1,15 @@
 <?php
 
-namespace MzMBO_Access\Client;
+namespace MzMboAccess\Client;
 
 use MzMindbody as MZ;
-use MzMBO_Access as NS;
-use MzMBO_Access\Session as Session;
-use MzMindbody\Inc\Core as Core;
-use MzMindbody\Inc\Common as Common;
-use MzMindbody\Inc\Libraries as Libraries;
-use MzMindbody\Inc\Schedule as Schedule;
-use MzMindbody\Inc\Common\Interfaces as Interfaces;
+use MzMboAccess as NS;
+use MzMboAccess\Session as Session;
+use MzMindbody\Core as Core;
+use MzMindbody\Common as Common;
+use MzMindbody\Libraries as Libraries;
+use MzMindbody\Schedule as Schedule;
+use MzMindbody\Common\Interfaces as Interfaces;
 use EAMann\Sessionz as Sessionz;
 
 /*
@@ -17,7 +17,7 @@ use EAMann\Sessionz as Sessionz;
  *
  *
  */
-class Retrieve_Client extends Interfaces\Retrieve
+class RetrieveClient extends Interfaces\Retrieve
 {
 
 
@@ -90,9 +90,9 @@ class Retrieve_Client extends Interfaces\Retrieve
      */
     public function __construct()
     {
-        $this->date_format = Core\MzMindbody_Api::$date_format;
-        $this->time_format = Core\MzMindbody_Api::$time_format;
-        $this->session     = Session\MzAccess_Session::instance();
+        $this->date_format = Core\MzMindbodyApi::$date_format;
+        $this->time_format = Core\MzMindbodyApi::$time_format;
+        $this->session     = Session\MzAccessSession::instance();
     }
 
     /**
@@ -698,7 +698,7 @@ class Retrieve_Client extends Interfaces\Retrieve
             Create a new array with a key for each date YYYY-MM-DD
             and corresponding value an array of class details */
 
-            $single_event = new Schedule\Mini_Schedule_Item($visit);
+            $single_event = new Schedule\MiniScheduleItem($visit);
 
             if (! empty($classesByDateThenTime[ $just_date ])) {
                 array_push($classesByDateThenTime[ $just_date ], $single_event);

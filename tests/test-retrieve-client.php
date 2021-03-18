@@ -3,7 +3,7 @@
 require_once 'MZMBOAccess_WPUnitTestCase.php';
 require_once 'MBO_Access_Test_Options.php';
 
-class Tests_Retrieve_Client extends MZMBOAccess_WPUnitTestCase
+class Tests_RetrieveClient extends MZMBOAccess_WPUnitTestCase
 {
 
 
@@ -17,9 +17,9 @@ class Tests_Retrieve_Client extends MZMBOAccess_WPUnitTestCase
 
         parent::setUp();
 
-        $this->assertTrue(class_exists('MzMBO_Access\Client\Retrieve_Client'));
+        $this->assertTrue(class_exists('MzMboAccess\Client\RetrieveClient'));
 
-        $client_object = new MzMBO_Access\Client\Retrieve_Client();
+        $client_object = new MzMboAccess\Client\RetrieveClient();
 
         $response = $client_object->getMboResults();
 
@@ -44,7 +44,7 @@ class Tests_Retrieve_Client extends MZMBOAccess_WPUnitTestCase
 
         parent::setUp();
 
-        $client_object = new MzMBO_Access\Client\Retrieve_Client();
+        $client_object = new MzMboAccess\Client\RetrieveClient();
 
         $required_fields = $client_object->get_signup_form_fields();
 
@@ -102,7 +102,7 @@ class Tests_Retrieve_Client extends MZMBOAccess_WPUnitTestCase
 
         parent::setUp();
 
-        $client_object = new MzMBO_Access\Client\Retrieve_Client();
+        $client_object = new MzMboAccess\Client\RetrieveClient();
 
         $user_data = array(
             'UserEmail'     => MBO_Access_Test_Options::$_CLIENTEMAIL,
@@ -147,7 +147,7 @@ class Tests_Retrieve_Client extends MZMBOAccess_WPUnitTestCase
 
         parent::setUp();
 
-        $client_object = new MzMBO_Access\Client\Retrieve_Client();
+        $client_object = new MzMboAccess\Client\RetrieveClient();
 
         $credentials = array(
             'Username' => MBO_Access_Test_Options::$_CLIENTEMAIL,
@@ -178,7 +178,7 @@ class Tests_Retrieve_Client extends MZMBOAccess_WPUnitTestCase
 
         parent::setUp();
 
-        $client_object = new MzMBO_Access\Client\Retrieve_Client();
+        $client_object = new MzMboAccess\Client\RetrieveClient();
 
         $good_password_strings = array(
             'Ad12DeDe',
@@ -216,7 +216,7 @@ class Tests_Retrieve_Client extends MZMBOAccess_WPUnitTestCase
 
         parent::setUp();
 
-        $client_object = new MzMBO_Access\Client\Retrieve_Client();
+        $client_object = new MzMboAccess\Client\RetrieveClient();
 
         $bad_credentials = array(
             'Username' => MBO_Access_Test_Options::$_CLIENTEMAIL,

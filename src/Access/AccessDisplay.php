@@ -1,17 +1,17 @@
 <?php
 
-namespace MzMBO_Access\Access;
+namespace MzMboAccess\Access;
 
-use MzMBO_Access as NS;
+use MzMboAccess as NS;
 use MzMindbody as MZ;
-use MzMBO_Access\Core as Core;
-use MzMBO_Access\Session as Session;
-use MzMBO_Access\Client as Client;
-use MzMindbody\Inc\Site as Site;
-use MzMindbody\Inc\Common as Common;
-use MzMindbody\Inc\Common\Interfaces as Interfaces;
+use MzMboAccess\Core as Core;
+use MzMboAccess\Session as Session;
+use MzMboAccess\Client as Client;
+use MzMindbody\Site as Site;
+use MzMindbody\Common as Common;
+use MzMindbody\Common\Interfaces as Interfaces;
 
-class Access_Display extends Interfaces\ShortcodeScriptLoader
+class AccessDisplay extends Interfaces\ShortcodeScriptLoader
 {
 
 
@@ -151,7 +151,7 @@ class Access_Display extends Interfaces\ShortcodeScriptLoader
         // Begin generating output
         ob_start();
 
-        $template_loader = new Core\Template_Loader();
+        $TemplateLoader = new Core\TemplateLoader();
 
         $this->template_data = array(
             'atts'                   => $this->atts,
@@ -175,7 +175,7 @@ class Access_Display extends Interfaces\ShortcodeScriptLoader
             'password_reset_request' => $this->atts['password_reset_request'],
         );
 
-        $access_utilities = new Access_Utilities();
+        $AccessUtilities = new AccessUtilities();
 
         $logged_client = NS\MBO_Access()->getSession()->get('MBO_Client');
 
@@ -187,7 +187,7 @@ class Access_Display extends Interfaces\ShortcodeScriptLoader
                 $this->has_access                  = true;
             } else {
                 // Need to ping the api
-                $client_access_level = $access_utilities->check_access_permissions($logged_client->Id);
+                $client_access_level = $AccessUtilities->check_access_permissions($logged_client->Id);
                 if (in_array($client_access_level, $this->atts['access_levels'])) {
                     $this->template_data['has_access'] = true;
                     $this->has_access                  = true;
@@ -201,8 +201,8 @@ class Access_Display extends Interfaces\ShortcodeScriptLoader
             $this->template_data['client_name'] = $logged_client->FirstName;
         }
 
-        $template_loader->set_template_data($this->template_data);
-        $template_loader->get_template_part('access_container');
+        $TemplateLoader->set_template_data($this->template_data);
+        $TemplateLoader->get_template_part('access_container');
 
         // Add Style with script adder
         self::addScript();
@@ -216,9 +216,9 @@ class Access_Display extends Interfaces\ShortcodeScriptLoader
     private function login_form()
     {
 
-        $template_loader = new Core\Template_Loader();
+        $TemplateLoader = new Core\TemplateLoader();
 
-        $template_loader->set_template_data($this->template_data);
+        $TemplateLoader->set_template_data($this->template_data);
     }
 
     public function addScript()
@@ -283,9 +283,9 @@ class Access_Display extends Interfaces\ShortcodeScriptLoader
 
         $result['type'] = 'success';
 
-        $template_loader = new Core\Template_Loader();
+        $TemplateLoader = new Core\TemplateLoader();
 
-        $this->schedule_object = new Retrieve_Schedule($atts);
+        $this->schedule_object = new RetrieveSchedule($atts);
 
         // Call the API and if fails, return error message.
         if (false == $this->schedule_object->getMboResults()) {
@@ -299,7 +299,7 @@ class Access_Display extends Interfaces\ShortcodeScriptLoader
         $this->template_data['time_format'] = $this->schedule_object->time_format;
         $this->template_data['date_format'] = $this->schedule_object->date_format;
 
-        $template_loader->set_template_data($this->template_data);
+        $TemplateLoader->set_template_data($this->template_data);
 
         // Initialize the variables, so won't be un-set:
         $horizontal_schedule = '';
@@ -309,7 +309,7 @@ class Access_Display extends Interfaces\ShortcodeScriptLoader
             $grid_schedule = $this->schedule_object->sortClassesByTimeThenDate();
             // Update the data array
             $this->template_data['grid_schedule'] = $grid_schedule;
-            $template_loader->get_template_part('grid_schedule');
+            $TemplateLoader->get_template_part('grid_schedule');
             $result['grid'] = ob_get_clean();
         endif;
 
@@ -318,7 +318,7 @@ class Access_Display extends Interfaces\ShortcodeScriptLoader
             $horizontal_schedule = $this->schedule_object->sortClassesByDateThenTime();
             // Update the data array
             $this->template_data['horizontal_schedule'] = $horizontal_schedule;
-            $template_loader->get_template_part('horizontal_schedule');
+            $TemplateLoader->get_template_part('horizontal_schedule');
             $result['horizontal'] = ob_get_clean();
         endif;
 

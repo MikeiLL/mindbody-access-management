@@ -1,12 +1,12 @@
 <?php
 
-namespace MzMBO_Access\Core;
+namespace MzMboAccess\Core;
 
-use MzMBO_Access as NS;
-use MzMBO_Access\Access as Access;
-use MzMBO_Access\Client as Client;
-use MzMBO_Access\Backend as Backend;
-use MzMBO_Access\Session as Session;
+use MzMboAccess as NS;
+use MzMboAccess\Access as Access;
+use MzMboAccess\Client as Client;
+use MzMboAccess\Backend as Backend;
+use MzMboAccess\Session as Session;
 
 /**
  * The core plugin class.
@@ -22,7 +22,7 @@ class PluginCore
 
 
     /**
-     * @var   MzMindbody_API The one true MzMindbody_API
+     * @var   MzMindbodyApi The one true MzMindbodyApi
      * @since 1.0.1
      */
     private static $instance;
@@ -92,7 +92,7 @@ class PluginCore
     public static $start_of_week;
 
     /**
-     * @var    MzAccess_Session
+     * @var    MzAccessSession
      * @accesZ private
      */
     private $session;
@@ -115,7 +115,7 @@ class PluginCore
         $this->register_shortcodes();
         $this->add_settings_page();
 
-        $this->session = Session\MzAccess_Session::instance();
+        $this->session = Session\MzAccessSession::instance();
     }
 
     /**
@@ -152,7 +152,7 @@ class PluginCore
      * Loads the following required dependencies for this plugin.
      *
      * - Loader - Orchestrates the hooks of the plugin.
-     * - Internationalization_I18n - Defines internationalization functionality.
+     * - InternationalizationI18n - Defines internationalization functionality.
      * - Admin - Defines all hooks for the admin area.
      * - Frontend - Defines all hooks for the public side of the site.
      *
@@ -166,7 +166,7 @@ class PluginCore
     /**
      * Define the locale for this plugin for internationalization.
      *
-     * Uses the Internationalization_I18n class in order to set the domain and to register the hook
+     * Uses the InternationalizationI18n class in order to set the domain and to register the hook
      * with WordPress.
      *
      * @access private
@@ -174,7 +174,7 @@ class PluginCore
     private function set_locale()
     {
 
-        $plugin_i18n = new Internationalization_I18n($this->plugin_text_domain);
+        $plugin_i18n = new InternationalizationI18n($this->plugin_text_domain);
 
         $this->loader->add_action('plugins_loaded', $plugin_i18n, 'load_plugin_textdomain');
     }
@@ -210,15 +210,15 @@ class PluginCore
      */
     private function define_public_hooks()
     {
-        $access_portal = new Access\Access_Portal();
+        $AccessPortal = new Access\AccessPortal();
         $client_portal = new Client\ClientPortal();
 
         // Start Ajax Access Management
-        $this->loader->add_action('wp_ajax_nopriv_ajax_login_check_access_permissions', $access_portal, 'ajax_login_check_access_permissions');
-        $this->loader->add_action('wp_ajax_ajax_login_check_access_permissions', $access_portal, 'ajax_login_check_access_permissions');
+        $this->loader->add_action('wp_ajax_nopriv_ajax_login_check_access_permissions', $AccessPortal, 'ajax_login_check_access_permissions');
+        $this->loader->add_action('wp_ajax_ajax_login_check_access_permissions', $AccessPortal, 'ajax_login_check_access_permissions');
 
-        $this->loader->add_action('wp_ajax_nopriv_ajax_check_access_permissions', $access_portal, 'ajax_check_access_permissions');
-        $this->loader->add_action('wp_ajax_ajax_check_access_permissions', $access_portal, 'ajax_check_access_permissions');
+        $this->loader->add_action('wp_ajax_nopriv_ajax_check_access_permissions', $AccessPortal, 'ajax_check_access_permissions');
+        $this->loader->add_action('wp_ajax_ajax_check_access_permissions', $AccessPortal, 'ajax_check_access_permissions');
 
         // Start Ajax Client Check Logged
         $this->loader->add_action('wp_ajax_nopriv_ajax_register_for_class', $client_portal, 'ajax_register_for_class');
@@ -319,7 +319,7 @@ class PluginCore
      */
     private function register_shortcodes()
     {
-        $Access_Display = new Access\Access_Display();
-        $Access_Display->register('mbo-client-access');
+        $AccessDisplay = new Access\AccessDisplay();
+        $AccessDisplay->register('mbo-client-access');
     }
 }

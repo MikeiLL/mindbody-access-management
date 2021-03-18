@@ -28,43 +28,43 @@ msgid ""
 "to be installed and active."
 msgstr ""
 
-#: src/Access/Access_Display.php:120
+#: src/Access/AccessDisplay.php:120
 msgid "Access to this content requires one of"
 msgstr ""
 
-#: src/Access/Access_Display.php:121
+#: src/Access/AccessDisplay.php:121
 msgid "Login with your Mindbody account to access this content."
 msgstr ""
 
-#: src/Access/Access_Display.php:122
+#: src/Access/AccessDisplay.php:122
 msgid "Looks like your access has expired."
 msgstr ""
 
-#: src/Access/Access_Display.php:128
+#: src/Access/AccessDisplay.php:128
 msgid "Forgot My Password"
 msgstr ""
 
-#: src/Access/Access_Display.php:155
+#: src/Access/AccessDisplay.php:155
 msgid "email"
 msgstr ""
 
-#: src/Access/Access_Display.php:156
+#: src/Access/AccessDisplay.php:156
 msgid "password"
 msgstr ""
 
-#: src/Access/Access_Display.php:157
+#: src/Access/AccessDisplay.php:157
 msgid "Login"
 msgstr ""
 
-#: src/Access/Access_Display.php:158
+#: src/Access/AccessDisplay.php:158
 msgid "Logout"
 msgstr ""
 
-#: src/Access/Access_Display.php:284
+#: src/Access/AccessDisplay.php:284
 msgid "Error returning schedule from Mindbody in Access Display."
 msgstr ""
 
-#: src/Access/Access_Display.php:316
+#: src/Access/AccessDisplay.php:316
 msgid "Error. Please try again."
 msgstr ""
 
@@ -237,39 +237,39 @@ msgstr ""
 msgid "Try Again"
 msgstr ""
 
-#: src/Client/Retrieve_Client.php:108
+#: src/Client/RetrieveClient.php:108
 msgid "Badly formed email."
 msgstr ""
 
-#: src/Client/Retrieve_Client.php:110
+#: src/Client/RetrieveClient.php:110
 msgid ""
 "All Mindbody passwords must contain 8 to 15 characters and must include both "
 "letters and numbers."
 msgstr ""
 
-#: src/Client/Retrieve_Client.php:117
+#: src/Client/RetrieveClient.php:117
 msgid "Welcome"
 msgstr ""
 
-#: src/Client/Retrieve_Client.php:119
+#: src/Client/RetrieveClient.php:119
 #, php-format
 msgid "Whoops. Please try again, %1$s."
 msgstr ""
 
-#: src/Client/Retrieve_Client.php:129
+#: src/Client/RetrieveClient.php:129
 msgid "Invalid Login"
 msgstr ""
 
-#: src/Client/Retrieve_Client.php:295
+#: src/Client/RetrieveClient.php:295
 msgid "Please Login"
 msgstr ""
 
 #: src/Core/PluginCore.php:123 src/Core/PluginCore.php:131
-#: src/Session/MzAccess_Session.php:228 src/Session/MzAccess_Session.php:236
+#: src/Session/MzAccessSession.php:228 src/Session/MzAccessSession.php:236
 msgid "Cheatin&#8217; huh?"
 msgstr ""
 
-#: src/Session/MzAccess_Session.php:217
+#: src/Session/MzAccessSession.php:217
 msgid ""
 "Another plugin is attempting to start a session with WordPress. WP Session "
 "Manager will not work!"

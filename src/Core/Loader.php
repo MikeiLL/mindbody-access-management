@@ -1,6 +1,6 @@
 <?php
 
-namespace MzMBO_Access\Core;
+namespace MzMboAccess\Core;
 
 /**
  * Register all actions and filters for the plugin

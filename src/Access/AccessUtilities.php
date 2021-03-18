@@ -1,15 +1,15 @@
 <?php
 
-namespace MzMBO_Access\Access;
+namespace MzMboAccess\Access;
 
-use MzMBO_Access as NS;
+use MzMboAccess as NS;
 use MzMindbody as MZ;
-use MzMBO_Access\Core as Core;
-use MzMBO_Access\Client as Client;
-use MzMindbody\Inc\Common as Common;
-use MzMindbody\Inc\Common\Interfaces as Interfaces;
+use MzMboAccess\Core as Core;
+use MzMboAccess\Client as Client;
+use MzMindbody\Common as Common;
+use MzMindbody\Common\Interfaces as Interfaces;
 
-class Access_Utilities extends Client\Retrieve_Client
+class AccessUtilities extends Client\RetrieveClient
 {
 
 

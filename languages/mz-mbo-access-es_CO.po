@@ -31,49 +31,49 @@ msgstr ""
 "Lo sentimos, pero el plugin MZ MBO Access requiere que el plugin principal, "
 "MZ Mindbody API, esté instalado y activo."
 
-#: src/Access/Access_Display.php:120
+#: src/Access/AccessDisplay.php:120
 #, fuzzy
 msgid "Access to this content requires one of"
 msgstr "El acceso a este contenido requiere una de las"
 
-#: src/Access/Access_Display.php:121
+#: src/Access/AccessDisplay.php:121
 #, fuzzy
 msgid "Login with your Mindbody account to access this content."
 msgstr "Inicia sesión con tu cuenta de Mindbody para acceder a este contenido."
 
-#: src/Access/Access_Display.php:122
+#: src/Access/AccessDisplay.php:122
 #, fuzzy
 msgid "Looks like your access has expired."
 msgstr "Parece que tu acceso ha caducado."
 
-#: src/Access/Access_Display.php:128
+#: src/Access/AccessDisplay.php:128
 #, fuzzy
 msgid "Forgot My Password"
 msgstr "Olvidé mi contraseña"
 
-#: src/Access/Access_Display.php:155
+#: src/Access/AccessDisplay.php:155
 msgid "email"
 msgstr "e-mail"
 
-#: src/Access/Access_Display.php:156
+#: src/Access/AccessDisplay.php:156
 #, fuzzy
 msgid "password"
 msgstr "Contraseña"
 
-#: src/Access/Access_Display.php:157
+#: src/Access/AccessDisplay.php:157
 msgid "Login"
 msgstr "Conectate"
 
-#: src/Access/Access_Display.php:158
+#: src/Access/AccessDisplay.php:158
 msgid "Logout"
 msgstr "Cerrar Sesión"
 
-#: src/Access/Access_Display.php:284
+#: src/Access/AccessDisplay.php:284
 #, fuzzy
 msgid "Error returning schedule from Mindbody in Access Display."
 msgstr "Error al devolver la programación de Mindbody en Access Display."
 
-#: src/Access/Access_Display.php:316
+#: src/Access/AccessDisplay.php:316
 msgid "Error. Please try again."
 msgstr "Error. Por favor, intenta de nuevo."
 
@@ -282,12 +282,12 @@ msgstr "Inscribirse en algunas clases."
 msgid "Try Again"
 msgstr "Vuelva a intentarlo"
 
-#: src/Client/Retrieve_Client.php:108
+#: src/Client/RetrieveClient.php:108
 #, fuzzy
 msgid "Badly formed email."
 msgstr "Correo electrónico mal formado."
 
-#: src/Client/Retrieve_Client.php:110
+#: src/Client/RetrieveClient.php:110
 #, fuzzy
 msgid ""
 "All Mindbody passwords must contain 8 to 15 characters and must include both "
@@ -296,29 +296,29 @@ msgstr ""
 "Todas las contraseñas de Mindbody deben contener de 8 a 15 caracteres y "
 "deben incluir letras y números."
 
-#: src/Client/Retrieve_Client.php:117
+#: src/Client/RetrieveClient.php:117
 msgid "Welcome"
 msgstr "Bienvenido"
 
-#: src/Client/Retrieve_Client.php:119
+#: src/Client/RetrieveClient.php:119
 #, fuzzy, php-format
 msgid "Whoops. Please try again, %1$s."
 msgstr "Gritos. Inténtelo de nuevo, %1$s."
 
-#: src/Client/Retrieve_Client.php:129
+#: src/Client/RetrieveClient.php:129
 msgid "Invalid Login"
 msgstr "Inicio de sesión no válido."
 
-#: src/Client/Retrieve_Client.php:295
+#: src/Client/RetrieveClient.php:295
 msgid "Please Login"
 msgstr "Por favor Inicie Sesion"
 
 #: src/Core/PluginCore.php:123 src/Core/PluginCore.php:131
-#: src/Session/MzAccess_Session.php:228 src/Session/MzAccess_Session.php:236
+#: src/Session/MzAccessSession.php:228 src/Session/MzAccessSession.php:236
 msgid "Cheatin&#8217; huh?"
 msgstr "¿Haciendo trampas, eh?"
 
-#: src/Session/MzAccess_Session.php:217
+#: src/Session/MzAccessSession.php:217
 #, fuzzy
 msgid ""
 "Another plugin is attempting to start a session with WordPress. WP Session "

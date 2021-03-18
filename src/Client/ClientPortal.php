@@ -1,21 +1,21 @@
 <?php
 
-namespace MzMBO_Access\Client;
+namespace MzMboAccess\Client;
 
 use MzMindbody as MZ;
-use MzMBO_Access as NS;
-use MzMindbody\Inc\Core as Core;
-use MzMindbody\Inc\Common as Common;
-use MzMindbody\Inc\Libraries as Libraries;
-use MzMindbody\Inc\Schedule as Schedule;
-use MzMindbody\Inc\Common\Interfaces as Interfaces;
+use MzMboAccess as NS;
+use MzMindbody\Core as Core;
+use MzMindbody\Common as Common;
+use MzMindbody\Libraries as Libraries;
+use MzMindbody\Schedule as Schedule;
+use MzMindbody\Common\Interfaces as Interfaces;
 
 /*
  * Class that holds Client Interface Methods for Ajax requests
  *
  *
  */
-class ClientPortal extends Retrieve_Client
+class ClientPortal extends RetrieveClient
 {
 
 
@@ -68,8 +68,8 @@ class ClientPortal extends Retrieve_Client
      */
     public function __construct()
     {
-        $this->date_format = Core\MzMindbody_Api::$date_format;
-        $this->time_format = Core\MzMindbody_Api::$time_format;
+        $this->date_format = Core\MzMindbodyApi::$date_format;
+        $this->time_format = Core\MzMindbodyApi::$time_format;
         parent::__construct();
     }
 

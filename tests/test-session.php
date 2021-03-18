@@ -30,7 +30,7 @@ class Tests_Session extends MZMBOAccess_WPUnitTestCase
 
         include_once ABSPATH . 'wp-admin/includes/upgrade.php';
         $this->el(dbDelta($sql));
-        new MzMBO_Access\Session\MzAccess_Session();
+        new MzMboAccess\Session\MzAccessSession();
     }
 
     public function tearDown()
@@ -40,12 +40,12 @@ class Tests_Session extends MZMBOAccess_WPUnitTestCase
 
     public function test_set()
     {
-        $this->assertEquals('"bar"', MzMBO_Access\Session\MzAccess_Session::instance()->set('foo', 'bar'));
+        $this->assertEquals('"bar"', MzMboAccess\Session\MzAccessSession::instance()->set('foo', 'bar'));
     }
 
     public function test_get()
     {
-        $this->assertEquals('bar', MzMBO_Access\Session\MzAccess_Session::instance()->get('foo'));
+        $this->assertEquals('bar', MzMboAccess\Session\MzAccessSession::instance()->get('foo'));
     }
 
     // public function test_use_cart_cookie() {
@@ -56,10 +56,10 @@ class Tests_Session extends MZMBOAccess_WPUnitTestCase
 
     public function test_should_start_session()
     {
-        $blacklist = MzMBO_Access\Session\MzAccess_Session::instance()->get_blacklist();
+        $blacklist = MzMboAccess\Session\MzAccessSession::instance()->get_blacklist();
         foreach ($blacklist as $uri) {
             $this->go_to('/' . $uri);
-            $this->assertFalse(MzMBO_Access\Session\MzAccess_Session::instance()->should_start_session());
+            $this->assertFalse(MzMboAccess\Session\MzAccessSession::instance()->should_start_session());
         }
     }
 }

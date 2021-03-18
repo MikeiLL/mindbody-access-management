@@ -16,11 +16,11 @@
  * Text Domain:     mz-mbo-access
  * Domain Path:     /languages
 */
-namespace MzMBO_Access;
+namespace MzMboAccess;
 
-use MzMBO_Access as NS;
+use MzMboAccess as NS;
 use MzMindbody;
-use MzMindbody\Inc\Core as Core;
+use MzMindbody\Core as Core;
 
 if (! defined('WPINC')) {
     die;
@@ -103,7 +103,7 @@ register_activation_hook(__FILE__, array( __NAMESPACE__ . '\Core\Activator', 'ac
 // register_deactivation_hook( __FILE__, array( NS . '\Core\Deactivator', 'deactivate' ) );
 
 
-class MzMBO_Access
+class MzMboAccess
 {
 
 
@@ -128,7 +128,7 @@ class MzMBO_Access
      * @static
      * @staticvar array $instance
      * @see       MZMBO()
-     * @return    object|MzMBO_Access The one true MzMBO_Access
+     * @return    object|MzMboAccess The one true MzMboAccess
      */
     public static function instance()
     {
@@ -145,9 +145,9 @@ class MzMBO_Access
 /**
  * Begins execution of the plugin
  *
- * The main function for that returns MzMBO_Access
+ * The main function for that returns MzMboAccess
  *
- * The main function responsible for returning the one true MzMBO_Access
+ * The main function responsible for returning the one true MzMboAccess
  * Instance to functions everywhere.
  *
  * Borrowed from Easy_Digital_Downloads.
@@ -165,12 +165,12 @@ class MzMBO_Access
  * can interact with the plugin's hooks contained within.
  *
  * @since  1.4
- * @return object|MzMBO_Access The one true MzMBO_Access Instance.
+ * @return object|MzMboAccess The one true MzMboAccess Instance.
  */
 if (! function_exists('MBO_Access')) {
     function MBO_Access()
     {
-        return NS\MzMBO_Access::instance();
+        return NS\MzMboAccess::instance();
     }
 }
 
@@ -190,7 +190,7 @@ function mz_mbo_access_plugin_init()
 {
     if (defined('MzMindbody\PLUGIN_NAME_DIR')) {
         // MZ Mindbody API plugin is activated, add the hooks
-        // Get MzMBO_Access Instance.
+        // Get MzMboAccess Instance.
         MBO_Access();
     } else {
         add_action('admin_init', __NAMESPACE__ . '\\deactivate');
