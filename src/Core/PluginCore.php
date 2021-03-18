@@ -1,12 +1,12 @@
 <?php
 
-namespace MzMboAccess\Core;
+namespace MZoo\MzMboAccess\Core;
 
-use MzMboAccess as NS;
-use MzMboAccess\Access as Access;
-use MzMboAccess\Client as Client;
-use MzMboAccess\Backend as Backend;
-use MzMboAccess\Session as Session;
+use MZoo\MzMboAccess as NS;
+use MZoo\MzMboAccess\Access as Access;
+use MZoo\MzMboAccess\Client as Client;
+use MZoo\MzMboAccess\Backend as Backend;
+use MZoo\MzMboAccess\Session as Session;
 
 /**
  * The core plugin class.

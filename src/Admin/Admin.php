@@ -1,8 +1,8 @@
 <?php
 
-namespace MzMboAccess\Admin;
+namespace MZoo\MzMboAccess\Admin;
 
-use MzMboAccess as NS;
+use MZoo\MzMboAccess as NS;
 
 /**
  * The admin-specific functionality of the plugin.

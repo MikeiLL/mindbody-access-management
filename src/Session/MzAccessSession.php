@@ -1,6 +1,6 @@
 <?php
 
-namespace MzMboAccess\Session;
+namespace MZoo\MzMboAccess\Session;
 
 use EAMann\Sessionz\Handlers\EncryptionHandler;
 use EAMann\Sessionz\Handlers\MemoryHandler;

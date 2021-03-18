@@ -40,7 +40,7 @@
 	},
 	"autoload": {
 		"psr-4": {
-			"MzMboAccess\\": "src",
+			"MZoo\\MzMboAccess\\": "src",
 			"EAMann\\": "libraries/wp-sessions",
 			"EAMann\\WPSession\\": "libraries/wp-sessions",
 			"EAMann\\WPSession\\Objects\\": "libraries/wp-sessions"

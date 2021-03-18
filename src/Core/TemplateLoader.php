@@ -1,11 +1,11 @@
 <?php
 
-namespace MzMboAccess\Core;
+namespace MZoo\MzMboAccess\Core;
 
-use MzMindbody\Libraries as Libraries;
-use MzMboAccess as NS;
+use MZoo\MzMindbody\Libraries as Libraries;
+use MZoo\MzMboAccess as NS;
 
-class TemplateLoader extends Libraries\Gamajo_TemplateLoader
+class TemplateLoader extends \MZMBO_Gamajo_Template_Loader
 {
 
 

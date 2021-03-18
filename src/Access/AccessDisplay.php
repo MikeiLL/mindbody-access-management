@@ -1,31 +1,29 @@
 <?php
 
-namespace MzMboAccess\Access;
+namespace MZoo\MzMboAccess\Access;
 
-use MzMboAccess as NS;
-use MzMindbody as MZ;
-use MzMboAccess\Core as Core;
-use MzMboAccess\Session as Session;
-use MzMboAccess\Client as Client;
-use MzMindbody\Site as Site;
-use MzMindbody\Common as Common;
-use MzMindbody\Common\Interfaces as Interfaces;
+use MZoo\MzMboAccess as NS;
+use MZoo\MzMindbody as MZ;
+use MZoo\MzMboAccess\Core as Core;
+use MZoo\MzMboAccess\Session as Session;
+use MZoo\MzMboAccess\Client as Client;
+use MZoo\MzMindbody\Site as Site;
+use MZoo\MzMindbody\Common as Common;
+use MZoo\MzMindbody\Common\Interfaces as Interfaces;
 
 class AccessDisplay extends Interfaces\ShortcodeScriptLoader
 {
 
-
-
     /**
      * If shortcode script has been enqueued.
      *
-     * @since  1.0.0
-     * @access public
+     * @since    2.4.7
+     * @access   private
      *
      * @used in handleShortcode, addScript
-     * @var  boolean $addedAlready True if shorcdoe scripts have been enqueued.
+     * @var      boolean $addedAlready True if shorcdoe scripts have been enqueued.
      */
-    static $addedAlready = false;
+    private static $addedAlready = false;
 
     /**
      * Restricted content.

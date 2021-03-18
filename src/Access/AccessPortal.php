@@ -1,13 +1,13 @@
 <?php
 
-namespace MzMboAccess\Access;
+namespace MZoo\MzMboAccess\Access;
 
-use MzMboAccess as NS;
-use MzMindbody as MZ;
-use MzMboAccess\Core as Core;
-use MzMboAccess\Client as Client;
-use MzMindbody\Common as Common;
-use MzMindbody\Common\Interfaces as Interfaces;
+use MZoo\MzMboAccess as NS;
+use MZoo\MzMindbody as MZ;
+use MZoo\MzMboAccess\Core as Core;
+use MZoo\MzMboAccess\Client as Client;
+use MZoo\MzMindbody\Common as Common;
+use MZoo\MzMindbody\Common\Interfaces as Interfaces;
 
 class AccessPortal extends AccessUtilities
 {

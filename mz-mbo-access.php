@@ -16,11 +16,11 @@
  * Text Domain:     mz-mbo-access
  * Domain Path:     /languages
 */
-namespace MzMboAccess;
+namespace MZoo\MzMboAccess;
 
-use MzMboAccess as NS;
-use MzMindbody;
-use MzMindbody\Core as Core;
+use MZoo\MzMboAccess as NS;
+use MZoo\MzMindbody;
+use MZoo\MzMindbody\Core as Core;
 
 if (! defined('WPINC')) {
     die;
@@ -83,7 +83,7 @@ if (file_exists($wp_mbo_access_autoload)) {
     include_once $wp_mbo_access_autoload;
 }
 
-if (! class_exists('\MzMboAccess\Core\PluginCore')) {
+if (! class_exists('\MZoo\MzMboAccess\Core\PluginCore')) {
     exit('MZ MBO Access requires Composer autoloading, which is not configured');
 }
 
@@ -92,7 +92,7 @@ if (! class_exists('\MzMboAccess\Core\PluginCore')) {
  * This action is documented in src/core/class-activator.php
  */
 
-register_activation_hook(__FILE__, array( __NAMESPACE__ . '\Core\Activator', 'activate' ));
+register_activation_hook(__FILE__, array( __NAMESPACE__ . '\MZoo\Core\Activator', 'activate' ));
 
 /**
  * The code that runs during plugin deactivation.

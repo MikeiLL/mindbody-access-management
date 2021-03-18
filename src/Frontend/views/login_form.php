@@ -1,6 +1,6 @@
 <?php
 
-use MzMboAccess\Core as Core;
+use MZoo\MzMboAccess\Core as Core;
 
 ?>
     <div id="mzLogInContainer">

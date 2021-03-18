@@ -1,6 +1,6 @@
 <?php
 
-namespace MzMboAccess\Core;
+namespace MZoo\MzMboAccess\Core;
 
 /**
  * Define the internationalization functionality.

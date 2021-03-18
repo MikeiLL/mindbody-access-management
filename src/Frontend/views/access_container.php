@@ -1,7 +1,7 @@
 <?php
 
-use MzMboAccess\Core as Core;
-use MzMindbody as MZ;
+use MZoo\MzMboAccess\Core as Core;
+use MZoo\MzMindbody as MZ;
 
 ?>
 <div id="mzAccessContainer">
