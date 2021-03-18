@@ -17,7 +17,7 @@ class Test_Get_Token extends MZMBOAccess_WPUnitTestCase
 
         parent::setUp();
 
-        $this->assertTrue(class_exists('MzMindbody\Libraries\MboV6Api'));
+        $this->assertTrue(class_exists('MZoo\MzMindbody\Libraries\MboV6Api'));
 
         $basic_options = get_option('mz_mbo_basic');
 

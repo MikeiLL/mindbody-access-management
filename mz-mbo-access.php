@@ -175,7 +175,7 @@ if (! function_exists('MBO_Access')) {
 }
 
 // Check the minimum required PHP version and run the plugin.
-if (version_compare(PHP_VERSION, 'MzMindbody\MINIMUM_PHP_VERSION', '>=')) {
+if (version_compare(PHP_VERSION, 'MZoo\MzMindbody\MINIMUM_PHP_VERSION', '>=')) {
     add_action('init', __NAMESPACE__ . '\\mz_mbo_access_plugin_init');
 }
 
@@ -188,7 +188,7 @@ function deactivate()
 
 function mz_mbo_access_plugin_init()
 {
-    if (defined('MzMindbody\PLUGIN_NAME_DIR')) {
+    if (defined('MZoo\MzMindbody\PLUGIN_NAME_DIR')) {
         // MZ Mindbody API plugin is activated, add the hooks
         // Get MzMboAccess Instance.
         MBO_Access();
