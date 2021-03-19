@@ -24,7 +24,6 @@
 		"php": ">=7.1",
 		"composer/installers": "~1.0",
 		"ericmann/sessionz": "^0.3",
-		"squizlabs/php_codesniffer": "*",
     "wp-coding-standards/wpcs": "*"
 	},
 	"config": {
@@ -45,5 +44,8 @@
 			"EAMann\\WPSession\\": "libraries/wp-sessions",
 			"EAMann\\WPSession\\Objects\\": "libraries/wp-sessions"
 		}
-	}
+	},
+  "require-dev": {
+    "squizlabs/php_codesniffer": "*"
+  }
 }
