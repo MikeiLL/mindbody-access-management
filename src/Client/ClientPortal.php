@@ -17,8 +17,6 @@ use MZoo\MzMindbody\Common\Interfaces as Interfaces;
 
 /**
  * Class that holds Client Interface Methods for Ajax requests
- *
- *
  */
 class ClientPortal extends RetrieveClient {
 
@@ -120,10 +118,10 @@ class ClientPortal extends RetrieveClient {
 			$result['client_id'] = $login['client_id'];
 		}
 
-		if ( ! empty( $_SERVER['HTTP_X_REQUESTED_WITH'] ) && 
-            'xmlhttprequest' === strtolower( $_SERVER['HTTP_X_REQUESTED_WITH'] ) ) {
+		if ( ! empty( $_SERVER['HTTP_X_REQUESTED_WITH'] ) &&
+			'xmlhttprequest' === strtolower( $_SERVER['HTTP_X_REQUESTED_WITH'] ) ) {
 			$result = wp_json_encode( $result );
-			echo $result;
+			esc_html_e($result);;
 		} else {
 			header( 'Location: ' . $_SERVER['HTTP_REFERER'] );
 		}
@@ -155,7 +153,7 @@ class ClientPortal extends RetrieveClient {
 
 		if ( ! empty( $_SERVER['HTTP_X_REQUESTED_WITH'] ) && strtolower( $_SERVER['HTTP_X_REQUESTED_WITH'] ) == 'xmlhttprequest' ) {
 			$result = wp_json_encode( $result );
-			echo $result;
+			esc_html_e($result);;
 		} else {
 			header( 'Location: ' . $_SERVER['HTTP_REFERER'] );
 		}
@@ -182,7 +180,7 @@ class ClientPortal extends RetrieveClient {
 
 		if ( ! empty( $_SERVER['HTTP_X_REQUESTED_WITH'] ) && strtolower( $_SERVER['HTTP_X_REQUESTED_WITH'] ) == 'xmlhttprequest' ) {
 			$result = wp_json_encode( $result );
-			echo $result;
+			esc_html_e($result);;
 		} else {
 			header( 'Location: ' . $_SERVER['HTTP_REFERER'] );
 		}
@@ -207,7 +205,7 @@ class ClientPortal extends RetrieveClient {
 
 		if ( ! empty( $_SERVER['HTTP_X_REQUESTED_WITH'] ) && strtolower( $_SERVER['HTTP_X_REQUESTED_WITH'] ) == 'xmlhttprequest' ) {
 			$result = wp_json_encode( $result );
-			echo $result;
+			esc_html_e($result);;
 		} else {
 			header( 'Location: ' . $_SERVER['HTTP_REFERER'] );
 		}
@@ -235,7 +233,7 @@ class ClientPortal extends RetrieveClient {
 
 		if ( ! empty( $_SERVER['HTTP_X_REQUESTED_WITH'] ) && strtolower( $_SERVER['HTTP_X_REQUESTED_WITH'] ) == 'xmlhttprequest' ) {
 			$result = wp_json_encode( $result );
-			echo $result;
+			esc_html_e($result);;
 		} else {
 			header( 'Location: ' . $_SERVER['HTTP_REFERER'] );
 		}
