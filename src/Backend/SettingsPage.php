@@ -36,7 +36,7 @@ class SettingsPage
 
     public function __construct()
     {
-        self::$wposa_obj = MZ\Inc\Core\MzMindbodyApi::$settings_page::$wposa_obj;
+        self::$wposa_obj = MZ\Core\MzMindbodyApi::$settings_page::$wposa_obj;
     }
 
     public function addSections()

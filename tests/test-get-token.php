@@ -21,7 +21,7 @@ class Test_Get_Token extends MZMBOAccess_WPUnitTestCase
 
         $basic_options = get_option('mz_mbo_basic');
 
-        $mbo_api = new MzMindbody\Libraries\MboV6Api($basic_options);
+        $mbo_api = new MZoo\MzMindbody\Libraries\MboV6Api($basic_options);
 
         $result = $mbo_api->TokenIssue();
 
@@ -43,7 +43,7 @@ class Test_Get_Token extends MZMBOAccess_WPUnitTestCase
 
         $bad_basic_options = get_option('mz_mbo_basic');
 
-        $bad_mbo_api = new MzMindbody\Libraries\MboV6Api($bad_basic_options);
+        $bad_mbo_api = new MZoo\MzMindbody\Libraries\MboV6Api($bad_basic_options);
 
         $result_error = $bad_mbo_api->TokenIssue();
 

@@ -682,6 +682,7 @@ class RetrieveClient extends Interfaces\Retrieve
         * schedule, the 'Visits' array contains that visit, but when there are multiple
         * visits then the array of visits is under 'Visits'/'Visit'
         */
+
         if (is_array($client_schedule['GetClientScheduleResult']['Visits']['Visit'][0])) {
             // Multiple visits
             $visit_array_scope = $client_schedule['GetClientScheduleResult']['Visits']['Visit'];
@@ -691,8 +692,7 @@ class RetrieveClient extends Interfaces\Retrieve
 
         foreach ($visit_array_scope as $visit) {
             // Make a timestamp of just the day to use as key for that day's classes
-            $dt        = new \DateTime($visit['StartDateTime']);
-            $just_date = $dt->format('Y-m-d');
+            $just_date = wp_date('Y-m-d', $visit['StartDateTime']);
 
             /*
             Create a new array with a key for each date YYYY-MM-DD
