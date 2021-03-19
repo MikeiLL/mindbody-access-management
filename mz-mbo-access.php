@@ -73,15 +73,17 @@ function mbo_access_has_mindbody_api() {
  * Child Plugin Notice
  */
 function mbo_access_child_plugin_notice() {     ?>
-    <div class="error">
-        <p>
-            <?php esc_htmlesc_html_e( 
-                'Sorry, but MZ MBO Access plugin requires the parent plugin, MZ Mindbody API, to be installed and active.',
-                NS\PLUGIN_TEXT_DOMAIN );
-            ?>
-        </p>
-    </div>
-<?php
+	<div class="error">
+		<p>
+			<?php
+			esc_htmlesc_html_e(
+				'Sorry, but MZ MBO Access plugin requires the parent plugin, MZ Mindbody API, to be installed and active.',
+				NS\PLUGIN_TEXT_DOMAIN
+			);
+			?>
+		</p>
+	</div>
+	<?php
 }
 
 /**
@@ -107,14 +109,17 @@ register_activation_hook( __FILE__, array( __NAMESPACE__ . '\MZoo\Core\Activator
  * The code that runs during plugin deactivation.
  * This action is documented src/core/class-deactivator.php
  */
-// TODO: This Class is causing a php Warning, then error that it's already
-// been declared. Not doing anything anyway so commenting out for not.
-// register_deactivation_hook( __FILE__, array( NS . '\Core\Deactivator', 'deactivate' ) );
 
+/*
+ * TODO: This Class is causing a php Warning, then error that it's already
+ * been declared. Not doing anything anyway so commenting out for now.
+ * register_deactivation_hook( __FILE__, array( NS . '\Core\Deactivator', 'deactivate' ) );
+ */
 
+/**
+ * Instance of the main plugin class.
+ */
 class MzMboAccess {
-
-
 
 	/**
 	 * The instance of the plugin.
@@ -130,13 +135,13 @@ class MzMboAccess {
 	 * Insures that only one instance of MzMindbody exists in memory at any one
 	 * time. Also prevents needing to define globals all over the place.
 	 *
-	 * Totally borrowed from Easy_Digital_Downloads, and certainly used with some ignorance
-	 * as EDD doesn't actually include a construct in it's class.
+	 * Totally borrowed from Easy_Digital_Downloads, and certainly used with some
+	 * ignorance.
 	 *
 	 * @since     1.0.1
 	 * @static
 	 * @staticvar array $instance
-	 * @see       MZMBO()
+	 * @see       MBO_Access()
 	 * @return    object|MzMboAccess The one true MzMboAccess
 	 */
 	public static function instance() {
@@ -150,32 +155,33 @@ class MzMboAccess {
 	}
 }
 
-/**
- * Begins execution of the plugin
- *
- * The main function for that returns MzMboAccess
- *
- * The main function responsible for returning the one true MzMboAccess
- * Instance to functions everywhere.
- *
- * Borrowed from Easy_Digital_Downloads.
- *
- * Use this function like you would a global variable, except without needing
- * to declare the global.
- *
- * Example: <?php $mZmboAccess = MBO_Access(); ?>
- *
- * Since everything within the plugin is registered via hooks,
- * then kicking off the plugin from this point in the file does
- * not affect the page life cycle.
- *
- * Also returns copy of the app object so 3rd party developers
- * can interact with the plugin's hooks contained within.
- *
- * @since  1.4
- * @return object|MzMboAccess The one true MzMboAccess Instance.
- */
 if ( ! function_exists( 'MBO_Access' ) ) {
+
+	/**
+	 * Begins execution of the plugin
+	 *
+	 * The main function for that returns MzMboAccess
+	 *
+	 * The main function responsible for returning the one true MzMboAccess
+	 * Instance to functions everywhere.
+	 *
+	 * Borrowed from Easy_Digital_Downloads.
+	 *
+	 * Use this function like you would a global variable, except without needing
+	 * to declare the global.
+	 *
+	 * Example: <?php $mZmboAccess = MBO_Access(); ?>
+	 *
+	 * Since everything within the plugin is registered via hooks,
+	 * then kicking off the plugin from this point in the file does
+	 * not affect the page life cycle.
+	 *
+	 * Also returns copy of the app object so 3rd party developers
+	 * can interact with the plugin's hooks contained within.
+	 *
+	 * @since  1.4
+	 * @return object|MzMboAccess The one true MzMboAccess Instance.
+	 */
 	function MBO_Access() {
 		return NS\MzMboAccess::instance();
 	}
@@ -186,12 +192,22 @@ if ( version_compare( PHP_VERSION, 'MZoo\MzMindbody\MINIMUM_PHP_VERSION', '>=' )
 	add_action( 'init', __NAMESPACE__ . '\\mz_mbo_access_plugin_init' );
 }
 
+/**
+ * Deactivate the plugin.
+ *
+ * @used by mbo_access_has_mindbody_api above
+ */
 function deactivate() {
-	  deactivate_plugins( plugin_basename( __FILE__ ) );
+	deactivate_plugins( plugin_basename( __FILE__ ) );
 	$admin_object = new NS\Admin\Admin( NS\PLUGIN_NAME, NS\PLUGIN_VERSION, NS\PLUGIN_TEXT_DOMAIN );
 	add_action( 'admin_notices', array( $admin_object, 'admin_notice' ) );
 }
 
+/**
+ * Activate the plugin.
+ *
+ * If version_compare passes above, function is added to init action.
+ */
 function mz_mbo_access_plugin_init() {
 	if ( defined( 'MZoo\MzMindbody\PLUGIN_NAME_DIR' ) ) {
 		// MZ Mindbody API plugin is activated, add the hooks
