@@ -1,8 +1,8 @@
 <?php
-
-/*
+/**
  * Plugin Name: Mindbody Access Management
  * Description: Child plugin for mZoo Mindbody Interface, which can limit user access to content based on MBO client account details.
+ *
  * @package MZMBOACCESS
  *
  * @wordpress-plugin
@@ -15,7 +15,8 @@
  * License URI:     http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain:     mz-mbo-access
  * Domain Path:     /languages
-*/
+ */
+
 namespace MZoo\MzMboAccess;
 
 use MZoo\MzMboAccess as NS;
@@ -26,10 +27,12 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
-// TODO make more eloquent appoach like EDD JILT work!
-// * Based on http://wptavern.com/how-to-prevent-wordpress-plugins-from-activating-on-sites-with-incompatible-hosting-environments
+/*
+ * TODO consider more eloquent appoach like EDD JILT work!
+ * Based on http://wptavern.com/how-to-prevent-wordpress-plugins-from-activating-on-sites-with-incompatible-hosting-environments
+ */
 
-/**
+/*
  * Define Constants
  */
 
@@ -69,7 +72,16 @@ function mbo_access_has_mindbody_api() {
 /**
  * Child Plugin Notice
  */
-function mbo_access_child_plugin_notice() {     ?><div class="error"><p><?php echo __( 'Sorry, but MZ MBO Access plugin requires the parent plugin, MZ Mindbody API, to be installed and active.', NS\PLUGIN_TEXT_DOMAIN ); ?></p></div><?php
+function mbo_access_child_plugin_notice() {     ?>
+    <div class="error">
+        <p>
+            <?php esc_htmlesc_html_e( 
+                'Sorry, but MZ MBO Access plugin requires the parent plugin, MZ Mindbody API, to be installed and active.',
+                NS\PLUGIN_TEXT_DOMAIN );
+            ?>
+        </p>
+    </div>
+<?php
 }
 
 /**

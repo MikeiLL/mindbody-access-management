@@ -138,7 +138,7 @@ class ClientPortal extends RetrieveClient {
 		// update class attribute to hold logged out status
 		$this->client_logged_in = false;
 
-		_e( 'Logged Out', 'mz-mindbody-api' );
+		esc_html_e( 'Logged Out', 'mz-mindbody-api' );
 
 		echo '<br/>';
 
