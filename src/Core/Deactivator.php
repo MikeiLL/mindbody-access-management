@@ -12,19 +12,18 @@ namespace MZoo\MzMboAccess\Core;
  *
  * @author Mike iLL/mZoo.org
  **/
-class Deactivator
-{
+class Deactivator {
 
 
 
-    /**
-     * Short Description.
-     *
-     * Long Description.
-     *
-     * @since 1.0.1
-     */
-    public static function deactivate()
-    {
-    }
+
+	/**
+	 * Short Description.
+	 *
+	 * Long Description.
+	 *
+	 * @since 1.0.1
+	 */
+	public static function deactivate() {
+	}
 }

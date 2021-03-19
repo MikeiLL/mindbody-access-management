@@ -9,125 +9,123 @@ use MZoo\MzMboAccess\Client as Client;
 use MZoo\MzMindbody\Common as Common;
 use MZoo\MzMindbody\Common\Interfaces as Interfaces;
 
-class AccessPortal extends AccessUtilities
-{
+class AccessPortal extends AccessUtilities {
 
 
 
-    /**
-     * Check Access Permissions
-     *
-     * Since 2.5.7
-     *
-     * return true if active membership matches one in received array (or string)
-     *
-     * @param $membership_types string or array of membership types
-     *
-     * @return bool
-     */
-    public function ajax_login_check_access_permissions()
-    {
 
-        check_ajax_referer($_REQUEST['nonce'], 'mz_mbo_access_nonce', false);
+	/**
+	 * Check Access Permissions
+	 *
+	 * Since 2.5.7
+	 *
+	 * return true if active membership matches one in received array (or string)
+	 *
+	 * @param $membership_types string or array of membership types
+	 *
+	 * @return bool
+	 */
+	public function ajax_login_check_access_permissions() {
 
-        // Crate the MBO Object
-        $this->getMboResults();
+		check_ajax_referer( $_REQUEST['nonce'], 'mz_mbo_access_nonce', false );
 
-        $result = array();
+		// Crate the MBO Object
+		$this->getMboResults();
 
-        // Init message
-        $result['logged'] = '';
+		$result = array();
 
-        $result['client_access_level'] = 0;
+		// Init message
+		$result['logged'] = '';
 
-        $result['type'] = 'success';
+		$result['client_access_level'] = 0;
 
-        // Parse the serialized form into an array.
-        $params = array();
-        parse_str($_REQUEST['form'], $params);
+		$result['type'] = 'success';
 
-        if (empty($params) || ! is_array($params)) {
-            $result['type'] = 'error';
-        } else {
-            $credentials = array(
-                'Username' => $params['email'],
-                'Password' => $params['password'],
-            );
+		// Parse the serialized form into an array.
+		$params = array();
+		parse_str( $_REQUEST['form'], $params );
 
-            $client = new Client\RetrieveClient();
+		if ( empty( $params ) || ! is_array( $params ) ) {
+			$result['type'] = 'error';
+		} else {
+			$credentials = array(
+				'Username' => $params['email'],
+				'Password' => $params['password'],
+			);
 
-            $login = $client->log_client_in($credentials);
+			$client = new Client\RetrieveClient();
 
-            if ($login['type'] == 'error') {
-                $result['type'] = 'error';
-            }
+			$login = $client->log_client_in( $credentials );
 
-            $result['logged'] = $login['message'];
+			if ( $login['type'] == 'error' ) {
+				$result['type'] = 'error';
+			}
 
-            $result['client_id'] = $login['client_id'];
-        }
+			$result['logged'] = $login['message'];
 
-        $access_level = $this->check_access_permissions($result['client_id']);
+			$result['client_id'] = $login['client_id'];
+		}
 
-        if (0 !== $access_level) {
-            $result['client_access_level'] = $access_level;
-        }
+		$access_level = $this->check_access_permissions( $result['client_id'] );
 
-        if (! empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
-            $result = json_encode($result);
-            echo $result;
-        } else {
-            header('Location: ' . $_SERVER['HTTP_REFERER']);
-        }
+		if ( 0 !== $access_level ) {
+			$result['client_access_level'] = $access_level;
+		}
 
-        die();
-    }
+		if ( ! empty( $_SERVER['HTTP_X_REQUESTED_WITH'] ) && strtolower( $_SERVER['HTTP_X_REQUESTED_WITH'] ) == 'xmlhttprequest' ) {
+			$result = json_encode( $result );
+			echo $result;
+		} else {
+			header( 'Location: ' . $_SERVER['HTTP_REFERER'] );
+		}
+
+		die();
+	}
 
 
-    /**
-     * Check Access Permissions
-     *
-     * Since 2.5.7
-     *
-     * return true if active membership matches one in received array (or string)
-     *
-     * @param $membership_types string or array of membership types
-     *
-     * @return bool
-     */
-    public function ajax_check_access_permissions()
-    {
+	/**
+	 * Check Access Permissions
+	 *
+	 * Since 2.5.7
+	 *
+	 * return true if active membership matches one in received array (or string)
+	 *
+	 * @param $membership_types string or array of membership types
+	 *
+	 * @return bool
+	 */
+	public function ajax_check_access_permissions() {
 
-        check_ajax_referer($_REQUEST['nonce'], 'mz_mbo_access_nonce', false);
+		check_ajax_referer( $_REQUEST['nonce'], 'mz_mbo_access_nonce', false );
 
-        // Crate the MBO Object
-        $this->getMboResults();
+		// Crate the MBO Object
+		$this->getMboResults();
 
-        $result = array();
+		$result = array();
 
-        // Init message
-        $result['logged'] = '';
+		// Init message
+		$result['logged'] = '';
 
-        $result['client_access_level'] = 0;
+		$result['client_access_level'] = 0;
 
-        $result['type'] = 'error';
+		$result['type'] = 'error';
 
-        if ($_REQUEST['client_id']) {
-            $access_level   = $this->check_access_permissions($_REQUEST['client_id']);
-            $result['type'] = 'success';
-        }
+		if ( $_REQUEST['client_id'] ) {
+			$access_level   = $this->check_access_permissions( $_REQUEST['client_id'] );
+			$result['type'] = 'success';
+		}
 
-        if (0 !== $access_level) {
-            $result['client_access_level'] = $access_level;
-        }
+		if ( 0 !== $access_level ) {
+			$result['client_access_level'] = $access_level;
+		}
 
-        if (! empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
-            $result = json_encode($result);
-            echo $result;
-        } else {
-            header('Location: ' . $_SERVER['HTTP_REFERER']);
-        }
+		if ( ! empty( $_SERVER['HTTP_X_REQUESTED_WITH'] ) && strtolower( $_SERVER['HTTP_X_REQUESTED_WITH'] ) == 'xmlhttprequest' ) {
+			$result = json_encode( $result );
+			echo $result;
+		} else {
+			header( 'Location: ' . $_SERVER['HTTP_REFERER'] );
+		}
 
-        die();
-    }
+		die();
+	}
 }

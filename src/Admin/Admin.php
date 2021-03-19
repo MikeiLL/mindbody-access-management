@@ -15,25 +15,24 @@ use MZoo\MzMboAccess as NS;
  *
  * @author Mike iLL/mZoo.org
  */
-class Admin
-{
+class Admin {
 
 
 
-    /**
-     * Notify Admin when plugin deactivated.
-     *
-     * TODO: abstract, maybe
-     *
-     * @since 2.5.7
-     */
-    public function admin_notice()
-    {
-        echo wp_kses_post(
-            sprintf(
-                '<div class="notice notice-error"><p>%s</p></div>',
-                __('Missing Plugin Dependency MZ Mindbody Api.', NS\PLUGIN_TEXT_DOMAIN)
-            )
-        );
-    }
+
+	/**
+	 * Notify Admin when plugin deactivated.
+	 *
+	 * TODO: abstract, maybe
+	 *
+	 * @since 2.5.7
+	 */
+	public function admin_notice() {
+		echo wp_kses_post(
+			sprintf(
+				'<div class="notice notice-error"><p>%s</p></div>',
+				__( 'Missing Plugin Dependency MZ Mindbody Api.', NS\PLUGIN_TEXT_DOMAIN )
+			)
+		);
+	}
 }
