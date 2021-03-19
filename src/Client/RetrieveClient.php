@@ -1,4 +1,7 @@
 <?php
+/**
+ * @package MZMBOACCESS
+ */
 
 namespace MZoo\MzMboAccess\Client;
 
@@ -36,7 +39,7 @@ class RetrieveClient extends Interfaces\Retrieve {
 	 *
 	 * @access private
 	 */
-	private $clientID;
+	private $client_id;
 
 	/**
 	 * MBO Client
@@ -213,16 +216,16 @@ class RetrieveClient extends Interfaces\Retrieve {
 	 * Since 2.0.6
 	 * Get @array of MBO Client IDs
 	 *
-	 * @param  $clientID
+	 * @param  $client_id
 	 * @return array _single_ (first) Client from Mindbody
 	 */
-	public function get_client( $clientID ) {
+	public function get_client( $client_id ) {
 
 		$this->getMboResults();
 
 		$result = $this->mb->GetClients(
 			array(
-				'ClientIds' => array( $clientID ),
+				'ClientIds' => array( $client_id ),
 			)
 		);
 
@@ -588,12 +591,12 @@ class RetrieveClient extends Interfaces\Retrieve {
 	 *
 	 * return array either error or new client details
 	 */
-	public function password_reset_email_request( $clientID = array() ) {
+	public function password_reset_email_request( $client_id = array() ) {
 
 		// Crate the MBO Object
 		$this->getMboResults();
 
-		$result = $this->mb->SendPasswordResetEmail( $clientID );
+		$result = $this->mb->SendPasswordResetEmail( $client_id );
 
 		return $result;
 	}

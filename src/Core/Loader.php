@@ -1,4 +1,7 @@
 <?php
+/**
+ * @package MZMBOACCESS
+ */
 
 namespace MZoo\MzMboAccess\Core;
 

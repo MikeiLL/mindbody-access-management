@@ -1,4 +1,9 @@
 <?php
+/**
+ * ClientPortal class
+ *
+ * @package MZMBOACCESS
+ */
 
 namespace MZoo\MzMboAccess\Client;
 
@@ -10,7 +15,7 @@ use MZoo\MzMindbody\Libraries as Libraries;
 use MZoo\MzMindbody\Schedule as Schedule;
 use MZoo\MzMindbody\Common\Interfaces as Interfaces;
 
-/*
+/**
  * Class that holds Client Interface Methods for Ajax requests
  *
  *
@@ -24,6 +29,7 @@ class ClientPortal extends RetrieveClient {
 	 * The Mindbody API Object
 	 *
 	 * @access private
+	 * @var    class instance $mb
 	 */
 	private $mb;
 
@@ -31,6 +37,7 @@ class ClientPortal extends RetrieveClient {
 	 * Template Date for sending to template partials
 	 *
 	 * @access private
+	 * @var    array $template_data
 	 */
 	private $template_data;
 
@@ -40,8 +47,9 @@ class ClientPortal extends RetrieveClient {
 	 * The MBO ID of the Current User/Client
 	 *
 	 * @access private
+	 * @var    int $client_id
 	 */
-	private $clientID;
+	private $client_id;
 
 	/**
 	 * Format for date display, specific to MBO API Plugin.
@@ -79,10 +87,10 @@ class ClientPortal extends RetrieveClient {
 
 		check_ajax_referer( $_REQUEST['nonce'], 'mz_signup_nonce', false );
 
-		// Create the MBO Object
+		// Create the MBO Object.
 		$this->getMboResults();
 
-		// Init message
+		// Init message.
 		$result['message'] = '';
 
 		$result['type'] = 'success';
@@ -101,7 +109,7 @@ class ClientPortal extends RetrieveClient {
 
 			$login = $this->log_client_in( $credentials );
 
-			if ( $login['type'] == 'error' ) {
+			if ( 'error' === $login['type'] ) {
 				$result['type'] = 'error';
 			}
 
@@ -112,8 +120,9 @@ class ClientPortal extends RetrieveClient {
 			$result['client_id'] = $login['client_id'];
 		}
 
-		if ( ! empty( $_SERVER['HTTP_X_REQUESTED_WITH'] ) && strtolower( $_SERVER['HTTP_X_REQUESTED_WITH'] ) == 'xmlhttprequest' ) {
-			$result = json_encode( $result );
+		if ( ! empty( $_SERVER['HTTP_X_REQUESTED_WITH'] ) && 
+            'xmlhttprequest' === strtolower( $_SERVER['HTTP_X_REQUESTED_WITH'] ) ) {
+			$result = wp_json_encode( $result );
 			echo $result;
 		} else {
 			header( 'Location: ' . $_SERVER['HTTP_REFERER'] );

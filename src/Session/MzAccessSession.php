@@ -1,4 +1,11 @@
 <?php
+/**
+ * MzAccessSession wrapper class.
+ *
+ * Wrap Eric Mann's sophisticated WP_Session class.
+ *
+ * @package MZMBOACCESS
+ */
 
 namespace MZoo\MzMboAccess\Session;
 
@@ -12,17 +19,20 @@ use EAMann\WPSession\CacheHandler;
 use EAMann\WPSession\DatabaseHandler;
 
 /**
- * MzAccessSession wrapper Class
+ * MzAccessSession wrapper class
  *
  * @since 1.0.1
  */
 class MzAccessSession {
 
-
-
-
-	// Hold the class instance.
-	private static $_instance = null;
+	/**
+	 * Hold the class instance.
+	 *
+	 * @var class instance
+	 * @access private
+	 * @since  1.0.1
+	 */
+	private static $instance = null;
 
 	/**
 	 * Holds our session data
@@ -56,10 +66,10 @@ class MzAccessSession {
 		if ( ! $this->should_start_session() ) {
 			return;
 		}
-		if ( session_status() !== PHP_SESSION_DISABLED && ( ! defined( 'WP_CLI' ) || false === WP_CLI ) ) {
+		if ( PHP_SESSION_DISABLED !== session_status() && ( ! defined( 'WP_CLI' ) || false === WP_CLI ) ) {
 			add_action( 'wp_loaded', array( $this, 'wp_session_manager_initialize' ), 1, 0 );
 
-			// If we're not in a cron, start the session
+			// If we're not in a cron, start the session.
 			if ( ! defined( 'DOING_CRON' ) || false === DOING_CRON ) {
 				add_action( 'wp_loaded', array( $this, 'wp_session_manager_start_session' ), 10, 0 );
 			}
@@ -73,7 +83,7 @@ class MzAccessSession {
 	public function wp_session_manager_initialize() {
 
 		if ( ! isset( $_SESSION ) ) {
-			// Queue up the session stack
+			// Queue up the session stack.
 			$wp_session_handler = Manager::initialize();
 
 			// Fall back to database storage where needed.
@@ -114,7 +124,7 @@ class MzAccessSession {
 			$_SESSION['wp_session_manager'] = 'active';
 		}
 
-		if ( ! isset( $_SESSION['wp_session_manager'] ) || $_SESSION['wp_session_manager'] !== 'active' ) {
+		if ( 'active' !== $_SESSION['wp_session_manager'] || ! isset( $_SESSION['wp_session_manager'] ) ) {
 			add_action( 'admin_notices', array( $this, 'wp_session_manager_multiple_sessions_notice' ) );
 			return;
 		}
@@ -143,7 +153,7 @@ class MzAccessSession {
 			$blacklist = $this->get_blacklist();
 			$uri       = ltrim( $_SERVER['REQUEST_URI'], '/' );
 			$uri       = untrailingslashit( $uri );
-			if ( in_array( $uri, $blacklist ) ) {
+			if ( in_array( $uri, $blacklist, true ) ) {
 				$start_session = false;
 			}
 			if ( false !== strpos( $uri, 'feed=' ) ) {
@@ -151,7 +161,7 @@ class MzAccessSession {
 			}
 		}
 
-		return apply_filters( 'mbo_access/sessions/start_session', $start_session );
+		return apply_filters( 'mbo_access_sessions_start_session', $start_session );
 	}
 
 	/**
@@ -164,7 +174,7 @@ class MzAccessSession {
 	 */
 	public function get_blacklist() {
 		$blacklist = apply_filters(
-			'mbo_access/sessions/session_start_uri_blacklist',
+			'mbo_access_sessions_session_start_uri_blacklist',
 			array(
 				'feed',
 				'feed/rss',
@@ -174,7 +184,7 @@ class MzAccessSession {
 				'comments/feed',
 			)
 		);
-		// Look to see if WordPress is in a sub folder or this is a network site that uses sub folders
+		// Look to see if WordPress is in a sub folder or this is a network site that uses sub folders.
 		$folder = str_replace( network_home_url(), '', get_site_url() );
 		if ( ! empty( $folder ) ) {
 			foreach ( $blacklist as $path ) {
@@ -195,11 +205,11 @@ class MzAccessSession {
 	 * @static
 	 */
 	public static function instance() {
-		if ( is_null( self::$_instance ) ) {
-			self::$_instance = new self();
+		if ( is_null( self::$instance ) ) {
+			self::$instance = new self();
 		}
 
-		return self::$_instance;
+		return self::$instance;
 	}
 
 	/**
@@ -218,10 +228,12 @@ class MzAccessSession {
 	 */
 	public function wp_session_manager_multiple_sessions_notice() {
 		echo '<div class="notice notice-error">';
-		echo '<p>' . __(
+		echo '<p>';
+		esc_html_e(
 			'Another plugin is attempting to start a session with WordPress. WP Session Manager will not work!',
 			'wp-session-manager'
-		) . '</p>';
+		);
+		echo '</p>';
 		echo '</div>';
 	}
 
@@ -232,7 +244,7 @@ class MzAccessSession {
 	 * @since 1.0.1
 	 */
 	public function __clone() {
-		_doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; huh?', 'wsi' ), '2.1' );
+		_doing_it_wrong( __FUNCTION__, esc_html_e( 'Cheatin&#8217; huh?', 'wsi' ), '2.1' );
 	}
 
 	/**
@@ -241,7 +253,7 @@ class MzAccessSession {
 	 * @since 1.0.1
 	 */
 	public function __wakeup() {
-		_doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; huh?', 'wsi' ), '2.1' );
+		_doing_it_wrong( __FUNCTION__, esc_html_e( 'Cheatin&#8217; huh?', 'wsi' ), '2.1' );
 	}
 
 	/**
@@ -249,7 +261,7 @@ class MzAccessSession {
 	 *
 	 * @access public
 	 *
-	 * @param string $key Session key
+	 * @param string $key Session key.
 	 *
 	 * @return mixed Session variable
 	 * @since  1.5
@@ -263,8 +275,8 @@ class MzAccessSession {
 	/**
 	 * Set a session variable
 	 *
-	 * @param string           $key   Session key
-	 * @param int|string|array $value Session variable
+	 * @param string           $key   Session key.
+	 * @param int|string|array $value Session variable.
 	 *
 	 * @return mixed Session variable
 	 * @since  1.0.1
