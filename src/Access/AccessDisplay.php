@@ -269,7 +269,7 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 	 *
 	 *
 	 *
-	 * Echo json json_encode() version of HTML from template
+	 * Echo json wp_json_encode() version of HTML from template
 	 */
 	public function display_schedule() {
 
@@ -321,7 +321,7 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 		$result['message'] = __( 'Error. Please try again.', NS\PLUGIN_TEXT_DOMAIN );
 
 		if ( ! empty( $_SERVER['HTTP_X_REQUESTED_WITH'] ) && strtolower( $_SERVER['HTTP_X_REQUESTED_WITH'] ) == 'xmlhttprequest' ) {
-			$result = json_encode( $result );
+			$result = wp_json_encode( $result );
 			echo $result;
 		} else {
 			header( 'Location: ' . $_SERVER['HTTP_REFERER'] );
