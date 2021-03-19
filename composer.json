@@ -8,6 +8,7 @@
     "plugin",
     "session"
   ],
+  "prefer-stable": true,
 	"homepage": "https://github.com/MikeiLL/mz-mbo-access",
 	"license"          : "GPL-2.0-or-later",
 	"minimum-stability": "dev",
@@ -23,8 +24,7 @@
 	"require": {
 		"php": ">=7.1",
 		"composer/installers": "~1.0",
-		"ericmann/sessionz": "^0.3",
-    "wp-coding-standards/wpcs": "*"
+		"ericmann/sessionz": "^0.3"
 	},
 	"config": {
 	  "optimize-autoloader": true,
@@ -33,9 +33,9 @@
 	},
 	"scripts": {
 		"lint": [
-		  "phpcs --extensions=php --standard=PSR12 src *.php"
+		  "phpcs --extensions=php src *.php"
 		],
-    "fix": ["phpcbf --extensions=php --standard=PSR12 src *.php"]
+    "fix": ["phpcbf --extensions=php src *.php"]
 	},
 	"autoload": {
 		"psr-4": {
@@ -46,6 +46,7 @@
 		}
 	},
   "require-dev": {
-    "squizlabs/php_codesniffer": "*"
+    "squizlabs/php_codesniffer": "*",
+    "wp-coding-standards/wpcs": "*"
   }
 }
