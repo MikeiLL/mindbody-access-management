@@ -21,19 +21,15 @@ use MZoo\MzMindbody\Common\Interfaces as Interfaces;
  *
  * Class that extends MZ MBO retrieve Client class to expose access ulities.
  *
- * @package MZMBOACCESS
  */
 class AccessUtilities extends Client\RetrieveClient {
-
-
-
 
 	/**
 	 * Access Level
 	 *
 	 * @since 1.0.5
 	 *
-	 * @ int indicating client access level, 0, 1 or 2.
+	 * @var int $access_level indicating client access level, 0, 1 or 2.
 	 */
 	public $access_level = 0;
 
@@ -42,7 +38,7 @@ class AccessUtilities extends Client\RetrieveClient {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @return int indicating client access level, 0, 1 or 2.
+	 * @return int $client_id indicating client access level, 0, 1 or 2.
 	 */
 	public function check_access_permissions( $client_id ) {
 		$result = $this->set_client_access_level( $client_id );
@@ -56,7 +52,7 @@ class AccessUtilities extends Client\RetrieveClient {
 	 *
 	 * return true if active membership matches one in received array (or string)
 	 *
-	 * @param string|array $membership_types of membership types
+	 * @param int $client_id from MBO.
 	 *
 	 * @return bool
 	 */
@@ -192,11 +188,9 @@ class AccessUtilities extends Client\RetrieveClient {
 	 *
 	 * @since 1.0.0
 	 *
-	 * return true if active membership matches one in received array (or string)
+	 * @param string|array $contract_types from MBO.
 	 *
-	 * @param string|array $membership_types of membership types
-	 *
-	 * @return bool
+	 * @return false|int based on client access level.
 	 */
 	public function compare_client_contract_status( $contract_types = array() ) {
 
@@ -223,9 +217,9 @@ class AccessUtilities extends Client\RetrieveClient {
 	 *
 	 * @since 2.5.8
 	 *
-	 * return true if TODO active membership matches one in received array (or string)
+	 * return true if purchased items matches one in received array (or string)
 	 *
-	 * @param TODO $membership_types string|array of membership types
+	 * @param string|array $purchase_types  of purchased items
 	 *
 	 * @return bool
 	 */
@@ -248,15 +242,12 @@ class AccessUtilities extends Client\RetrieveClient {
 		return 0;
 	}
 
-
-
-
 	/**
 	 * Get Client Access Level
 	 *
 	 * @since 2.5.8
 	 *
-	 * @return bool
+	 * @return int indicating access level of currently logged in client.
 	 */
 	public function get_client_access_level() {
 
