@@ -140,7 +140,7 @@ if ( ! function_exists( 'MBO_Access' ) ) {
 	 *
 	 * Example: <?php $mZmboAccess = MBO_Access(); ?>
 	 *
-	 * Since everything within the plugin is registered via hooks,
+	 * @since everything within the plugin is registered via hooks,
 	 * then kicking off the plugin from this point in the file does
 	 * not affect the page life cycle.
 	 *

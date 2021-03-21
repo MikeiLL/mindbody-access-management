@@ -90,7 +90,7 @@ class RetrieveClient extends Interfaces\Retrieve {
 	/**
 	 * Class constructor
 	 *
-	 * Since 1.0.1
+	 * @since 1.0.1
 	 */
 	public function __construct() {
 		$this->date_format = Core\MzMindbodyApi::$date_format;
@@ -101,7 +101,7 @@ class RetrieveClient extends Interfaces\Retrieve {
 	/**
 	 * Client Login – using API VERSION 5!
 	 *
-	 * Since 1.0.1
+	 * @since 1.0.1
 	 *
 	 * @param array $credentials with username and password.
 	 * @param array $additional_details additional endpoints to populate from.
@@ -206,7 +206,7 @@ class RetrieveClient extends Interfaces\Retrieve {
 	/**
 	 * Validate Client - API VERSION 5!
 	 *
-	 * Since 1.0.1
+	 * @since 1.0.1
 	 *
 	 * @param array $validate_login_result with result from MBO API.
 	 */
@@ -229,7 +229,7 @@ class RetrieveClient extends Interfaces\Retrieve {
 	/**
 	 * Get Client
 	 *
-	 * Since 2.0.6
+	 * @since 2.0.6
 	 * Get @array of MBO Client IDs
 	 *
 	 * @param  int $client_id
@@ -252,7 +252,7 @@ class RetrieveClient extends Interfaces\Retrieve {
 	/**
 	 * Create Client Session
 	 *
-	 * Since 1.0.0
+	 * @since 1.0.0
 	 *
 	 * Sanitize array returned from MBO and save in $_SESSION under mbo_result key.
 	 *
@@ -286,7 +286,7 @@ class RetrieveClient extends Interfaces\Retrieve {
 	/**
 	 * Update Client Session
 	 *
-	 * Since 2.0.5
+	 * @since 2.0.5
 	 *
 	 * @param array $additional_info with MBO client details to add to Session.
 	 */
@@ -374,7 +374,7 @@ class RetrieveClient extends Interfaces\Retrieve {
 	/**
 	 * Sanitize User Credentials via WP helpers.
 	 *
-	 * since: 1.0.1
+	 * @since: 1.0.1
 	 *
      * @param array $credentials user passwd.
 	 * @return array of sanitized credentials.

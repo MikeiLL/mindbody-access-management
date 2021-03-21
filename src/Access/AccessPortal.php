@@ -20,7 +20,7 @@ class AccessPortal extends AccessUtilities {
 	/**
 	 * Check Access Permissions
 	 *
-	 * Since 2.5.7
+	 * @since 2.5.7
 	 *
 	 * return true if active membership matches one in received array (or string)
 	 *
@@ -91,7 +91,7 @@ class AccessPortal extends AccessUtilities {
 	/**
 	 * Check Access Permissions
 	 *
-	 * Since 2.5.7
+	 * @since 2.5.7
 	 *
 	 * return true if active membership matches one in received array (or string)
 	 *

@@ -70,7 +70,7 @@ class ClientPortal extends RetrieveClient {
 	/**
 	 * Class constructor
 	 *
-	 * Since 2.4.7
+	 * @since 2.4.7
 	 */
 	public function __construct() {
 		$this->date_format = Core\MzMindbodyApi::$date_format;

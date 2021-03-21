@@ -20,7 +20,7 @@ class AccessUtilities extends Client\RetrieveClient {
 	/**
 	 * Access Level
 	 *
-	 * Since 1.0.5
+	 * @since 1.0.5
 	 *
 	 * @ int indicating client access level, 0, 1 or 2.
 	 */
@@ -29,7 +29,7 @@ class AccessUtilities extends Client\RetrieveClient {
 	/**
 	 * Check Access Permissions
 	 *
-	 * Since 1.0.0
+	 * @since 1.0.0
 	 *
 	 * @return int indicating client access level, 0, 1 or 2.
 	 */
@@ -41,7 +41,7 @@ class AccessUtilities extends Client\RetrieveClient {
 	/**
 	 * Compare Client Service Status
 	 *
-	 * Since 2.5.8
+	 * @since 2.5.8
 	 *
 	 * return true if active membership matches one in received array (or string)
 	 *
@@ -179,7 +179,7 @@ class AccessUtilities extends Client\RetrieveClient {
 	/**
 	 * Compare Client Contract Status
 	 *
-	 * Since 1.0.0
+	 * @since 1.0.0
 	 *
 	 * return true if active membership matches one in received array (or string)
 	 *
@@ -210,7 +210,7 @@ class AccessUtilities extends Client\RetrieveClient {
 	/**
 	 * Compare Client Purchase Status
 	 *
-	 * Since 2.5.8
+	 * @since 2.5.8
 	 *
 	 * return true if TODO active membership matches one in received array (or string)
 	 *
@@ -243,7 +243,7 @@ class AccessUtilities extends Client\RetrieveClient {
 	/**
 	 * Get Client Access Level
 	 *
-	 * Since 2.5.8
+	 * @since 2.5.8
 	 *
 	 * @return bool
 	 */
