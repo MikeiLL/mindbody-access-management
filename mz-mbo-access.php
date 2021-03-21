@@ -52,39 +52,7 @@ define( NS . 'PLUGIN_TEXT_DOMAIN', 'mz-mbo-access' );
 
 add_action( 'admin_init', __NAMESPACE__ . '\mbo_access_has_mindbody_api' );
 
-/**
- * Insure that parent plugin, is active or deactivate plugin.
- */
-function mbo_access_has_mindbody_api() {
-	if ( is_admin() && current_user_can( 'activate_plugins' ) && ! is_plugin_active( 'mz-mindbody-api/mz-mindbody.php' ) ) {
-		add_action( 'admin_notices', __NAMESPACE__ . '\\mbo_access_child_plugin_notice' );
 
-		deactivate_plugins( plugin_basename( __FILE__ ) );
-
-		if ( isset( $_GET['activate'] ) ) {
-			unset( $_GET['activate'] );
-		}
-	}
-}
-
-
-
-/**
- * Child Plugin Notice
- */
-function mbo_access_child_plugin_notice() {     ?>
-	<div class="error">
-		<p>
-			<?php
-			esc_htmlesc_html_e(
-				'Sorry, but MZ MBO Access plugin requires the parent plugin, MZ Mindbody API, to be installed and active.',
-				NS\PLUGIN_TEXT_DOMAIN
-			);
-			?>
-		</p>
-	</div>
-	<?php
-}
 
 /**
  * Autoload Classes
@@ -103,7 +71,7 @@ if ( ! class_exists( '\MZoo\MzMboAccess\Core\PluginCore' ) ) {
  * This action is documented in src/core/class-activator.php
  */
 
-register_activation_hook( __FILE__, array( __NAMESPACE__ . '\MZoo\Core\Activator', 'activate' ) );
+register_activation_hook( __FILE__, array( NS . 'Core\Activator', 'activate' ) );
 
 /**
  * The code that runs during plugin deactivation.
@@ -192,6 +160,39 @@ if ( version_compare( PHP_VERSION, 'MZoo\MzMindbody\MINIMUM_PHP_VERSION', '>=' )
 	add_action( 'init', __NAMESPACE__ . '\\mz_mbo_access_plugin_init' );
 }
 
+/**
+ * Insure that parent plugin, is active or deactivate plugin.
+ */
+function mbo_access_has_mindbody_api() {
+	if ( is_admin() && current_user_can( 'activate_plugins' ) && 
+    ! is_plugin_active( 'mz-mindbody-api/mz-mindbody.php' ) ) {
+		add_action( 'admin_notices', __NAMESPACE__ . '\\mbo_access_child_plugin_notice' );
+
+		deactivate_plugins( plugin_basename( __FILE__ ) );
+
+		if ( isset( $_GET['activate'] ) ) {
+			unset( $_GET['activate'] );
+		}
+	}
+}
+
+/**
+ * Child Plugin Notice
+ */
+function mbo_access_child_plugin_notice() {     ?>
+	<div class="error">
+		<p>
+			<?php
+			esc_html_e(
+				'Whoops. MZ MBO Access plugin requires the parent plugin, 
+                MZ Mindbody API, to be installed and active.',
+				NS\PLUGIN_TEXT_DOMAIN
+			);
+			?>
+		</p>
+	</div>
+	<?php
+}
 /**
  * Deactivate the plugin.
  *

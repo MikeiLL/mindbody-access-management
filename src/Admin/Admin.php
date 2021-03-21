@@ -30,12 +30,17 @@ class Admin {
 	 *
 	 * @since 2.5.7
 	 */
-	public function admin_notice() {
-		echo wp_kses_post(
-			sprintf(
-				'<div class="notice notice-error"><p>%s</p></div>',
-				__( 'Missing Plugin Dependency MZ Mindbody Api.', NS\PLUGIN_TEXT_DOMAIN )
-			)
-		);
+	public function admin_notice() { ?>
+	<div class="error">
+		<p>
+			<?php
+			esc_html_e(
+				'Missing required plugin: MZ Mindbody API.',
+				NS\PLUGIN_TEXT_DOMAIN
+			);
+			?>
+		</p>
+	</div>
+    <?php
 	}
 }
