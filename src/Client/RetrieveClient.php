@@ -232,7 +232,7 @@ class RetrieveClient extends Interfaces\Retrieve {
 	 * @since 2.0.6
 	 * Get @array of MBO Client IDs
 	 *
-	 * @param  int $client_id
+	 * @param int $client_id for MBO access. for MBO.
 	 * @return array _single_ (first) Client from Mindbody.
 	 */
 	public function get_client( $client_id ) {
@@ -376,7 +376,7 @@ class RetrieveClient extends Interfaces\Retrieve {
 	 *
 	 * @since: 1.0.1
 	 *
-     * @param array $credentials user passwd.
+	 * @param array $credentials user passwd.
 	 * @return array of sanitized credentials.
 	 */
 	public function sanitize_login_fields( $credentials = array() ) {
@@ -392,7 +392,7 @@ class RetrieveClient extends Interfaces\Retrieve {
 	 * Verify User Credentials.
 	 *
 	 * @since: 1.0.1
-	 *
+	 * @param array $credentials for MBO access.
 	 * @return array of verified credentials.
 	 */
 	public function validate_login_fields( $credentials = array() ) {
@@ -464,13 +464,13 @@ class RetrieveClient extends Interfaces\Retrieve {
 	 * [Remaining] => 1000, etc..
 	 *
 	 * @since: 1.0.1
-	 * @param int $client_id.
+	 * @param int $client_id for MBO access..
 	 *
 	 * @return array numeric array of active memberships
 	 */
 	public function get_client_active_memberships( $client_id ) {
 
-		// Create the MBO Object
+		// Create the MBO Object.
 		$this->getMboResults();
 
 		$result = $this->mb->GetActiveClientMemberships(
@@ -487,13 +487,13 @@ class RetrieveClient extends Interfaces\Retrieve {
 	 * we just get it for one.
 	 *
 	 * @since: 1.0.1
-	 * @param int $client_id.
+	 * @param int $client_id for MBO access.
 	 *
-	 * @return array account balances
+	 * @return array account balances.
 	 */
 	public function get_client_account_balance( $client_id ) {
 
-		// Can accept a list of client id strings
+		// Can accept a list of client id strings.
 		$result = $this->mb->GetClientAccountBalances(
 			array( 'clientIds' => $client_id )
 		); // Think this is not UniqueID.
@@ -540,13 +540,13 @@ class RetrieveClient extends Interfaces\Retrieve {
 	 * )
 	 *
 	 * @since: 1.0.1
-	 * @param int $client_id.
+	 * @param int $client_id for MBO access..
 	 *
-	 * @return array numeric array of client contracts
+	 * @return array numeric array of client contracts.
 	 */
 	public function get_client_contracts( $client_id ) {
 
-		// Create the MBO Object
+		// Create the MBO Object.
 		$this->getMboResults();
 
 		$result = $this->mb->GetClientContracts(
@@ -599,18 +599,18 @@ class RetrieveClient extends Interfaces\Retrieve {
 	 * [Quantity] => 1
 	 *
 	 * @since: 1.0.1
-	 * @param int $client_id.
+	 * @param int $client_id for MBO access..
 	 *
 	 * @return array numeric array of client purchases
 	 */
 	public function get_client_purchases( $client_id ) {
 
-		// Create the MBO Object
+		// Create the MBO Object.
 		$this->getMboResults();
 
 		$result = $this->mb->GetClientPurchases(
 			array( 'ClientId' => $client_id )
-		); // NOT "UniqueID"
+		); // NOT "UniqueID".
 
 		return $result['Purchases'];
 	}
@@ -619,13 +619,13 @@ class RetrieveClient extends Interfaces\Retrieve {
 	 * Get client services.
 	 *
 	 * @since: 1.0.1
-	 * @param int $client_id.
+	 * @param int $client_id for MBO access..
 	 *
 	 * @return array numeric array of required fields
 	 */
 	public function get_client_services( $client_id ) {
 
-		// Create the MBO Object
+		// Create the MBO Object.
 		$this->getMboResults();
 
 		$result = $this->mb->GetClientServices(
@@ -642,13 +642,13 @@ class RetrieveClient extends Interfaces\Retrieve {
 	 *
 	 * param array containing 'UserEmail' 'UserFirstName' 'UserLastName'
 	 *
-	 * @param str $client_id.
+	 * @param int $client_id for MBO.
 	 *
 	 * @return array|bool either error or new client details
 	 */
 	public function password_reset_email_request( $client_id = array() ) {
 
-		// Crate the MBO Object
+		// Crate the MBO Object.
 		$this->getMboResults();
 
 		$result = $this->mb->SendPasswordResetEmail( $client_id );
@@ -674,7 +674,7 @@ class RetrieveClient extends Interfaces\Retrieve {
 			return false;
 		}
 
-		return ( 1 == (bool) $client_info->mbo_result ) ? 1 : 0;
+		return ( 1 === (bool) $client_info->mbo_result ) ? 1 : 0;
 	}
 
 	/**
@@ -689,13 +689,13 @@ class RetrieveClient extends Interfaces\Retrieve {
 	 */
 	public function getMboResults( $api_version = 6 ) {
 
-		if ( $api_version == 6 ) {
+		if ( 6 === $api_version ) {
 			$this->mb = $this->instantiateMboApi();
 		} else {
 			$this->mb = $this->instantiateMboApi( 5 );
 		}
 
-		if ( ! $this->mb || $this->mb == 'NO_API_SERVICE' ) {
+		if ( ! $this->mb || 'NO_API_SERVICE' === $this->mb ) {
 			return false;
 		}
 
@@ -717,7 +717,7 @@ class RetrieveClient extends Interfaces\Retrieve {
 		$classes_by_date_then_time = array();
 
 		/*
-		For some reason, when there is only a single class in the client
+		* For some reason, when there is only a single class in the client
 		* schedule, the 'Visits' array contains that visit, but when there are multiple
 		* visits then the array of visits is under 'Visits'/'Visit'
 		*/
@@ -725,19 +725,20 @@ class RetrieveClient extends Interfaces\Retrieve {
 		if ( is_array(
 			$client_schedule['GetClientScheduleResult']['Visits']['Visit'][0]
 		) ) {
-			// Multiple visits
+			// Multiple visits.
 			$visit_array_scope = $client_schedule['GetClientScheduleResult']['Visits']['Visit'];
 		} else {
 			$visit_array_scope = $client_schedule['GetClientScheduleResult']['Visits'];
 		}
 
 		foreach ( $visit_array_scope as $visit ) {
-			// Make a timestamp of just the day to use as key for that day's classes
+			// Make a timestamp of just the day to use as key for that day's classes.
 			$just_date = wp_date( 'Y-m-d', $visit['StartDateTime'] );
 
 			/*
-			Create a new array with a key for each date YYYY-MM-DD
-			and corresponding value an array of class details */
+			 * Create a new array with a key for each date YYYY-MM-DD,
+			 * and corresponding value an array of class details.
+			 */
 
 			$single_event = new Schedule\MiniScheduleItem( $visit );
 
@@ -751,7 +752,7 @@ class RetrieveClient extends Interfaces\Retrieve {
 		/* They are not ordered by date so order them by date */
 		ksort( $classes_by_date_then_time );
 
-		foreach ( $classes_by_date_then_time as $classDate => &$classes ) {
+		foreach ( $classes_by_date_then_time as $class_date => &$classes ) {
 			/*
 			* $classes is an array of all classes for given date
 			* Take each of the class arrays and order it by time
@@ -761,7 +762,7 @@ class RetrieveClient extends Interfaces\Retrieve {
 			usort(
 				$classes,
 				function ( $a, $b ) {
-					if ( $a->start_datetime == $b->start_datetime ) {
+					if ( $a->start_datetime === $b->start_datetime ) {
 						return 0;
 					}
 					return $a->start_datetime < $b->start_datetime ? -1 : 1;
@@ -778,7 +779,7 @@ class RetrieveClient extends Interfaces\Retrieve {
 	 *
 	 * Make sure that we have an array
 	 *
-	 * @param  $data
+	 * @param string|array $data a string or array.
 	 * @return array
 	 */
 	private function make_numeric_array( $data ) {
