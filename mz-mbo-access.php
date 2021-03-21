@@ -211,7 +211,7 @@ function deactivate() {
  */
 function mz_mbo_access_plugin_init() {
 	if ( defined( 'MZoo\MzMindbody\PLUGIN_NAME_DIR' ) ) {
-		// MZ Mindbody API plugin is activated, add the hooks
+		// MZ Mindbody API plugin is activated, add the hooks.
 		// Get MzMboAccess Instance.
 		MBO_Access();
 	} else {

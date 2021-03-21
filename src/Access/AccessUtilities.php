@@ -64,7 +64,7 @@ class AccessUtilities extends Client\RetrieveClient {
 
 			if ( empty( $contracts ) ) {
 				$this->access_level = 0;
-				// Update client session with empty keys just in case
+				// Update client session with empty keys just in case.
 				return $this->update_client_session(
 					array(
 						'access_level' => 0,
@@ -73,10 +73,10 @@ class AccessUtilities extends Client\RetrieveClient {
 				);
 			}
 
-			// Comapre level two services first
+			// Comapre level two services first.
 			foreach ( $contracts as $contract ) {
 				if ( in_array( $contract['ContractName'], $level_2_contracts ) ) {
-					// No need to check further
+					// No need to check further.
 					$this->access_level = 2;
 					return $this->update_client_session(
 						array(
@@ -87,7 +87,7 @@ class AccessUtilities extends Client\RetrieveClient {
 				}
 				// If not level two do we have level one access?
 				if ( in_array( $contract['ContractName'], $level_1_contracts ) ) {
-					// No need to check further
+					// No need to check further.
 					$this->access_level = 1;
 					return $this->update_client_session(
 						array(
@@ -99,7 +99,7 @@ class AccessUtilities extends Client\RetrieveClient {
 			}
 		}
 
-		// No contracts so must be dealing with services
+		// No contracts so must be dealing with services.
 		$level_1_services = explode( ',', $mz_mbo_access_options['level_1_services'] );
 		$level_2_services = explode( ',', $mz_mbo_access_options['level_2_services'] );
 		$level_1_services = array_map( 'trim', $level_1_services );
@@ -109,7 +109,7 @@ class AccessUtilities extends Client\RetrieveClient {
 
 		if ( false == (bool) $services['ClientServices'] ) {
 			$this->access_level = 0;
-			// Update client session with empty keys just in case
+			// Update client session with empty keys just in case.
 			return $this->update_client_session(
 				array(
 					'access_level' => 0,
@@ -118,14 +118,14 @@ class AccessUtilities extends Client\RetrieveClient {
 			);
 		}
 
-		// Comapre level two services first
+		// Comapre level two services first.
 		foreach ( $services['ClientServices'] as $service ) {
 			if ( in_array( $service['Name'], $level_2_services ) ) {
 				if ( ! $this->is_service_valid( $service ) ) {
 					continue;
 				}
 				$this->access_level = 2;
-				// No need to check further
+				// No need to check further.
 				return $this->update_client_session(
 					array(
 						'access_level' => 2,
@@ -139,7 +139,7 @@ class AccessUtilities extends Client\RetrieveClient {
 					continue;
 				}
 				$this->access_level = 1;
-				// No need to check further
+				// No need to check further.
 				return $this->update_client_session(
 					array(
 						'access_level' => 1,

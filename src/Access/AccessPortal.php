@@ -32,12 +32,12 @@ class AccessPortal extends AccessUtilities {
 
 		check_ajax_referer( $_REQUEST['nonce'], 'mz_mbo_access_nonce', false );
 
-		// Crate the MBO Object
+		// Crate the MBO Object.
 		$this->getMboResults();
 
 		$result = array();
 
-		// Init message
+		// Init message.
 		$result['logged'] = '';
 
 		$result['client_access_level'] = 0;
@@ -108,7 +108,7 @@ class AccessPortal extends AccessUtilities {
 
 		$result = array();
 
-		// Init message
+		// Init message.
 		$result['logged'] = '';
 
 		$result['client_access_level'] = 0;

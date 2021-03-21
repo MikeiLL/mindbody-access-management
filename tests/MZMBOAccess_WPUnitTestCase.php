@@ -23,7 +23,7 @@ abstract class MZMBOAccess_WPUnitTestCase extends \WP_UnitTestCase
 
     public static function setUpBeforeClass()
     {
-        // global vars setup
+        // global vars setup.
         $basic_options_set = array(
             'mz_source_name'       => MBO_Access_Test_Options::$_MYSOURCENAME,
             'mz_mindbody_password' => MBO_Access_Test_Options::$_MYPASSWORD,

@@ -148,7 +148,7 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 
 		$this->restricted_content = $content;
 
-		// Begin generating output
+		// Begin generating output.
 		ob_start();
 
 		$TemplateLoader = new Core\TemplateLoader();
@@ -180,13 +180,13 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 		$logged_client = NS\MBO_Access()->getSession()->get( 'MBO_Client' );
 
 		if ( empty( $this->atts['level_1_redirect'] ) || empty( $this->atts['level_2_redirect'] ) || empty( $this->atts['denied_redirect'] ) ) {
-			// If this is a content page check access permissions now
-			// First we will see if client access is already determined in client_session
+			// If this is a content page check access permissions now.
+			// First we will see if client access is already determined in client_session.
 			if ( ! empty( $logged_client->access_level ) && in_array( $logged_client->access_level, $this->atts['access_levels'] ) ) {
 				$this->template_data['has_access'] = true;
 				$this->has_access                  = true;
 			} else {
-				// Need to ping the api
+				// Need to ping the api.
 				$client_access_level = $AccessUtilities->check_access_permissions( $logged_client->Id );
 				if ( in_array( $client_access_level, $this->atts['access_levels'] ) ) {
 					$this->template_data['has_access'] = true;
@@ -204,7 +204,7 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 		$TemplateLoader->set_template_data( $this->template_data );
 		$TemplateLoader->get_template_part( 'access_container' );
 
-		// Add Style with script adder
+		// Add Style with script adder.
 		self::addScript();
 
 		return ob_get_clean();
@@ -288,10 +288,10 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 			return esc_html( sprintf( '%1$s %2$s %3$s', '<div>', __( 'Error returning schedule from Mindbody in Access Display.', 'mz-mbo-access' ), '<div>' ) );
 		}
 
-		// Register attributes
+		// Register attributes.
 		$this->handleShortcode( $atts );
 
-		// Update the data array
+		// Update the data array.
 		$this->template_data['time_format'] = $this->schedule_object->time_format;
 		$this->template_data['date_format'] = $this->schedule_object->date_format;
 
@@ -303,7 +303,7 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 		if ( $this->display_type == 'grid' || $this->display_type == 'both' ) :
 			ob_start();
 			$grid_schedule = $this->schedule_object->sortClassesByTimeThenDate();
-			// Update the data array
+			// Update the data array.
 			$this->template_data['grid_schedule'] = $grid_schedule;
 			$TemplateLoader->get_template_part( 'grid_schedule' );
 			$result['grid'] = ob_get_clean();
@@ -312,7 +312,7 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 		if ( $this->display_type == 'horizontal' || $this->display_type == 'both' ) :
 			ob_start();
 			$horizontal_schedule = $this->schedule_object->sortClassesByDateThenTime();
-			// Update the data array
+			// Update the data array.
 			$this->template_data['horizontal_schedule'] = $horizontal_schedule;
 			$TemplateLoader->get_template_part( 'horizontal_schedule' );
 			$result['horizontal'] = ob_get_clean();

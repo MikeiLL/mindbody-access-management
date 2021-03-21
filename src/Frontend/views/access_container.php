@@ -14,7 +14,7 @@ else :
 	<p class="mbo-user">Hi, <?php esc_html_e( $data->client_name ); ?>.</p>
 	<?php
 	if ( ( ! empty( $data->atts['level_1_redirect'] ) || ! empty( $data->atts['level_2_redirect'] ) ) ) {
-		// this is being used as a redirect login form so just echo content if it exists
+		// this is being used as a redirect login form so just echo content if it exists.
 		esc_html_e( $data->content );
 
 		?>

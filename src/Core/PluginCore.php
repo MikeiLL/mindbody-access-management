@@ -208,38 +208,38 @@ class PluginCore {
 		$AccessPortal  = new Access\AccessPortal();
 		$client_portal = new Client\ClientPortal();
 
-		// Start Ajax Access Management
+		// Start Ajax Access Management.
 		$this->loader->add_action( 'wp_ajax_nopriv_ajax_login_check_access_permissions', $AccessPortal, 'ajax_login_check_access_permissions' );
 		$this->loader->add_action( 'wp_ajax_ajax_login_check_access_permissions', $AccessPortal, 'ajax_login_check_access_permissions' );
 
 		$this->loader->add_action( 'wp_ajax_nopriv_ajax_check_access_permissions', $AccessPortal, 'ajax_check_access_permissions' );
 		$this->loader->add_action( 'wp_ajax_ajax_check_access_permissions', $AccessPortal, 'ajax_check_access_permissions' );
 
-		// Start Ajax Client Check Logged
+		// Start Ajax Client Check Logged.
 		$this->loader->add_action( 'wp_ajax_nopriv_ajax_register_for_class', $client_portal, 'ajax_register_for_class' );
 		$this->loader->add_action( 'wp_ajax_ajax_register_for_class', $client_portal, 'ajax_register_for_class' );
 
-		// Start Ajax Client Create Account
+		// Start Ajax Client Create Account.
 		$this->loader->add_action( 'wp_ajax_nopriv_ajax_create_mbo_account', $client_portal, 'ajax_create_mbo_account' );
 		$this->loader->add_action( 'wp_ajax_ajax_create_mbo_account', $client_portal, 'ajax_create_mbo_account' );
 
-		// Start Ajax Client Create Account
+		// Start Ajax Client Create Account.
 		$this->loader->add_action( 'wp_ajax_nopriv_ajax_generate_signup_form', $client_portal, 'ajax_generate_mbo_signup_form' );
 		$this->loader->add_action( 'wp_ajax_ajax_generate_signup_form', $client_portal, 'ajax_generate_mbo_signup_form' );
 
-		// Start Ajax Client Log In
+		// Start Ajax Client Log In.
 		$this->loader->add_action( 'wp_ajax_nopriv_ajaxClientLogIn', $client_portal, 'ajaxClientLogIn' );
 		$this->loader->add_action( 'wp_ajax_ajaxClientLogIn', $client_portal, 'ajaxClientLogIn' );
 
-		// Start Ajax Client Log Out
+		// Start Ajax Client Log Out.
 		$this->loader->add_action( 'wp_ajax_nopriv_ajaxClientLogOut', $client_portal, 'ajaxClientLogOut' );
 		$this->loader->add_action( 'wp_ajax_ajaxClientLogOut', $client_portal, 'ajaxClientLogOut' );
 
-		// Start Ajax Display Client Schedule
+		// Start Ajax Display Client Schedule.
 		$this->loader->add_action( 'wp_ajax_nopriv_ajax_display_client_schedule', $client_portal, 'ajax_display_client_schedule' );
 		$this->loader->add_action( 'wp_ajax_ajax_display_client_schedule', $client_portal, 'ajax_display_client_schedule' );
 
-		// Start Ajax Check Client Logged Status
+		// Start Ajax Check Client Logged Status.
 		$this->loader->add_action( 'wp_ajax_nopriv_ajaxCheckClientLogged', $client_portal, 'ajaxCheckClientLogged' );
 		$this->loader->add_action( 'wp_ajax_ajaxCheckClientLogged', $client_portal, 'ajaxCheckClientLogged' );
 	}

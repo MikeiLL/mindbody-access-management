@@ -92,7 +92,6 @@ class SettingsPage {
 			)
 		);
 
-		// Field: Regenerate Class Owners
 		self::$wposa_obj->add_field(
 			'mz_mbo_access',
 			array(
@@ -104,7 +103,6 @@ class SettingsPage {
 			)
 		);
 
-		// Field: Regenerate Class Owners
 		self::$wposa_obj->add_field(
 			'mz_mbo_access',
 			array(
@@ -116,7 +114,6 @@ class SettingsPage {
 			)
 		);
 
-		// Field: Regenerate Class Owners
 		self::$wposa_obj->add_field(
 			'mz_mbo_access',
 			array(
@@ -128,7 +125,6 @@ class SettingsPage {
 			)
 		);
 
-		// Field: Regenerate Class Owners
 		self::$wposa_obj->add_field(
 			'mz_mbo_access',
 			array(
@@ -140,7 +136,6 @@ class SettingsPage {
 			)
 		);
 
-		// Field: Regenerate Class Owners
 		self::$wposa_obj->add_field(
 			'mz_mbo_access',
 			array(
