@@ -1,5 +1,7 @@
 <?php
 /**
+ * Retrieve Client
+ *
  * @package MZMBOACCESS
  */
 
@@ -15,20 +17,16 @@ use MZoo\MzMindbody\Schedule as Schedule;
 use MZoo\MzMindbody\Common\Interfaces as Interfaces;
 use EAMann\Sessionz as Sessionz;
 
-/*
+/**
  * Class that holds Client Interface Methods
- *
- *
  */
 class RetrieveClient extends Interfaces\Retrieve {
-
-
-
 
 	/**
 	 * The Mindbody API Object
 	 *
 	 * @access private
+	 * @var    object $mb with interface methods.
 	 */
 	private $mb;
 
@@ -38,6 +36,7 @@ class RetrieveClient extends Interfaces\Retrieve {
 	 * The MBO ID of the Current User/Client
 	 *
 	 * @access private
+	 * @var    int $client_id from MBO.
 	 */
 	private $client_id;
 
@@ -47,6 +46,7 @@ class RetrieveClient extends Interfaces\Retrieve {
 	 * GetClient result from MBO
 	 *
 	 * @access private
+	 * @var    array $mbo_client as returned from MBO.
 	 */
 	private $mbo_client;
 
@@ -56,6 +56,7 @@ class RetrieveClient extends Interfaces\Retrieve {
 	 * Services returned from MBO
 	 *
 	 * @access private
+	 * @var    array $services as returned from MBO.
 	 */
 	private $services;
 
@@ -102,10 +103,10 @@ class RetrieveClient extends Interfaces\Retrieve {
 	 *
 	 * Since 1.0.1
 	 *
-	 * @param credentials array                                                                   $credentials        with username and password
-	 * @param $additional_details array listing names of additional api endpoints to populate from
+	 * @param array $credentials with username and password.
+	 * @param array $additional_details additional endpoints to populate from.
 	 *
-	 * @return array - result type and message
+	 * @return array - result type and message.
 	 */
 	public function log_client_in( $credentials = array(
 		'username' => '',
@@ -114,15 +115,21 @@ class RetrieveClient extends Interfaces\Retrieve {
 
 		$valid_credentials = $this->validate_login_fields( $this->sanitize_login_fields( $credentials ) );
 
-		if ( $valid_credentials === 2 ) {
+		if ( 2 === $valid_credentials ) {
 			return array(
 				'type'    => 'error',
 				'message' => __( 'Badly formed email.', NS\PLUGIN_TEXT_DOMAIN ),
 			);
-		} elseif ( $valid_credentials === 3 ) {
+		} elseif ( 3 === $valid_credentials ) {
 			return array(
 				'type'    => 'error',
-				'message' => __( 'All Mindbody passwords must contain 8 to 15 characters and must include both letters and numbers.', NS\PLUGIN_TEXT_DOMAIN ),
+				'message' => __(
+					'All Mindbody passwords must 
+                                contain 8 to 15 characters and 
+                                must include both letters and 
+                                numbers.',
+					NS\PLUGIN_TEXT_DOMAIN
+				),
 			);
 		}
 
@@ -146,7 +153,12 @@ class RetrieveClient extends Interfaces\Retrieve {
 							if ( ! is_array( $additional ) ) {
 								break;
 							}
-							$client_info = array_merge( array( 'purchases' => $additional ), $client_info );
+							$client_info = array_merge(
+								array(
+									'purchases' => $additional,
+								),
+								$client_info
+							);
 							break;
 					}
 				}
@@ -155,7 +167,10 @@ class RetrieveClient extends Interfaces\Retrieve {
 			if ( $this->create_client_session( $client_info ) ) {
 				return array(
 					'type'           => 'success',
-					'message'        => __( 'Welcome', NS\PLUGIN_TEXT_DOMAIN ) . ', ' . $client_info['FirstName'],
+					'message'        => __(
+						'Welcome',
+						NS\PLUGIN_TEXT_DOMAIN
+					) . ', ' . $client_info['FirstName'],
 					'client_id'      => $client_info['ID'],
 					'client_details' => $client_info,
 				);
@@ -245,9 +260,15 @@ class RetrieveClient extends Interfaces\Retrieve {
 	public function create_client_session( $client_info ) {
 
 		if ( ! empty( $client_info['ID'] ) ) {
-			$sanitized_client_info = MZ\MZMBO()->helpers->arrayMapRecursive( 'sanitize_text_field', $client_info );
+			$sanitized_client_info = MZ\MZMBO()->helpers->arrayMapRecursive(
+				'sanitize_text_field',
+				$client_info
+			);
 
-			$client_info_with_access = array_merge( array( 'access_level' => 0 ), $sanitized_client_info );
+			$client_info_with_access = array_merge(
+				array( 'access_level' => 0 ),
+				$sanitized_client_info
+			);
 
 			// If validated, create session variables and store
 			$client_details = array(
@@ -273,7 +294,10 @@ class RetrieveClient extends Interfaces\Retrieve {
 		$previous_session = (array) $this->session->get( 'MBO_Client' )->mbo_result;
 
 		if ( ! empty( $previous_session['ID'] ) ) {
-			$sanitized_additional_info = MZ\MZMBO()->helpers->arrayMapRecursive( 'sanitize_text_field', $additional_info );
+			$sanitized_additional_info = MZ\MZMBO()->helpers->arrayMapRecursive(
+				'sanitize_text_field',
+				$additional_info
+			);
 
 			$new_session = array_merge( $previous_session, $sanitized_additional_info );
 
@@ -302,7 +326,8 @@ class RetrieveClient extends Interfaces\Retrieve {
 	}
 
 	/**
-	 * Return MBO Account config required fields with what I think are default required fields.
+	 * Return MBO Account config required fields with what I think
+	 * are default required fields.
 	 *
 	 * since: 1.0.1
 	 *
@@ -321,7 +346,13 @@ class RetrieveClient extends Interfaces\Retrieve {
 			'LastName',
 		);
 
-		return array_merge( $default_required_fields, array_map( 'sanitize_text_field', $requiredFields['RequiredClientFields'] ) );
+		return array_merge(
+			$default_required_fields,
+			array_map(
+				'sanitize_text_field',
+				$requiredFields['RequiredClientFields']
+			)
+		);
 	}
 
 	/**
@@ -384,7 +415,8 @@ class RetrieveClient extends Interfaces\Retrieve {
 	 */
 	public function verify_mbo_pass( $mbo_password = '' ) {
 
-		// "All Mindbody passwords must contain 8 to 15 characters and must include both letters and numbers"
+		// "All Mindbody passwords must contain 8 to 15 characters,
+		// and must include both letters and numbers."
 		$re = '/^[A-Z0-9a-z].{7,14}$/m';
 
 		return preg_match( $re, $mbo_password );
@@ -435,7 +467,9 @@ class RetrieveClient extends Interfaces\Retrieve {
 		// Create the MBO Object
 		$this->getMboResults();
 
-		$result = $this->mb->GetActiveClientMemberships( array( 'clientId' => $client_id ) ); // UniqueID ??
+		$result = $this->mb->GetActiveClientMemberships(
+			array( 'clientId' => $client_id )
+		); // Think this is not UniqueID.
 
 		return $result['ClientMemberships'];
 	}
@@ -453,9 +487,11 @@ class RetrieveClient extends Interfaces\Retrieve {
 	public function get_client_account_balance( $client_id ) {
 
 		// Can accept a list of client id strings
-		$result = $this->mb->GetClientAccountBalances( array( 'clientIds' => $client_id ) ); // UniqueID ??
+		$result = $this->mb->GetClientAccountBalances(
+			array( 'clientIds' => $client_id )
+		); // Think this is not UniqueID.
 
-		// Just return the first (and only) result
+		// Just return the first (and only) result.
 		return $result['Clients'][0]['AccountBalance'];
 	}
 
@@ -505,7 +541,9 @@ class RetrieveClient extends Interfaces\Retrieve {
 		// Create the MBO Object
 		$this->getMboResults();
 
-		$result = $this->mb->GetClientContracts( array( 'clientId' => $client_id ) ); // UniqueID ??
+		$result = $this->mb->GetClientContracts(
+			array( 'clientId' => $client_id )
+		);
 
 		return $result['Contracts'];
 	}
@@ -561,7 +599,9 @@ class RetrieveClient extends Interfaces\Retrieve {
 		// Create the MBO Object
 		$this->getMboResults();
 
-		$result = $this->mb->GetClientPurchases( array( 'ClientId' => $client_id ) ); // NOT "UniqueID"
+		$result = $this->mb->GetClientPurchases(
+			array( 'ClientId' => $client_id )
+		); // NOT "UniqueID"
 
 		return $result['Purchases'];
 	}
@@ -578,7 +618,9 @@ class RetrieveClient extends Interfaces\Retrieve {
 		// Create the MBO Object
 		$this->getMboResults();
 
-		$result = $this->mb->GetClientServices( array( 'clientId' => $client_id ) ); // UniqueID ??
+		$result = $this->mb->GetClientServices(
+			array( 'clientId' => $client_id )
+		);
 
 		return $result;
 	}
@@ -664,7 +706,9 @@ class RetrieveClient extends Interfaces\Retrieve {
 		* visits then the array of visits is under 'Visits'/'Visit'
 		*/
 
-		if ( is_array( $client_schedule['GetClientScheduleResult']['Visits']['Visit'][0] ) ) {
+		if ( is_array(
+			$client_schedule['GetClientScheduleResult']['Visits']['Visit'][0]
+		) ) {
 			// Multiple visits
 			$visit_array_scope = $client_schedule['GetClientScheduleResult']['Visits']['Visit'];
 		} else {
