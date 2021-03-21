@@ -38,6 +38,6 @@ class Admin {
 			?>
 		</p>
 	</div>
-    <?php
+		<?php
 	}
 }

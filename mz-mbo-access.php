@@ -164,8 +164,8 @@ if ( version_compare( PHP_VERSION, 'MZoo\MzMindbody\MINIMUM_PHP_VERSION', '>=' )
  * Insure that parent plugin, is active or deactivate plugin.
  */
 function mbo_access_has_mindbody_api() {
-	if ( is_admin() && current_user_can( 'activate_plugins' ) && 
-    ! is_plugin_active( 'mz-mindbody-api/mz-mindbody.php' ) ) {
+	if ( is_admin() && current_user_can( 'activate_plugins' ) &&
+	! is_plugin_active( 'mz-mindbody-api/mz-mindbody.php' ) ) {
 		add_action( 'admin_notices', __NAMESPACE__ . '\\mbo_access_child_plugin_notice' );
 
 		deactivate_plugins( plugin_basename( __FILE__ ) );

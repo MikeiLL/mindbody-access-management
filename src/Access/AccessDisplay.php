@@ -285,7 +285,7 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 
 		// Call the API and if fails, return error message.
 		if ( false == $this->schedule_object->getMboResults() ) {
-			return esc_html(sprintf('%1$s %2$s %3$s','<div>', __( 'Error returning schedule from Mindbody in Access Display.', NS\PLUGIN_TEXT_DOMAIN ), '<div>'));
+			return esc_html( sprintf( '%1$s %2$s %3$s', '<div>', __( 'Error returning schedule from Mindbody in Access Display.', NS\PLUGIN_TEXT_DOMAIN ), '<div>' ) );
 		}
 
 		// Register attributes
@@ -322,7 +322,7 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 
 		if ( ! empty( $_SERVER['HTTP_X_REQUESTED_WITH'] ) && strtolower( $_SERVER['HTTP_X_REQUESTED_WITH'] ) == 'xmlhttprequest' ) {
 			$result = wp_json_encode( $result );
-			esc_html_e($result);
+			esc_html_e( $result );
 		} else {
 			header( 'Location: ' . $_SERVER['HTTP_REFERER'] );
 		}
