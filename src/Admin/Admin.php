@@ -20,9 +20,6 @@ use MZoo\MzMboAccess as NS;
  */
 class Admin {
 
-
-
-
 	/**
 	 * Notify Admin when plugin deactivated.
 	 *

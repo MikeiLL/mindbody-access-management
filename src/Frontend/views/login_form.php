@@ -41,15 +41,34 @@ use MZoo\MzMboAccess\Core as Core;
 
 				<div class="col-12">
 
-					<button type="submit" class="btn btn-primary btn-xs"><?php esc_html_e($data->login); ?></button>
+					<button type="submit" class="btn btn-primary btn-xs">
+					    <?php esc_html_e($data->login); ?>
+					</button>
 				
 					<?php if ( ! empty( $data->password_reset_request ) ) : ?>
-					<a style="text-decoration:none;" href="https://clients.mindbodyonline.com/PasswordReset?studioid=<?php esc_html_e($data->siteID; ?>" class="btn btn-primary btn-xs" target="_blank"><?php esc_html_e($data->password_reset_request)); ?></a>
+					<?php 
+					$reset_link = 'https://clients.mindbodyonline.com/PasswordReset';
+                    $reset_link .= '?&studioid=' . $data->siteID;
+                    ?>
+					<a style="text-decoration:none;" 
+					    href="<?php esc_html_e($reset_link); ?>" 
+					    class="btn btn-primary btn-xs" 
+					    target="_blank">
+					    <?php esc_html_e($data->password_reset_request); ?>
+					</a>
 
 					<?php endif; ?>
 					
 					<?php if ( ! empty( $data->manage_on_mbo ) ) : ?>
-					<a style="text-decoration:none;" href="https://clients.mindbodyonline.com/ws.asp?&amp;sLoc=1&studioid=<?php esc_html_e($data->siteID; ?>" class="btn btn-primary btn-xs" id="MBOSite" target="_blank"><?php esc_html_e($data->manage_on_mbo)); ?></a>
+					
+                    <?php $mbo_link = 'https://clients.mindbodyonline.com/ws.asp';
+                    $mbo_link .= '?&amp;sLoc=1&studioid=' . $data->siteID; ?>
+                    <a href="<?php esc_html_e($mbo_link); ?>" 
+                        class="btn btn-primary btn-xs" 
+                        style="text-decoration:none;" 
+                        id="MBOSite">
+                        <?php esc_html_e($data->manage_on_mbo); ?>
+                    </a>
 					
 					<?php endif; ?>
 					

@@ -47,6 +47,7 @@ class Activator {
 	 */
 	public static function is_mzmbo_active() {
 		$active_plugins = (array) get_option( 'active_plugins', array() );
-		return in_array( 'mz-mindbody-api/mz-mindbody.php', $active_plugins ) || array_key_exists( 'mz-mindbody-api/mz-mindbody.php', $active_plugins );
+		return in_array( 'mz-mindbody-api/mz-mindbody.php', $active_plugins ) || 
+        array_key_exists( 'mz-mindbody-api/mz-mindbody.php', $active_plugins );
 	}
 }
