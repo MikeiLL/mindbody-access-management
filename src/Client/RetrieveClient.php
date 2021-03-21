@@ -761,10 +761,10 @@ class RetrieveClient extends Interfaces\Retrieve {
 			usort(
 				$classes,
 				function ( $a, $b ) {
-					if ( $a->startDateTime == $b->startDateTime ) {
+					if ( $a->start_datetime == $b->start_datetime ) {
 						return 0;
 					}
-					return $a->startDateTime < $b->startDateTime ? -1 : 1;
+					return $a->start_datetime < $b->start_datetime ? -1 : 1;
 				}
 			);
 		}
