@@ -1,9 +1,9 @@
 <?php
 /**
  * Access Portal
- * 
+ *
  * Ajax methods for client interface.
- * 
+ *
  * @package MZMBOACCESS
  */
 
@@ -18,11 +18,10 @@ use MZoo\MzMindbody\Common\Interfaces as Interfaces;
 
 /**
  * Access Portal Class
- * 
+ *
  * @since 1.0.0
- * 
+ *
  * Ajax methods to MBO access utilities.
- * 
  */
 class AccessPortal extends AccessUtilities {
 
@@ -36,7 +35,7 @@ class AccessPortal extends AccessUtilities {
 	 *
 	 * return true if active membership matches one in received array (or string)
 	 *
-	 string|array * @param $membership_types of membership types
+	 * @param string|array $membership_types of membership types
 	 *
 	 * @return bool
 	 */
@@ -107,7 +106,7 @@ class AccessPortal extends AccessUtilities {
 	 *
 	 * return true if active membership matches one in received array (or string)
 	 *
-	 string|array * @param $membership_types of membership types
+	 * @param string|array $membership_types of membership types
 	 *
 	 * @return bool
 	 */
