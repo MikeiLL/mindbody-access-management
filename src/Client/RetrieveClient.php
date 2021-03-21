@@ -118,7 +118,7 @@ class RetrieveClient extends Interfaces\Retrieve {
 		if ( 2 === $valid_credentials ) {
 			return array(
 				'type'    => 'error',
-				'message' => __( 'Badly formed email.', NS\PLUGIN_TEXT_DOMAIN ),
+				'message' => __( 'Badly formed email.', 'mz-mbo-access' ),
 			);
 		} elseif ( 3 === $valid_credentials ) {
 			return array(
@@ -128,7 +128,7 @@ class RetrieveClient extends Interfaces\Retrieve {
                                 contain 8 to 15 characters and 
                                 must include both letters and 
                                 numbers.',
-					NS\PLUGIN_TEXT_DOMAIN
+					'mz-mbo-access'
 				),
 			);
 		}
@@ -169,7 +169,7 @@ class RetrieveClient extends Interfaces\Retrieve {
 					'type'           => 'success',
 					'message'        => __(
 						'Welcome',
-						NS\PLUGIN_TEXT_DOMAIN
+						'mz-mbo-access'
 					) . ', ' . $client_info['FirstName'],
 					'client_id'      => $client_info['ID'],
 					'client_details' => $client_info,
@@ -178,7 +178,7 @@ class RetrieveClient extends Interfaces\Retrieve {
 			return array(
 				'type'    => 'error',
 				'message' => sprintf(
-					__( 'Whoops. Please try again, %1$s.', NS\PLUGIN_TEXT_DOMAIN ),
+					__( 'Whoops. Please try again, %1$s.', 'mz-mbo-access' ),
 					$validateLogin['ValidateLoginResult']['Client']['FirstName']
 				),
 			);
@@ -193,7 +193,7 @@ class RetrieveClient extends Interfaces\Retrieve {
 				// Default fallback message.
 				return array(
 					'type'    => 'error',
-					'message' => __( 'Invalid Login', NS\PLUGIN_TEXT_DOMAIN ) . '<br/>',
+					'message' => __( 'Invalid Login', 'mz-mbo-access' ) . '<br/>',
 				);
 			}
 		}

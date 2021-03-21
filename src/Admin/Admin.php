@@ -33,7 +33,7 @@ class Admin {
 			<?php
 			esc_html_e(
 				'Missing required plugin: MZ Mindbody API.',
-				NS\PLUGIN_TEXT_DOMAIN
+				'mz-mbo-access'
 			);
 			?>
 		</p>

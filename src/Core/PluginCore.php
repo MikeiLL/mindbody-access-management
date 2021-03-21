@@ -108,7 +108,7 @@ class PluginCore {
 		$this->plugin_name        = NS\PLUGIN_NAME;
 		$this->version            = NS\PLUGIN_VERSION;
 		$this->plugin_basename    = NS\PLUGIN_BASENAME;
-		$this->plugin_text_domain = NS\PLUGIN_TEXT_DOMAIN;
+		$this->plugin_text_domain = 'mz-mbo-access';
 
 		$this->load_dependencies();
 		$this->set_locale();
@@ -126,7 +126,7 @@ class PluginCore {
 	 * @since 1.0.0
 	 */
 	public function __clone() {
-		_doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; huh?', NS\PLUGIN_TEXT_DOMAIN ), '2.1' );
+		_doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; huh?', 'mz-mbo-access' ), '2.1' );
 	}
 
 	/**
@@ -135,7 +135,7 @@ class PluginCore {
 	 * @since 1.0.0
 	 */
 	public function __wakeup() {
-		_doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; huh?', NS\PLUGIN_TEXT_DOMAIN ), '2.1' );
+		_doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; huh?', 'mz-mbo-access' ), '2.1' );
 	}
 
 

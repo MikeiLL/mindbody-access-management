@@ -121,15 +121,15 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 		$this->atts = shortcode_atts(
 			array(
 				'siteid'                 => '',
-				'denied_message'         => __( 'Access to this content requires one of', NS\PLUGIN_TEXT_DOMAIN ),
-				'call_to_action'         => __( 'Login with your Mindbody account to access this content.', NS\PLUGIN_TEXT_DOMAIN ),
-				'access_expired'         => __( 'Looks like your access has expired.', NS\PLUGIN_TEXT_DOMAIN ),
+				'denied_message'         => __( 'Access to this content requires one of', 'mz-mbo-access' ),
+				'call_to_action'         => __( 'Login with your Mindbody account to access this content.', 'mz-mbo-access' ),
+				'access_expired'         => __( 'Looks like your access has expired.', 'mz-mbo-access' ),
 				'level_1_redirect'       => '',
 				'level_2_redirect'       => '',
 				'denied_redirect'        => '',
 				'access_levels'          => 1,
 				'manage_on_mbo'          => 'Visit Mindbody Site',
-				'password_reset_request' => __( 'Forgot My Password', NS\PLUGIN_TEXT_DOMAIN ),
+				'password_reset_request' => __( 'Forgot My Password', 'mz-mbo-access' ),
 			),
 			$atts
 		);
@@ -285,7 +285,7 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 
 		// Call the API and if fails, return error message.
 		if ( false == $this->schedule_object->getMboResults() ) {
-			return esc_html( sprintf( '%1$s %2$s %3$s', '<div>', __( 'Error returning schedule from Mindbody in Access Display.', NS\PLUGIN_TEXT_DOMAIN ), '<div>' ) );
+			return esc_html( sprintf( '%1$s %2$s %3$s', '<div>', __( 'Error returning schedule from Mindbody in Access Display.', 'mz-mbo-access' ), '<div>' ) );
 		}
 
 		// Register attributes
@@ -318,7 +318,7 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 			$result['horizontal'] = ob_get_clean();
 		endif;
 
-		$result['message'] = __( 'Error. Please try again.', NS\PLUGIN_TEXT_DOMAIN );
+		$result['message'] = __( 'Error. Please try again.', 'mz-mbo-access' );
 
 		if ( ! empty( $_SERVER['HTTP_X_REQUESTED_WITH'] ) &&
 			'xmlhttprequest' === strtolower( $_SERVER['HTTP_X_REQUESTED_WITH'] ) ) {

@@ -32,7 +32,7 @@ class Activator {
 	public static function activate() {
 
 		if ( ! self::is_mzmbo_active() ) {
-			$admin_object = new Admin\Admin( NS\PLUGIN_NAME, NS\PLUGIN_VERSION, NS\PLUGIN_TEXT_DOMAIN );
+			$admin_object = new Admin\Admin( NS\PLUGIN_NAME, NS\PLUGIN_VERSION, 'mz-mbo-access' );
 			add_action( 'admin_notices', array( $admin_object, 'admin_notice' ) );
 			deactivate_plugins( NS\PLUGIN_BASENAME );
 		}

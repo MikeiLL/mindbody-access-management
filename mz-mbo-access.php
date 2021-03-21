@@ -186,7 +186,7 @@ function mbo_access_child_plugin_notice() {     ?>
 			esc_html_e(
 				'Whoops. MZ MBO Access plugin requires the parent plugin, 
                 MZ Mindbody API, to be installed and active.',
-				NS\PLUGIN_TEXT_DOMAIN
+				'mz-mbo-access'
 			);
 			?>
 		</p>
@@ -200,7 +200,7 @@ function mbo_access_child_plugin_notice() {     ?>
  */
 function deactivate() {
 	deactivate_plugins( plugin_basename( __FILE__ ) );
-	$admin_object = new NS\Admin\Admin( NS\PLUGIN_NAME, NS\PLUGIN_VERSION, NS\PLUGIN_TEXT_DOMAIN );
+	$admin_object = new NS\Admin\Admin( NS\PLUGIN_NAME, NS\PLUGIN_VERSION, 'mz-mbo-access' );
 	add_action( 'admin_notices', array( $admin_object, 'admin_notice' ) );
 }
 
