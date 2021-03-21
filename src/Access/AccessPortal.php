@@ -25,19 +25,13 @@ use MZoo\MzMindbody\Common\Interfaces as Interfaces;
  */
 class AccessPortal extends AccessUtilities {
 
-
-
-
 	/**
 	 * Check Access Permissions
 	 *
 	 * @since 2.5.7
 	 *
-	 * return true if active membership matches one in received array (or string)
-	 *
-	 * @param string|array $membership_types of membership types
-	 *
-	 * @return bool
+	 * Log client in and echo true if active membership
+	 * matches one in received array (or string).
 	 */
 	public function ajax_login_check_access_permissions() {
 
@@ -71,7 +65,7 @@ class AccessPortal extends AccessUtilities {
 
 			$login = $client->log_client_in( $credentials );
 
-			if ( $login['type'] == 'error' ) {
+			if ( 'error' === $login['type'] ) {
 				$result['type'] = 'error';
 			}
 
@@ -104,17 +98,13 @@ class AccessPortal extends AccessUtilities {
 	 *
 	 * @since 2.5.7
 	 *
-	 * return true if active membership matches one in received array (or string)
-	 *
-	 * @param string|array $membership_types of membership types
-	 *
-	 * @return bool
+	 * Echo true if active membership matches one in received array (or string).
 	 */
 	public function ajax_check_access_permissions() {
 
 		check_ajax_referer( $_REQUEST['nonce'], 'mz_mbo_access_nonce', false );
 
-		// Crate the MBO Object
+		// Crate the MBO Object.
 		$this->getMboResults();
 
 		$result = array();

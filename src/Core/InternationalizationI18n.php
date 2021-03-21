@@ -1,5 +1,9 @@
 <?php
 /**
+ * Plugin Internationalization
+ *
+ * Not sure if we are using this, currently.
+ *
  * @package MZMBOACCESS
  */
 
@@ -17,8 +21,6 @@ namespace MZoo\MzMboAccess\Core;
  * @author Mike iLL/mZoo.org
  */
 class InternationalizationI18n {
-
-
 
 
 	/**

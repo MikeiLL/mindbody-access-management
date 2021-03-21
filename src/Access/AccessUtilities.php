@@ -1,5 +1,9 @@
 <?php
 /**
+ * Access Utilities
+ *
+ * Class that retrieves client to expose access ulities.
+ *
  * @package MZMBOACCESS
  */
 
@@ -12,6 +16,13 @@ use MZoo\MzMboAccess\Client as Client;
 use MZoo\MzMindbody\Common as Common;
 use MZoo\MzMindbody\Common\Interfaces as Interfaces;
 
+/**
+ * Access Utilities Class
+ *
+ * Class that extends MZ MBO retrieve Client class to expose access ulities.
+ *
+ * @package MZMBOACCESS
+ */
 class AccessUtilities extends Client\RetrieveClient {
 
 

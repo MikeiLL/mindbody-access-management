@@ -1,5 +1,9 @@
 <?php
 /**
+ * Template Loader
+ *
+ * Extend Gamajo Template Loader
+ *
  * @package MZMBOACCESS
  */
 
@@ -8,10 +12,12 @@ namespace MZoo\MzMboAccess\Core;
 use MZoo\MzMindbody\Libraries as Libraries;
 use MZoo\MzMboAccess as NS;
 
+/**
+ * Template Loader
+ *
+ * Extend Gamajo Template Loader
+ */
 class TemplateLoader extends \MZMBO_Gamajo_Template_Loader {
-
-
-
 
 	/**
 	 * Prefix for filter names.

@@ -1,5 +1,9 @@
 <?php
 /**
+ * Access Display
+ *
+ * Class to display access state to user.
+ *
  * @package MZMBOACCESS
  */
 
@@ -14,6 +18,11 @@ use MZoo\MzMindbody\Site as Site;
 use MZoo\MzMindbody\Common as Common;
 use MZoo\MzMindbody\Common\Interfaces as Interfaces;
 
+/**
+ * Access Display Class
+ *
+ * Shortcode class to display user content based on access.
+ */
 class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 
 

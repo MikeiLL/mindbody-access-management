@@ -1,5 +1,12 @@
 <?php
 /**
+ * The core plugin class.
+ * Defines internationalization, admin-specific hooks, and public-facing site hooks.
+ *
+ * @link  http://mzoo.org
+ * @since 1.0.0
+ *
+ * @author Mike iLL/mZoo.org
  * @package MZMBOACCESS
  */
 

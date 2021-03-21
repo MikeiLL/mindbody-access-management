@@ -1,5 +1,9 @@
 <?php
 /**
+ * Deactivator
+ *
+ * Methods to run on plugin deactivation.
+ *
  * @package MZMBOACCESS
  */
 

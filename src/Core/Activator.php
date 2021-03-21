@@ -1,5 +1,9 @@
 <?php
 /**
+ * Activator class
+ *
+ * Methods to run on plugin activation.
+ *
  * @package MZMBOACCESS
  */
 
