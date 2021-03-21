@@ -376,6 +376,7 @@ class RetrieveClient extends Interfaces\Retrieve {
 	 *
 	 * since: 1.0.1
 	 *
+     * @param array $credentials user passwd.
 	 * @return array of sanitized credentials.
 	 */
 	public function sanitize_login_fields( $credentials = array() ) {
