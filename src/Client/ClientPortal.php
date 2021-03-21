@@ -121,7 +121,7 @@ class ClientPortal extends RetrieveClient {
 		if ( ! empty( $_SERVER['HTTP_X_REQUESTED_WITH'] ) &&
 			'xmlhttprequest' === strtolower( $_SERVER['HTTP_X_REQUESTED_WITH'] ) ) {
 			$result = wp_json_encode( $result );
-			esc_html_e( $result );
+			echo esc_js( $result );
 
 		} else {
 			header( 'Location: ' . $_SERVER['HTTP_REFERER'] );
@@ -143,7 +143,7 @@ class ClientPortal extends RetrieveClient {
 
 		$this->client_log_out();
 
-		// update class attribute to hold logged out status
+		// update class attribute to hold logged out status.
 		$this->client_logged_in = false;
 
 		esc_html_e( 'Logged Out', 'mz-mindbody-api' );
@@ -152,9 +152,10 @@ class ClientPortal extends RetrieveClient {
 
 		$result['message'] = ob_get_clean();
 
-		if ( ! empty( $_SERVER['HTTP_X_REQUESTED_WITH'] ) && strtolower( $_SERVER['HTTP_X_REQUESTED_WITH'] ) == 'xmlhttprequest' ) {
+		if ( ! empty( $_SERVER['HTTP_X_REQUESTED_WITH'] ) &&
+			'xmlhttprequest' === strtolower( $_SERVER['HTTP_X_REQUESTED_WITH'] ) ) {
 			$result = wp_json_encode( $result );
-			esc_html_e( $result );
+			echo esc_js( $result );
 
 		} else {
 			header( 'Location: ' . $_SERVER['HTTP_REFERER'] );
@@ -180,9 +181,10 @@ class ClientPortal extends RetrieveClient {
 		$result['type']    = 'success';
 		$result['message'] = $this->check_client_logged();
 
-		if ( ! empty( $_SERVER['HTTP_X_REQUESTED_WITH'] ) && strtolower( $_SERVER['HTTP_X_REQUESTED_WITH'] ) == 'xmlhttprequest' ) {
+		if ( ! empty( $_SERVER['HTTP_X_REQUESTED_WITH'] ) &&
+			'xmlhttprequest' === strtolower( $_SERVER['HTTP_X_REQUESTED_WITH'] ) ) {
 			$result = wp_json_encode( $result );
-			esc_html_e( $result );
+			echo esc_js( $result );
 
 		} else {
 			header( 'Location: ' . $_SERVER['HTTP_REFERER'] );
@@ -206,9 +208,10 @@ class ClientPortal extends RetrieveClient {
 		$result['type']    = 'success';
 		$result['message'] = $this->get_clients( array( $_REQUEST['client_id'] ) );
 
-		if ( ! empty( $_SERVER['HTTP_X_REQUESTED_WITH'] ) && strtolower( $_SERVER['HTTP_X_REQUESTED_WITH'] ) == 'xmlhttprequest' ) {
+		if ( ! empty( $_SERVER['HTTP_X_REQUESTED_WITH'] ) &&
+			'xmlhttprequest' === strtolower( $_SERVER['HTTP_X_REQUESTED_WITH'] ) ) {
 			$result = wp_json_encode( $result );
-			esc_html_e( $result );
+			echo esc_js( $result );
 
 		} else {
 			header( 'Location: ' . $_SERVER['HTTP_REFERER'] );
@@ -235,9 +238,10 @@ class ClientPortal extends RetrieveClient {
 
 		$result['client'] = $this->update_client_session( $client );
 
-		if ( ! empty( $_SERVER['HTTP_X_REQUESTED_WITH'] ) && strtolower( $_SERVER['HTTP_X_REQUESTED_WITH'] ) == 'xmlhttprequest' ) {
+		if ( ! empty( $_SERVER['HTTP_X_REQUESTED_WITH'] ) &&
+			'xmlhttprequest' === strtolower( $_SERVER['HTTP_X_REQUESTED_WITH'] ) ) {
 			$result = wp_json_encode( $result );
-			esc_html_e( $result );
+			echo esc_js( $result );
 
 		} else {
 			header( 'Location: ' . $_SERVER['HTTP_REFERER'] );
