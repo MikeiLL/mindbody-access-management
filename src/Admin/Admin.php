@@ -1,5 +1,9 @@
 <?php
 /**
+ * Admin Class
+ *
+ * For some admin functionality. Backend contains the settings page.
+ *
  * @package MZMBOACCESS
  */
 

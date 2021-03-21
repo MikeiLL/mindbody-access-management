@@ -45,7 +45,7 @@ class AccessUtilities extends Client\RetrieveClient {
 	 *
 	 * return true if active membership matches one in received array (or string)
 	 *
-	 * @param $membership_types string or array of membership types
+	 string|array * @param $membership_types of membership types
 	 *
 	 * @return bool
 	 */
@@ -183,7 +183,7 @@ class AccessUtilities extends Client\RetrieveClient {
 	 *
 	 * return true if active membership matches one in received array (or string)
 	 *
-	 * @param $membership_types string or array of membership types
+	 string|array * @param $membership_types of membership types
 	 *
 	 * @return bool
 	 */
@@ -214,7 +214,7 @@ class AccessUtilities extends Client\RetrieveClient {
 	 *
 	 * return true if TODO active membership matches one in received array (or string)
 	 *
-	 * @param TODO $membership_types string or array of membership types
+	 * @param TODO $membership_types string|array of membership types
 	 *
 	 * @return bool
 	 */

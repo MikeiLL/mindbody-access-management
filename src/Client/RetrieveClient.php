@@ -779,7 +779,7 @@ class RetrieveClient extends Interfaces\Retrieve {
 	 *
 	 * Make sure that we have an array
 	 *
-	 * @param string|array $data a string or array.
+	 * @param string|array $data a string|array.
 	 * @return array
 	 */
 	private function make_numeric_array( $data ) {
