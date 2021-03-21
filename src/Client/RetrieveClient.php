@@ -133,10 +133,10 @@ class RetrieveClient extends Interfaces\Retrieve {
 			);
 		}
 
-		$validateLogin = $this->validate_client( $valid_credentials );
+		$validate_login = $this->validate_client( $valid_credentials );
 
-		if ( ! empty( $validateLogin['ValidateLoginResult']['GUID'] ) ) {
-			$client_info = $validateLogin['ValidateLoginResult']['Client'];
+		if ( ! empty( $validate_login['ValidateLoginResult']['GUID'] ) ) {
+			$client_info = $validate_login['ValidateLoginResult']['Client'];
 
 			if ( ! empty( $additional_details ) ) {
 				foreach ( $additional_details as $endpoint ) {
@@ -144,7 +144,7 @@ class RetrieveClient extends Interfaces\Retrieve {
 						case 'get_clients':
 							$additional = $this->get_clients( array( $client_info['ID'] ) )[0];
 							if ( ! is_array( $additional ) ) {
-								 break;
+								break;
 							}
 							$client_info = array_merge( $additional, $client_info );
 							break;
@@ -178,16 +178,17 @@ class RetrieveClient extends Interfaces\Retrieve {
 			return array(
 				'type'    => 'error',
 				'message' => sprintf(
+					/* translators: alert referencing the user. */
 					__( 'Whoops. Please try again, %1$s.', 'mz-mbo-access' ),
-					$validateLogin['ValidateLoginResult']['Client']['FirstName']
+					$validate_login['ValidateLoginResult']['Client']['FirstName']
 				),
 			);
 		} else {
-			// Otherwise error message
-			if ( ! empty( $validateLogin['ValidateLoginResult']['Message'] ) ) {
+			// Otherwise error message.
+			if ( ! empty( $validate_login['ValidateLoginResult']['Message'] ) ) {
 				return array(
 					'type'    => 'error',
-					'message' => $validateLogin['ValidateLoginResult']['Message'],
+					'message' => $validate_login['ValidateLoginResult']['Message'],
 				);
 			} else {
 				// Default fallback message.
@@ -207,17 +208,17 @@ class RetrieveClient extends Interfaces\Retrieve {
 	 *
 	 * Since 1.0.1
 	 *
-	 * @param $validateLoginResult array with result from MBO API
+	 * @param array $validate_login_result with result from MBO API.
 	 */
-	public function validate_client( $validateLoginResult ) {
+	public function validate_client( $validate_login_result ) {
 
 		// Create the MBO Object using API VERSION 5!
 		$this->getMboResults( 5 );
 
 		$result = $this->mb->ValidateLogin(
 			array(
-				'Username' => $validateLoginResult['Username'],
-				'Password' => $validateLoginResult['Password'],
+				'Username' => $validate_login_result['Username'],
+				'Password' => $validate_login_result['Password'],
 			)
 		);
 
@@ -231,8 +232,8 @@ class RetrieveClient extends Interfaces\Retrieve {
 	 * Since 2.0.6
 	 * Get @array of MBO Client IDs
 	 *
-	 * @param  $client_id
-	 * @return array _single_ (first) Client from Mindbody
+	 * @param  int $client_id
+	 * @return array _single_ (first) Client from Mindbody.
 	 */
 	public function get_client( $client_id ) {
 
@@ -255,7 +256,7 @@ class RetrieveClient extends Interfaces\Retrieve {
 	 *
 	 * Sanitize array returned from MBO and save in $_SESSION under mbo_result key.
 	 *
-	 * @param $validateLoginResult array with MBO result
+	 * @param array $client_info from MBO.
 	 */
 	public function create_client_session( $client_info ) {
 
@@ -270,7 +271,7 @@ class RetrieveClient extends Interfaces\Retrieve {
 				$sanitized_client_info
 			);
 
-			// If validated, create session variables and store
+			// If validated, create session variables and store.
 			$client_details = array(
 				'mbo_result' => $sanitized_client_info,
 			);
@@ -287,7 +288,7 @@ class RetrieveClient extends Interfaces\Retrieve {
 	 *
 	 * Since 2.0.5
 	 *
-	 * @param $additional_info array with MBO client details to add to Session
+	 * @param array $additional_info with MBO client details to add to Session.
 	 */
 	public function update_client_session( $additional_info ) {
 
@@ -303,7 +304,7 @@ class RetrieveClient extends Interfaces\Retrieve {
 
 			$this->client_log_out();
 
-			// If validated, create session variables and store
+			// If validated, create session variables and store.
 			$client_details = array(
 				'mbo_result' => $new_session,
 			);
@@ -329,16 +330,16 @@ class RetrieveClient extends Interfaces\Retrieve {
 	 * Return MBO Account config required fields with what I think
 	 * are default required fields.
 	 *
-	 * since: 1.0.1
+	 * @since: 1.0.1
 	 *
-	 * return array numeric array of required fields
+	 * @return array numeric array of required fields.
 	 */
 	public function get_signup_form_fields() {
 
-		// Crate the MBO Object
+		// Crate the MBO Object.
 		$this->getMboResults();
 
-		$requiredFields = $this->mb->GetRequiredClientFields();
+		$required_fields = $this->mb->GetRequiredClientFields();
 
 		$default_required_fields = array(
 			'Email',
@@ -350,17 +351,19 @@ class RetrieveClient extends Interfaces\Retrieve {
 			$default_required_fields,
 			array_map(
 				'sanitize_text_field',
-				$requiredFields['RequiredClientFields']
+				$required_fields['RequiredClientFields']
 			)
 		);
 	}
 
 	/**
-	 * Create MBO Account
+	 * Create MBO Account.
+	 *
+	 * @param array $client_fields to send to MBO.
 	 */
 	public function add_client( $client_fields = array() ) {
 
-		// Crate the MBO Object
+		// Crate the MBO Object.
 		$this->getMboResults();
 
 		$signup_result = $this->mb->AddClient( $client_fields );
@@ -373,7 +376,7 @@ class RetrieveClient extends Interfaces\Retrieve {
 	 *
 	 * since: 1.0.1
 	 *
-	 * return array of sanitized credentials
+	 * @return array of sanitized credentials.
 	 */
 	public function sanitize_login_fields( $credentials = array() ) {
 
@@ -387,9 +390,9 @@ class RetrieveClient extends Interfaces\Retrieve {
 	/**
 	 * Verify User Credentials.
 	 *
-	 * since: 1.0.1
+	 * @since: 1.0.1
 	 *
-	 * return array of sanitized credentials
+	 * @return array of verified credentials.
 	 */
 	public function validate_login_fields( $credentials = array() ) {
 		if ( false === filter_var( $credentials['Username'], FILTER_VALIDATE_EMAIL ) ) {
@@ -409,9 +412,10 @@ class RetrieveClient extends Interfaces\Retrieve {
 	/**
 	 * Check if MBO pass meets their criteria.
 	 *
-	 * since: 1.0.1
+	 * @since: 1.0.1
 	 *
-	 * return bool
+	 * @param string $mbo_password submitted by user.
+	 * @return bool
 	 */
 	public function verify_mbo_pass( $mbo_password = '' ) {
 
@@ -427,9 +431,9 @@ class RetrieveClient extends Interfaces\Retrieve {
 	/**
 	 * Get client details from session
 	 *
-	 * since: 1.0.1
+	 * @since: 1.0.1
 	 *
-	 * return array of client info from MBO or require login
+	 * @return array of client info from MBO or require login.
 	 */
 	public function get_client_details_from_session() {
 
@@ -458,9 +462,10 @@ class RetrieveClient extends Interfaces\Retrieve {
 	 *          )
 	 * [Remaining] => 1000, etc..
 	 *
-	 * since: 1.0.1
+	 * @since: 1.0.1
+	 * @param int $client_id.
 	 *
-	 * return array numeric array of active memberships
+	 * @return array numeric array of active memberships
 	 */
 	public function get_client_active_memberships( $client_id ) {
 
@@ -477,12 +482,13 @@ class RetrieveClient extends Interfaces\Retrieve {
 	/**
 	 * Get client account balance.
 	 *
-	 * since: 1.0.1
-	 *
 	 * This wraps a method for getting balances for multiple accounts, but
 	 * we just get it for one.
 	 *
-	 * return string client account balance
+	 * @since: 1.0.1
+	 * @param int $client_id.
+	 *
+	 * @return array account balances
 	 */
 	public function get_client_account_balance( $client_id ) {
 
@@ -497,8 +503,6 @@ class RetrieveClient extends Interfaces\Retrieve {
 
 	/**
 	 * Get client contracts.
-	 *
-	 * Since 1.0.0
 	 *
 	 * Returns an array of items that look like this:
 	 *
@@ -534,7 +538,10 @@ class RetrieveClient extends Interfaces\Retrieve {
 	 *
 	 * )
 	 *
-	 * return array numeric array of client contracts
+	 * @since: 1.0.1
+	 * @param int $client_id.
+	 *
+	 * @return array numeric array of client contracts
 	 */
 	public function get_client_contracts( $client_id ) {
 
@@ -550,8 +557,6 @@ class RetrieveClient extends Interfaces\Retrieve {
 
 	/**
 	 * Get client purchases.
-	 *
-	 * Since 1.0.0
 	 *
 	 * Returns an array of items that look like this:
 	 * [Sale] => Array
@@ -592,7 +597,10 @@ class RetrieveClient extends Interfaces\Retrieve {
 	 * [Returned] =>
 	 * [Quantity] => 1
 	 *
-	 * return array numeric array of client purchases
+	 * @since: 1.0.1
+	 * @param int $client_id.
+	 *
+	 * @return array numeric array of client purchases
 	 */
 	public function get_client_purchases( $client_id ) {
 
@@ -609,9 +617,10 @@ class RetrieveClient extends Interfaces\Retrieve {
 	/**
 	 * Get client services.
 	 *
-	 * since: 1.0.1
+	 * @since: 1.0.1
+	 * @param int $client_id.
 	 *
-	 * return array numeric array of required fields
+	 * @return array numeric array of required fields
 	 */
 	public function get_client_services( $client_id ) {
 
@@ -627,11 +636,14 @@ class RetrieveClient extends Interfaces\Retrieve {
 
 	/**
 	 * Create MBO Account
-	 * since 5.4.7
+	 *
+	 * @since 5.4.7
 	 *
 	 * param array containing 'UserEmail' 'UserFirstName' 'UserLastName'
 	 *
-	 * return array either error or new client details
+	 * @param str $client_id.
+	 *
+	 * @return array|bool either error or new client details
 	 */
 	public function password_reset_email_request( $client_id = array() ) {
 
@@ -647,8 +659,9 @@ class RetrieveClient extends Interfaces\Retrieve {
 	/**
 	 * Check Client Logged In
 	 *
-	 * Since 1.0.0
 	 * Is there a session containing the MBO_GUID of current user
+	 *
+	 * @since 1.0.0
 	 *
 	 * @return bool
 	 */
@@ -668,9 +681,10 @@ class RetrieveClient extends Interfaces\Retrieve {
 	 *
 	 * @since 1.0.1
 	 *
-	 * @param $api_version int in case we need to call on API v5 as in for client login
+	 * @param int $api_version in case we need to call on API v5,
+	 * as in for client login.
 	 *
-	 * @return array of MBO schedule data
+	 * @return array of MBO schedule data.
 	 */
 	public function getMboResults( $api_version = 6 ) {
 
@@ -692,13 +706,14 @@ class RetrieveClient extends Interfaces\Retrieve {
 	 *
 	 * This is a limited version of the Retrieve Classes method used in horizontal schedule
 	 *
-	 * @param @type array $mz_classes
+	 * @since 1.0.1
+	 * @param array $client_schedule as returned from MBO.
 	 *
-	 * @return @type array of Objects from Single_event class, in Date (and time) sequence.
+	 * @return array of Objects from Single_event class, in Date (and time) sequence.
 	 */
 	public function sortClassesByDateThenTime( $client_schedule = array() ) {
 
-		$classesByDateThenTime = array();
+		$classes_by_date_then_time = array();
 
 		/*
 		For some reason, when there is only a single class in the client
@@ -725,21 +740,21 @@ class RetrieveClient extends Interfaces\Retrieve {
 
 			$single_event = new Schedule\MiniScheduleItem( $visit );
 
-			if ( ! empty( $classesByDateThenTime[ $just_date ] ) ) {
-				array_push( $classesByDateThenTime[ $just_date ], $single_event );
+			if ( ! empty( $classes_by_date_then_time[ $just_date ] ) ) {
+				array_push( $classes_by_date_then_time[ $just_date ], $single_event );
 			} else {
-				$classesByDateThenTime[ $just_date ] = array( $single_event );
+				$classes_by_date_then_time[ $just_date ] = array( $single_event );
 			}
 		}
 
 		/* They are not ordered by date so order them by date */
-		ksort( $classesByDateThenTime );
+		ksort( $classes_by_date_then_time );
 
-		foreach ( $classesByDateThenTime as $classDate => &$classes ) {
+		foreach ( $classes_by_date_then_time as $classDate => &$classes ) {
 			/*
 			* $classes is an array of all classes for given date
 			* Take each of the class arrays and order it by time
-			* $classesByDateThenTime should have a length of seven, one for
+			* $classes_by_date_then_time should have a length of seven, one for
 			* each day of the week.
 			*/
 			usort(
@@ -753,7 +768,7 @@ class RetrieveClient extends Interfaces\Retrieve {
 			);
 		}
 
-		return $classesByDateThenTime;
+		return $classes_by_date_then_time;
 	}
 
 
