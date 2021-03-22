@@ -160,7 +160,9 @@ class Tests_RetrieveClient extends MZMBOAccess_WPUnitTestCase
 
         $session_result = $client_object->create_client_session($validation_result['ValidateLoginResult']['Client']);
 
-        $this->assertTrue((bool) $validation_result);
+        $this->assertTrue((bool) $session_result);
+
+        $this->assertTrue((bool) $session_result->mbo_result->ID);
 
         $is_or_is_not = $client_object->check_client_logged();
 
