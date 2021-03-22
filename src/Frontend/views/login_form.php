@@ -1,10 +1,17 @@
 <?php
+/**
+ * Login Form.
+ *
+ * Template for login form.
+ *
+ * @package MZMBOACCESS
+ */
 
 use MZoo\MzMboAccess\Core as Core;
 
 ?>
 	<div id="mzLogInContainer">
-	
+
 		<form role="form" class="form-group" style="margin:1em 0;" data-async id="mzLogIn" data-target="#mzSignUpModal" method="POST">
 
 			<h3><?php echo esc_html( $data->atts['call_to_action'] ); ?></h3>
@@ -44,7 +51,7 @@ use MZoo\MzMboAccess\Core as Core;
 					<button type="submit" class="btn btn-primary btn-xs">
 						<?php echo esc_html( $data->login ); ?>
 					</button>
-				
+
 					<?php if ( ! empty( $data->password_reset_request ) ) : ?>
 						<?php
 						$reset_link  = 'https://clients.mindbodyonline.com/PasswordReset';
@@ -58,9 +65,9 @@ use MZoo\MzMboAccess\Core as Core;
 					</a>
 
 					<?php endif; ?>
-					
+
 					<?php if ( ! empty( $data->manage_on_mbo ) ) : ?>
-					
+
 						<?php
 						$mbo_link  = 'https://clients.mindbodyonline.com/ws.asp';
 						$mbo_link .= '?&amp;sLoc=1&studioid=' . $data->site_id;
@@ -71,11 +78,11 @@ use MZoo\MzMboAccess\Core as Core;
 						id="MBOSite">
 						<?php echo esc_html( $data->manage_on_mbo ); ?>
 					</a>
-					
+
 					<?php endif; ?>
-					
+
 				</div>
-			
+
 			</div>
 
 		</form>
