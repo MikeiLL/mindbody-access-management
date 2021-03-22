@@ -125,6 +125,15 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 	 */
 	public $level_2_services;
 
+    
+
+    /**
+     * Handle Shortcode 
+     *
+     * @param    string $atts shortcode inputs
+     * @param    string $content any content between start and end shortcode tags.
+     * @return   string shortcode content
+     */
 	public function handleShortcode( $atts, $content = null ) {
 
 		$this->atts = shortcode_atts(
