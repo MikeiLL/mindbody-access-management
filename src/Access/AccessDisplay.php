@@ -33,9 +33,9 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 	 * @access   private
 	 *
 	 * @used in handleShortcode, addScript
-	 * @var      boolean $addedAlready True if shorcdoe scripts have been enqueued.
+	 * @var      boolean $added_already True if shorcdoe scripts have been enqueued.
 	 */
-	private static $addedAlready = false;
+	private static $added_already = false;
 
 	/**
 	 * Restricted content.
@@ -231,8 +231,8 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 
 	public function addScript() {
 
-		if ( ! self::$addedAlready ) {
-			self::$addedAlready = true;
+		if ( ! self::$added_already ) {
+			self::$added_already = true;
 
 			wp_register_style( 'mz_mindbody_style', MZ\PLUGIN_NAME_URL . 'dist/styles/main.css' );
 			wp_enqueue_style( 'mz_mindbody_style' );

@@ -20,7 +20,6 @@ use MZoo\MzMindbody\Common\Interfaces as Interfaces;
  * Access Utilities Class
  *
  * Class that extends MZ MBO retrieve Client class to expose access ulities.
- *
  */
 class AccessUtilities extends Client\RetrieveClient {
 
@@ -38,6 +37,7 @@ class AccessUtilities extends Client\RetrieveClient {
 	 *
 	 * @since 1.0.0
 	 *
+	 * @param int $client_id from MBO.
 	 * @return int $client_id indicating client access level, 0, 1 or 2.
 	 */
 	public function check_access_permissions( $client_id ) {
@@ -82,7 +82,7 @@ class AccessUtilities extends Client\RetrieveClient {
 
 			// Comapre level two services first.
 			foreach ( $contracts as $contract ) {
-				if ( in_array( $contract['ContractName'], $level_2_contracts ) ) {
+				if ( in_array( $contract['ContractName'], $level_2_contracts, true ) ) {
 					// No need to check further.
 					$this->access_level = 2;
 					return $this->update_client_session(
@@ -93,7 +93,7 @@ class AccessUtilities extends Client\RetrieveClient {
 					);
 				}
 				// If not level two do we have level one access?
-				if ( in_array( $contract['ContractName'], $level_1_contracts ) ) {
+				if ( in_array( $contract['ContractName'], $level_1_contracts, true ) ) {
 					// No need to check further.
 					$this->access_level = 1;
 					return $this->update_client_session(
@@ -114,7 +114,7 @@ class AccessUtilities extends Client\RetrieveClient {
 
 		$services = $this->get_client_services( $client_id );
 
-		if ( false == (bool) $services['ClientServices'] ) {
+		if ( false === (bool) $services['ClientServices'] ) {
 			$this->access_level = 0;
 			// Update client session with empty keys just in case.
 			return $this->update_client_session(
@@ -127,7 +127,7 @@ class AccessUtilities extends Client\RetrieveClient {
 
 		// Comapre level two services first.
 		foreach ( $services['ClientServices'] as $service ) {
-			if ( in_array( $service['Name'], $level_2_services ) ) {
+			if ( in_array( $service['Name'], $level_2_services, true ) ) {
 				if ( ! $this->is_service_valid( $service ) ) {
 					continue;
 				}
@@ -141,7 +141,7 @@ class AccessUtilities extends Client\RetrieveClient {
 				);
 			}
 			// If not level two do we have level one access?
-			if ( in_array( $service['Name'], $level_1_services ) ) {
+			if ( in_array( $service['Name'], $level_1_services, true ) ) {
 				if ( ! $this->is_service_valid( $service ) ) {
 					continue;
 				}
@@ -155,8 +155,6 @@ class AccessUtilities extends Client\RetrieveClient {
 				);
 			}
 		}
-		foreach ( $services['ClientServices'] as $service ) {
-		}
 
 		return $this->access_level;
 	}
@@ -165,8 +163,8 @@ class AccessUtilities extends Client\RetrieveClient {
 	 * Is Service Valid
 	 *
 	 * @since  1.0.0
-	 * @param  array service as returned from mbo
-	 * @return bool true if there are remaining and date not expired
+	 * @param  array $service as returned from mbo.
+	 * @return bool true if there are remaining and date not expired.
 	 */
 	private function is_service_valid( $service ) {
 
@@ -198,12 +196,12 @@ class AccessUtilities extends Client\RetrieveClient {
 
 		$contracts = $this->get_client_contracts();
 
-		if ( false == (bool) $contracts[0]['ContractName'] ) {
+		if ( false === (bool) $contracts[0]['ContractName'] ) {
 			return 0;
 		}
 
 		foreach ( $contracts as $contract ) {
-			if ( in_array( $contract['ContractName'], $contract_types ) ) {
+			if ( in_array( $contract['ContractName'], $contract_types, true ) ) {
 				return 2;
 			}
 		}
@@ -217,9 +215,9 @@ class AccessUtilities extends Client\RetrieveClient {
 	 *
 	 * @since 2.5.8
 	 *
-	 * return true if purchased items matches one in received array (or string)
+	 * return true if purchased items matches one in received array (or string).
 	 *
-	 * @param string|array $purchase_types  of purchased items
+	 * @param string|array $purchase_types  of purchased items.
 	 *
 	 * @return bool
 	 */
@@ -229,12 +227,12 @@ class AccessUtilities extends Client\RetrieveClient {
 
 		$purchases = $this->get_client_purchases();
 
-		if ( false == (bool) $purchases[0]['Sale'] ) {
+		if ( false === (bool) $purchases[0]['Sale'] ) {
 			return 0;
 		}
 
 		foreach ( $purchases as $purchase ) {
-			if ( in_array( $purchase['Description'], $purchase_types ) ) {
+			if ( in_array( $purchase['Description'], $purchase_types, true ) ) {
 				return 1;
 			}
 		}
