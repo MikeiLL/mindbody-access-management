@@ -229,12 +229,19 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 		return ob_get_clean();
 	}
 
+	/**
+	 * Add Script.
+	 *
+	 * Add scripts if not added already.
+	 *
+	 * @return   void
+	 */
 	public function addScript() {
 
 		if ( ! self::$added_already ) {
 			self::$added_already = true;
 
-			wp_register_style( 'mz_mindbody_style', MZ\PLUGIN_NAME_URL . 'dist/styles/main.css' );
+			wp_register_style( 'mz_mindbody_style', MZ\PLUGIN_NAME_URL . 'dist/styles/main.css', null, NS\PLUGIN_VERSION );
 			wp_enqueue_style( 'mz_mindbody_style' );
 
 			wp_register_script( 'mz_mbo_access_script', NS\PLUGIN_NAME_URL . 'dist/scripts/main.js', array( 'jquery' ), NS\PLUGIN_VERSION, true );
@@ -244,6 +251,13 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 		}
 	}
 
+	/**
+	 * Localize Script.
+	 *
+	 * Send required variables as javascript object.
+	 *
+	 * @return   void
+	 */
 	public function localizeScript() {
 
 		$protocol = isset( $_SERVER['HTTPS'] ) ? 'https://' : 'http://';
@@ -293,7 +307,7 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 		$this->schedule_object = new RetrieveSchedule( $atts );
 
 		// Call the API and if fails, return error message.
-		if ( false == $this->schedule_object->getMboResults() ) {
+		if ( false === $this->schedule_object->getMboResults() ) {
 			return esc_html( sprintf( '%1$s %2$s %3$s', '<div>', __( 'Error returning schedule from Mindbody in Access Display.', 'mz-mbo-access' ), '<div>' ) );
 		}
 
@@ -306,10 +320,11 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 
 		$template_loader->set_template_data( $this->template_data );
 
-		// Initialize the variables, so won't be un-set:
+		// Initialize the variables, so won't be un-set.
 		$horizontal_schedule = '';
 		$grid_schedule       = '';
-		if ( $this->display_type == 'grid' || $this->display_type == 'both' ) :
+		if ( 'grid' === $this->display_type ||
+				'both' === $this->display_type ) :
 			ob_start();
 			$grid_schedule = $this->schedule_object->sortClassesByTimeThenDate();
 			// Update the data array.
@@ -318,7 +333,8 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 			$result['grid'] = ob_get_clean();
 		endif;
 
-		if ( $this->display_type == 'horizontal' || $this->display_type == 'both' ) :
+		if ( 'horizontal' === $this->display_type ||
+				'both' === $this->display_type ) :
 			ob_start();
 			$horizontal_schedule = $this->schedule_object->sortClassesByDateThenTime();
 			// Update the data array.

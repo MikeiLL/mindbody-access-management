@@ -7,11 +7,11 @@ use MZoo\MzMboAccess\Core as Core;
 	
 		<form role="form" class="form-group" style="margin:1em 0;" data-async id="mzLogIn" data-target="#mzSignUpModal" method="POST">
 
-			<h3><?php esc_html_e( $data->atts['call_to_action'] ); ?></h3>
+			<h3><?php echo esc_html( $data->atts['call_to_action'] ); ?></h3>
 
-			<input type="hidden" name="nonce" value="<?php esc_html_e( $data->signup_nonce ); ?>"/>
+			<input type="hidden" name="nonce" value="<?php echo esc_html( $data->signup_nonce ); ?>"/>
 
-			<input type="hidden" name="siteID" value="<?php esc_html_e( $data->site_id ); ?>" />
+			<input type="hidden" name="siteID" value="<?php echo esc_html( $data->site_id ); ?>" />
 
 			<div class="row">
 
@@ -19,7 +19,7 @@ use MZoo\MzMboAccess\Core as Core;
 
 					<label for="username">Email</label>
 
-					<input type="email" size="10" class="form-control" id="email" name="email" placeholder="<?php esc_html_e( $data->email ); ?>" required>
+					<input type="email" size="10" class="form-control" id="email" name="email" placeholder="<?php echo esc_html( $data->email ); ?>" required>
 
 				</div>
 
@@ -31,7 +31,7 @@ use MZoo\MzMboAccess\Core as Core;
 
 					<label for="password">Password</label>
 
-					<input type="password" size="10" class="form-control" name="password" id="password" placeholder="<?php esc_html_e( $data->password ); ?>" required>
+					<input type="password" size="10" class="form-control" name="password" id="password" placeholder="<?php echo esc_html( $data->password ); ?>" required>
 
 				</div>
 
@@ -42,7 +42,7 @@ use MZoo\MzMboAccess\Core as Core;
 				<div class="col-12">
 
 					<button type="submit" class="btn btn-primary btn-xs">
-						<?php esc_html_e( $data->login ); ?>
+						<?php echo esc_html( $data->login ); ?>
 					</button>
 				
 					<?php if ( ! empty( $data->password_reset_request ) ) : ?>
@@ -51,10 +51,10 @@ use MZoo\MzMboAccess\Core as Core;
 						$reset_link .= '?&studioid=' . $data->site_id;
 						?>
 					<a style="text-decoration:none;" 
-						href="<?php esc_html_e( $reset_link ); ?>" 
+						href="<?php echo esc_html( $reset_link ); ?>" 
 						class="btn btn-primary btn-xs" 
 						target="_blank">
-						<?php esc_html_e( $data->password_reset_request ); ?>
+						<?php echo esc_html( $data->password_reset_request ); ?>
 					</a>
 
 					<?php endif; ?>
@@ -65,11 +65,11 @@ use MZoo\MzMboAccess\Core as Core;
 						$mbo_link  = 'https://clients.mindbodyonline.com/ws.asp';
 						$mbo_link .= '?&amp;sLoc=1&studioid=' . $data->site_id;
 						?>
-					<a href="<?php esc_html_e( $mbo_link ); ?>" 
+					<a href="<?php echo esc_html( $mbo_link ); ?>" 
 						class="btn btn-primary btn-xs" 
 						style="text-decoration:none;" 
 						id="MBOSite">
-						<?php esc_html_e( $data->manage_on_mbo ); ?>
+						<?php echo esc_html( $data->manage_on_mbo ); ?>
 					</a>
 					
 					<?php endif; ?>

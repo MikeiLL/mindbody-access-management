@@ -1,4 +1,11 @@
 <?php
+/**
+ * Access Container
+ *
+ * Template for access shortcode.
+ *
+ * @package MZMBOACCESS
+ */
 
 use MZoo\MzMboAccess\Core as Core;
 use MZoo\MzMindbody as MZ;
@@ -7,31 +14,31 @@ use MZoo\MzMindbody as MZ;
 <div id="mzAccessContainer">
 
 <?php
-if ( false == $data->logged_in ) :
+if ( false === $data->logged_in ) :
 	include 'login_form.php';
 else :
 	?>
-	<p class="mbo-user">Hi, <?php esc_html_e( $data->client_name ); ?>.</p>
+	<p class="mbo-user">Hi, <?php echo esc_html( $data->client_name ); ?>.</p>
 	<?php
 	if ( ( ! empty( $data->atts['level_1_redirect'] ) || ! empty( $data->atts['level_2_redirect'] ) ) ) {
 		// this is being used as a redirect login form so just echo content if it exists.
-		esc_html_e( $data->content );
+		echo esc_html( $data->content );
 
 		?>
 		<div class="row" style="margin:.5em;">
-			<span class="btn btn-primary btn-xs" id="MBOLogout" target="_blank"><?php esc_html_e( $data->logout ); ?></span>
+			<span class="btn btn-primary btn-xs" id="MBOLogout" target="_blank"><?php echo esc_html( $data->logout ); ?></span>
 		</div>
 		<?php
 	} else {
 		if ( ! $data->has_access ) {
 			?>
 			<div class="alert alert-warning">
-			<?php esc_html_e( '<strong>' . $data->atts['denied_message'] . '</strong>:' ); ?>
+			<?php echo esc_html( '<strong>' . $data->atts['denied_message'] . '</strong>:' ); ?>
 				<ul>
 			<?php
 			foreach ( $data->access_levels as $level ) {
 				foreach ( $data->required_services[ $level ] as $service ) {
-					  esc_html_e( '<li>' . $service . '</li>' );
+					echo esc_html( '<li>' . $service . '</li>' );
 				}
 			}
 			?>
@@ -39,7 +46,7 @@ else :
 			</div>
 			<?php
 		} else {
-			esc_html_e( $data->content );
+			echo esc_html( $data->content );
 		}
 		?>
 			<div class="row" style="margin:.5em;">
@@ -49,13 +56,13 @@ else :
 					$url  = 'https://clients.mindbodyonline.com';
 					$url .= '/ws.asp?&amp;sLoc=1&studioid=' . esc_html( $data->site_id );
 					?>
-					<a style="text-decoration:none;" href="<?php esc_html_e( $url ); ?>" 
+					<a style="text-decoration:none;" href="<?php echo esc_html( $url ); ?>" 
 						class="btn btn-primary btn-xs" id="MBOSite" target="_blank">
-						<?php esc_html_e( $data->manage_on_mbo ); ?>
+						<?php echo esc_html( $data->manage_on_mbo ); ?>
 					</a>
 		<?php endif; ?>
 					<span class="btn btn-primary btn-xs" id="MBOLogout" target="_blank">
-						<?php esc_html_e( $data->logout ); ?>
+						<?php echo esc_html( $data->logout ); ?>
 					</span>
 				</div>
 			</div>

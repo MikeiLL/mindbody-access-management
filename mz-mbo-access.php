@@ -172,7 +172,9 @@ function mbo_access_has_mindbody_api() {
 
 		deactivate_plugins( plugin_basename( __FILE__ ) );
 
+        // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		if ( isset( $_GET['activate'] ) ) {
+            // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			unset( $_GET['activate'] );
 		}
 	}
