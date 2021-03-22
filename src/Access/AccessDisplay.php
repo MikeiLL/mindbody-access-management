@@ -195,16 +195,19 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 
 		$logged_client = NS\MBO_Access()->getSession()->get( 'MBO_Client' );
 
-		if ( empty( $this->atts['level_1_redirect'] ) || empty( $this->atts['level_2_redirect'] ) || empty( $this->atts['denied_redirect'] ) ) {
+		if ( empty( $this->atts['level_1_redirect'] ) || 
+		        empty( $this->atts['level_2_redirect'] ) || 
+		        empty( $this->atts['denied_redirect'] ) ) {
 			// If this is a content page check access permissions now.
 			// First we will see if client access is already determined in client_session.
-			if ( ! empty( $logged_client->access_level ) && in_array( $logged_client->access_level, $this->atts['access_levels'] ) ) {
+			if ( ! empty( $logged_client->access_level ) && 
+			    in_array( $logged_client->access_level, $this->atts['access_levels'], true ) ) {
 				$this->template_data['has_access'] = true;
 				$this->has_access                  = true;
 			} else {
 				// Need to ping the api.
 				$client_access_level = $access_utilities->check_access_permissions( $logged_client->Id );
-				if ( in_array( $client_access_level, $this->atts['access_levels'] ) ) {
+				if ( in_array( $client_access_level, $this->atts['access_levels'], true ) ) {
 					$this->template_data['has_access'] = true;
 					$this->has_access                  = true;
 				}

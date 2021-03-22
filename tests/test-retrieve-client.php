@@ -25,9 +25,9 @@ class Tests_RetrieveClient extends MZMBOAccess_WPUnitTestCase {
 
 		$required_fields = $client_object->get_signup_form_fields();
 
-		$this->assertTrue( in_array( 'Email', $required_fields ) );
-		$this->assertTrue( in_array( 'FirstName', $required_fields ) );
-		$this->assertTrue( in_array( 'LastName', $required_fields ) );
+		$this->assertTrue( in_array( 'Email', $required_fields, true ) );
+		$this->assertTrue( in_array( 'FirstName', $required_fields, true ) );
+		$this->assertTrue( in_array( 'LastName', $required_fields, true ) );
 	}
 
 	public function test_add_client() {
