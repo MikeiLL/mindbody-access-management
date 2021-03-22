@@ -661,8 +661,8 @@ class RetrieveClient extends Interfaces\Retrieve {
 	 * Check Client Logged In
 	 *
 	 * Is there a session containing the MBO_GUID of current user
-     * The $client_info is an object, as is mbo_result. Not an
-     * array as is returned from MBO API.
+	 * The $client_info is an object, as is mbo_result. Not an
+	 * array as is returned from MBO API.
 	 *
 	 * @since 1.0.0
 	 *
@@ -675,7 +675,7 @@ class RetrieveClient extends Interfaces\Retrieve {
 		if ( empty( $client_info ) ) {
 			return false;
 		}
-        // Just returning the (bool) result fails.
+		// Just returning the (bool) result fails.
 		return ( 1 == (bool) $client_info->mbo_result ) ? 1 : 0;
 	}
 

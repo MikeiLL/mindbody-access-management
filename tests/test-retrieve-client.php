@@ -3,273 +3,266 @@
 require_once 'MZMBOAccess_WPUnitTestCase.php';
 require_once 'MBO_Access_Test_Options.php';
 
-class Tests_RetrieveClient extends MZMBOAccess_WPUnitTestCase
-{
+class Tests_RetrieveClient extends MZMBOAccess_WPUnitTestCase {
 
 
-    public function tearDown()
-    {
-        parent::tearDown();
-    }
 
-    public function test_get_signup_form_fields()
-    {
+	public function tearDown() {
+		parent::tearDown();
+	}
 
-        parent::setUp();
+	public function test_get_signup_form_fields() {
 
-        $this->assertTrue(class_exists('MZoo\MzMboAccess\Client\RetrieveClient'));
+		parent::setUp();
 
-        $client_object = new MZoo\MzMboAccess\Client\RetrieveClient();
+		$this->assertTrue( class_exists( 'MZoo\MzMboAccess\Client\RetrieveClient' ) );
 
-        $response = $client_object->getMboResults();
+		$client_object = new MZoo\MzMboAccess\Client\RetrieveClient();
 
-        $this->assertTrue($response);
+		$response = $client_object->getMboResults();
 
-        $required_fields = $client_object->get_signup_form_fields();
+		$this->assertTrue( $response );
 
-        $this->assertTrue(in_array('Email', $required_fields));
-        $this->assertTrue(in_array('FirstName', $required_fields));
-        $this->assertTrue(in_array('LastName', $required_fields));
-    }
+		$required_fields = $client_object->get_signup_form_fields();
 
-    public function test_add_client()
-    {
-        // This API let's me create all the duplicate contacts I want with same name, email.
-        // So only do this if we haven't already
-        // Check https://developers.mindbodyonline.com/PublicDocumentation/V6#add-a-new-client
-        // For recommended workflow as new feature being added May 11 2020
-        if (! empty(MBO_Access_Test_Options::$_CLIENTPASSWORD)) {
-            return false;
-        }
-
-        parent::setUp();
-
-        $client_object = new MZoo\MzMboAccess\Client\RetrieveClient();
-
-        $required_fields = $client_object->get_signup_form_fields();
+		$this->assertTrue( in_array( 'Email', $required_fields ) );
+		$this->assertTrue( in_array( 'FirstName', $required_fields ) );
+		$this->assertTrue( in_array( 'LastName', $required_fields ) );
+	}
 
-        $user_data = array();
+	public function test_add_client() {
+		// This API let's me create all the duplicate contacts I want with same name, email.
+		// So only do this if we haven't already
+		// Check https://developers.mindbodyonline.com/PublicDocumentation/V6#add-a-new-client
+		// For recommended workflow as new feature being added May 11 2020
+		if ( ! empty( MBO_Access_Test_Options::$_CLIENTPASSWORD ) ) {
+			return false;
+		}
 
-        // Merge testa data with random data for additional required fields
+		parent::setUp();
 
-        $length = 7; // of random string
-
-        foreach ($required_fields as $k => $v) {
-            switch ($v) {
-                case 'FirstName':
-                    $user_data['FirstName'] = MBO_Access_Test_Options::$_FIRSTNAME;
-                    break;
-                case 'LastName':
-                    $user_data['LastName'] = MBO_Access_Test_Options::$_LASTNAME;
-                    break;
-                case 'Email':
-                    $user_data['Email'] = MBO_Access_Test_Options::$_CLIENTEMAIL;
-                    break;
-                case 'State':
-                    $user_data['State'] = MBO_Access_Test_Options::$_CLIENTSTATE;
-                    break;
-                case 'PostalCode':
-                    $user_data['PostalCode'] = '32505';
-                    break;
-                case 'MobilePhone':
-                    $user_data['MobilePhone'] = '8504333202';
-                    break;
-                case 'BirthDate':
-                    $user_data['BirthDate'] = MBO_Access_Test_Options::$_CLIENTBIRTHDATE;
-                    break;
-                default:
-                    $user_data[ $v ] = $v . '_' . substr(str_shuffle(str_repeat($x = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil($length / strlen($x)))), 1, $length);
-                    break;
-            }
-        }
+		$client_object = new MZoo\MzMboAccess\Client\RetrieveClient();
 
-        $new_client = $client_object->add_client($user_data);
+		$required_fields = $client_object->get_signup_form_fields();
 
-        if (! empty($new_client['Client']['Id'])) {
-            MBO_Access_Test_Options::$_CLIENTID = $new_client['Client']['Id']; // 100015679
-        }
+		$user_data = array();
 
-        // TODO More validation tests for various fields
+		// Merge testa data with random data for additional required fields
 
-        $this->assertTrue(is_array($new_client));
+		$length = 7; // of random string
 
-        $this->assertTrue(is_string(MBO_Access_Test_Options::$_CLIENTID));
-        $this->assertTrue($new_client['Client']['Email'] == MBO_Access_Test_Options::$_CLIENTEMAIL);
-    }
+		foreach ( $required_fields as $k => $v ) {
+			switch ( $v ) {
+				case 'FirstName':
+					$user_data['FirstName'] = MBO_Access_Test_Options::$_FIRSTNAME;
+					break;
+				case 'LastName':
+					$user_data['LastName'] = MBO_Access_Test_Options::$_LASTNAME;
+					break;
+				case 'Email':
+					$user_data['Email'] = MBO_Access_Test_Options::$_CLIENTEMAIL;
+					break;
+				case 'State':
+					$user_data['State'] = MBO_Access_Test_Options::$_CLIENTSTATE;
+					break;
+				case 'PostalCode':
+					$user_data['PostalCode'] = '32505';
+					break;
+				case 'MobilePhone':
+					$user_data['MobilePhone'] = '8504333202';
+					break;
+				case 'BirthDate':
+					$user_data['BirthDate'] = MBO_Access_Test_Options::$_CLIENTBIRTHDATE;
+					break;
+				default:
+					$user_data[ $v ] = $v . '_' . substr( str_shuffle( str_repeat( $x = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil( $length / strlen( $x ) ) ) ), 1, $length );
+					break;
+			}
+		}
 
-    public function test_password_reset_email_request()
-    {
+		$new_client = $client_object->add_client( $user_data );
 
-        parent::setUp();
+		if ( ! empty( $new_client['Client']['Id'] ) ) {
+			MBO_Access_Test_Options::$_CLIENTID = $new_client['Client']['Id']; // 100015679
+		}
 
-        $client_object = new MZoo\MzMboAccess\Client\RetrieveClient();
+		// TODO More validation tests for various fields
 
-        $user_data = array(
-            'UserEmail'     => MBO_Access_Test_Options::$_CLIENTEMAIL,
-            'UserFirstName' => MBO_Access_Test_Options::$_FIRSTNAME,
-            '1UserLastName' => MBO_Access_Test_Options::$_LASTNAME,
-        );
+		$this->assertTrue( is_array( $new_client ) );
 
-        $client_reset_request = $client_object->password_reset_email_request($user_data);
+		$this->assertTrue( is_string( MBO_Access_Test_Options::$_CLIENTID ) );
+		$this->assertTrue( $new_client['Client']['Email'] == MBO_Access_Test_Options::$_CLIENTEMAIL );
+	}
 
-        $this->assertTrue($client_reset_request['Error']['Code'] == 'MissingRequiredFields');
+	public function test_password_reset_email_request() {
 
-        if (empty(MBO_Access_Test_Options::$_CLIENTPASSWORD)) {
-            $user_data            = array(
-                'UserEmail'     => MBO_Access_Test_Options::$_CLIENTEMAIL,
-                'UserFirstName' => MBO_Access_Test_Options::$_FIRSTNAME,
-                'UserLastName'  => MBO_Access_Test_Options::$_LASTNAME,
-            );
-            $client_reset_request = $client_object->password_reset_email_request($user_data);
+		parent::setUp();
 
-            // We will use this method to not create a new user if one already
-            // exists with this email and name
-            if (empty($client_reset_request)) {
-                return false;
-            }
+		$client_object = new MZoo\MzMboAccess\Client\RetrieveClient();
 
-            $this->assertTrue(empty($client_reset_request));
-        }
-    }
+		$user_data = array(
+			'UserEmail'     => MBO_Access_Test_Options::$_CLIENTEMAIL,
+			'UserFirstName' => MBO_Access_Test_Options::$_FIRSTNAME,
+			'1UserLastName' => MBO_Access_Test_Options::$_LASTNAME,
+		);
 
-    /**
-     * @runInSeparateProcess
-     * @preserveGlobalState  disabled
-     * // prevent headers already sent error
-     * // see: https://phpunit.de/manual/6.5/en/appendixes.annotations.html#appendixes.annotations.runInSeparateProcess
-     */
-    public function test_log_client_in()
-    {
+		$client_reset_request = $client_object->password_reset_email_request( $user_data );
 
-        if (empty(MBO_Access_Test_Options::$_CLIENTPASSWORD)) {
-            return; // can't login yet.
-        }
+		$this->assertTrue( $client_reset_request['Error']['Code'] == 'MissingRequiredFields' );
 
-        parent::setUp();
+		if ( empty( MBO_Access_Test_Options::$_CLIENTPASSWORD ) ) {
+			$user_data            = array(
+				'UserEmail'     => MBO_Access_Test_Options::$_CLIENTEMAIL,
+				'UserFirstName' => MBO_Access_Test_Options::$_FIRSTNAME,
+				'UserLastName'  => MBO_Access_Test_Options::$_LASTNAME,
+			);
+			$client_reset_request = $client_object->password_reset_email_request( $user_data );
 
-        $client_object = new MZoo\MzMboAccess\Client\RetrieveClient();
+			// We will use this method to not create a new user if one already
+			// exists with this email and name
+			if ( empty( $client_reset_request ) ) {
+				return false;
+			}
 
-        $credentials = array(
-            'Username' => MBO_Access_Test_Options::$_CLIENTEMAIL,
-            'Password' => MBO_Access_Test_Options::$_CLIENTPASSWORD,
-        );
+			$this->assertTrue( empty( $client_reset_request ) );
+		}
+	}
 
-        $validation_result = $client_object->validate_client($credentials);
+	/**
+	 * @runInSeparateProcess
+	 * @preserveGlobalState  disabled
+	 * // prevent headers already sent error
+	 * // see: https://phpunit.de/manual/6.5/en/appendixes.annotations.html#appendixes.annotations.runInSeparateProcess
+	 */
+	public function test_log_client_in() {
 
-        $this->assertTrue(! empty($validation_result['ValidateLoginResult']['GUID']));
+		if ( empty( MBO_Access_Test_Options::$_CLIENTPASSWORD ) ) {
+			return; // can't login yet.
+		}
 
-        $session_result = $client_object->create_client_session($validation_result['ValidateLoginResult']['Client']);
+		parent::setUp();
 
-        $this->assertTrue((bool) $session_result);
+		$client_object = new MZoo\MzMboAccess\Client\RetrieveClient();
 
-        $this->assertTrue((bool) $session_result->mbo_result->ID);
+		$credentials = array(
+			'Username' => MBO_Access_Test_Options::$_CLIENTEMAIL,
+			'Password' => MBO_Access_Test_Options::$_CLIENTPASSWORD,
+		);
 
-        $is_or_is_not = $client_object->check_client_logged();
+		$validation_result = $client_object->validate_client( $credentials );
 
-        $this->assertTrue(true == $is_or_is_not);
+		$this->assertTrue( ! empty( $validation_result['ValidateLoginResult']['GUID'] ) );
 
-        $is_or_is_not = $client_object->client_log_out();
+		$session_result = $client_object->create_client_session( $validation_result['ValidateLoginResult']['Client'] );
 
-        $is_or_is_not = $client_object->check_client_logged();
+		$this->assertTrue( (bool) $session_result );
 
-        $this->assertTrue(false == $is_or_is_not);
-    }
+		$this->assertTrue( (bool) $session_result->mbo_result->ID );
 
-    public function test_validate_client_pass()
-    {
+		$is_or_is_not = $client_object->check_client_logged();
 
-        parent::setUp();
+		$this->assertTrue( true == $is_or_is_not );
 
-        $client_object = new MZoo\MzMboAccess\Client\RetrieveClient();
+		$is_or_is_not = $client_object->client_log_out();
 
-        $good_password_strings = array(
-            'Ad12DeDe',
-            'Ad12#$6^6',
-            'Zs3Dddddd198',
-            'Q6Kdddojos',
-            '15Gkk0II',
-            'lkjasdf8lj',
-            'kNKnkflkj3@kk',
-        );
+		$is_or_is_not = $client_object->check_client_logged();
 
-        $bad_password_strings = array(
-            'Short1',
-            'aVeryLongPasswordHereSee1',
-            "'This!onenonums",
-            "'this!onenocaps",
-            '109893',
-        );
+		$this->assertTrue( false == $is_or_is_not );
+	}
 
-        foreach ($good_password_strings as $pass) {
-            $this->assertTrue(true == $client_object->verify_mbo_pass($pass));
-        }
+	public function test_validate_client_pass() {
 
-        foreach ($bad_password_strings as $pass) {
-            $this->assertTrue(false == $client_object->verify_mbo_pass($pass));
-        }
-    }
+		parent::setUp();
 
-    public function test_get_client_details()
-    {
+		$client_object = new MZoo\MzMboAccess\Client\RetrieveClient();
 
-        if (empty(MBO_Access_Test_Options::$_CLIENTPASSWORD)) {
-            return; // can't login yet.
-        }
+		$good_password_strings = array(
+			'Ad12DeDe',
+			'Ad12#$6^6',
+			'Zs3Dddddd198',
+			'Q6Kdddojos',
+			'15Gkk0II',
+			'lkjasdf8lj',
+			'kNKnkflkj3@kk',
+		);
 
-        parent::setUp();
+		$bad_password_strings = array(
+			'Short1',
+			'aVeryLongPasswordHereSee1',
+			"'This!onenonums",
+			"'this!onenocaps",
+			'109893',
+		);
 
-        $client_object = new MZoo\MzMboAccess\Client\RetrieveClient();
+		foreach ( $good_password_strings as $pass ) {
+			$this->assertTrue( true == $client_object->verify_mbo_pass( $pass ) );
+		}
 
-        $bad_credentials = array(
-            'Username' => MBO_Access_Test_Options::$_CLIENTEMAIL,
-            'Password' => 'abitoks',
-        );
+		foreach ( $bad_password_strings as $pass ) {
+			$this->assertTrue( false == $client_object->verify_mbo_pass( $pass ) );
+		}
+	}
 
-        $failed_validation_result = $client_object->validate_client($bad_credentials);
+	public function test_get_client_details() {
 
-        $this->assertTrue($failed_validation_result['ValidateLoginResult']['Status'] == 'InvalidParameters');
+		if ( empty( MBO_Access_Test_Options::$_CLIENTPASSWORD ) ) {
+			return; // can't login yet.
+		}
 
-        $this->assertTrue($failed_validation_result['ValidateLoginResult']['ErrorCode'] == 315);
+		parent::setUp();
 
-        $credentials = array(
-            'Username' => MBO_Access_Test_Options::$_CLIENTEMAIL,
-            'Password' => MBO_Access_Test_Options::$_CLIENTPASSWORD,
-        );
+		$client_object = new MZoo\MzMboAccess\Client\RetrieveClient();
 
-        $validation_result = $client_object->validate_client($credentials);
+		$bad_credentials = array(
+			'Username' => MBO_Access_Test_Options::$_CLIENTEMAIL,
+			'Password' => 'abitoks',
+		);
 
-        $this->assertTrue(! empty($validation_result['ValidateLoginResult']['GUID']));
+		$failed_validation_result = $client_object->validate_client( $bad_credentials );
 
-        $session_result = $client_object->create_client_session($validation_result['ValidateLoginResult']['Client']);
+		$this->assertTrue( $failed_validation_result['ValidateLoginResult']['Status'] == 'InvalidParameters' );
 
-        $client_id = $validation_result['ValidateLoginResult']['Client']['ID'];
+		$this->assertTrue( $failed_validation_result['ValidateLoginResult']['ErrorCode'] == 315 );
 
-        $client_details = $client_object->get_client_details_from_session($client_id);
+		$credentials = array(
+			'Username' => MBO_Access_Test_Options::$_CLIENTEMAIL,
+			'Password' => MBO_Access_Test_Options::$_CLIENTPASSWORD,
+		);
 
-        $client_active_memberships = $client_object->get_client_active_memberships($client_id);
+		$validation_result = $client_object->validate_client( $credentials );
 
-        $get_client_account_balance = $client_object->get_client_account_balance($client_id);
+		$this->assertTrue( ! empty( $validation_result['ValidateLoginResult']['GUID'] ) );
 
-        $get_client_contracts = $client_object->get_client_contracts($client_id);
+		$session_result = $client_object->create_client_session( $validation_result['ValidateLoginResult']['Client'] );
 
-        $get_client_services = $client_object->get_client_services($client_id);
+		$client_id = $validation_result['ValidateLoginResult']['Client']['ID'];
 
-        $get_client_purchases = $client_object->get_client_purchases($client_id);
-        foreach (
-            array(
-            'client_active_memberships: ' => $client_active_memberships,
-            'get_client_contracts: '      => $get_client_contracts,
-            'get_client_purchases: '      => $get_client_purchases,
-            'get_client_services: '       => $get_client_services,
-            ) as $k => $v
-        ) {
-            // print_r($k);
-            // print_r($v);
-        }
-        $this->assertTrue(is_array($client_active_memberships));
-        $this->assertTrue(isset($get_client_account_balance));
-        $this->assertTrue(is_array($get_client_contracts));
-        $this->assertTrue(is_array($get_client_services));
-        $this->assertTrue(is_array($get_client_purchases));
-    }
+		$client_details = $client_object->get_client_details_from_session( $client_id );
+
+		$client_active_memberships = $client_object->get_client_active_memberships( $client_id );
+
+		$get_client_account_balance = $client_object->get_client_account_balance( $client_id );
+
+		$get_client_contracts = $client_object->get_client_contracts( $client_id );
+
+		$get_client_services = $client_object->get_client_services( $client_id );
+
+		$get_client_purchases = $client_object->get_client_purchases( $client_id );
+		foreach (
+			array(
+				'client_active_memberships: ' => $client_active_memberships,
+				'get_client_contracts: '      => $get_client_contracts,
+				'get_client_purchases: '      => $get_client_purchases,
+				'get_client_services: '       => $get_client_services,
+			) as $k => $v
+		) {
+			// print_r($k);
+			// print_r($v);
+		}
+		$this->assertTrue( is_array( $client_active_memberships ) );
+		$this->assertTrue( isset( $get_client_account_balance ) );
+		$this->assertTrue( is_array( $get_client_contracts ) );
+		$this->assertTrue( is_array( $get_client_services ) );
+		$this->assertTrue( is_array( $get_client_purchases ) );
+	}
 }
