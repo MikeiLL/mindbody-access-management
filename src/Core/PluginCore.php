@@ -155,7 +155,6 @@ class PluginCore {
 		return $this->session;
 	}
 
-
 	/**
 	 * Loads the following required dependencies for this plugin.
 	 *
@@ -192,7 +191,6 @@ class PluginCore {
 	 * @access private
 	 */
 	private function define_admin_hooks() {
-
 		/*
 		* Additional Hooks go here
 		*
@@ -214,7 +212,7 @@ class PluginCore {
 	 * @access private
 	 */
 	private function define_public_hooks() {
-		$access_portal  = new Access\AccessPortal();
+		$access_portal = new Access\AccessPortal();
 		$client_portal = new Client\ClientPortal();
 
 		// Start Ajax Access Management.
@@ -316,7 +314,7 @@ class PluginCore {
 	 * @access private
 	 */
 	private function register_shortcodes() {
-		$AccessDisplay = new Access\AccessDisplay();
-		$AccessDisplay->register( 'mbo-client-access' );
+		$access_display = new Access\AccessDisplay();
+		$access_display->register( 'mbo-client-access' );
 	}
 }
