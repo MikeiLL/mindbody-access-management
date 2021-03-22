@@ -47,7 +47,7 @@ else :
 		<?php if ( ! empty( $data->manage_on_mbo ) ) : ?>
 					<?php
 					$url  = 'https://clients.mindbodyonline.com';
-					$url .= '/ws.asp?&amp;sLoc=1&studioid=' . esc_html( $data->siteID );
+					$url .= '/ws.asp?&amp;sLoc=1&studioid=' . esc_html( $data->site_id );
 					?>
 					<a style="text-decoration:none;" href="<?php esc_html_e( $url ); ?>" 
 						class="btn btn-primary btn-xs" id="MBOSite" target="_blank">

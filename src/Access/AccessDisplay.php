@@ -143,7 +143,7 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 			$atts
 		);
 
-		$this->siteID = ( isset( $atts['siteid'] ) ) ? $atts['siteid'] : MZ\MZMBO()::$basic_options['mz_mindbody_siteID'];
+		$this->site_id = ( isset( $atts['siteid'] ) ) ? $atts['siteid'] : MZ\MZMBO()::$basic_options['mz_mindbody_siteID'];
 
 		// TODO can we avoid doing this here AND in access utilities?
 		$mz_mbo_access_options  = get_option( 'mz_mbo_access' );
@@ -256,7 +256,7 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 			'logout_nonce'       => wp_create_nonce( 'mz_client_log_out' ),
 			'atts'               => $this->atts,
 			'restricted_content' => $this->restricted_content,
-			'siteID'             => $this->siteID,
+			'siteID'             => $this->site_id,
 			'logged_in'          => $this->logged_in,
 			'has_access'         => $this->has_access,
 			'denied_message'     => $this->denied_message,
