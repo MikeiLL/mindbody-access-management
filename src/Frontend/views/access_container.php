@@ -66,10 +66,10 @@ else :
 					</span>
 				</div>
 			</div>
-	<?php } // End not a redirect login form ?>
+	<?php } // End not a redirect login form. ?>
 <?php endif; ?>
 
 </div>
 <div style="display:none">
-<?php require 'login_form.php'; // for use in logout routine ?>
+<?php require 'login_form.php'; // for use in logout routine. ?>
 </div>
