@@ -1,12 +1,10 @@
 <?php
 /**
  * The core plugin class.
- * Defines internationalization, admin-specific hooks, and public-facing site hooks.
  *
- * @link  http://mzoo.org
- * @since 1.0.0
+ * Define internationalization, admin-specific hooks,
+ * and public-facing site hooks.
  *
- * @author Mike iLL/mZoo.org
  * @package MZMBOACCESS
  */
 
@@ -20,7 +18,9 @@ use MZoo\MzMboAccess\Session as Session;
 
 /**
  * The core plugin class.
- * Defines internationalization, admin-specific hooks, and public-facing site hooks.
+ *
+ * Define internationalization, admin-specific hooks,
+ * and public-facing site hooks.
  *
  * @link  http://mzoo.org
  * @since 1.0.0
@@ -29,9 +29,9 @@ use MZoo\MzMboAccess\Session as Session;
  */
 class PluginCore {
 
-
-
 	/**
+	 * Instance
+	 *
 	 * @var   MzMindbodyApi The one true MzMindbodyApi
 	 * @since 1.0.1
 	 */
@@ -102,8 +102,10 @@ class PluginCore {
 	public static $start_of_week;
 
 	/**
-	 * @var    MzAccessSession
-	 * @accesZ private
+	 * Session object
+	 *
+	 * @var    $session MzAccessSession
+	 * @access private
 	 */
 	private $session;
 
@@ -119,7 +121,7 @@ class PluginCore {
 
 		$this->load_dependencies();
 		$this->set_locale();
-		// $this->define_admin_hooks();
+		// Could also define_admin_hooks here.
 		$this->define_public_hooks();
 		$this->register_shortcodes();
 		$this->add_settings_page();
@@ -133,7 +135,7 @@ class PluginCore {
 	 * @since 1.0.0
 	 */
 	public function __clone() {
-		_doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; huh?', 'mz-mbo-access' ), '2.1' );
+		_doing_it_wrong( __FUNCTION__, esc_html__( 'Cheatin&#8217; huh?', 'mz-mbo-access' ), '2.1' );
 	}
 
 	/**
@@ -142,14 +144,14 @@ class PluginCore {
 	 * @since 1.0.0
 	 */
 	public function __wakeup() {
-		_doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; huh?', 'mz-mbo-access' ), '2.1' );
+		_doing_it_wrong( __FUNCTION__, esc_html__( 'Cheatin&#8217; huh?', 'mz-mbo-access' ), '2.1' );
 	}
 
 
 	/**
 	 * Return our session instance
 	 */
-	public function getSession() {
+	public function get_session() {
 		return $this->session;
 	}
 
@@ -212,15 +214,15 @@ class PluginCore {
 	 * @access private
 	 */
 	private function define_public_hooks() {
-		$AccessPortal  = new Access\AccessPortal();
+		$access_portal  = new Access\AccessPortal();
 		$client_portal = new Client\ClientPortal();
 
 		// Start Ajax Access Management.
-		$this->loader->add_action( 'wp_ajax_nopriv_ajax_login_check_access_permissions', $AccessPortal, 'ajax_login_check_access_permissions' );
-		$this->loader->add_action( 'wp_ajax_ajax_login_check_access_permissions', $AccessPortal, 'ajax_login_check_access_permissions' );
+		$this->loader->add_action( 'wp_ajax_nopriv_ajax_login_check_access_permissions', $access_portal, 'ajax_login_check_access_permissions' );
+		$this->loader->add_action( 'wp_ajax_ajax_login_check_access_permissions', $access_portal, 'ajax_login_check_access_permissions' );
 
-		$this->loader->add_action( 'wp_ajax_nopriv_ajax_check_access_permissions', $AccessPortal, 'ajax_check_access_permissions' );
-		$this->loader->add_action( 'wp_ajax_ajax_check_access_permissions', $AccessPortal, 'ajax_check_access_permissions' );
+		$this->loader->add_action( 'wp_ajax_nopriv_ajax_check_access_permissions', $access_portal, 'ajax_check_access_permissions' );
+		$this->loader->add_action( 'wp_ajax_ajax_check_access_permissions', $access_portal, 'ajax_check_access_permissions' );
 
 		// Start Ajax Client Check Logged.
 		$this->loader->add_action( 'wp_ajax_nopriv_ajax_register_for_class', $client_portal, 'ajax_register_for_class' );

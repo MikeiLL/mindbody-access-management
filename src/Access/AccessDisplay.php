@@ -193,7 +193,7 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 
 		$access_utilities = new AccessUtilities();
 
-		$logged_client = NS\MBO_Access()->getSession()->get( 'MBO_Client' );
+		$logged_client = NS\MBO_Access()->get_session()->get( 'MBO_Client' );
 
 		if ( empty( $this->atts['level_1_redirect'] ) ||
 				empty( $this->atts['level_2_redirect'] ) ||
