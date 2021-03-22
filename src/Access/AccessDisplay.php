@@ -195,13 +195,13 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 
 		$logged_client = NS\MBO_Access()->getSession()->get( 'MBO_Client' );
 
-		if ( empty( $this->atts['level_1_redirect'] ) || 
-		        empty( $this->atts['level_2_redirect'] ) || 
-		        empty( $this->atts['denied_redirect'] ) ) {
+		if ( empty( $this->atts['level_1_redirect'] ) ||
+				empty( $this->atts['level_2_redirect'] ) ||
+				empty( $this->atts['denied_redirect'] ) ) {
 			// If this is a content page check access permissions now.
 			// First we will see if client access is already determined in client_session.
-			if ( ! empty( $logged_client->access_level ) && 
-			    in_array( $logged_client->access_level, $this->atts['access_levels'], true ) ) {
+			if ( ! empty( $logged_client->access_level ) &&
+				in_array( $logged_client->access_level, $this->atts['access_levels'], true ) ) {
 				$this->template_data['has_access'] = true;
 				$this->has_access                  = true;
 			} else {
@@ -227,16 +227,6 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 		self::addScript();
 
 		return ob_get_clean();
-	}
-
-	/*
-	* What is this?
-	*/
-	private function login_form() {
-
-		$template_loader = new Core\TemplateLoader();
-
-		$template_loader->set_template_data( $this->template_data );
 	}
 
 	public function addScript() {
