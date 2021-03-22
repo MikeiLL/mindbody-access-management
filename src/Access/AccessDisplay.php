@@ -193,7 +193,7 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 			'password_reset_request' => $this->atts['password_reset_request'],
 		);
 
-		$AccessUtilities = new AccessUtilities();
+		$access_utilities = new AccessUtilities();
 
 		$logged_client = NS\MBO_Access()->getSession()->get( 'MBO_Client' );
 
@@ -205,7 +205,7 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 				$this->has_access                  = true;
 			} else {
 				// Need to ping the api.
-				$client_access_level = $AccessUtilities->check_access_permissions( $logged_client->Id );
+				$client_access_level = $access_utilities->check_access_permissions( $logged_client->Id );
 				if ( in_array( $client_access_level, $this->atts['access_levels'] ) ) {
 					$this->template_data['has_access'] = true;
 					$this->has_access                  = true;
