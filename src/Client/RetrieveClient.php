@@ -31,16 +31,6 @@ class RetrieveClient extends Interfaces\Retrieve {
 	private $_mb;
 
 	/**
-	 * Client ID
-	 *
-	 * The MBO ID of the Current User/Client
-	 *
-	 * @access private
-	 * @var    int $client_id from MBO.
-	 */
-	private $client_id;
-
-	/**
 	 * MBO Client
 	 *
 	 * GetClient result from MBO

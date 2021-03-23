@@ -40,16 +40,6 @@ class ClientPortal extends RetrieveClient {
 	private $template_data;
 
 	/**
-	 * Client ID
-	 *
-	 * The MBO ID of the Current User/Client
-	 *
-	 * @access private
-	 * @var    int $client_id
-	 */
-	private $client_id;
-
-	/**
 	 * Format for date display, specific to MBO API Plugin.
 	 *
 	 * @since  1.0.1
