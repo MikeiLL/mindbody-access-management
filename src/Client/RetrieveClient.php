@@ -28,7 +28,7 @@ class RetrieveClient extends Interfaces\Retrieve {
 	 * @access private
 	 * @var    object $mb with interface methods.
 	 */
-	private $mb;
+	private $_mb;
 
 	/**
 	 * Client ID
@@ -215,7 +215,7 @@ class RetrieveClient extends Interfaces\Retrieve {
 		// Create the MBO Object using API VERSION 5!
 		$this->getMboResults( 5 );
 
-		$result = $this->mb->ValidateLogin(
+		$result = $this->_mb->ValidateLogin(
 			array(
 				'Username' => $validate_login_result['Username'],
 				'Password' => $validate_login_result['Password'],
@@ -239,7 +239,7 @@ class RetrieveClient extends Interfaces\Retrieve {
 
 		$this->getMboResults();
 
-		$result = $this->mb->GetClients(
+		$result = $this->_mb->GetClients(
 			array(
 				'ClientIds' => array( $client_id ),
 			)
@@ -339,7 +339,7 @@ class RetrieveClient extends Interfaces\Retrieve {
 		// Crate the MBO Object.
 		$this->getMboResults();
 
-		$required_fields = $this->mb->GetRequiredClientFields();
+		$required_fields = $this->_mb->GetRequiredClientFields();
 
 		$default_required_fields = array(
 			'Email',
@@ -366,7 +366,7 @@ class RetrieveClient extends Interfaces\Retrieve {
 		// Crate the MBO Object.
 		$this->getMboResults();
 
-		$signup_result = $this->mb->AddClient( $client_fields );
+		$signup_result = $this->_mb->AddClient( $client_fields );
 
 		return $signup_result;
 	}
@@ -473,7 +473,7 @@ class RetrieveClient extends Interfaces\Retrieve {
 		// Create the MBO Object.
 		$this->getMboResults();
 
-		$result = $this->mb->GetActiveClientMemberships(
+		$result = $this->_mb->GetActiveClientMemberships(
 			array( 'clientId' => $client_id )
 		); // Think this is not UniqueID.
 
@@ -494,7 +494,7 @@ class RetrieveClient extends Interfaces\Retrieve {
 	public function get_client_account_balance( $client_id ) {
 
 		// Can accept a list of client id strings.
-		$result = $this->mb->GetClientAccountBalances(
+		$result = $this->_mb->GetClientAccountBalances(
 			array( 'clientIds' => $client_id )
 		); // Think this is not UniqueID.
 
@@ -549,7 +549,7 @@ class RetrieveClient extends Interfaces\Retrieve {
 		// Create the MBO Object.
 		$this->getMboResults();
 
-		$result = $this->mb->GetClientContracts(
+		$result = $this->_mb->GetClientContracts(
 			array( 'clientId' => $client_id )
 		);
 
@@ -608,7 +608,7 @@ class RetrieveClient extends Interfaces\Retrieve {
 		// Create the MBO Object.
 		$this->getMboResults();
 
-		$result = $this->mb->GetClientPurchases(
+		$result = $this->_mb->GetClientPurchases(
 			array( 'ClientId' => $client_id )
 		); // NOT "UniqueID".
 
@@ -628,7 +628,7 @@ class RetrieveClient extends Interfaces\Retrieve {
 		// Create the MBO Object.
 		$this->getMboResults();
 
-		$result = $this->mb->GetClientServices(
+		$result = $this->_mb->GetClientServices(
 			array( 'clientId' => $client_id )
 		);
 
@@ -651,7 +651,7 @@ class RetrieveClient extends Interfaces\Retrieve {
 		// Crate the MBO Object.
 		$this->getMboResults();
 
-		$result = $this->mb->SendPasswordResetEmail( $client_id );
+		$result = $this->_mb->SendPasswordResetEmail( $client_id );
 
 		return $result;
 	}

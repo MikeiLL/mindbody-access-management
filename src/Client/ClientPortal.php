@@ -29,7 +29,7 @@ class ClientPortal extends RetrieveClient {
 	 * @access private
 	 * @var    class instance $mb
 	 */
-	private $mb;
+	private $_mb;
 
 	/**
 	 * Template Date for sending to template partials
