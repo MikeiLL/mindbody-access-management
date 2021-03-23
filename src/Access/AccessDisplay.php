@@ -348,7 +348,7 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 		if ( ! empty( $_SERVER['HTTP_X_REQUESTED_WITH'] ) &&
 			'xmlhttprequest' === strtolower( $_SERVER['HTTP_X_REQUESTED_WITH'] ) ) {
 			$result = wp_json_encode( $result );
-			echo esc_js( $result );
+			echo $result;
 		} else {
 			header( 'Location: ' . $_SERVER['HTTP_REFERER'] );
 		}
