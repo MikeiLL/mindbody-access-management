@@ -308,7 +308,7 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 
 		// Call the API and if fails, return error message.
 		if ( false === $this->schedule_object->getMboResults() ) {
-			return esc_html( sprintf( '%1$s %2$s %3$s', '<div>', __( 'Error returning schedule from Mindbody in Access Display.', 'mz-mbo-access' ), '<div>' ) );
+			echo '<div>' . __( 'Error returning schedule from Mindbody in Access Display.', NS\PLUGIN_TEXT_DOMAIN ) . '</div>';
 		}
 
 		// Register attributes.
