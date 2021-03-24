@@ -274,7 +274,7 @@
                         {
                             dataType: 'json',
                             url: mz_mindbody_access.ajaxurl,
-                            data: {action: 'ajaxClientLogOut', nonce: mz_mindbody_access.logout_nonce},
+                            data: {action: 'ajax_client_logout', nonce: mz_mindbody_access.logout_nonce},
                             beforeSend: function () {
                                 mz_mindbody_access_state.action = 'processing';
                                 render_mbo_access_activity();

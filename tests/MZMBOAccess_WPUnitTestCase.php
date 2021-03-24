@@ -14,8 +14,6 @@ require 'bootstrap.php';
  */
 abstract class MZMBOAccess_WPUnitTestCase extends \WP_UnitTestCase {
 
-
-
 	public function el( $message ) {
 		file_put_contents( './log_' . date( 'j.n.Y' ) . '.log', $message, FILE_APPEND );
 	}

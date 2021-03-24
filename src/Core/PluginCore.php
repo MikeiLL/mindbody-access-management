@@ -235,12 +235,12 @@ class PluginCore {
 		$this->loader->add_action( 'wp_ajax_ajax_generate_signup_form', $client_portal, 'ajax_generate_mbo_signup_form' );
 
 		// Start Ajax Client Log In.
-		$this->loader->add_action( 'wp_ajax_nopriv_ajaxClientLogIn', $client_portal, 'ajaxClientLogIn' );
-		$this->loader->add_action( 'wp_ajax_ajaxClientLogIn', $client_portal, 'ajaxClientLogIn' );
+		$this->loader->add_action( 'wp_ajax_nopriv_ajax_client_login', $client_portal, 'ajax_client_login' );
+		$this->loader->add_action( 'wp_ajax_ajax_client_login', $client_portal, 'ajax_client_login' );
 
 		// Start Ajax Client Log Out.
-		$this->loader->add_action( 'wp_ajax_nopriv_ajaxClientLogOut', $client_portal, 'ajaxClientLogOut' );
-		$this->loader->add_action( 'wp_ajax_ajaxClientLogOut', $client_portal, 'ajaxClientLogOut' );
+		$this->loader->add_action( 'wp_ajax_nopriv_ajax_client_logout', $client_portal, 'ajax_client_logout' );
+		$this->loader->add_action( 'wp_ajax_ajax_client_logout', $client_portal, 'ajax_client_logout' );
 
 		// Start Ajax Display Client Schedule.
 		$this->loader->add_action( 'wp_ajax_nopriv_ajax_display_client_schedule', $client_portal, 'ajax_display_client_schedule' );

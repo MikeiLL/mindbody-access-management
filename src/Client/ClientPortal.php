@@ -52,9 +52,9 @@ class ClientPortal extends RetrieveClient {
 	/**
 	 * Client Log In
 	 */
-	public function ajaxClientLogIn() {
+	public function ajax_client_login() {
 
-		check_ajax_referer( $_REQUEST['nonce'], 'mz_signup_nonce' );
+		check_ajax_referer( 'mz_signup_nonce', 'nonce' );
 
 		// Create the MBO Object.
 		$this->getMboResults();
@@ -104,7 +104,7 @@ class ClientPortal extends RetrieveClient {
 	/**
 	 * Client Log Out
 	 */
-	public function ajaxClientLogOut() {
+	public function ajax_client_logout() {
 
 		check_ajax_referer( $_REQUEST['nonce'], 'mz_client_log_out' );
 
@@ -197,7 +197,7 @@ class ClientPortal extends RetrieveClient {
 	 *
 	 * Like Get Clients (above), but return only the first client.
 	 */
-	public function ajaxGetClientDetails() {
+	public function ajax_get_client_details() {
 
 		check_ajax_referer( $_REQUEST['nonce'], 'mz_client_request' );
 
