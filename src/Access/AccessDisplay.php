@@ -173,7 +173,7 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 			'atts'                   => $this->atts,
 			'content'                => $this->restricted_content,
 			'signup_nonce'           => wp_create_nonce( 'mz_mbo_signup_nonce' ),
-			'site_id'                 => MZ\MZMBO()::$basic_options['mz_mindbody_siteID'],
+			'site_id'                => MZ\MZMBO()::$basic_options['mz_mindbody_siteID'],
 			'email'                  => __( 'email', 'mz-mbo-access' ),
 			'password'               => __( 'password', 'mz-mbo-access' ),
 			'login'                  => __( 'Login', 'mz-mbo-access' ),
@@ -270,7 +270,7 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 			'logout_nonce'       => wp_create_nonce( 'mz_client_log_out' ),
 			'atts'               => $this->atts,
 			'restricted_content' => $this->restricted_content,
-			'site_id'             => $this->site_id,
+			'site_id'            => $this->site_id,
 			'logged_in'          => $this->logged_in,
 			'has_access'         => $this->has_access,
 			'denied_message'     => $this->denied_message,
@@ -296,7 +296,7 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 	 */
 	public function display_schedule() {
 
-		check_ajax_referer( $_REQUEST['nonce'], 'mz_mbo_access_nonce', false );
+		check_ajax_referer( $_REQUEST['nonce'], 'mz_mbo_access_nonce' );
 
 		$atts = $_REQUEST['atts'];
 

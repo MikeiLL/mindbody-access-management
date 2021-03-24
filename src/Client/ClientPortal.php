@@ -20,25 +20,6 @@ use MZoo\MzMindbody\Common\Interfaces as Interfaces;
  */
 class ClientPortal extends RetrieveClient {
 
-
-
-
-	/**
-	 * The Mindbody API Object
-	 *
-	 * @access private
-	 * @var    class instance $mb
-	 */
-	private $mb;
-
-	/**
-	 * Template Date for sending to template partials
-	 *
-	 * @access private
-	 * @var    array $template_data
-	 */
-	private $template_data;
-
 	/**
 	 * Format for date display, specific to MBO API Plugin.
 	 *
@@ -73,7 +54,7 @@ class ClientPortal extends RetrieveClient {
 	 */
 	public function ajaxClientLogIn() {
 
-		check_ajax_referer( $_REQUEST['nonce'], 'mz_signup_nonce', false );
+		check_ajax_referer( $_REQUEST['nonce'], 'mz_signup_nonce' );
 
 		// Create the MBO Object.
 		$this->getMboResults();
@@ -125,7 +106,7 @@ class ClientPortal extends RetrieveClient {
 	 */
 	public function ajaxClientLogOut() {
 
-		check_ajax_referer( $_REQUEST['nonce'], 'mz_client_log_out', false );
+		check_ajax_referer( $_REQUEST['nonce'], 'mz_client_log_out' );
 
 		ob_start();
 
@@ -164,7 +145,7 @@ class ClientPortal extends RetrieveClient {
 	 */
 	public function ajaxCheckClientLogged() {
 
-		check_ajax_referer( $_REQUEST['nonce'], 'mz_check_client_logged', false );
+		check_ajax_referer( $_REQUEST['nonce'], 'mz_check_client_logged' );
 
 		$result = array();
 
@@ -191,7 +172,7 @@ class ClientPortal extends RetrieveClient {
 	 */
 	public function ajax_get_clients() {
 
-		check_ajax_referer( $_REQUEST['nonce'], 'mz_client_request', false );
+		check_ajax_referer( $_REQUEST['nonce'], 'mz_client_request' );
 
 		$result = array();
 
@@ -218,7 +199,7 @@ class ClientPortal extends RetrieveClient {
 	 */
 	public function ajaxGetClientDetails() {
 
-		check_ajax_referer( $_REQUEST['nonce'], 'mz_client_request', false );
+		check_ajax_referer( $_REQUEST['nonce'], 'mz_client_request' );
 
 		$result = array();
 
