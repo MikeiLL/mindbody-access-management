@@ -87,7 +87,14 @@ bin/install-wp-tests.sh
 phpunit.xml.dist
 phpcs.ruleset.xml
 phpcs.xml.dist
+vendor/coenjacobs
+vendor/dealerdirect
+vendor/symfony
+vendor/wp-coding-standards
+vendor/squizlabs
 .git
+.babelrc
+.idea
 *.log
 *.sh
 webpack.config.js
