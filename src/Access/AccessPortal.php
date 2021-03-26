@@ -40,7 +40,7 @@ class AccessPortal extends AccessUtilities {
 		 *      Access\AccessDisplay localizeScript()
 		 *      OnDemandYoga Frontend\Frontend enqueue_scripts()
 		 */
-		check_ajax_referer( 'mz_mbo_access_nonce', 'ajax_login_check_access_permissions' );
+		check_ajax_referer( 'ajax_login_check_access_permissions', 'nonce' );
 
 		// Crate the MBO Object.
 		$this->getMboResults();
