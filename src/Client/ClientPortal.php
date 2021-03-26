@@ -54,7 +54,8 @@ class ClientPortal extends RetrieveClient {
 	 */
 	public function ajax_client_login() {
 
-		check_ajax_referer( 'mz_signup_nonce', 'nonce' );
+		check_ajax_referer( 'ajax_client_login', 'nonce' );
+		MZ\MZMBO()->helpers->log( 'ajax_client_login within MBO Access' );
 
 		// Create the MBO Object.
 		$this->getMboResults();
@@ -106,15 +107,15 @@ class ClientPortal extends RetrieveClient {
 	 */
 	public function ajax_client_logout() {
 
-		check_ajax_referer( $_REQUEST['nonce'], 'mz_client_log_out' );
+		check_ajax_referer( 'ajax_client_logout', 'nonce' );
 
 		ob_start();
 
 		$result['type'] = 'success';
 
-		$this->client_log_out();
+		$this->client_logout();
 
-		// update class attribute to hold logged out status.
+		// Update class attribute to hold logged out status.
 		$this->client_logged_in = false;
 
 		esc_html_e( 'Logged Out', 'mz-mindbody-api' );

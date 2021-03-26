@@ -172,7 +172,8 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 		$this->template_data = array(
 			'atts'                   => $this->atts,
 			'content'                => $this->restricted_content,
-			'signup_nonce'           => wp_create_nonce( 'mz_mbo_signup_nonce' ),
+			// Used in Client\ClientPortal ajax_client_login()
+			'login_nonce'            => wp_create_nonce( 'ajax_client_login' ),
 			'site_id'                => MZ\MZMBO()::$basic_options['mz_mindbody_siteID'],
 			'email'                  => __( 'email', 'mz-mbo-access' ),
 			'password'               => __( 'password', 'mz-mbo-access' ),
@@ -266,8 +267,10 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 
 		$params = array(
 			'ajaxurl'            => admin_url( 'admin-ajax.php', $protocol ),
-			'login_nonce'        => wp_create_nonce( 'mz_mbo_access_nonce' ),
-			'logout_nonce'       => wp_create_nonce( 'mz_client_log_out' ),
+			// Used in Client\ClientPortal ajax_client_login()
+			'login_nonce'        => wp_create_nonce( 'ajax_client_login' ),
+			// Used in Client\ClientPortal ajax_client_logout()
+			'logout_nonce'       => wp_create_nonce( 'ajax_client_logout' ),
 			'atts'               => $this->atts,
 			'restricted_content' => $this->restricted_content,
 			'site_id'            => $this->site_id,

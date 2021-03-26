@@ -292,7 +292,7 @@ class RetrieveClient extends Interfaces\Retrieve {
 
 			$new_session = array_merge( $previous_session, $sanitized_additional_info );
 
-			$this->client_log_out();
+			$this->client_logout();
 
 			// If validated, create session variables and store.
 			$client_details = array(
@@ -308,7 +308,7 @@ class RetrieveClient extends Interfaces\Retrieve {
 	/**
 	 * Client Log Out
 	 */
-	public function client_log_out() {
+	public function client_logout() {
 
 		$this->session->set( 'MBO_Client', array() );
 		setcookie( 'PHPSESSID', false );

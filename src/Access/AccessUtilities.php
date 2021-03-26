@@ -61,6 +61,8 @@ class AccessUtilities extends Client\RetrieveClient {
 		// TODO can we avoid doing this here AND in access display?
 		$mz_mbo_access_options = get_option( 'mz_mbo_access' );
 
+		MZ\MZMBO()->helpers->log( 'set_client_access_level' );
+
 		$level_1_contracts = explode( ',', $mz_mbo_access_options['level_1_contracts'] );
 		$level_2_contracts = explode( ',', $mz_mbo_access_options['level_2_contracts'] );
 		$level_1_contracts = array_map( 'trim', $level_1_contracts );

@@ -16,7 +16,7 @@ use MZoo\MzMboAccess\Core as Core;
 
 			<h3><?php echo esc_html( $data->atts['call_to_action'] ); ?></h3>
 
-			<input type="hidden" name="nonce" value="<?php echo esc_html( $data->signup_nonce ); ?>"/>
+			<input type="hidden" name="nonce" value="<?php echo esc_html( $data->login_nonce ); ?>"/>
 
 			<input type="hidden" name="siteID" value="<?php echo esc_html( $data->site_id ); ?>" />
 

@@ -163,7 +163,7 @@ class Tests_RetrieveClient extends MZMBOAccess_WPUnitTestCase {
 
 		$this->assertTrue( true == $is_or_is_not );
 
-		$is_or_is_not = $client_object->client_log_out();
+		$is_or_is_not = $client_object->client_logout();
 
 		$is_or_is_not = $client_object->check_client_logged();
 
