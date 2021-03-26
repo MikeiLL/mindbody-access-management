@@ -173,7 +173,8 @@ class ClientPortal extends RetrieveClient {
 	 */
 	public function ajax_get_clients() {
 
-		check_ajax_referer( $_REQUEST['nonce'], 'mz_client_request' );
+		// Generated in Frontend\Frontend of On Demand Yoga.
+		check_ajax_referer( 'mz_client_request', 'nonce' );
 
 		$result = array();
 
@@ -200,7 +201,8 @@ class ClientPortal extends RetrieveClient {
 	 */
 	public function ajax_get_client_details() {
 
-		check_ajax_referer( $_REQUEST['nonce'], 'mz_client_request' );
+		// Generated in Frontend\Frontend of On Demand Yoga.
+		check_ajax_referer( 'mz_client_request', 'nonce' );
 
 		$result = array();
 
