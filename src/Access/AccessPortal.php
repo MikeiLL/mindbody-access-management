@@ -35,7 +35,12 @@ class AccessPortal extends AccessUtilities {
 	 */
 	public function ajax_login_check_access_permissions() {
 
-		check_ajax_referer( $_REQUEST['nonce'], 'mz_mbo_access_nonce' );
+		/*
+		 * Generated in
+		 *      Access\AccessDisplay localizeScript()
+		 *      OnDemandYoga Frontend\Frontend enqueue_scripts()
+		 */
+		check_ajax_referer( 'mz_mbo_access_nonce', 'ajax_login_check_access_permissions' );
 
 		// Crate the MBO Object.
 		$this->getMboResults();
@@ -102,7 +107,8 @@ class AccessPortal extends AccessUtilities {
 	 */
 	public function ajax_check_access_permissions() {
 
-		check_ajax_referer( $_REQUEST['nonce'], 'mz_mbo_access_nonce' );
+		// Generated in OnDemandYoga Frontend\Frontend enqueue_scripts().
+		check_ajax_referer( 'ajax_check_access_permissions', 'nonce' );
 
 		// Crate the MBO Object.
 		$this->getMboResults();

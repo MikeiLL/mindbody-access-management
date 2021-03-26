@@ -54,8 +54,12 @@ class ClientPortal extends RetrieveClient {
 	 */
 	public function ajax_client_login() {
 
+		/*
+		 * Generated in Access\AccessDisplay
+		 *      handleShortcode()
+		 *      localizeScript()
+		 */
 		check_ajax_referer( 'ajax_client_login', 'nonce' );
-		MZ\MZMBO()->helpers->log( 'ajax_client_login within MBO Access' );
 
 		// Create the MBO Object.
 		$this->getMboResults();
@@ -107,6 +111,7 @@ class ClientPortal extends RetrieveClient {
 	 */
 	public function ajax_client_logout() {
 
+		// Generated in Access\AccessDisplay localizeScript().
 		check_ajax_referer( 'ajax_client_logout', 'nonce' );
 
 		ob_start();
@@ -144,9 +149,14 @@ class ClientPortal extends RetrieveClient {
 	 *
 	 * Function run by ajax to continually check if client is logged in
 	 */
-	public function ajaxCheckClientLogged() {
+	public function ajax_check_client_logged() {
 
-		check_ajax_referer( $_REQUEST['nonce'], 'mz_check_client_logged' );
+		/*
+		 * Generated in
+		 *      Access\AccessDisplay localizeScript()
+		 *      OnDemandYoga\Frontend\Frontend enqueue_scripts()
+		 */
+		check_ajax_referer( 'mz_check_client_logged', 'nonce' );
 
 		$result = array();
 

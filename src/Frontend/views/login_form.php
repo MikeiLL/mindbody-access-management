@@ -18,6 +18,8 @@ use MZoo\MzMboAccess\Core as Core;
 
 			<input type="hidden" name="nonce" value="<?php echo esc_html( $data->login_nonce ); ?>"/>
 
+			<input type="hidden" name="access_permissions_nonce" value="<?php echo esc_html( $data->check_access_permissions_nonce ); ?>"/>
+
 			<input type="hidden" name="siteID" value="<?php echo esc_html( $data->site_id ); ?>" />
 
 			<div class="row">

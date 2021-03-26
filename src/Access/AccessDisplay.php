@@ -170,26 +170,30 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 		$template_loader = new Core\TemplateLoader();
 
 		$this->template_data = array(
-			'atts'                   => $this->atts,
-			'content'                => $this->restricted_content,
-			// Used in Client\ClientPortal ajax_client_login()
-			'login_nonce'            => wp_create_nonce( 'ajax_client_login' ),
-			'site_id'                => MZ\MZMBO()::$basic_options['mz_mindbody_siteID'],
-			'email'                  => __( 'email', 'mz-mbo-access' ),
-			'password'               => __( 'password', 'mz-mbo-access' ),
-			'login'                  => __( 'Login', 'mz-mbo-access' ),
-			'logout'                 => __( 'Logout', 'mz-mbo-access' ),
-			'logged_in'              => false,
-			'required_services'      => array(
+			'atts'                           => $this->atts,
+			'content'                        => $this->restricted_content,
+			// Tested in Client\ClientPortal ajax_client_login()
+			'login_nonce'                    => wp_create_nonce( 'ajax_client_login' ),
+			// Tested in Access\AccessPortal ajax_login_check_access_permissions().
+			'check_access_permissions_nonce' => wp_create_nonce(
+				'ajax_login_check_access_permissions'
+			),
+			'site_id'                        => MZ\MZMBO()::$basic_options['mz_mindbody_siteID'],
+			'email'                          => __( 'email', 'mz-mbo-access' ),
+			'password'                       => __( 'password', 'mz-mbo-access' ),
+			'login'                          => __( 'Login', 'mz-mbo-access' ),
+			'logout'                         => __( 'Logout', 'mz-mbo-access' ),
+			'logged_in'                      => false,
+			'required_services'              => array(
 				1 => $this->level_1_services,
 				2 => $this->level_2_services,
 			),
-			'access_levels'          => $this->atts['access_levels'],
-			'has_access'             => false,
-			'client_name'            => '',
-			'denied_message'         => $this->atts['denied_message'],
-			'manage_on_mbo'          => $this->atts['manage_on_mbo'],
-			'password_reset_request' => $this->atts['password_reset_request'],
+			'access_levels'                  => $this->atts['access_levels'],
+			'has_access'                     => false,
+			'client_name'                    => '',
+			'denied_message'                 => $this->atts['denied_message'],
+			'manage_on_mbo'                  => $this->atts['manage_on_mbo'],
+			'password_reset_request'         => $this->atts['password_reset_request'],
 		);
 
 		$access_utilities = new AccessUtilities();
@@ -266,18 +270,24 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 		$translated_strings = MZ\MZMBO()->i18n->get();
 
 		$params = array(
-			'ajaxurl'            => admin_url( 'admin-ajax.php', $protocol ),
-			// Used in Client\ClientPortal ajax_client_login()
-			'login_nonce'        => wp_create_nonce( 'ajax_client_login' ),
-			// Used in Client\ClientPortal ajax_client_logout()
-			'logout_nonce'       => wp_create_nonce( 'ajax_client_logout' ),
-			'atts'               => $this->atts,
-			'restricted_content' => $this->restricted_content,
-			'site_id'            => $this->site_id,
-			'logged_in'          => $this->logged_in,
-			'has_access'         => $this->has_access,
-			'denied_message'     => $this->denied_message,
-			'required_services'  => array(
+			'ajaxurl'                  => admin_url( 'admin-ajax.php', $protocol ),
+			// Tested in Client\ClientPortal ajax_client_login().
+			'login_nonce'              => wp_create_nonce( 'ajax_client_login' ),
+			// Tested in Client\ClientPortal ajax_client_logout().
+			'logout_nonce'             => wp_create_nonce( 'ajax_client_logout' ),
+			// Tested in Client\ClientPortal ajax_check_client_logged().
+			'check_logged_nonce'       => wp_create_nonce( 'mz_check_client_logged' ),
+			// Tested in Access\AccessPortal ajax_login_check_access_permissions().
+			'check_access_permissions' => wp_create_nonce(
+				'ajax_login_check_access_permissions'
+			),
+			'atts'                     => $this->atts,
+			'restricted_content'       => $this->restricted_content,
+			'site_id'                  => $this->site_id,
+			'logged_in'                => $this->logged_in,
+			'has_access'               => $this->has_access,
+			'denied_message'           => $this->denied_message,
+			'required_services'        => array(
 				1 => $this->level_1_services,
 				2 => $this->level_2_services,
 			),

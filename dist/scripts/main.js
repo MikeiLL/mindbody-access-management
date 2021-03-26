@@ -3,7 +3,7 @@
         function ($) {
 
             // Initialize some variables
-            var nonce = mz_mindbody_access.login_nonce,
+            var login_nonce = mz_mindbody_access.login_nonce,
             // Shortcode atts for current page.
             atts = mz_mindbody_access.atts,
             restricted_content = mz_mindbody_access.restricted_content,
@@ -19,7 +19,7 @@
                 action: undefined,
                 target: undefined,
                 siteID: undefined,
-                nonce: undefined,
+                login_nonce: undefined,
                 has_access: mz_mindbody_access.has_access,
                 content: undefined,
                 alert_class: undefined,
@@ -131,7 +131,7 @@
                             data: {
                                 action: 'ajax_login_check_access_permissions',
                                 form: form.serialize(),
-                                nonce: result.nonce
+                                nonce: result.access_permissions_nonce
                             },
                             beforeSend: function () {
                                   mz_mindbody_access_state.action = 'processing';
@@ -232,7 +232,7 @@
                         context: this, // So we have access to form data within ajax results
                         data: {
                             action: 'ajax_login_check_access_permissions',
-                            nonce: mz_mindbody_access.login_nonce
+                            nonce: mz_mindbody_access.check_logged_nonce
                         },
                         beforeSend: function () {
                             mz_mindbody_access_state.action = 'processing';
@@ -323,7 +323,7 @@
                     {
                         dataType: 'json',
                         url: mz_mindbody_access.ajaxurl,
-                        data: {action: 'ajaxCheckClientLogged', nonce: 'mz_check_client_logged'},
+                        data: {action: 'ajax_check_client_logged', nonce: mz_mindbody_access.check_logged_nonce},
                         success: function (json) {
                             if (json.type == "success") {
                                 mz_mindbody_access_state.logged_in = (json.message == 1 ? true : false);

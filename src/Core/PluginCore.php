@@ -247,8 +247,8 @@ class PluginCore {
 		$this->loader->add_action( 'wp_ajax_ajax_display_client_schedule', $client_portal, 'ajax_display_client_schedule' );
 
 		// Start Ajax Check Client Logged Status.
-		$this->loader->add_action( 'wp_ajax_nopriv_ajaxCheckClientLogged', $client_portal, 'ajaxCheckClientLogged' );
-		$this->loader->add_action( 'wp_ajax_ajaxCheckClientLogged', $client_portal, 'ajaxCheckClientLogged' );
+		$this->loader->add_action( 'wp_ajax_nopriv_ajax_check_client_logged', $client_portal, 'ajax_check_client_logged' );
+		$this->loader->add_action( 'wp_ajax_ajax_check_client_logged', $client_portal, 'ajax_check_client_logged' );
 	}
 
 
