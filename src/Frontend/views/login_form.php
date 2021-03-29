@@ -57,7 +57,7 @@ use MZoo\MzMboAccess\Core as Core;
 					<?php if ( ! empty( $data->password_reset_request ) ) : ?>
 						<?php
 						$reset_link  = 'https://clients.mindbodyonline.com/PasswordReset';
-						$reset_link .= '?&studioid=' . $data->site_id;
+						$reset_link .= '?&studioid=' . esc_html($data->site_id);
 						?>
 					<a style="text-decoration:none;" 
 						href="<?php echo esc_html( $reset_link ); ?>" 
@@ -72,7 +72,7 @@ use MZoo\MzMboAccess\Core as Core;
 
 						<?php
 						$mbo_link  = 'https://clients.mindbodyonline.com/ws.asp';
-						$mbo_link .= '?&amp;sLoc=1&studioid=' . $data->site_id;
+						$mbo_link .= '?&amp;sLoc=1&studioid=' . esc_html($data->site_id);
 						?>
 					<a href="<?php echo esc_html( $mbo_link ); ?>" 
 						class="btn btn-primary btn-xs" 

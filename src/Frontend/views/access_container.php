@@ -22,23 +22,23 @@ else :
 	<?php
 	if ( ( ! empty( $data->atts['level_1_redirect'] ) || ! empty( $data->atts['level_2_redirect'] ) ) ) {
 		// this is being used as a redirect login form so just echo content if it exists.
-		echo esc_html( $data->content );
+		echo $data->content;
 
 		?>
 		<div class="row" style="margin:.5em;">
-			<span class="btn btn-primary btn-xs" id="MBOLogout" target="_blank"><?php echo esc_html( $data->logout ); ?></span>
+			<span class="btn btn-primary btn-xs" id="MBOLogout" target="_blank"><?php echo $data->logout; ?></span>
 		</div>
 		<?php
 	} else {
 		if ( ! $data->has_access ) {
 			?>
 			<div class="alert alert-warning">
-			<?php echo esc_html( '<strong>' . $data->atts['denied_message'] . '</strong>:' ); ?>
+			<?php echo '<strong>' . $data->atts['denied_message'] . '</strong>:'; ?>
 				<ul>
 			<?php
 			foreach ( $data->access_levels as $level ) {
 				foreach ( $data->required_services[ $level ] as $service ) {
-					echo esc_html( '<li>' . $service . '</li>' );
+					echo '<li>' . $service . '</li>' ;
 				}
 			}
 			?>
@@ -46,7 +46,7 @@ else :
 			</div>
 			<?php
 		} else {
-			echo esc_html( $data->content );
+			echo $data->content;
 		}
 		?>
 			<div class="row" style="margin:.5em;">
@@ -58,11 +58,11 @@ else :
 					?>
 					<a style="text-decoration:none;" href="<?php echo esc_html( $url ); ?>" 
 						class="btn btn-primary btn-xs" id="MBOSite" target="_blank">
-						<?php echo esc_html( $data->manage_on_mbo ); ?>
+						<?php echo $data->manage_on_mbo; ?>
 					</a>
 		<?php endif; ?>
 					<span class="btn btn-primary btn-xs" id="MBOLogout" target="_blank">
-						<?php echo esc_html( $data->logout ); ?>
+						<?php echo $data->logout; ?>
 					</span>
 				</div>
 			</div>

@@ -3,24 +3,24 @@
         function ($) {
 
             // Initialize some variables
-            var login_nonce = mz_mindbody_access.login_nonce,
+            var login_nonce = mz_mbo_access_vars.login_nonce,
             // Shortcode atts for current page.
-            atts = mz_mindbody_access.atts,
-            restricted_content = mz_mindbody_access.restricted_content,
+            atts = mz_mbo_access_vars.atts,
+            restricted_content = mz_mbo_access_vars.restricted_content,
             membership_types = atts.membership_types,
             purchase_types = atts.purchase_types,
             contract_types = atts.contract_types,
             number_of_mbo_log_access_checks = 0,
-            siteID = mz_mindbody_access.siteID;
+            siteID = mz_mbo_access_vars.siteID;
             
             var mz_mindbody_access_state = {
 
-                logged_in: (mz_mindbody_access.logged_in == 1) ? true : false,
+                logged_in: (mz_mbo_access_vars.logged_in == 1) ? true : false,
                 action: undefined,
                 target: undefined,
                 siteID: undefined,
                 login_nonce: undefined,
-                has_access: mz_mindbody_access.has_access,
+                has_access: mz_mbo_access_vars.has_access,
                 content: undefined,
                 alert_class: undefined,
                 spinner: '<div class="d-flex justify-content-center"><div class="spinner-border" role="status"><span class="sr-only">Loading...</span></div></div>',
@@ -125,7 +125,7 @@
                     $.ajax(
                         {
                             dataType: 'json',
-                            url: mz_mindbody_access.ajaxurl,
+                            url: mz_mbo_access_vars.ajaxurl,
                             type: form.attr('method'),
                             context: this, // So we have access to form data within ajax results
                             data: {
@@ -185,14 +185,14 @@
                         
                                         mz_mindbody_access_state.action = 'denied';
                                         mz_mindbody_access_state.message += '</br>';
-                                        mz_mindbody_access_state.message += '<div class="alert alert-warning">'  + mz_mindbody_access.atts.denied_message + ':';
+                                        mz_mindbody_access_state.message += '<div class="alert alert-warning">'  + mz_mbo_access_vars.atts.denied_message + ':';
                                         mz_mindbody_access_state.message += '<ul>';
                             
-                                        if (mz_mindbody_access.required_services && mz_mindbody_access.atts.access_levels) {
-                                            for (var i=0; i < mz_mindbody_access.atts.access_levels.length; i++) {
-                                                var level = mz_mindbody_access.atts.access_levels[i];
-                                                for (var j=0; j < mz_mindbody_access.required_services[level].length; j++) {
-                                                    mz_mindbody_access_state.message += '<li>' + mz_mindbody_access.required_services[level][j] + '</li>';
+                                        if (mz_mbo_access_vars.required_services && mz_mbo_access_vars.atts.access_levels) {
+                                            for (var i=0; i < mz_mbo_access_vars.atts.access_levels.length; i++) {
+                                                var level = mz_mbo_access_vars.atts.access_levels[i];
+                                                for (var j=0; j < mz_mbo_access_vars.required_services[level].length; j++) {
+                                                    mz_mindbody_access_state.message += '<li>' + mz_mbo_access_vars.required_services[level][j] + '</li>';
                                                 }
                                             }
                                         }
@@ -228,11 +228,11 @@
                 $.ajax(
                     {
                         dataType: 'json',
-                        url: mz_mindbody_access.ajaxurl,
+                        url: mz_mbo_access_vars.ajaxurl,
                         context: this, // So we have access to form data within ajax results
                         data: {
                             action: 'ajax_login_check_access_permissions',
-                            nonce: mz_mindbody_access.check_logged_nonce
+                            nonce: mz_mbo_access_vars.check_logged_nonce
                         },
                         beforeSend: function () {
                             mz_mindbody_access_state.action = 'processing';
@@ -246,7 +246,7 @@
                                 render_mbo_access_activity();
                             } else {
                                  mz_mindbody_access_state.action = 'denied';
-                                 mz_mindbody_access_state.message = json.logged + '<div class="alert alert-warning">' + mz_mindbody_access.atts.denied_message + ' ' + mz_mindbody_access.membership_types + '</div>';
+                                 mz_mindbody_access_state.message = json.logged + '<div class="alert alert-warning">' + mz_mbo_access_vars.atts.denied_message + ' ' + mz_mbo_access_vars.membership_types + '</div>';
                                  render_mbo_access_activity();
                             }
                         } // ./ Ajax Success
@@ -273,8 +273,8 @@
                     $.ajax(
                         {
                             dataType: 'json',
-                            url: mz_mindbody_access.ajaxurl,
-                            data: {action: 'ajax_client_logout', nonce: mz_mindbody_access.logout_nonce},
+                            url: mz_mbo_access_vars.ajaxurl,
+                            data: {action: 'ajax_client_logout', nonce: mz_mbo_access_vars.logout_nonce},
                             beforeSend: function () {
                                 mz_mindbody_access_state.action = 'processing';
                                 render_mbo_access_activity();
@@ -315,15 +315,17 @@
                 // Only do this up to 1000 times or so so it's not pinging server all day
                 // The count is vague because it's also updated by check_client_access
                 number_of_mbo_log_access_checks++;
-                if (number_of_mbo_log_access_checks >= 1000) { return;
+                if (number_of_mbo_log_access_checks >= 1000) { 
+                  return;
                 }
+                
             
                 //this will repeat every 15 seconds
                 $.ajax(
                     {
                         dataType: 'json',
-                        url: mz_mindbody_access.ajaxurl,
-                        data: {action: 'ajax_check_client_logged', nonce: mz_mindbody_access.check_logged_nonce},
+                        url: mz_mbo_access_vars.ajaxurl,
+                        data: {action: 'ajax_check_client_logged', nonce: mz_mbo_access_vars.check_logged_nonce},
                         success: function (json) {
                             if (json.type == "success") {
                                 mz_mindbody_access_state.logged_in = (json.message == 1 ? true : false);
@@ -352,12 +354,12 @@
                 $.ajax(
                     {
                         dataType: 'json',
-                        url: mz_mindbody_access.ajaxurl,
+                        url: mz_mbo_access_vars.ajaxurl,
                         context: this, // So we have access to form data within ajax results
                         data: {
                             action: 'ajax_check_access_permissions',
-                            nonce: mz_mindbody_access.login_nonce,
-                            client_id: mz_mindbody_access.client_id
+                            nonce: mz_mbo_access_vars.login_nonce,
+                            client_id: mz_mbo_access_vars.client_id
                         },
                         success: function (json) {
                             if (json.type == "success") {

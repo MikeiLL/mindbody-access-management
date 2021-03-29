@@ -198,20 +198,20 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 
 		$access_utilities = new AccessUtilities();
 
-		$logged_client = NS\MBO_Access()->get_session()->get( 'MBO_Client' );
+		$logged_client = NS\MBO_Access()->get_session()->get( 'MBO_Client' )->mbo_result;
 
 		if ( empty( $this->atts['level_1_redirect'] ) ||
 				empty( $this->atts['level_2_redirect'] ) ||
 				empty( $this->atts['denied_redirect'] ) ) {
-			// If this is a content page check access permissions now.
-			// First we will see if client access is already determined in client_session.
+			// Above test true? Then this is a content page. Check access permissions now.
+			// First, check client_session for access.
 			if ( ! empty( $logged_client->access_level ) &&
 				in_array( $logged_client->access_level, $this->atts['access_levels'], true ) ) {
 				$this->template_data['has_access'] = true;
 				$this->has_access                  = true;
 			} else {
 				// Need to ping the api.
-				$client_access_level = $access_utilities->check_access_permissions( $logged_client->Id );
+				$client_access_level = $access_utilities->check_access_permissions( $logged_client->ID );
 				if ( in_array( $client_access_level, $this->atts['access_levels'], true ) ) {
 					$this->template_data['has_access'] = true;
 					$this->has_access                  = true;
@@ -219,7 +219,7 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 			}
 		}
 
-		if ( ! empty( $logged_client->Id ) ) {
+		if ( ! empty( $logged_client->ID ) ) {
 			$this->template_data['logged_in']   = true;
 			$this->logged_in                    = true;
 			$this->template_data['client_name'] = $logged_client->FirstName;
@@ -268,6 +268,8 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 		$protocol = isset( $_SERVER['HTTPS'] ) ? 'https://' : 'http://';
 
 		$translated_strings = MZ\MZMBO()->i18n->get();
+		
+		$client_logged_nonce = wp_create_nonce( 'mz_check_client_logged' );
 
 		$params = array(
 			'ajaxurl'                  => admin_url( 'admin-ajax.php', $protocol ),
@@ -276,7 +278,7 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 			// Tested in Client\ClientPortal ajax_client_logout().
 			'logout_nonce'             => wp_create_nonce( 'ajax_client_logout' ),
 			// Tested in Client\ClientPortal ajax_check_client_logged().
-			'check_logged_nonce'       => wp_create_nonce( 'mz_check_client_logged' ),
+			'check_logged_nonce'       => $client_logged_nonce,
 			// Tested in Access\AccessPortal ajax_login_check_access_permissions().
 			'check_access_permissions' => wp_create_nonce(
 				'ajax_login_check_access_permissions'
@@ -284,7 +286,7 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 			'atts'                     => $this->atts,
 			'restricted_content'       => $this->restricted_content,
 			'site_id'                  => $this->site_id,
-			'logged_in'                => $this->logged_in,
+			'logged_in'                => $this->check_client_logged,
 			'has_access'               => $this->has_access,
 			'denied_message'           => $this->denied_message,
 			'required_services'        => array(
@@ -292,6 +294,7 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 				2 => $this->level_2_services,
 			),
 		);
-		wp_localize_script( 'mz_mbo_access_script', 'mz_mindbody_access', $params );
+
+		wp_localize_script( 'mz_mbo_access_script', 'mz_mbo_access_vars', $params );
 	}
 }
