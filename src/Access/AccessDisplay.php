@@ -268,7 +268,7 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 		$protocol = isset( $_SERVER['HTTPS'] ) ? 'https://' : 'http://';
 
 		$translated_strings = MZ\MZMBO()->i18n->get();
-		
+
 		$client_logged_nonce = wp_create_nonce( 'mz_check_client_logged' );
 
 		$params = array(

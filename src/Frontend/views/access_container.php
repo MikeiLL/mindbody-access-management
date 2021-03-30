@@ -38,7 +38,7 @@ else :
 			<?php
 			foreach ( $data->access_levels as $level ) {
 				foreach ( $data->required_services[ $level ] as $service ) {
-					echo '<li>' . $service . '</li>' ;
+					echo '<li>' . $service . '</li>';
 				}
 			}
 			?>

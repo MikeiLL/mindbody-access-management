@@ -157,7 +157,7 @@ class ClientPortal extends RetrieveClient {
 		 *      OnDemandYoga\Frontend\Frontend enqueue_scripts()
 		 */
 		check_ajax_referer( 'mz_check_client_logged', 'nonce' );
-		MZ\MZMBO()->helpers->log($_REQUEST);
+		MZ\MZMBO()->helpers->log( $_REQUEST );
 
 		$result = array();
 
