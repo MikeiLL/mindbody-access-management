@@ -38,7 +38,7 @@ class SettingsPage {
 	/**
 	 * Construct
 	 *
-	 * Assign the WPOSA object.
+	 * Instanciate the WPOSA object.
 	 */
 	public function __construct() {
 		self::$wposa_obj = MZ\Core\MzMindbodyApi::$settings_page::$wposa_obj;
