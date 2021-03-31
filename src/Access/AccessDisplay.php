@@ -66,7 +66,7 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 	 * @access public
 	 *
 	 * @used in handleShortcode,
-	 * @var  @array    $data    array to send template.
+	 * @var  array    $data    array to send template.
 	 */
 	public $template_data;
 
@@ -77,7 +77,7 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 	 * @access public
 	 *
 	 * @used in handleShortcode, localizeScript
-	 * @var  @array    $data    array to send template.
+	 * @var  array    $data    array to send template.
 	 */
 	public $logged_in;
 
@@ -88,7 +88,7 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 	 * @access public
 	 *
 	 * @used in handleShortcode, localizeScript
-	 * @var  @bool    $has_access if current client has access current page.
+	 * @var  bool    $has_access if current client has access current page.
 	 */
 	public $has_access;
 
@@ -99,9 +99,42 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 	 * @access public
 	 *
 	 * @used in handleShortcode, localizeScript
-	 * @var  @int    $client_access_level current client access level.
+	 * @var  int    $client_access_level current client access level.
 	 */
 	public $client_access_level;
+
+	/**
+	 * Level One Contracts
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 *
+	 * @used in localizeScript
+	 * @var  array    $level_1_contracts of contracts from options page.
+	 */
+	public $level_1_contracts;
+
+	/**
+	 * Level Two Contracts
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 *
+	 * @used in localizeScript
+	 * @var  array    $level_2_contracts of contracts from options page.
+	 */
+	public $level_2_contracts;
+
+	/**
+	 * Level Three Contracts
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 *
+	 * @used in localizeScript
+	 * @var  array    $level_3_contracts of contracts from options page.
+	 */
+	public $level_3_contracts;
 
 	/**
 	 * Level One Services
@@ -110,7 +143,7 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 	 * @access public
 	 *
 	 * @used in localizeScript
-	 * @var  @array    $level_1_services of services from options page.
+	 * @var  array    $level_1_services of services from options page.
 	 */
 	public $level_1_services;
 
@@ -121,9 +154,20 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 	 * @access public
 	 *
 	 * @used in localizeScript
-	 * @var  @array    $level_2_services of services from options page.
+	 * @var  array    $level_2_services of services from options page.
 	 */
 	public $level_2_services;
+
+	/**
+	 * Level Three Services
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 *
+	 * @used in localizeScript
+	 * @var  array    $level_3_services of services from options page.
+	 */
+	public $level_3_services;
 
 	/**
 	 * Handle Shortcode
@@ -152,17 +196,35 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 
 		$this->site_id = ( isset( $atts['siteid'] ) ) ? $atts['siteid'] : MZ\MZMBO()::$basic_options['mz_mindbody_siteID'];
 
+		$mz_mbo_access_options = get_option( 'mz_mbo_access' );
+
 		// TODO can we avoid doing this here AND in access utilities?
-		$mz_mbo_access_options  = get_option( 'mz_mbo_access' );
+		$this->level_1_contracts = explode( ',', $mz_mbo_access_options['level_1_contracts'] );
+		$this->level_2_contracts = explode( ',', $mz_mbo_access_options['level_2_contracts'] );
+		$this->level_3_contracts = explode( ',', $mz_mbo_access_options['level_3_contracts'] );
+		$this->level_1_contracts = array_map( 'trim', $this->level_1_contracts );
+		$this->level_2_contracts = array_map( 'trim', $this->level_2_contracts );
+		$this->level_3_contracts = array_map( 'trim', $this->level_3_contracts );
+
 		$this->level_1_services = explode( ',', $mz_mbo_access_options['level_1_services'] );
 		$this->level_2_services = explode( ',', $mz_mbo_access_options['level_2_services'] );
+		$this->level_3_services = explode( ',', $mz_mbo_access_options['level_3_services'] );
 		$this->level_1_services = array_map( 'trim', $this->level_1_services );
 		$this->level_2_services = array_map( 'trim', $this->level_2_services );
+		$this->level_3_services = array_map( 'trim', $this->level_3_services );
 
 		$this->atts['access_levels'] = explode( ',', $this->atts['access_levels'] );
 		$this->atts['access_levels'] = array_map( 'trim', $this->atts['access_levels'] );
 
 		$this->restricted_content = $content;
+
+		// Check for Service-based access attribute
+		if ( false !== $this->atts['service_based_access'] ) {
+
+			$this->service_access = explode( ',', $this->atts['service_based_access'] );
+			$this->service_access = array_map( 'trim', $this->service_access );
+
+		}
 
 		// Begin generating output.
 		ob_start();
@@ -184,9 +246,30 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 			'login'                          => __( 'Login', 'mz-mbo-access' ),
 			'logout'                         => __( 'Logout', 'mz-mbo-access' ),
 			'logged_in'                      => false,
+			/**
+			 * Required services value is filtered based
+			 * on shortcode access levels within the template.
+			 * Using array_filter to remove empties.
+			 */
 			'required_services'              => array(
-				1 => $this->level_1_services,
-				2 => $this->level_2_services,
+				1 => array_filter(
+					array_merge(
+						$this->level_1_contracts,
+						$this->level_1_services
+					)
+				),
+				2 => array_filter(
+					array_merge(
+						$this->level_2_contracts,
+						$this->level_2_services
+					)
+				),
+				3 => array_filter(
+					array_merge(
+						$this->level_3_contracts,
+						$this->level_3_services
+					)
+				),
 			),
 			'access_levels'                  => $this->atts['access_levels'],
 			'has_access'                     => false,

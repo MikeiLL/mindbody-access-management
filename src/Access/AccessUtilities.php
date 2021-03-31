@@ -61,20 +61,22 @@ class AccessUtilities extends Client\RetrieveClient {
 		// TODO can we avoid doing this here AND in access display?
 		$mz_mbo_access_options = get_option( 'mz_mbo_access' );
 
-		MZ\MZMBO()->helpers->log( 'set_client_access_level' );
-
 		$level_1_contracts = explode( ',', $mz_mbo_access_options['level_1_contracts'] );
 		$level_2_contracts = explode( ',', $mz_mbo_access_options['level_2_contracts'] );
+		$level_3_contracts = explode( ',', $mz_mbo_access_options['level_3_contracts'] );
 		$level_1_contracts = array_map( 'trim', $level_1_contracts );
 		$level_2_contracts = array_map( 'trim', $level_2_contracts );
+		$level_3_contracts = array_map( 'trim', $level_3_contracts );
 
-		if ( count( $level_1_contracts ) >= 1 || count( $level_2_contracts ) >= 1 ) {
+		if ( count( $level_1_contracts ) >= 1 ||
+			count( $level_2_contracts ) >= 1 ||
+			count( $level_3_contracts ) >= 1 ) {
 			$contracts = $this->get_client_contracts( $client_id );
 
 			if ( empty( $contracts ) ) {
 				$this->access_level = 0;
 				// Update client session with empty keys just in case.
-				return $this->update_client_session(
+				$this->update_client_session(
 					array(
 						'access_level' => 0,
 						'contracts'    => array(),
@@ -82,28 +84,42 @@ class AccessUtilities extends Client\RetrieveClient {
 				);
 			}
 
-			// Comapre level two services first.
-			foreach ( $contracts as $contract ) {
-				if ( in_array( $contract['ContractName'], $level_2_contracts, true ) ) {
-					// No need to check further.
-					$this->access_level = 2;
-					return $this->update_client_session(
-						array(
-							'access_level' => 2,
-							'contracts'    => $contracts,
-						)
-					);
-				}
-				// If not level two do we have level one access?
-				if ( in_array( $contract['ContractName'], $level_1_contracts, true ) ) {
-					// No need to check further.
-					$this->access_level = 1;
-					return $this->update_client_session(
-						array(
-							'access_level' => 1,
-							'contracts'    => $contracts,
-						)
-					);
+			if ( ! empty( $contracts ) ) {
+
+				foreach ( $contracts as $contract ) {
+					// Compare level three contracts first.
+					if ( in_array( $contract['ContractName'], $level_3_contracts, true ) ) {
+						// No need to check further.
+						$this->access_level = 3;
+						return $this->update_client_session(
+							array(
+								'access_level' => 3,
+								'contracts'    => $contracts,
+							)
+						);
+					}
+					// Compare level two contracts second.
+					if ( in_array( $contract['ContractName'], $level_2_contracts, true ) ) {
+						// No need to check further.
+						$this->access_level = 2;
+						return $this->update_client_session(
+							array(
+								'access_level' => 2,
+								'contracts'    => $contracts,
+							)
+						);
+					}
+					// If not level two do we have level one access?
+					if ( in_array( $contract['ContractName'], $level_1_contracts, true ) ) {
+						// No need to check further.
+						$this->access_level = 1;
+						return $this->update_client_session(
+							array(
+								'access_level' => 1,
+								'contracts'    => $contracts,
+							)
+						);
+					}
 				}
 			}
 		}
@@ -111,15 +127,17 @@ class AccessUtilities extends Client\RetrieveClient {
 		// No contracts so must be dealing with services.
 		$level_1_services = explode( ',', $mz_mbo_access_options['level_1_services'] );
 		$level_2_services = explode( ',', $mz_mbo_access_options['level_2_services'] );
+		$level_3_services = explode( ',', $mz_mbo_access_options['level_3_services'] );
 		$level_1_services = array_map( 'trim', $level_1_services );
 		$level_2_services = array_map( 'trim', $level_2_services );
+		$level_3_services = array_map( 'trim', $level_3_services );
 
 		$services = $this->get_client_services( $client_id );
 
-		if ( false === (bool) $services['ClientServices'] ) {
+		if ( false === (bool) $services ) {
 			$this->access_level = 0;
 			// Update client session with empty keys just in case.
-			return $this->update_client_session(
+			$this->update_client_session(
 				array(
 					'access_level' => 0,
 					'services'     => array(),
@@ -127,8 +145,22 @@ class AccessUtilities extends Client\RetrieveClient {
 			);
 		}
 
-		// Comapre level two services first.
-		foreach ( $services['ClientServices'] as $service ) {
+		foreach ( $services as $service ) {
+			// Compare level three services first.
+			if ( in_array( $service['Name'], $level_3_services, true ) ) {
+				if ( ! $this->is_service_valid( $service ) ) {
+					continue;
+				}
+				$this->access_level = 3;
+				// No need to check further.
+				return $this->update_client_session(
+					array(
+						'access_level' => 3,
+						'services'     => $services,
+					)
+				);
+			}
+			// Compare level two services second.
 			if ( in_array( $service['Name'], $level_2_services, true ) ) {
 				if ( ! $this->is_service_valid( $service ) ) {
 					continue;
@@ -138,7 +170,7 @@ class AccessUtilities extends Client\RetrieveClient {
 				return $this->update_client_session(
 					array(
 						'access_level' => 2,
-						'services'     => $services['ClientServices'],
+						'services'     => $services,
 					)
 				);
 			}
@@ -152,7 +184,7 @@ class AccessUtilities extends Client\RetrieveClient {
 				return $this->update_client_session(
 					array(
 						'access_level' => 1,
-						'services'     => $services['ClientServices'],
+						'services'     => $services,
 					)
 				);
 			}
@@ -174,8 +206,12 @@ class AccessUtilities extends Client\RetrieveClient {
 			return false;
 		}
 
-		$service_expiration = new \DateTime( $service['ExpirationDate'], MZ\MZMBO()::$timezone );
-		$now                = new \DateTimeImmutable( 'now', MZ\MZMBO()::$timezone );
+		$service_expiration = new \DateTime(
+			$service['ExpirationDate'],
+			wp_timezone()
+		);
+		$now                = new \DateTimeImmutable( 'now', wp_timezone() );
+
 		if ( $service_expiration->date < $now->date ) {
 			return false;
 		}
@@ -210,7 +246,6 @@ class AccessUtilities extends Client\RetrieveClient {
 
 		return 0;
 	}
-
 
 	/**
 	 * Compare Client Purchase Status

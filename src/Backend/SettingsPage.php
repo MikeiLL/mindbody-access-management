@@ -49,7 +49,9 @@ class SettingsPage {
 	 *
 	 * Add sections and fields.
 	 */
+    // @codingStandardsIgnoreStart
 	public function addSections() {
+    // @codingStandardsIgnoreEnd
 
 		// Section: Basic Settings.
 		self::$wposa_obj->add_section(
@@ -100,25 +102,25 @@ class SettingsPage {
 			)
 		);
 
+		// Field: Title.
 		self::$wposa_obj->add_field(
 			'mz_mbo_access',
 			array(
-				'id'          => 'level_1_contracts',
-				'type'        => 'textarea',
-				'name'        => __( 'Access Level One Contracts', 'mz-mindbody-api' ),
-				'desc'        => __( 'Comma separated list (or single) MBO Service(s) or Contract(s)', 'mz_mbo_access' ),
-				'placeholder' => 'Ten Class Pass, Single Class Drop-In',
+				'id'      => 'level_1_contracts_title',
+				'type'    => 'title',
+				'name'    => '<h1>Access Level One</h1>',
+				'default' => '',
 			)
 		);
 
 		self::$wposa_obj->add_field(
 			'mz_mbo_access',
 			array(
-				'id'          => 'level_2_contracts',
+				'id'          => 'level_1_contracts',
 				'type'        => 'textarea',
-				'name'        => __( 'Access Level Two Contracts', 'mz-mindbody-api' ),
-				'desc'        => __( 'Comma separated list (or single) MBO Service(s) or Contract(s)', 'mz_mbo_access' ),
-				'placeholder' => 'Weekly Class Pass, Monthly Yoga All Access Pass',
+				'name'        => __( 'L1 Contracts', 'mz-mindbody-api' ),
+				'desc'        => __( 'Comma separated list (or single) MBO Contract(s)', 'mz_mbo_access' ),
+				'placeholder' => 'Ten Class Pass, Single Class Drop-In',
 			)
 		);
 
@@ -127,9 +129,31 @@ class SettingsPage {
 			array(
 				'id'          => 'level_1_services',
 				'type'        => 'textarea',
-				'name'        => __( 'Access Level One Services', 'mz-mindbody-api' ),
-				'desc'        => __( 'Comma separated list (or single) MBO Service(s) or Contract(s)', 'mz_mbo_access' ),
+				'name'        => __( 'L1 Services', 'mz-mindbody-api' ),
+				'desc'        => __( 'Comma separated list (or single) MBO Service(s)', 'mz_mbo_access' ),
 				'placeholder' => 'Ten Class Pass, Single Class Drop-In',
+			)
+		);
+
+		// Field: Title.
+		self::$wposa_obj->add_field(
+			'mz_mbo_access',
+			array(
+				'id'      => 'level_2_contracts_title',
+				'type'    => 'title',
+				'name'    => '<h1>Access Level Two</h1>',
+				'default' => '',
+			)
+		);
+
+		self::$wposa_obj->add_field(
+			'mz_mbo_access',
+			array(
+				'id'          => 'level_2_contracts',
+				'type'        => 'textarea',
+				'name'        => __( 'L2 Contracts', 'mz-mindbody-api' ),
+				'desc'        => __( 'Comma separated list (or single) MBO Contract(s)', 'mz_mbo_access' ),
+				'placeholder' => 'Weekly Class Pass, Monthly Yoga All Access Pass',
 			)
 		);
 
@@ -138,8 +162,41 @@ class SettingsPage {
 			array(
 				'id'          => 'level_2_services',
 				'type'        => 'textarea',
-				'name'        => __( 'Access Level Two Services', 'mz-mindbody-api' ),
-				'desc'        => __( 'Comma separated list (or single) MBO Service(s) or Contract(s)', 'mz_mbo_access' ),
+				'name'        => __( 'L2 Services', 'mz-mindbody-api' ),
+				'desc'        => __( 'Comma separated list (or single) MBO Service(s)', 'mz_mbo_access' ),
+				'placeholder' => 'Weekly Class Pass, Monthly Yoga All Access Pass',
+			)
+		);
+
+		// Field: Title.
+		self::$wposa_obj->add_field(
+			'mz_mbo_access',
+			array(
+				'id'      => 'level_3_contracts_title',
+				'type'    => 'title',
+				'name'    => '<h1>Access Level Three</h1>',
+				'default' => '',
+			)
+		);
+
+		self::$wposa_obj->add_field(
+			'mz_mbo_access',
+			array(
+				'id'          => 'level_3_contracts',
+				'type'        => 'textarea',
+				'name'        => __( 'L3 Contracts', 'mz-mindbody-api' ),
+				'desc'        => __( 'Comma separated list (or single) MBO Contract(s)', 'mz_mbo_access' ),
+				'placeholder' => 'Weekly Class Pass, Monthly Yoga All Access Pass',
+			)
+		);
+
+		self::$wposa_obj->add_field(
+			'mz_mbo_access',
+			array(
+				'id'          => 'level_3_services',
+				'type'        => 'textarea',
+				'name'        => __( 'L3 Services', 'mz-mindbody-api' ),
+				'desc'        => __( 'Comma separated list (or single) MBO Service(s)', 'mz_mbo_access' ),
 				'placeholder' => 'Weekly Class Pass, Monthly Yoga All Access Pass',
 			)
 		);

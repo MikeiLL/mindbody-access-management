@@ -608,10 +608,36 @@ class RetrieveClient extends Interfaces\Retrieve {
 	/**
 	 * Get client services.
 	 *
-	 * @since: 1.0.1
-	 * @param int $client_id for MBO access..
+	 * Returns an array of items that look like this:
 	 *
-	 * @return array numeric array of required fields
+	 * [ActiveDate] => 2021-03-31T00:00:00
+	 * [Count] => 8
+	 * [Current] => 1
+	 * [ExpirationDate] => 2021-05-31T00:00:00
+	 * [Id] => 100247311
+	 * [ProductId] => 1403
+	 * [Name] => Intense Bootcamp (Name of the actual service)
+	 * [PaymentDate] => 2021-03-31T00:00:00
+	 * [Program] => Array
+	 *     (
+	 *         [Id] => 10
+	 *         [Name] => Boot Camp (Program by which was purchsed ie: Free Class)
+	 *         [ScheduleType] => Enrollment
+	 *         [CancelOffset] => 0
+	 *         [ContentFormats] => Array
+	 *             (
+	 *                 [0] => InPerson
+	 *             )
+	 *
+	 *     )
+	 * [Remaining] => 8
+	 * [SiteId] => -99
+	 * [Action] => None
+	 *
+	 * @since: 1.0.1
+	 * @param int $client_id for MBO access.
+	 *
+	 * @return array numeric array of client services
 	 */
 	public function get_client_services( $client_id ) {
 
@@ -622,7 +648,7 @@ class RetrieveClient extends Interfaces\Retrieve {
 			array( 'clientId' => $client_id )
 		);
 
-		return $result;
+		return $result['ClientServices'];
 	}
 
 	/**
@@ -630,6 +656,7 @@ class RetrieveClient extends Interfaces\Retrieve {
 	 *
 	 * @since 5.4.7
 	 *
+	 * TODO: clarify
 	 * param array containing 'UserEmail' 'UserFirstName' 'UserLastName'
 	 *
 	 * @param int $client_id for MBO.
@@ -666,7 +693,7 @@ class RetrieveClient extends Interfaces\Retrieve {
 			return false;
 		}
 		// Just returning the (bool) result fails.
-		return ( 1 == (bool) $client_info->mbo_result ) ? 1 : 0;
+		return ( 1 === (bool) $client_info->mbo_result ) ? 1 : 0;
 	}
 
 	/**

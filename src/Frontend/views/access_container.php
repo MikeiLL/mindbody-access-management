@@ -9,7 +9,6 @@
 
 use MZoo\MzMboAccess\Core as Core;
 use MZoo\MzMindbody as MZ;
-
 ?>
 <div id="mzAccessContainer">
 
