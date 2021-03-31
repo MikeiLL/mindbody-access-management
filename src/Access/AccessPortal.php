@@ -34,7 +34,6 @@ class AccessPortal extends AccessUtilities {
 	 * matches one in received array (or string).
 	 */
 	public function ajax_login_check_access_permissions() {
-
 		/*
 		 * Generated in
 		 *      Access\AccessDisplay localizeScript()

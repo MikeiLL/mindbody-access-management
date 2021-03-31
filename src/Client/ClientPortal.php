@@ -53,7 +53,6 @@ class ClientPortal extends RetrieveClient {
 	 * Client Log In
 	 */
 	public function ajax_client_login() {
-
 		/*
 		 * Generated in Access\AccessDisplay
 		 *      handleShortcode()
@@ -150,7 +149,6 @@ class ClientPortal extends RetrieveClient {
 	 * Function run by ajax to continually check if client is logged in
 	 */
 	public function ajax_check_client_logged() {
-
 		/*
 		 * Generated in
 		 *      Access\AccessDisplay localizeScript()

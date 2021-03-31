@@ -218,7 +218,7 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 
 		$this->restricted_content = $content;
 
-		// Check for Service-based access attribute
+		// Check for Service-based access attribute.
 		if ( false !== $this->atts['service_based_access'] ) {
 
 			$this->service_access = explode( ',', $this->atts['service_based_access'] );
@@ -234,7 +234,7 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 		$this->template_data = array(
 			'atts'                           => $this->atts,
 			'content'                        => $this->restricted_content,
-			// Tested in Client\ClientPortal ajax_client_login()
+			// Tested in Client\ClientPortal ajax_client_login().
 			'login_nonce'                    => wp_create_nonce( 'ajax_client_login' ),
 			// Tested in Access\AccessPortal ajax_login_check_access_permissions().
 			'check_access_permissions_nonce' => wp_create_nonce(
@@ -303,9 +303,11 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 		}
 
 		if ( ! empty( $logged_client->ID ) ) {
-			$this->template_data['logged_in']   = true;
-			$this->logged_in                    = true;
+			$this->template_data['logged_in'] = true;
+			$this->logged_in                  = true;
+			// @codingStandardsIgnoreStart (MBO Naming conventions)
 			$this->template_data['client_name'] = $logged_client->FirstName;
+			// @codingStandardsIgnoreEnd
 		}
 
 		$template_loader->set_template_data( $this->template_data );
