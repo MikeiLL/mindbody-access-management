@@ -693,7 +693,9 @@ class RetrieveClient extends Interfaces\Retrieve {
 			return false;
 		}
 		// Just returning the (bool) result fails.
-		return ( 1 === (bool) $client_info->mbo_result ) ? 1 : 0;
+        // @codingStandardsIgnoreStart because strict test fails
+		return ( 1 == (bool) $client_info->mbo_result ) ? 1 : 0;
+        // @codingStandardsIgnoreEnd
 	}
 
 	/**
