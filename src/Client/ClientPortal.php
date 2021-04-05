@@ -55,7 +55,7 @@ class ClientPortal extends RetrieveClient {
 	public function ajax_client_login() {
 		/*
 		 * Generated in Access\AccessDisplay
-		 *      handleShortcode()
+		 *      handle_shortcode()
 		 *      localizeScript()
 		 */
 		check_ajax_referer( 'ajax_client_login', 'nonce' );

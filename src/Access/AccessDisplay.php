@@ -32,7 +32,7 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 	 * @since    2.4.7
 	 * @access   private
 	 *
-	 * @used in handleShortcode, addScript
+	 * @used in handle_shortcode, addScript
 	 * @var      boolean $added_already True if shorcdoe scripts have been enqueued.
 	 */
 	private static $added_already = false;
@@ -43,7 +43,7 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 	 * @since  1.0.0
 	 * @access public
 	 *
-	 * @used in handleShortcode, localizeScript
+	 * @used in handle_shortcode, localizeScript
 	 * @var  string $restricted_content Content between two shortcode tags.
 	 */
 	public $restricted_content;
@@ -54,7 +54,7 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 	 * @since  1.0.0
 	 * @access public
 	 *
-	 * @used in handleShortcode, localizeScript
+	 * @used in handle_shortcode, localizeScript
 	 * @var  array $atts Shortcode attributes function called with.
 	 */
 	public $atts;
@@ -65,7 +65,7 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 	 * @since  1.0.0
 	 * @access public
 	 *
-	 * @used in handleShortcode,
+	 * @used in handle_shortcode,
 	 * @var  array    $data    array to send template.
 	 */
 	public $template_data;
@@ -76,7 +76,7 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 	 * @since  1.0.0
 	 * @access public
 	 *
-	 * @used in handleShortcode, localizeScript
+	 * @used in handle_shortcode, localizeScript
 	 * @var  array    $data    array to send template.
 	 */
 	public $logged_in;
@@ -87,7 +87,7 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 	 * @since  1.0.0
 	 * @access public
 	 *
-	 * @used in handleShortcode, localizeScript
+	 * @used in handle_shortcode, localizeScript
 	 * @var  bool    $has_access if current client has access current page.
 	 */
 	public $has_access;
@@ -98,7 +98,7 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 	 * @since  1.0.0
 	 * @access public
 	 *
-	 * @used in handleShortcode, localizeScript
+	 * @used in handle_shortcode, localizeScript
 	 * @var  int    $client_access_level current client access level.
 	 */
 	public $client_access_level;
@@ -176,7 +176,7 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 	 * @param    string $content any content between start and end shortcode tags.
 	 * @return   string shortcode content.
 	 */
-	public function handleShortcode( $atts, $content = null ) {
+	public function handle_shortcode( $atts, $content = null ) {
 
 		$this->atts = shortcode_atts(
 			array(
