@@ -203,7 +203,7 @@ class RetrieveClient extends Interfaces\Retrieve {
 	public function validate_client( $validate_login_result ) {
 
 		// Create the MBO Object using API VERSION 5!
-		$this->getMboResults( 5 );
+		$this->get_mbo_results( 5 );
 
 		$result = $this->mb->ValidateLogin(
 			array(
@@ -227,7 +227,7 @@ class RetrieveClient extends Interfaces\Retrieve {
 	 */
 	public function get_client( $client_id ) {
 
-		$this->getMboResults();
+		$this->get_mbo_results();
 
 		$result = $this->mb->GetClients(
 			array(
@@ -327,7 +327,7 @@ class RetrieveClient extends Interfaces\Retrieve {
 	public function get_signup_form_fields() {
 
 		// Crate the MBO Object.
-		$this->getMboResults();
+		$this->get_mbo_results();
 
 		$required_fields = $this->mb->GetRequiredClientFields();
 
@@ -354,7 +354,7 @@ class RetrieveClient extends Interfaces\Retrieve {
 	public function add_client( $client_fields = array() ) {
 
 		// Crate the MBO Object.
-		$this->getMboResults();
+		$this->get_mbo_results();
 
 		$signup_result = $this->mb->AddClient( $client_fields );
 
@@ -461,7 +461,7 @@ class RetrieveClient extends Interfaces\Retrieve {
 	public function get_client_active_memberships( $client_id ) {
 
 		// Create the MBO Object.
-		$this->getMboResults();
+		$this->get_mbo_results();
 
 		$result = $this->mb->GetActiveClientMemberships(
 			array( 'clientId' => $client_id )
@@ -537,7 +537,7 @@ class RetrieveClient extends Interfaces\Retrieve {
 	public function get_client_contracts( $client_id ) {
 
 		// Create the MBO Object.
-		$this->getMboResults();
+		$this->get_mbo_results();
 
 		$result = $this->mb->GetClientContracts(
 			array( 'clientId' => $client_id )
@@ -596,7 +596,7 @@ class RetrieveClient extends Interfaces\Retrieve {
 	public function get_client_purchases( $client_id ) {
 
 		// Create the MBO Object.
-		$this->getMboResults();
+		$this->get_mbo_results();
 
 		$result = $this->mb->GetClientPurchases(
 			array( 'ClientId' => $client_id )
@@ -642,7 +642,7 @@ class RetrieveClient extends Interfaces\Retrieve {
 	public function get_client_services( $client_id ) {
 
 		// Create the MBO Object.
-		$this->getMboResults();
+		$this->get_mbo_results();
 
 		$result = $this->mb->GetClientServices(
 			array( 'clientId' => $client_id )
@@ -666,7 +666,7 @@ class RetrieveClient extends Interfaces\Retrieve {
 	public function password_reset_email_request( $client_id = array() ) {
 
 		// Crate the MBO Object.
-		$this->getMboResults();
+		$this->get_mbo_results();
 
 		$result = $this->mb->SendPasswordResetEmail( $client_id );
 
@@ -708,7 +708,7 @@ class RetrieveClient extends Interfaces\Retrieve {
 	 *
 	 * @return array of MBO schedule data.
 	 */
-	public function getMboResults( $api_version = 6 ) {
+	public function get_mbo_results( $api_version = 6 ) {
 
 		if ( 6 === $api_version ) {
 			$this->mb = $this->instantiateMboApi();

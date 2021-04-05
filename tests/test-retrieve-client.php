@@ -19,7 +19,7 @@ class Tests_RetrieveClient extends MZMBOAccess_WPUnitTestCase {
 
 		$client_object = new MZoo\MzMboAccess\Client\RetrieveClient();
 
-		$response = $client_object->getMboResults();
+		$response = $client_object->get_mbo_results();
 
 		$this->assertTrue( $response );
 

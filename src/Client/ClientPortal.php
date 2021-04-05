@@ -61,7 +61,7 @@ class ClientPortal extends RetrieveClient {
 		check_ajax_referer( 'ajax_client_login', 'nonce' );
 
 		// Create the MBO Object.
-		$this->getMboResults();
+		$this->get_mbo_results();
 
 		// Init message.
 		$result['message'] = '';

@@ -42,7 +42,7 @@ class AccessPortal extends AccessUtilities {
 		check_ajax_referer( 'ajax_login_check_access_permissions', 'nonce' );
 
 		// Crate the MBO Object.
-		$this->getMboResults();
+		$this->get_mbo_results();
 
 		$result = array();
 
@@ -110,7 +110,7 @@ class AccessPortal extends AccessUtilities {
 		check_ajax_referer( 'ajax_check_access_permissions', 'nonce' );
 
 		// Crate the MBO Object.
-		$this->getMboResults();
+		$this->get_mbo_results();
 
 		$result = array();
 
