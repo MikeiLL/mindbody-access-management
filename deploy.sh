@@ -65,6 +65,9 @@ echo
 echo "Creating local copy of SVN repo ..."
 svn co $SVNURL $SVNPATH
 
+# for zsh disable prompt when removing wildcard
+setopt rmstarsilent
+
 echo "Clearing svn repo so we can overwrite it"
 rm -rf $SVNPATH/trunk/*
 
@@ -92,6 +95,7 @@ vendor/dealerdirect
 vendor/symfony
 vendor/wp-coding-standards
 vendor/squizlabs
+vendor/bin
 .git
 .babelrc
 .idea
@@ -99,6 +103,8 @@ vendor/squizlabs
 *.sh
 webpack.config.js
 .gitignore" "$SVNPATH/trunk/"
+
+# If this fails, check into svn cleanup
 
 echo "Changing directory to SVN and committing to trunk"
 cd $SVNPATH/trunk/
