@@ -251,7 +251,7 @@ class RetrieveClient extends Interfaces\Retrieve {
 	public function create_client_session( $client_info ) {
 
 		if ( ! empty( $client_info['ID'] ) ) {
-			$sanitized_client_info = MZ\MZMBO()->helpers->arrayMapRecursive(
+			$sanitized_client_info = MZ\MZMBO()->helpers->array_map_recursive(
 				'sanitize_text_field',
 				$client_info
 			);
@@ -285,7 +285,7 @@ class RetrieveClient extends Interfaces\Retrieve {
 		$previous_session = (array) $this->session->get( 'MBO_Client' )->mbo_result;
 
 		if ( ! empty( $previous_session['ID'] ) ) {
-			$sanitized_additional_info = MZ\MZMBO()->helpers->arrayMapRecursive(
+			$sanitized_additional_info = MZ\MZMBO()->helpers->array_map_recursive(
 				'sanitize_text_field',
 				$additional_info
 			);
