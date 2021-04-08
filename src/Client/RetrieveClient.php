@@ -711,9 +711,9 @@ class RetrieveClient extends Interfaces\Retrieve {
 	public function get_mbo_results( $api_version = 6 ) {
 
 		if ( 6 === $api_version ) {
-			$this->mb = $this->instantiateMboApi();
+			$this->mb = $this->instantiate_mbo_api();
 		} else {
-			$this->mb = $this->instantiateMboApi( 5 );
+			$this->mb = $this->instantiate_mbo_api( 5 );
 		}
 
 		if ( ! $this->mb || 'NO_API_SERVICE' === $this->mb ) {
