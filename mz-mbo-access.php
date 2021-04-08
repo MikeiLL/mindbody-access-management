@@ -1,9 +1,8 @@
 <?php
 /**
- * Plugin Name: Mindbody Access Management
+ * Plugin Name: mZ Mindbody Access
  *
- * Description: Child plugin for mZoo Mindbody Interface,
- * which can limit user access to content based on MBO client account details.
+ * Description: Child plugin for mZoo Mindbody Interface, which can limit user access to content based on MBO client account details.
  *
  * @package MZMBOACCESS
  *

@@ -37,7 +37,7 @@ class AccessPortal extends AccessUtilities {
 		/*
 		 * Generated in
 		 *      Access\AccessDisplay localizeScript()
-		 *      MboOnDemandMedia Frontend\Frontend enqueue_scripts()
+		 *      MzMboOnDemand Frontend\Frontend enqueue_scripts()
 		 */
 		check_ajax_referer( 'ajax_login_check_access_permissions', 'nonce' );
 
@@ -106,7 +106,7 @@ class AccessPortal extends AccessUtilities {
 	 */
 	public function ajax_check_access_permissions() {
 
-		// Generated in MboOnDemandMedia Frontend\Frontend enqueue_scripts().
+		// Generated in MzMboOnDemand Frontend\Frontend enqueue_scripts().
 		check_ajax_referer( 'ajax_check_access_permissions', 'nonce' );
 
 		// Crate the MBO Object.

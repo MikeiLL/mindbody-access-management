@@ -152,7 +152,7 @@ class ClientPortal extends RetrieveClient {
 		/*
 		 * Generated in
 		 *      Access\AccessDisplay localizeScript()
-		 *      MboOnDemandMedia\Frontend\Frontend enqueue_scripts()
+		 *      MzMboOnDemand\Frontend\Frontend enqueue_scripts()
 		 */
 		check_ajax_referer( 'mz_check_client_logged', 'nonce' );
 
@@ -181,7 +181,7 @@ class ClientPortal extends RetrieveClient {
 	 */
 	public function ajax_get_clients() {
 
-		// Generated in Frontend\Frontend of On Demand Yoga.
+		// Generated in Frontend\Frontend of Mz Mindbody On Demand.
 		check_ajax_referer( 'mz_client_request', 'nonce' );
 
 		$result = array();
@@ -209,7 +209,7 @@ class ClientPortal extends RetrieveClient {
 	 */
 	public function ajax_get_client_details() {
 
-		// Generated in Frontend\Frontend of On Demand Yoga.
+		// Generated in Frontend\Frontend of Mz Mindbody On Demand.
 		check_ajax_referer( 'mz_client_request', 'nonce' );
 
 		$result = array();
