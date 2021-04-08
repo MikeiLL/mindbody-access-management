@@ -152,7 +152,7 @@ class ClientPortal extends RetrieveClient {
 		/*
 		 * Generated in
 		 *      Access\AccessDisplay localizeScript()
-		 *      OnDemandYoga\Frontend\Frontend enqueue_scripts()
+		 *      MboOnDemandMedia\Frontend\Frontend enqueue_scripts()
 		 */
 		check_ajax_referer( 'mz_check_client_logged', 'nonce' );
 
