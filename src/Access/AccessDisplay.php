@@ -43,7 +43,7 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 	 * @since  1.0.0
 	 * @access public
 	 *
-	 * @used in handle_shortcode, localizeScript
+	 * @used in handle_shortcode, localize_script
 	 * @var  string $restricted_content Content between two shortcode tags.
 	 */
 	public $restricted_content;
@@ -54,7 +54,7 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 	 * @since  1.0.0
 	 * @access public
 	 *
-	 * @used in handle_shortcode, localizeScript
+	 * @used in handle_shortcode, localize_script
 	 * @var  array $atts Shortcode attributes function called with.
 	 */
 	public $atts;
@@ -76,7 +76,7 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 	 * @since  1.0.0
 	 * @access public
 	 *
-	 * @used in handle_shortcode, localizeScript
+	 * @used in handle_shortcode, localize_script
 	 * @var  array    $data    array to send template.
 	 */
 	public $logged_in;
@@ -87,7 +87,7 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 	 * @since  1.0.0
 	 * @access public
 	 *
-	 * @used in handle_shortcode, localizeScript
+	 * @used in handle_shortcode, localize_script
 	 * @var  bool    $has_access if current client has access current page.
 	 */
 	public $has_access;
@@ -98,7 +98,7 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 	 * @since  1.0.0
 	 * @access public
 	 *
-	 * @used in handle_shortcode, localizeScript
+	 * @used in handle_shortcode, localize_script
 	 * @var  int    $client_access_level current client access level.
 	 */
 	public $client_access_level;
@@ -109,7 +109,7 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 	 * @since  1.0.0
 	 * @access public
 	 *
-	 * @used in localizeScript
+	 * @used in localize_script
 	 * @var  array    $level_1_contracts of contracts from options page.
 	 */
 	public $level_1_contracts;
@@ -120,7 +120,7 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 	 * @since  1.0.0
 	 * @access public
 	 *
-	 * @used in localizeScript
+	 * @used in localize_script
 	 * @var  array    $level_2_contracts of contracts from options page.
 	 */
 	public $level_2_contracts;
@@ -131,7 +131,7 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 	 * @since  1.0.0
 	 * @access public
 	 *
-	 * @used in localizeScript
+	 * @used in localize_script
 	 * @var  array    $level_3_contracts of contracts from options page.
 	 */
 	public $level_3_contracts;
@@ -142,7 +142,7 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 	 * @since  1.0.0
 	 * @access public
 	 *
-	 * @used in localizeScript
+	 * @used in localize_script
 	 * @var  array    $level_1_services of services from options page.
 	 */
 	public $level_1_services;
@@ -153,7 +153,7 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 	 * @since  1.0.0
 	 * @access public
 	 *
-	 * @used in localizeScript
+	 * @used in localize_script
 	 * @var  array    $level_2_services of services from options page.
 	 */
 	public $level_2_services;
@@ -164,7 +164,7 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 	 * @since  1.0.0
 	 * @access public
 	 *
-	 * @used in localizeScript
+	 * @used in localize_script
 	 * @var  array    $level_3_services of services from options page.
 	 */
 	public $level_3_services;
@@ -337,7 +337,7 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 			wp_register_script( 'mz_mbo_access_script', NS\PLUGIN_NAME_URL . 'dist/scripts/main.js', array( 'jquery' ), NS\PLUGIN_VERSION, true );
 			wp_enqueue_script( 'mz_mbo_access_script' );
 
-			$this->localizeScript();
+			$this->localize_script();
 		}
 	}
 
@@ -348,7 +348,7 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 	 *
 	 * @return   void
 	 */
-	public function localizeScript() {
+	public function localize_script() {
 
 		$protocol = isset( $_SERVER['HTTPS'] ) ? 'https://' : 'http://';
 

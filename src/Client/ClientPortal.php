@@ -56,7 +56,7 @@ class ClientPortal extends RetrieveClient {
 		/*
 		 * Generated in Access\AccessDisplay
 		 *      handle_shortcode()
-		 *      localizeScript()
+		 *      localize_script()
 		 */
 		check_ajax_referer( 'ajax_client_login', 'nonce' );
 
@@ -110,7 +110,7 @@ class ClientPortal extends RetrieveClient {
 	 */
 	public function ajax_client_logout() {
 
-		// Generated in Access\AccessDisplay localizeScript().
+		// Generated in Access\AccessDisplay localize_script().
 		check_ajax_referer( 'ajax_client_logout', 'nonce' );
 
 		ob_start();
@@ -151,7 +151,7 @@ class ClientPortal extends RetrieveClient {
 	public function ajax_check_client_logged() {
 		/*
 		 * Generated in
-		 *      Access\AccessDisplay localizeScript()
+		 *      Access\AccessDisplay localize_script()
 		 *      MzMboOnDemand\Frontend\Frontend enqueue_scripts()
 		 */
 		check_ajax_referer( 'mz_check_client_logged', 'nonce' );

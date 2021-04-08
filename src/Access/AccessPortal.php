@@ -36,7 +36,7 @@ class AccessPortal extends AccessUtilities {
 	public function ajax_login_check_access_permissions() {
 		/*
 		 * Generated in
-		 *      Access\AccessDisplay localizeScript()
+		 *      Access\AccessDisplay localize_script()
 		 *      MzMboOnDemand Frontend\Frontend enqueue_scripts()
 		 */
 		check_ajax_referer( 'ajax_login_check_access_permissions', 'nonce' );
