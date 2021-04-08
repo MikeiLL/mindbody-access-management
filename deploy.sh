@@ -74,35 +74,16 @@ rm -rf $SVNPATH/trunk/*
 echo "Exporting the HEAD of master from git to the trunk of SVN"
 git checkout-index -a -f --prefix=$SVNPATH/trunk/
 
-echo "Ignoring github specific files and deployment script"
-svn propset svn:ignore "
-README.md
-node_modules
-tests
-assets
-wpassets
-.DS_Store
-.gitmodules
-.babelrc
-package.json
-package-lock.json
-bin/install-wp-tests.sh
-phpunit.xml.dist
-phpcs.ruleset.xml
-phpcs.xml.dist
-vendor/coenjacobs
-vendor/dealerdirect
-vendor/symfony
-vendor/wp-coding-standards
-vendor/squizlabs
-vendor/bin
-.git
-.babelrc
-.idea
-*.log
-*.sh
-webpack.config.js
-.gitignore" "$SVNPATH/trunk/"
+echo "Ignoring github specific files, some composer vendor files, deployment script"
+svn propset -R svn:ignore -F .svnignore "$SVNPATH/trunk/"
+
+# Remove vendor directory
+echo "Remove vendor directory in case not empty."
+rm -rf vendor
+
+# Run composer install no dev
+echo "Install composer non-dev dependencies."
+composer install --no-dev
 
 # If this fails, check into svn cleanup
 
