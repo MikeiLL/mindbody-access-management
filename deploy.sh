@@ -32,8 +32,8 @@ echo
 #fi
 
 # Check version in readme.txt is the same as plugin file after translating both to unix line breaks to work around grep's failure to identify mac line breaks
-NEWVERSION1=`grep "^Stable tag:" $GITPATH/readme.txt | awk -F' ' '{print $NF}'`
-echo "readme.txt version: $NEWVERSION1"
+NEWVERSION1=`grep "^Stable tag:" $GITPATH/README.txt | awk -F' ' '{print $NF}'`
+echo "README.txt version: $NEWVERSION1"
 NEWVERSION2=`grep "^ \* Version:" $GITPATH/$MAINFILE | awk -F' ' '{print $NF}'`
 echo "$MAINFILE version: $NEWVERSION2"
 
@@ -77,6 +77,12 @@ git checkout-index -a -f --prefix=$SVNPATH/trunk/
 echo "Ignoring github specific files, some composer vendor files, deployment script"
 svn propset -R svn:ignore -F .svnignore "$SVNPATH/trunk/"
 
+
+# If this fails, check into svn cleanup
+
+echo "Changing directory to SVN and committing to trunk"
+cd $SVNPATH/trunk/
+
 # Remove vendor directory
 echo "Remove vendor directory in case not empty."
 rm -rf vendor
@@ -85,12 +91,6 @@ rm -rf vendor
 echo "Install composer non-dev dependencies."
 composer install --no-dev
 
-# If this fails, check into svn cleanup
-
-echo "Changing directory to SVN and committing to trunk"
-cd $SVNPATH/trunk/
-echo "Run composer install to get dependencies."
-composer install
 # Add all new files that are not set to be ignored
 echo "Doing the file adding"
 svn status | grep -v "^.[ \t]*\..*" | grep "^?" | awk '{print $2}' | xargs svn add
