@@ -24,7 +24,8 @@
 	"require": {
 		"php": ">=7.1",
 		"composer/installers": "~1.0",
-		"ericmann/sessionz": "^0.3"
+		"ericmann/sessionz": "^0.3",
+		"htmlburger/carbon-fields": "^3.3"
 	},
 	"config": {
 	  "optimize-autoloader": true,
