@@ -274,23 +274,6 @@ class SettingsPage {
 		$return          = '';
 		$mz_requirements = 0;
 
-		if ( ! file_exists( 'PEAR/Registry.php' ) ) {
-			return '<p>
-                        SOAP warning (above).
-                    </p>
-                    <div class="notice notice-warning is-dismissible" 
-                        style="padding:1.5em;">Cannot confirm pear is installed. 
-                        Check with server admin about pear/SOAP if you have issues.
-                        <button type="button" class="notice-dismiss">
-                            <span class="screen-reader-text">Dismiss this notice.</span>
-                        </button>
-                    </div>';
-		}
-
-		include 'PEAR/Registry.php';
-
-		$reg = new \PEAR_Registry();
-
 		if ( extension_loaded( 'soap' ) ) {
 			$return .= __( 'SOAP installed! ', 'mz-mindbody-api' );
 		} else {
@@ -299,17 +282,10 @@ class SettingsPage {
 		}
 		$return .= '&nbsp;';
 
-		if ( class_exists( 'System' ) === true ) {
-			$return .= __( 'PEAR installed! ', 'mz-mindbody-api' );
-		} else {
-			$return         .= __( 'PEAR is not installed. ', 'mz-mindbody-api' );
-			$mz_requirements = 1;
-		}
-
 		if ( 1 === $mz_requirements ) {
-			$return .= '<div class="settings-error"><p>';
+			$return .= '<div class="settings-error notice notice-warning is-dismissible" style="padding:1.5em;"><p>';
 			$return .= __(
-				'MZ Mindbody API requires SOAP and PEAR. 
+				'MZ Mindbody API requires SOAP. 
                         Please contact your hosting provider or 
                         enable via your CPANEL of php.ini file.',
 				'mz-mindbody-api'
