@@ -29,11 +29,6 @@ use MZoo\MzMboAccess\Carbon_Fields;
  *
  * @author Mike iLL/mZoo.org
  */
-$carbon_fields_init = new Carbon_Fields\Carbon_Fields_Init();
-
-// Load Carbon Fields
-add_action( 'after_setup_theme', [$carbon_fields_init, 'crb_load'], 1 );
-add_action( 'carbon_fields_register_fields', [$carbon_fields_init, 'crb_attach_theme_options'] );
 
 class PluginCore {
 
@@ -130,6 +125,7 @@ class PluginCore {
 		$this->load_dependencies();
 		$this->set_locale();
 		// Could also define_admin_hooks here.
+		$this->define_admin_hooks();
 		$this->define_public_hooks();
 		$this->register_shortcodes();
 		$this->add_settings_page();
@@ -211,6 +207,7 @@ class PluginCore {
 		* $this->loader->add_filter( 'plugin_action_links_' . $this->plugin_basename, $plugin_admin, 'add_additional_action_link' );
 		*
 		*/
+        $carbon_fields_init = new Carbon_Fields\Carbon_Fields_Init();
 
 	}
     
@@ -223,6 +220,13 @@ class PluginCore {
 	private function define_public_hooks() {
 		$access_portal = new Access\AccessPortal();
 		$client_portal = new Client\ClientPortal();
+        $carbon_fields_init = new Carbon_Fields\Carbon_Fields_Init();
+
+        // Testing Carbon Fields
+        $this->loader->add_action( 'after_setup_theme', $carbon_fields_init, 'crb_load' );
+
+        // Testing Carbon Fields
+        $this->loader->add_action( 'carbon_fields_register_fields', $carbon_fields_init, 'crb_attach_theme_options' );
 
 		// Start Ajax Access Management.
 		$this->loader->add_action( 'wp_ajax_nopriv_ajax_login_check_access_permissions', $access_portal, 'ajax_login_check_access_permissions' );
