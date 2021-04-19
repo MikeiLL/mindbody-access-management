@@ -118,6 +118,54 @@
             "time": "2018-01-16T15:06:12+00:00"
         },
         {
+            "name": "ericmann/wp-session-manager",
+            "version": "4.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ericmann/wp-session-manager",
+                "reference": "b5cafd9216241a53314f7e21b3888b8583f7784f"
+            },
+            "require": {
+                "ericmann/sessionz": "^0.3",
+                "php": ">=7.1"
+            },
+            "require-dev": {
+                "php-coveralls/php-coveralls": "^2.1",
+                "phpunit/phpunit": "^7.5",
+                "squizlabs/php_codesniffer": "^3.4"
+            },
+            "type": "wordpress-plugin",
+            "autoload": {
+                "classmap": [
+                    "includes/SessionHandler.php",
+                    "includes/CacheHandler.php",
+                    "includes/DatabaseHandler.php",
+                    "includes/Option.php",
+                    "includes/OptionsHandler.php"
+                ],
+                "files": [
+                    "includes/deprecated.php"
+                ]
+            },
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Eric Mann",
+                    "email": "eric@eamann.com",
+                    "homepage": "https://eamann.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Prototype session management for WordPress.",
+            "homepage": "https://github.com/ericmann/wp-session-manager",
+            "keywords": [
+                "session"
+            ],
+            "time": "2019-03-31T03:32:58+00:00"
+        },
+        {
             "name": "htmlburger/carbon-fields",
             "version": "v3.3.0",
             "source": {

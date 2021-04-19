@@ -29,6 +29,12 @@ use MZoo\MzMboAccess\Carbon_Fields;
  *
  * @author Mike iLL/mZoo.org
  */
+//$carbon_fields = new Carbon_Fields\Carbon_Fields();
+
+// Load Carbon Fields
+//add_action( 'after_setup_theme', [$carbon_fields, 'crb_load'], 1 );
+//add_action( 'carbon_fields_register_fields', [$carbon_fields, 'crb_attach_theme_options'] );
+
 class PluginCore {
 
 	/**
@@ -207,7 +213,7 @@ class PluginCore {
 		*/
 
 	}
-
+    
 	/**
 	 * Register all of the hooks related to the public-facing functionality
 	 * of the plugin.
