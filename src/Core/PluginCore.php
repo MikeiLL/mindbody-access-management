@@ -207,7 +207,6 @@ class PluginCore {
 		* $this->loader->add_filter( 'plugin_action_links_' . $this->plugin_basename, $plugin_admin, 'add_additional_action_link' );
 		*
 		*/
-        $carbon_fields_init = new Carbon_Fields\Carbon_Fields_Init();
 
 	}
     
