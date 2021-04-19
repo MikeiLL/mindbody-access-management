@@ -39,6 +39,8 @@ if ( ! defined( 'WPINC' ) ) {
 
 define( __NAMESPACE__ . '\NS', __NAMESPACE__ . '\\' );
 
+define( NS . 'MZ', 'MZoo\MzMindbody' );
+
 define( NS . 'PLUGIN_NAME', 'mz-mbo-access' );
 
 define( NS . 'PLUGIN_VERSION', '2.1.0' );
@@ -54,36 +56,47 @@ define( NS . 'PLUGIN_TEXT_DOMAIN', 'mz-mbo-access' );
 add_action( 'admin_init', __NAMESPACE__ . '\mbo_access_has_mindbody_api' );
 
 
-
 /**
- * Autoload Classes
+ * Check the minimum PHP version.
  */
-$wp_mbo_access_autoload = NS\PLUGIN_NAME_DIR . '/vendor/autoload.php';
-if ( file_exists( $wp_mbo_access_autoload ) ) {
-	include_once $wp_mbo_access_autoload;
+if ( version_compare( PHP_VERSION, MZ . '\MINIMUM_PHP_VERSION', '<' ) ) {
+	add_action( 'admin_notices', NS . 'minimum_php_version' );
+}
+else {
+	/**
+	 * Autoload Classes
+	 */
+	$wp_mbo_access_autoload = NS\PLUGIN_NAME_DIR . '/vendor/autoload.php';
+	if ( file_exists( $wp_mbo_access_autoload ) ) {
+		include_once $wp_mbo_access_autoload;
+	}
+
+	if ( ! class_exists( '\MZoo\MzMboAccess\Core\PluginCore' ) ) {
+		add_action( 'admin_notices', NS . 'missing_composer' );
+	}
+	else {
+
+		/**
+		 * Register Activation and Deactivation Hooks
+		 * This action is documented in src/core/class-activator.php
+		 */
+
+		register_activation_hook( __FILE__, array( NS . 'Core\Activator', 'activate' ) );
+
+		/**
+		 * The code that runs during plugin deactivation.
+		 * This action is documented src/core/class-deactivator.php
+		 */
+
+		/*
+			* TODO: This Class is causing a php Warning, then error that it's already
+			* been declared. Not doing anything anyway so commenting out for now.
+			* register_deactivation_hook( __FILE__, array( NS . '\Core\Deactivator', 'deactivate' ) );
+			*/
+
+	}
 }
 
-if ( ! class_exists( '\MZoo\MzMboAccess\Core\PluginCore' ) ) {
-	exit( 'MZ MBO Access requires Composer autoloading, which is not configured' );
-}
-
-/**
- * Register Activation and Deactivation Hooks
- * This action is documented in src/core/class-activator.php
- */
-
-register_activation_hook( __FILE__, array( NS . 'Core\Activator', 'activate' ) );
-
-/**
- * The code that runs during plugin deactivation.
- * This action is documented src/core/class-deactivator.php
- */
-
-/*
- * TODO: This Class is causing a php Warning, then error that it's already
- * been declared. Not doing anything anyway so commenting out for now.
- * register_deactivation_hook( __FILE__, array( NS . '\Core\Deactivator', 'deactivate' ) );
- */
 
 /**
  * Instance of the main plugin class.
@@ -123,106 +136,101 @@ class MzMboAccess {
 		return self::$instance;
 	}
 }
-
-if ( ! function_exists( 'MBO_Access' ) ) {
-
-	/**
-	 * Begins execution of the plugin
-	 *
-	 * The main function for that returns MzMboAccess
-	 *
-	 * The main function responsible for returning the one true MzMboAccess
-	 * Instance to functions everywhere.
-	 *
-	 * Borrowed from Easy_Digital_Downloads.
-	 *
-	 * Use this function like you would a global variable, except without needing
-	 * to declare the global.
-	 *
-	 * Example: <?php $mZmboAccess = MBO_Access(); ?>
-	 *
-	 * @since everything within the plugin is registered via hooks,
-	 * then kicking off the plugin from this point in the file does
-	 * not affect the page life cycle.
-	 *
-	 * Also returns copy of the app object so 3rd party developers
-	 * can interact with the plugin's hooks contained within.
-	 *
-	 * @since  1.4
-	 * @return object|MzMboAccess The one true MzMboAccess Instance.
-	 */
-    // @codingStandardsIgnoreStart
-	function MBO_Access() {
-        // @codingStandardsIgnoreEnd
-		return NS\MzMboAccess::instance();
-	}
+/**
+ * Begins execution of the plugin
+ *
+ * The main function for that returns MzMboAccess
+ *
+ * The main function responsible for returning the one true MzMboAccess
+ * Instance to functions everywhere.
+ *
+ * Borrowed from Easy_Digital_Downloads.
+ *
+ * Use this function like you would a global variable, except without needing
+ * to declare the global.
+ *
+ * Example: <?php $mZmboAccess = MBO_Access(); ?>
+ *
+ * @since everything within the plugin is registered via hooks,
+ * then kicking off the plugin from this point in the file does
+ * not affect the page life cycle.
+ *
+ * Also returns copy of the app object so 3rd party developers
+ * can interact with the plugin's hooks contained within.
+ *
+ * @since  1.4
+ * @return object|MzMboAccess The one true MzMboAccess Instance.
+ */
+// @codingStandardsIgnoreStart
+function MBO_Access() {
+	// @codingStandardsIgnoreEnd
+	return NS\MzMboAccess::instance();
 }
 
-// Check the minimum required PHP version and run the plugin.
-if ( version_compare( PHP_VERSION, 'MZoo\MzMindbody\MINIMUM_PHP_VERSION', '>=' ) ) {
-	add_action( 'init', __NAMESPACE__ . '\\mz_mbo_access_plugin_init' );
+/**
+ * Deactivation and message when initialization fails.
+ * 
+ * @param string $error        Error message to output.
+ * @since 2.1.1
+ * @return void.
+ */
+function activation_failed( $error ) {
+	register_deactivation_hook( plugin_basename( __FILE__ ), NS . 'plugin_is_deactivated' );
+	?>
+		<div class="notice notice-error is-dismissible"><p><strong>
+			<?php echo $error; ?>
+		</strong></p></div>
+	<?php
+	deactivate_plugins( plugin_basename( __FILE__ ) );
+}
+
+/**
+ * Notice of missing composer.
+ *
+ * @since 2.1.1
+ * @return void.
+ */
+function missing_composer() {
+	activation_failed( __( 'MZ MBO Access requires Composer autoloading, which is not configured.', NS . 'PLUGIN_TEXT_DOMAIN' ) );
+}
+
+/**
+ * Notice of php version error.
+ *
+ * @since 2.1.1
+ * @return void.
+ */
+function minimum_php_version() {
+	activation_failed( __( 'MZ MBO Access requires PHP version', NS . 'PLUGIN_TEXT_DOMAIN' ) . sprintf( ' %1.1f.', MZ\MINIMUM_PHP_VERSION ) );
+}	
+
+/**
+ * Notice of plugin deactivation.
+ *
+ * @since 2.1.1
+ * @return void.
+ */
+function plugin_is_deactivated() {
+	?>
+		<div class="notice notice-success is-dismissible"><p>
+			<?php _e( 'MZ MBO Access plugin has been deactivated.', NS . 'PLUGIN_TEXT_DOMAIN' ); ?>
+		</p></div>
+	<?php
 }
 
 /**
  * Insure that parent plugin, is active or deactivate plugin.
  */
 function mbo_access_has_mindbody_api() {
-	if ( is_admin() && current_user_can( 'activate_plugins' ) &&
-	! class_exists( '\MZoo\MzMindbody\Core\MzMindbodyApi' ) ) {
-		add_action( 'admin_notices', __NAMESPACE__ . '\\mbo_access_child_plugin_notice' );
-
-		deactivate_plugins( plugin_basename( __FILE__ ) );
-
-        // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		if ( isset( $_GET['activate'] ) ) {
-            // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-			unset( $_GET['activate'] );
-		}
+	if ( is_admin() && current_user_can( 'activate_plugins' ) && ! class_exists( MZ . '\Core\MzMindbodyApi' ) ) {
+		activation_failed( __( 'MZ MBO Access requires MZ Mindbody Api.', NS . 'PLUGIN_TEXT_DOMAIN' ) );
 	}
-}
-
-/**
- * Child Plugin Notice
- */
-function mbo_access_child_plugin_notice() {     ?>
-	<div class="error">
-		<p>
-			<?php
-			esc_html_e(
-				'Whoops. MZ MBO Access plugin requires the parent plugin, 
-                MZ Mindbody API, to be installed and active.',
-				'mz-mbo-access'
-			);
-			?>
-		</p>
-	</div>
-	<?php
-}
-/**
- * Deactivate the plugin.
- *
- * @used by mbo_access_has_mindbody_api above
- */
-function deactivate() {
-	deactivate_plugins( plugin_basename( __FILE__ ) );
-	$admin_object = new NS\Admin\Admin( NS\PLUGIN_NAME, NS\PLUGIN_VERSION, 'mz-mbo-access' );
-	add_action( 'admin_notices', array( $admin_object, 'admin_notice' ) );
-}
-
-/**
- * Activate the plugin.
- *
- * If version_compare passes above, function is added to init action.
- */
-function mz_mbo_access_plugin_init() {
-	if ( defined( 'MZoo\MzMindbody\PLUGIN_NAME_DIR' ) ) {
-		// MZ Mindbody API plugin is activated, add the hooks.
+	else {
+			
 		// Get MzMboAccess Instance.
 		MBO_Access();
-	} else {
-		add_action( 'admin_init', __NAMESPACE__ . '\\deactivate' );
+
 	}
 }
-
 
 ?>
