@@ -29,11 +29,11 @@ use MZoo\MzMboAccess\Carbon_Fields;
  *
  * @author Mike iLL/mZoo.org
  */
-//$carbon_fields = new Carbon_Fields\Carbon_Fields();
+$carbon_fields_init = new Carbon_Fields\Carbon_Fields_Init();
 
 // Load Carbon Fields
-//add_action( 'after_setup_theme', [$carbon_fields, 'crb_load'], 1 );
-//add_action( 'carbon_fields_register_fields', [$carbon_fields, 'crb_attach_theme_options'] );
+add_action( 'after_setup_theme', [$carbon_fields_init, 'crb_load'], 1 );
+add_action( 'carbon_fields_register_fields', [$carbon_fields_init, 'crb_attach_theme_options'] );
 
 class PluginCore {
 
@@ -223,13 +223,6 @@ class PluginCore {
 	private function define_public_hooks() {
 		$access_portal = new Access\AccessPortal();
 		$client_portal = new Client\ClientPortal();
-        $carbon_fields = new Carbon_Fields\Carbon_Fields();
-
-        // Load Carbon Fields
-        $this->loader->add_action( 'after_setup_theme', $carbon_fields, 'crb_load', 1 );
-
-        // Testing Carbon Fields
-        $this->loader->add_action( 'carbon_fields_register_fields', $carbon_fields, 'crb_attach_theme_options' );
 
 		// Start Ajax Access Management.
 		$this->loader->add_action( 'wp_ajax_nopriv_ajax_login_check_access_permissions', $access_portal, 'ajax_login_check_access_permissions' );

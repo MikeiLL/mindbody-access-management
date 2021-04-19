@@ -11,6 +11,9 @@
 namespace MZoo\MzMboAccess\Carbon_Fields;
 
 use MZoo\MzMboAccess as NS;
+use MZoo\MzMboAccess\Dependencies\Carbon_Fields;
+use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Container;
+
 /**
  * Carbon Fields Extension Class.
  *
@@ -21,7 +24,7 @@ use MZoo\MzMboAccess as NS;
  *
  * @author Mike iLL/mZoo.org
  */
-class Carbon_Fields {
+class Carbon_Fields_Init {
 
     /**
      * Load Carbon Fields
@@ -29,16 +32,16 @@ class Carbon_Fields {
      * Call the Carbon Fields boot method.
      */
     public function crb_load(){
-        NS\Dependencies\Carbon_Fields\Carbon_Fields::boot();
+        Carbon_Fields\Carbon_Fields::boot();
     }
 
     /**
      * Test Carbon Fields Options Page
      */
     function crb_attach_theme_options() {
-        Container::make( 'theme_options', __( 'Carbon Fields Options' ) )
+        Container\Container::make( 'theme_options', __( 'Carbon Fields Options' ) )
             ->add_fields( array(
-                Field::make( 'text', 'crb_text', 'Text Field' ),
+                Carbon_Fields\Field::make( 'text', 'crb_text', 'Text Field' ),
             ) );
     }
 }
