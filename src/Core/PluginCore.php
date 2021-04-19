@@ -125,7 +125,6 @@ class PluginCore {
 		$this->load_dependencies();
 		$this->set_locale();
 		// Could also define_admin_hooks here.
-		$this->define_admin_hooks();
 		$this->define_public_hooks();
 		$this->register_shortcodes();
 		$this->add_settings_page();
