@@ -1,5 +1,5 @@
 {
-	"name": "mikeill/mz-mbo-access",
+  "name": "mikeill/mz-mbo-access",
 	"description": "Grant Client Access Based on Mindbody Online API Credentials",
 	"keywords": [
     "MBO",
@@ -19,35 +19,69 @@
       "homepage": "http://mzoo.org",
       "role": "Developer"
     }
-   ],
+  ],
 	"type": "wordpress-plugin",
-	"require": {
-		"php": ">=7.1",
-		"composer/installers": "~1.0",
-		"ericmann/sessionz": "^0.3",
-		"htmlburger/carbon-fields": "^3.3"
-	},
-	"config": {
-	  "optimize-autoloader": true,
-	  "preferred-install": "dist",
-	  "sort-packages": true
-	},
 	"scripts": {
 		"lint": [
 		  "phpcs --extensions=php src *.php"
 		],
-    "fix": ["phpcbf --extensions=php src *.php"]
+    "fix": ["phpcbf --extensions=php src *.php"],
+    "post-install-cmd": [
+        "\"vendor/bin/mozart\" compose"
+    ],
+    "post-update-cmd": [
+      "\"vendor/bin/mozart\" compose"
+    ]
 	},
+  "require": {
+		"php": ">=7.1",
+		"ericmann/sessionz": "^0.3",
+		"ericmann/wp-session-manager": "*",
+    "htmlburger/carbon-fields": "*"
+  },
+  "repositories": [
+    {
+      "url": "https://github.com/brianhenryie/mozart",
+      "type": "git"
+    },
+    {
+      "url": "https://github.com/ericmann/wp-session-manager",
+      "type": "git"
+    }
+  ],
+  "require-dev":{
+    "coenjacobs/mozart": "dev-rewrite",
+		"squizlabs/php_codesniffer": "*",
+		"wp-coding-standards/wpcs": "*"
+  },
 	"autoload": {
 		"psr-4": {
-			"MZoo\\MzMboAccess\\": "src",
-			"EAMann\\": "libraries/wp-sessions",
-			"EAMann\\WPSession\\": "libraries/wp-sessions",
-			"EAMann\\WPSession\\Objects\\": "libraries/wp-sessions"
+			"MZoo\\MzMboAccess\\": "src"
 		}
 	},
-  "require-dev": {
-    "squizlabs/php_codesniffer": "*",
-    "wp-coding-standards/wpcs": "*"
+  "extra": {
+    "mozart":{
+      "dep_namespace": "MZoo\\MzMboAccess\\Dependencies\\",
+      "dep_directory": "/src/Mozart/",
+      "packages": [
+        "htmlburger/carbon-fields",
+        "ericmann/wp-session-manager",
+        "ericmann/sessionz"
+      ],
+      "delete_vendor_directories": false,
+      "override_autoload": {
+        "htmlburger/carbon-fields": {
+          "psr-4": {
+            "Carbon_Fields\\": "core/"
+          },
+          "files": [
+            "config.php",
+            "templates",
+            "assets",
+            "build"
+          ]
+        }
+      }
+    }
   }
 }

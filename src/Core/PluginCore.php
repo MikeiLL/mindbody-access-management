@@ -11,10 +11,12 @@
 namespace MZoo\MzMboAccess\Core;
 
 use MZoo\MzMboAccess as NS;
-use MZoo\MzMboAccess\Access as Access;
-use MZoo\MzMboAccess\Client as Client;
-use MZoo\MzMboAccess\Backend as Backend;
-use MZoo\MzMboAccess\Session as Session;
+use MZoo\MzMindbody as MZ;
+use MZoo\MzMboAccess\Access;
+use MZoo\MzMboAccess\Client;
+use MZoo\MzMboAccess\Backend;
+use MZoo\MzMboAccess\Session;
+use MZoo\MzMboAccess\Carbon_Fields;
 
 /**
  * The core plugin class.
@@ -27,6 +29,12 @@ use MZoo\MzMboAccess\Session as Session;
  *
  * @author Mike iLL/mZoo.org
  */
+//$carbon_fields = new Carbon_Fields\Carbon_Fields();
+
+// Load Carbon Fields
+//add_action( 'after_setup_theme', [$carbon_fields, 'crb_load'], 1 );
+//add_action( 'carbon_fields_register_fields', [$carbon_fields, 'crb_attach_theme_options'] );
+
 class PluginCore {
 
 	/**
@@ -203,8 +211,9 @@ class PluginCore {
 		* $this->loader->add_filter( 'plugin_action_links_' . $this->plugin_basename, $plugin_admin, 'add_additional_action_link' );
 		*
 		*/
-	}
 
+	}
+    
 	/**
 	 * Register all of the hooks related to the public-facing functionality
 	 * of the plugin.
@@ -214,6 +223,13 @@ class PluginCore {
 	private function define_public_hooks() {
 		$access_portal = new Access\AccessPortal();
 		$client_portal = new Client\ClientPortal();
+        $carbon_fields = new Carbon_Fields\Carbon_Fields();
+
+        // Load Carbon Fields
+        $this->loader->add_action( 'after_setup_theme', $carbon_fields, 'crb_load', 1 );
+
+        // Testing Carbon Fields
+        $this->loader->add_action( 'carbon_fields_register_fields', $carbon_fields, 'crb_attach_theme_options' );
 
 		// Start Ajax Access Management.
 		$this->loader->add_action( 'wp_ajax_nopriv_ajax_login_check_access_permissions', $access_portal, 'ajax_login_check_access_permissions' );

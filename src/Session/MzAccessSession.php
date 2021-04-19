@@ -9,14 +9,8 @@
 
 namespace MZoo\MzMboAccess\Session;
 
-use EAMann\Sessionz\Handlers\EncryptionHandler;
-use EAMann\Sessionz\Handlers\MemoryHandler;
-use EAMann\Sessionz\Manager;
-use EAMann\WPSession\SessionHandler;
-use EAMann\WPSession\Objects\Option;
-use EAMann\WPSession\OptionsHandler;
-use EAMann\WPSession\CacheHandler;
-use EAMann\WPSession\DatabaseHandler;
+use MZoo\MzMboAccess\Dependencies\EAMann\Sessionz;
+use MZoo\MzMboAccess\Dependencies\EAMann\WPSession;
 
 /**
  * MzAccessSession wrapper class
@@ -84,13 +78,13 @@ class MzAccessSession {
 
 		if ( ! isset( $_SESSION ) ) {
 			// Queue up the session stack.
-			$wp_session_handler = Manager::initialize();
+			$wp_session_handler = Sessionz\Manager::initialize();
 
 			// Fall back to database storage where needed.
 			if ( defined( 'WP_SESSION_USE_OPTIONS' ) && WP_SESSION_USE_OPTIONS ) {
-				$wp_session_handler->addHandler( new OptionsHandler() );
+				$wp_session_handler->addHandler( new WPSession\OptionsHandler() );
 			} else {
-				$wp_session_handler->addHandler( new DatabaseHandler() );
+				$wp_session_handler->addHandler( new WPSession\DatabaseHandler() );
 
 				/**
 				 * The database handler can automatically clean up sessions as it goes. By default,
@@ -111,15 +105,15 @@ class MzAccessSession {
 
 			// If we have an external object cache, let's use it!
 			if ( wp_using_ext_object_cache() ) {
-				$wp_session_handler->addHandler( new CacheHandler() );
+				$wp_session_handler->addHandler( new WPSession\CacheHandler() );
 			}
 
 			if ( defined( 'WP_SESSION_ENC_KEY' ) && WP_SESSION_ENC_KEY ) {
-				$wp_session_handler->addHandler( new EncryptionHandler( WP_SESSION_ENC_KEY ) );
+				$wp_session_handler->addHandler( new Sessionz\Handlers\EncryptionHandler( WP_SESSION_ENC_KEY ) );
 			}
 
 			// Use an in-memory cache for the instance if we can. This will only help in rare cases.
-			$wp_session_handler->addHandler( new MemoryHandler() );
+			$wp_session_handler->addHandler( new Sessionz\Handlers\MemoryHandler() );
 
 			$_SESSION['wp_session_manager'] = 'active';
 		}
@@ -130,7 +124,7 @@ class MzAccessSession {
 		}
 
 		// Create the required table.
-		DatabaseHandler::createTable();
+		WPSession\DatabaseHandler::createTable();
 
 		register_deactivation_hook(
 			__FILE__,
