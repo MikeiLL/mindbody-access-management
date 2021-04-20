@@ -53,8 +53,6 @@ define( NS . 'PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
 
 define( NS . 'PLUGIN_TEXT_DOMAIN', 'mz-mbo-access' );
 
-add_action( 'admin_init', __NAMESPACE__ . '\mbo_access_has_mindbody_api' );
-
 
 /**
  * Check the minimum PHP version.
@@ -93,6 +91,9 @@ else {
 			* been declared. Not doing anything anyway so commenting out for now.
 			* register_deactivation_hook( __FILE__, array( NS . '\Core\Deactivator', 'deactivate' ) );
 			*/
+
+
+		add_action( 'init', __NAMESPACE__ . '\mbo_access_has_mindbody_api', 20 );
 
 	}
 }
@@ -176,11 +177,13 @@ function MBO_Access() {
  */
 function activation_failed( $error ) {
 	register_deactivation_hook( plugin_basename( __FILE__ ), NS . 'plugin_is_deactivated' );
-	?>
-		<div class="notice notice-error is-dismissible"><p><strong>
-			<?php echo $error; ?>
-		</strong></p></div>
-	<?php
+	if ( is_admin() && current_user_can( 'activate_plugins' ) ) {
+		?>
+			<div class="notice notice-error is-dismissible"><p><strong>
+				<?php echo $error; ?>
+			</strong></p></div>
+		<?php
+	}
 	deactivate_plugins( plugin_basename( __FILE__ ) );
 }
 
@@ -211,18 +214,20 @@ function minimum_php_version() {
  * @return void.
  */
 function plugin_is_deactivated() {
-	?>
-		<div class="notice notice-success is-dismissible"><p>
-			<?php _e( 'MZ MBO Access plugin has been deactivated.', NS . 'PLUGIN_TEXT_DOMAIN' ); ?>
-		</p></div>
-	<?php
+	if ( is_admin() && current_user_can( 'activate_plugins' ) ) {
+		?>
+			<div class="notice notice-success is-dismissible"><p>
+				<?php _e( 'MZ MBO Access plugin has been deactivated.', NS . 'PLUGIN_TEXT_DOMAIN' ); ?>
+			</p></div>
+		<?php
+	}
 }
 
 /**
  * Insure that parent plugin, is active or deactivate plugin.
  */
 function mbo_access_has_mindbody_api() {
-	if ( is_admin() && current_user_can( 'activate_plugins' ) && ! class_exists( MZ . '\Core\MzMindbodyApi' ) ) {
+	if ( ! class_exists( MZ . '\Core\MzMindbodyApi' ) ) {
 		activation_failed( __( 'MZ MBO Access requires MZ Mindbody Api.', NS . 'PLUGIN_TEXT_DOMAIN' ) );
 	}
 	else {
