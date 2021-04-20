@@ -93,7 +93,7 @@ if ( version_compare( PHP_VERSION, NS\MINIMUM_PHP_VERSION, '<' ) ) {
 		 * Check for the dependencies and run if everything looks okay.
 		 */
 
-		add_action( 'init', __NAMESPACE__ . '\mbo_access_has_mindbody_api', 20 );
+		add_action( 'plugins_loaded', __NAMESPACE__ . '\mbo_access_has_mindbody_api', 20 );
 
 	}
 }
