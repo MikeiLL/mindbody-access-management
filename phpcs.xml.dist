@@ -8,6 +8,7 @@
 	<arg name="parallel" value="8"/>
 	
 	<exclude-pattern>index.php</exclude-pattern>
+	<exclude-pattern>src/Mozart</exclude-pattern>
 	<exclude-pattern>class-gamajo-template-loader.php</exclude-pattern>
 		
 	<rule ref="WordPress-Core" >
