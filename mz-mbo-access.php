@@ -23,6 +23,7 @@ namespace MZoo\MzMboAccess;
 use MZoo\MzMboAccess as NS;
 use MZoo\MzMindbody;
 use MZoo\MzMindbody\Core as Core;
+
 /*
  * TODO consider more eloquent appoach like EDD JILT work!
  * Based on http://wptavern.com/how-to-prevent-wordpress-plugins-from-activating-on-sites-with-incompatible-hosting-environments
@@ -62,7 +63,7 @@ if ( version_compare( PHP_VERSION, NS\MINIMUM_PHP_VERSION, '<' ) ) {
 		include_once $wp_mbo_access_autoload;
 	}
 
-// Mozart-managed dependencies
+// Mozart-managed dependencies.
 $wp_mbo_access_mozart_autoload = NS\PLUGIN_NAME_DIR . '/src/Mozart/autoload.php';
 if ( file_exists( $wp_mbo_access_mozart_autoload ) ) {
 	include_once $wp_mbo_access_mozart_autoload;
