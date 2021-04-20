@@ -30,7 +30,7 @@ use MZoo\MzMindbody\Site;
  */
 class Carbon_Fields_Init {
 
-    /**
+	/**
      * Post Listings Array
      * 
      * @since 2.1.1
@@ -41,7 +41,7 @@ class Carbon_Fields_Init {
 
 	/**
 	 * Load Carbon Fields
-     * 
+	 *
      * @since 2.1.1
 	 *
 	 * Call the Carbon Fields boot method.
@@ -129,5 +129,5 @@ class Carbon_Fields_Init {
             $this->posts_for_options[$post['ID'] => $post['post_title']
         }
         return $this->posts_for_options;
-    }
+	}
 }

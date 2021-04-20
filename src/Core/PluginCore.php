@@ -29,7 +29,6 @@ use MZoo\MzMboAccess\Carbon_Fields;
  *
  * @author Mike iLL/mZoo.org
  */
-
 class PluginCore {
 
 	/**
@@ -208,7 +207,7 @@ class PluginCore {
 		*/
 
 	}
-    
+
 	/**
 	 * Register all of the hooks related to the public-facing functionality
 	 * of the plugin.
@@ -223,8 +222,8 @@ class PluginCore {
         $this->loader->add_action( 'after_setup_theme', $carbon_fields, 'crb_load', 1 );
 		// Add Options page for Mindbody Access Levels.
 		$this->loader->add_action( 'carbon_fields_register_fields', $carbon_fields_init, 'access_levels_page' );
-        // Testing Carbon Fields
-        $this->loader->add_action( 'carbon_fields_register_fields', $carbon_fields_init, 'crb_attach_theme_options' );
+		// Add Options page for Mindbody Access Levels.
+		$this->loader->add_action( 'carbon_fields_register_fields', $carbon_fields_init, 'access_levels_page' );
 
 		// Start Ajax Access Management.
 		$this->loader->add_action( 'wp_ajax_nopriv_ajax_login_check_access_permissions', $access_portal, 'ajax_login_check_access_permissions' );
