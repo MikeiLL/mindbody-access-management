@@ -41,7 +41,7 @@ class Carbon_Fields_Init {
 
 	/**
 	 * Load Carbon Fields
-	 *
+     * 
      * @since 2.1.1
 	 *
 	 * Call the Carbon Fields boot method.
