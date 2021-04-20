@@ -20,10 +20,6 @@ namespace MZoo\MzMboAccess\Core;
  * @author Mike iLL/mZoo.org
  **/
 class Deactivator {
-
-
-
-
 	/**
 	 * Short Description.
 	 *

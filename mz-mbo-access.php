@@ -53,11 +53,13 @@ define( NS . 'PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
 
 define( NS . 'PLUGIN_TEXT_DOMAIN', 'mz-mbo-access' );
 
+define( NS . 'MINIMUM_PHP_VERSION', 7.1 );
+
 
 /**
  * Check the minimum PHP version.
  */
-if ( version_compare( PHP_VERSION, MZ . '\MINIMUM_PHP_VERSION', '<' ) ) {
+if ( version_compare( PHP_VERSION, NS\MINIMUM_PHP_VERSION, '<' ) ) {
 	add_action( 'admin_notices', NS . 'minimum_php_version' );
 }
 else {
@@ -86,12 +88,12 @@ else {
 		 * This action is documented src/core/class-deactivator.php
 		 */
 
-		/*
-			* TODO: This Class is causing a php Warning, then error that it's already
-			* been declared. Not doing anything anyway so commenting out for now.
-			* register_deactivation_hook( __FILE__, array( NS . '\Core\Deactivator', 'deactivate' ) );
-			*/
+		register_deactivation_hook( __FILE__, array( NS . '\Core\Deactivator', 'deactivate' ) );
 
+
+		/**
+		 * Check for the dependencies and run if everything looks okay.
+		 */
 
 		add_action( 'init', __NAMESPACE__ . '\mbo_access_has_mindbody_api', 20 );
 
@@ -137,6 +139,7 @@ class MzMboAccess {
 		return self::$instance;
 	}
 }
+
 /**
  * Begins execution of the plugin
  *
@@ -180,7 +183,7 @@ function activation_failed( $error ) {
 	if ( is_admin() && current_user_can( 'activate_plugins' ) ) {
 		?>
 			<div class="notice notice-error is-dismissible"><p><strong>
-				<?php echo $error; ?>
+				<?php echo esc_html( $error ); ?>
 			</strong></p></div>
 		<?php
 	}
@@ -217,7 +220,7 @@ function plugin_is_deactivated() {
 	if ( is_admin() && current_user_can( 'activate_plugins' ) ) {
 		?>
 			<div class="notice notice-success is-dismissible"><p>
-				<?php _e( 'MZ MBO Access plugin has been deactivated.', NS . 'PLUGIN_TEXT_DOMAIN' ); ?>
+				<?php esc_html_e( 'MZ MBO Access plugin has been deactivated.', NS . 'PLUGIN_TEXT_DOMAIN' ); ?>
 			</p></div>
 		<?php
 	}
