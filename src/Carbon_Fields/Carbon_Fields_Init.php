@@ -32,6 +32,8 @@ class Carbon_Fields_Init {
 
 	/**
 	 * Load Carbon Fields
+     * 
+     * @since 2.1.1
 	 *
 	 * Call the Carbon Fields boot method.
 	 */
@@ -40,7 +42,10 @@ class Carbon_Fields_Init {
 	}
 
 	/**
-	 * Test Carbon Fields Options Page
+	 * Access Levels Page via Carbon Fields
+     * 
+     * @since 2.1.1
+     * @return void
 	 */
 	public function access_levels_page() {
 		Container\Container::make( 'theme_options', __( 'MBO Access Levels' ) )
@@ -53,22 +58,50 @@ class Carbon_Fields_Init {
 							Field::make( 'text', 'access_level_name', __( 'Name' ) ),
 							Field::make( 'multiselect', 'access_level_subscriptions', __( 'Mindbody Subscriptions' ) )
 								->add_options( self::get_mbo_subscriptions() ),
+							Field::make( 'multiselect', 'access_level_programs', __( 'Mindbody Programs' ) )
+								->add_options( self::get_mbo_programs() ),
+							Field::make( 'multiselect', 'access_level_memberships', __( 'Mindbody Memberships' ) )
+								->add_options( self::get_mbo_memberships() )
 						)
-					),
+					)->set_help_text( __("Generate Access Levels by Mindbody Subscription, Program or Memberships.", 'mz-mbo-access') ),
 				)
 			);
 
 	}
 
 	/**
-	 * Return Mindbody Subscriptions
+	 * Get Mindbody Subscriptions
+     * 
+     * @since 2.1.1
+     * 
+     * @return dictionary of MBO subscriptions by Id.
 	 */
 	public static function get_mbo_subscriptions() {
 		$sale_object = new Sale\RetrieveSale();
+		return $sale_object->get_contracts( true );
+	}
+
+	/**
+	 * Get Mindbody Programs
+     * 
+     * @since 2.1.1
+     * 
+     * @return dictionary of MBO subscriptions by Id.
+	 */
+	public static function get_mbo_programs() {
 		$site_object = new Site\RetrieveSite();
-		$memberships = $site_object->get_site_memberships( true );
-		$programs    = $site_object->get_site_programs( true );
-		$contracts   = $sale_object->get_contracts();
-		return array_merge( $memberships, $contracts, $programs );
+		return $site_object->get_site_programs( true );
+	}
+
+	/**
+	 * Get Mindbody Memberships
+     * 
+     * @since 2.1.1
+     * 
+     * @return dictionary (Active) of MBO site memberships by MembershipId.
+	 */
+	public static function get_mbo_memberships() {
+		$site_object = new Site\RetrieveSite();
+		return $site_object->get_site_memberships( true );
 	}
 }

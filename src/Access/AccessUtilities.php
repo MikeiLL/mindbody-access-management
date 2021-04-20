@@ -58,6 +58,8 @@ class AccessUtilities extends Client\RetrieveClient {
 	 */
 	public function set_client_access_level( $client_id ) {
 
+        $access_options = carbon_get_theme_option( 'mbo_access_access_levels' );
+        MZ\MZMBO()->helpers->log($access_options);
 		// TODO can we avoid doing this here AND in access display?
 		$mz_mbo_access_options = get_option( 'mz_mbo_access' );
 
