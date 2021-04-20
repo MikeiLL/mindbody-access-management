@@ -61,8 +61,7 @@ define( NS . 'MINIMUM_PHP_VERSION', 7.1 );
  */
 if ( version_compare( PHP_VERSION, NS\MINIMUM_PHP_VERSION, '<' ) ) {
 	add_action( 'admin_notices', NS . 'minimum_php_version' );
-}
-else {
+} else {
 	/**
 	 * Autoload Classes
 	 */
@@ -73,8 +72,7 @@ else {
 
 	if ( ! class_exists( '\MZoo\MzMboAccess\Core\PluginCore' ) ) {
 		add_action( 'admin_notices', NS . 'missing_composer' );
-	}
-	else {
+	} else {
 
 		/**
 		 * Register Activation and Deactivation Hooks
@@ -173,7 +171,7 @@ function MBO_Access() {
 
 /**
  * Deactivation and message when initialization fails.
- * 
+ *
  * @param string $error        Error message to output.
  * @since 2.1.1
  * @return void.
@@ -197,7 +195,7 @@ function activation_failed( $error ) {
  * @return void.
  */
 function missing_composer() {
-	activation_failed( __( 'MZ MBO Access requires Composer autoloading, which is not configured.', NS . 'PLUGIN_TEXT_DOMAIN' ) );
+	activation_failed( __( 'MZ MBO Access requires Composer autoloading, which is not configured.', 'mz-mbo-access' ) );
 }
 
 /**
@@ -207,8 +205,8 @@ function missing_composer() {
  * @return void.
  */
 function minimum_php_version() {
-	activation_failed( __( 'MZ MBO Access requires PHP version', NS . 'PLUGIN_TEXT_DOMAIN' ) . sprintf( ' %1.1f.', MZ\MINIMUM_PHP_VERSION ) );
-}	
+	activation_failed( __( 'MZ MBO Access requires PHP version', 'mz-mbo-access' ) . sprintf( ' %1.1f.', MZ\MINIMUM_PHP_VERSION ) );
+}
 
 /**
  * Notice of plugin deactivation.
@@ -220,7 +218,7 @@ function plugin_is_deactivated() {
 	if ( is_admin() && current_user_can( 'activate_plugins' ) ) {
 		?>
 			<div class="notice notice-success is-dismissible"><p>
-				<?php esc_html_e( 'MZ MBO Access plugin has been deactivated.', NS . 'PLUGIN_TEXT_DOMAIN' ); ?>
+				<?php esc_html_e( 'MZ MBO Access plugin has been deactivated.', 'mz-mbo-access' ); ?>
 			</p></div>
 		<?php
 	}
@@ -231,10 +229,9 @@ function plugin_is_deactivated() {
  */
 function mbo_access_has_mindbody_api() {
 	if ( ! class_exists( MZ . '\Core\MzMindbodyApi' ) ) {
-		activation_failed( __( 'MZ MBO Access requires MZ Mindbody Api.', NS . 'PLUGIN_TEXT_DOMAIN' ) );
-	}
-	else {
-			
+		activation_failed( __( 'MZ MBO Access requires MZ Mindbody Api.', 'mz-mbo-access' ) );
+	} else {
+
 		// Get MzMboAccess Instance.
 		MBO_Access();
 
