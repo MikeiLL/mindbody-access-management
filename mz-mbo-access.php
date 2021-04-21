@@ -182,7 +182,17 @@ function activation_failed( $error ) {
 			</strong></p></div>
 		<?php
 	}
-	deactivate_plugins( plugin_basename( __FILE__ ) );
+	add_action( 'init', __NAMESPACE__ . '\deactivate_plugins', 20 );
+}
+/**
+ * Deactivate plugins.
+ *
+ * @param string $error        Error message to output.
+ * @since 2.1.1
+ * @return void.
+ */
+function deactivate_plugins() {
+	\deactivate_plugins( plugin_basename( __FILE__ ) );
 }
 
 /**
