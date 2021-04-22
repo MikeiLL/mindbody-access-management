@@ -73,8 +73,8 @@ class Carbon_Fields_Init {
 							Field::make( 'multiselect', 'access_level_services', __( 'Mindbody Services' ) )
 								->add_options( self::get_mbo_services() ),
 							Field::make( 'select', 'access_level_redirect_post', __( 'Redirect Post' ) )
-								->add_options( self::get_posts_for_options() )
-								->set_help_text( __("Page to redirect to if no access granted.", 'mz-mbo-access') )
+								->add_options( self::get_posts_for_redirects() )
+								->set_help_text( __("Page to redirect user to if no access granted.", 'mz-mbo-access') )
 								->set_default_value(0)
 						)
 					)->set_help_text( __("Generate Access Levels by Mindbody Subscriptions, Memberships and/or Services.", 'mz-mbo-access') ),
@@ -120,9 +120,12 @@ class Carbon_Fields_Init {
 	}
 
     /**
-     * Get listing of WP Pages
+     * Get Posts for Redirects
+     * 
+     * Listing of WP Pages which can be selected for
+     * redirect for access level.
      */
-    private function get_posts_for_options(){ 
+    private function get_posts_for_redirects(){ 
         if (! empty($this->posts_for_options)){
             return $this->posts_for_options; // Already did this. 
         }
@@ -131,7 +134,7 @@ class Carbon_Fields_Init {
 
         $posts = get_posts( ['numberposts' => -1]);
         foreach($posts as $k => $post){
-            $this->posts_for_options[$post->ID] = $post->post_title;
+            $this->posts_for_options[get_post_permalink($post->ID)] = $post->post_title;
         }
         return $this->posts_for_options;
     }
