@@ -57,7 +57,7 @@ class Carbon_Fields_Init {
      * @return void
 	 */
 	public function access_levels_page() {
-        $this->get_post_listing();
+
 		Container\Container::make( 'theme_options', __( 'MBO Access Levels' ) )
 			->add_fields(
 				array(
@@ -71,16 +71,17 @@ class Carbon_Fields_Init {
                             Field::make( 'multiselect', 'access_level_memberships', __( 'Mindbody Memberships' ) )
                                 ->add_options( self::get_mbo_memberships() ),
 							Field::make( 'multiselect', 'access_level_services', __( 'Mindbody Services' ) )
-								->add_options( self::get_mbo_services() )
-							Field::make( 'multiselect', 'access_level_redirect_post', __( 'Mindbody Services' ) )
+								->add_options( self::get_mbo_services() ),
+							Field::make( 'multiselect', 'access_level_redirect_post', __( 'Redirect Post' ) )
 								->add_options( self::get_posts_for_options() )
+								->set_help_text( __("Page to redirect to if no access granted.", 'mz-mbo-access') )
 						)
 					)->set_help_text( __("Generate Access Levels by Mindbody Subscriptions, Memberships and/or Services.", 'mz-mbo-access') ),
 				)
 			);
 
 	}
-    get_posts_for_options
+
 	/**
 	 * Get Mindbody Contracts
      * 
@@ -126,7 +127,7 @@ class Carbon_Fields_Init {
         }
         $posts = get_posts();
         foreach($posts as $k => $post){
-            $this->posts_for_options[$post['ID'] => $post['post_title']
+            $this->posts_for_options[$post->ID] = $post->post_title;
         }
         return $this->posts_for_options;
 	}
