@@ -128,22 +128,23 @@ class AccessUtilities extends Client\RetrieveClient {
 
 		$this->client_service_ids = $this->get_client_valid_service_ids( $client_id );
         
+        // Populate client access levels with levels client has access to.
         foreach ($this->mindbody_access_levels as $k => $level){
             if (true === $this->check_client_access_to_level($client_id, $level)) {
                 $this->client_access_levels[] = $k + 1;
             }
         }
-
+        
         $this->update_client_session(
             array(
                 'access_levels' => $this->client_access_levels,
                 'contracts'    => $this->client_contract_ids,
-                'services'    => $this->client_membership_ids,
-                'memberships'    => $this->client_service_ids,
+                'services'    => $this->client_service_ids,
+                'memberships'    => $this->client_membership_ids,
             )
         );
 
-		return 0;
+		return $this->client_access_levels;
 	}
 
 	/**

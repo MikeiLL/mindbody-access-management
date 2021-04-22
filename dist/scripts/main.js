@@ -2,7 +2,8 @@
     $(document).ready(
         function ($) {
 
-            // Initialize some variables
+            // Initialize some variables.
+            // Defined in src/Access/AccessDisplay.php.
             var login_nonce = mz_mbo_access_vars.login_nonce,
             // Shortcode atts for current page.
             atts = mz_mbo_access_vars.atts,
@@ -12,6 +13,7 @@
             contract_types = atts.contract_types,
             number_of_mbo_log_access_checks = 0,
             siteID = mz_mbo_access_vars.siteID;
+            console.log(mz_mbo_access_vars.required_access_levels)
             
             var mz_mindbody_access_state = {
 
@@ -150,8 +152,9 @@
                                     mz_mindbody_access_state.logged_in = true;
                                     mz_mindbody_access_state.client_id = json.client_id;
                                     mz_mindbody_access_state.message = json.logged;
+                                    console.log(json.client_access_levels);
                                     // If there are redirects, this is just a login usage
-                                    if ((json.client_access_levels === 1) && (!!atts.level_1_redirect)) {
+                                    /* if ((json.client_access_levels === 1) && (!!atts.level_1_redirect)) {
                                                 mz_mindbody_access_state.action = 'redirect';
                                                 mz_mindbody_access_state.message += 'Redirecting you to the classes page.';
                                                 render_mbo_access_activity();
@@ -159,22 +162,7 @@
                                                     function () {
                                                         window.location.href = atts.level_1_redirect}, 3000
                                                 );
-                                    } else if ((json.client_access_level === 2) && (!!atts.level_2_redirect)) {
-                                              mz_mindbody_access_state.action = 'redirect';
-                                              mz_mindbody_access_state.message += 'Redirecting you to the members page.';
-                                              render_mbo_access_activity();
-                                            setTimeout(
-                                                function () {
-                                                    window.location.href = atts.level_2_redirect}, 3000
-                                            );
-                                    } else if ((json.client_access_level === 0) && (!!atts.denied_redirect)) {
-                                        mz_mindbody_access_state.action = 'redirect';
-                                        mz_mindbody_access_state.message += 'Redirecting you to our pricing page.';
-                                        render_mbo_access_activity();
-                                        setTimeout(
-                                            function () {
-                                                window.location.href = atts.denied_redirect}, 3000
-                                        );
+                                    
                                     }  else if (atts.access_levels.indexOf(String(json.client_access_level)) != -1) {
                                         // This page contains restricted content
                                         // Check to see if client access level matches one set in shortcode
@@ -199,7 +187,7 @@
                             
                                         mz_mindbody_access_state.message += '</ul></div>';
                                         render_mbo_access_activity();
-                                    }
+                                    } */
                         
                                 } else {
                                     mz_mindbody_access_state.action = 'login_failed';
