@@ -99,7 +99,7 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 	 * @access public
 	 *
 	 * @used in handle_shortcode, localize_script
-	 * @var  int    $client_access_level current client access level.
+	 * @var  array    $client_access_levels current client access levels.
 	 */
 	public $client_access_level;
 
