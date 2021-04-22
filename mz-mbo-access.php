@@ -53,11 +53,14 @@ define( NS . 'PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
 
 define( NS . 'MINIMUM_PHP_VERSION', 7.1 );
 
+define( NS . 'INIT_LEVEL', 20 );
+
 /**
  * Check the minimum PHP version.
  */
 if ( version_compare( PHP_VERSION, NS\MINIMUM_PHP_VERSION, '<' ) ) {
 	add_action( 'admin_notices', NS . 'minimum_php_version' );
+	add_action( 'init', __NAMESPACE__ . '\deactivate_plugins', INIT_LEVEL );
 } else {
 	/**
 	 * Autoload Classes
@@ -69,6 +72,7 @@ if ( version_compare( PHP_VERSION, NS\MINIMUM_PHP_VERSION, '<' ) ) {
 
 	if ( ! class_exists( '\MZoo\MzMboAccess\Core\PluginCore' ) ) {
 		add_action( 'admin_notices', NS . 'missing_composer' );
+		add_action( 'init', __NAMESPACE__ . '\deactivate_plugins', INIT_LEVEL );
 	} else {
 
 		/**
@@ -83,14 +87,14 @@ if ( version_compare( PHP_VERSION, NS\MINIMUM_PHP_VERSION, '<' ) ) {
 		 * This action is documented src/core/class-deactivator.php
 		 */
 
-		register_deactivation_hook( __FILE__, array( NS . '\Core\Deactivator', 'deactivate' ) );
+		register_deactivation_hook( __FILE__, array( NS . 'Core\Deactivator', 'deactivate' ) );
 
 
 		/**
 		 * Check for the dependencies and run if everything looks okay.
 		 */
 
-		add_action( 'plugins_loaded', __NAMESPACE__ . '\mbo_access_has_mindbody_api', 20 );
+		add_action( 'plugins_loaded', __NAMESPACE__ . '\mbo_access_has_mindbody_api', INIT_LEVEL );
 
 	}
 }
@@ -174,7 +178,6 @@ function MBO_Access() {
  * @return void.
  */
 function activation_failed( $error ) {
-	register_deactivation_hook( plugin_basename( __FILE__ ), NS . 'plugin_is_deactivated' );
 	if ( is_admin() && current_user_can( 'activate_plugins' ) ) {
 		?>
 			<div class="notice notice-error is-dismissible"><p><strong>
@@ -182,8 +185,8 @@ function activation_failed( $error ) {
 			</strong></p></div>
 		<?php
 	}
-	add_action( 'init', __NAMESPACE__ . '\deactivate_plugins', 20 );
 }
+
 /**
  * Deactivate plugins.
  *
@@ -193,6 +196,13 @@ function activation_failed( $error ) {
  */
 function deactivate_plugins() {
 	\deactivate_plugins( plugin_basename( __FILE__ ) );
+	if ( is_admin() && current_user_can( 'activate_plugins' ) ) {
+		?>
+			<div class="notice notice-success is-dismissible"><p>
+				<?php esc_html_e( 'MZ MBO Access plugin has been deactivated.', 'mz-mbo-access' ); ?>
+			</p></div>
+		<?php
+	}
 }
 
 /**
@@ -216,27 +226,12 @@ function minimum_php_version() {
 }
 
 /**
- * Notice of plugin deactivation.
- *
- * @since 2.1.1
- * @return void.
- */
-function plugin_is_deactivated() {
-	if ( is_admin() && current_user_can( 'activate_plugins' ) ) {
-		?>
-			<div class="notice notice-success is-dismissible"><p>
-				<?php esc_html_e( 'MZ MBO Access plugin has been deactivated.', 'mz-mbo-access' ); ?>
-			</p></div>
-		<?php
-	}
-}
-
-/**
  * Insure that parent plugin, is active or deactivate plugin.
  */
 function mbo_access_has_mindbody_api() {
 	if ( ! class_exists( MZ . '\Core\MzMindbodyApi' ) ) {
 		activation_failed( __( 'MZ MBO Access requires MZ Mindbody Api.', 'mz-mbo-access' ) );
+		add_action( 'init', __NAMESPACE__ . '\deactivate_plugins', INIT_LEVEL );
 	} else {
 
 		// Get MzMboAccess Instance.
