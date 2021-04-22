@@ -394,9 +394,6 @@ class RetrieveClient extends Interfaces\Retrieve {
 			return 3;
 		}
 
-		$credentials['Username'] = $credentials['Username'];
-		$credentials['Password'] = $credentials['Password'];
-
 		return $credentials;
 	}
 

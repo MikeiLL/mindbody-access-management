@@ -24,13 +24,53 @@ use MZoo\MzMindbody\Common\Interfaces as Interfaces;
 class AccessUtilities extends Client\RetrieveClient {
 
 	/**
-	 * Access Level
+	 * Access Levels
 	 *
 	 * @since 1.0.5
 	 *
-	 * @var int $access_level indicating client access level, 0, 1 or 2.
+	 * @var array $access_level integers indicating which levels client has access to.
 	 */
-	public $access_level = 0;
+	public $client_access_levels = [];
+
+	/**
+	 * Contract IDs
+	 *
+	 * @since 1.0.5
+	 * 
+     * @access private
+	 * @var array $client_contract_ids integers indicating valid MBO contracts client has.
+	 */
+	private $client_contract_ids = [];
+
+	/**
+	 * Service IDs
+	 *
+	 * @since 1.0.5
+	 * 
+     * @access private
+	 * @var array $client_service_ids integers indicating valid MBO services client has.
+	 */
+	private $client_service_ids = [];
+
+	/**
+	 * Membership IDs
+	 *
+	 * @since 1.0.5
+	 * 
+     * @access private
+	 * @var array $membership_ids integers indicating valid MBO memberships client has.
+	 */
+	private $client_membership_ids = [];
+
+	/**
+	 * Mindbody Access Levels
+	 *
+	 * @since 1.0.5
+	 * 
+     * @access public
+	 * @var array $mindbody_access_levels mbo_access_access_levels option array.
+	 */
+	public $mindbody_access_levels = [];
 
 	/**
 	 * Check Access Permissions
@@ -38,12 +78,13 @@ class AccessUtilities extends Client\RetrieveClient {
 	 * @since 1.0.0
 	 *
 	 * @param int $client_id from MBO.
-	 * @return int $client_id indicating client access level, 0, 1 or 2.
+	 * @return array of levels from mbo_access_access_levels option to which client has access.
 	 */
 	public function check_access_permissions( $client_id ) {
-		$result = $this->set_client_access_level( $client_id );
-		return $result;
-	}
+
+		return $this->set_client_access_level( $client_id );
+
+    }
 
 	/**
 	 * Compare Client Service Status
@@ -58,141 +99,51 @@ class AccessUtilities extends Client\RetrieveClient {
 	 */
 	public function set_client_access_level( $client_id ) {
 
-        $access_options = carbon_get_theme_option( 'mbo_access_access_levels' );
-        MZ\MZMBO()->helpers->log($access_options);
-		// TODO can we avoid doing this here AND in access display?
-		$mz_mbo_access_options = get_option( 'mz_mbo_access' );
+        $this->mindbody_access_levels = carbon_get_theme_option( 'mbo_access_access_levels' );
 
-		$level_1_contracts = explode( ',', $mz_mbo_access_options['level_1_contracts'] );
-		$level_2_contracts = explode( ',', $mz_mbo_access_options['level_2_contracts'] );
-		$level_3_contracts = explode( ',', $mz_mbo_access_options['level_3_contracts'] );
-		$level_1_contracts = array_map( 'trim', $level_1_contracts );
-		$level_2_contracts = array_map( 'trim', $level_2_contracts );
-		$level_3_contracts = array_map( 'trim', $level_3_contracts );
+        /*
+         * (
+         *     [_type] => access_level
+         *     [access_level_name] => Monthly Unlimited, 10 and 5 Class Cards
+         *     [access_level_subscriptions] => Array
+         *         (
+         *         )
+         *  
+         *     [access_level_memberships] => Array
+         *         (
+         *         )
+         *  
+         *     [access_level_services] => Array
+         *         (
+         *             [0] => 123456789
+         *             [1] => 1364
+         *             [2] => 1300
+         *         )
+         *  
+         * )
+         */
+		$this->client_contract_ids = $this->get_client_contract_ids( $client_id );
 
-		if ( count( $level_1_contracts ) >= 1 ||
-			count( $level_2_contracts ) >= 1 ||
-			count( $level_3_contracts ) >= 1 ) {
-			$contracts = $this->get_client_contracts( $client_id );
+		$this->client_membership_ids = $this->get_client_active_membership_ids( $client_id );
 
-			if ( empty( $contracts ) ) {
-				$this->access_level = 0;
-				// Update client session with empty keys just in case.
-				$this->update_client_session(
-					array(
-						'access_level' => 0,
-						'contracts'    => array(),
-					)
-				);
-			}
+		$this->client_service_ids = $this->get_client_valid_service_ids( $client_id );
+        
+        foreach ($this->mindbody_access_levels as $k => $level){
+            if (true === $this->check_client_access_to_level($client_id, $level)) {
+                $this->client_access_levels[] = $k + 1;
+            }
+        }
 
-			if ( ! empty( $contracts ) ) {
+        $this->update_client_session(
+            array(
+                'access_levels' => $this->client_access_levels,
+                'contracts'    => $this->client_contract_ids,
+                'services'    => $this->client_membership_ids,
+                'memberships'    => $this->client_service_ids,
+            )
+        );
 
-				foreach ( $contracts as $contract ) {
-					// Compare level three contracts first.
-					if ( in_array( $contract['ContractName'], $level_3_contracts, true ) ) {
-						// No need to check further.
-						$this->access_level = 3;
-						return $this->update_client_session(
-							array(
-								'access_level' => 3,
-								'contracts'    => $contracts,
-							)
-						);
-					}
-					// Compare level two contracts second.
-					if ( in_array( $contract['ContractName'], $level_2_contracts, true ) ) {
-						// No need to check further.
-						$this->access_level = 2;
-						return $this->update_client_session(
-							array(
-								'access_level' => 2,
-								'contracts'    => $contracts,
-							)
-						);
-					}
-					// If not level two do we have level one access?
-					if ( in_array( $contract['ContractName'], $level_1_contracts, true ) ) {
-						// No need to check further.
-						$this->access_level = 1;
-						return $this->update_client_session(
-							array(
-								'access_level' => 1,
-								'contracts'    => $contracts,
-							)
-						);
-					}
-				}
-			}
-		}
-
-		// No contracts so must be dealing with services.
-		$level_1_services = explode( ',', $mz_mbo_access_options['level_1_services'] );
-		$level_2_services = explode( ',', $mz_mbo_access_options['level_2_services'] );
-		$level_3_services = explode( ',', $mz_mbo_access_options['level_3_services'] );
-		$level_1_services = array_map( 'trim', $level_1_services );
-		$level_2_services = array_map( 'trim', $level_2_services );
-		$level_3_services = array_map( 'trim', $level_3_services );
-
-		$services = $this->get_client_services( $client_id );
-
-		if ( false === (bool) $services ) {
-			$this->access_level = 0;
-			// Update client session with empty keys just in case.
-			$this->update_client_session(
-				array(
-					'access_level' => 0,
-					'services'     => array(),
-				)
-			);
-		}
-
-		foreach ( $services as $service ) {
-			// Compare level three services first.
-			if ( in_array( $service['Name'], $level_3_services, true ) ) {
-				if ( ! $this->is_service_valid( $service ) ) {
-					continue;
-				}
-				$this->access_level = 3;
-				// No need to check further.
-				return $this->update_client_session(
-					array(
-						'access_level' => 3,
-						'services'     => $services,
-					)
-				);
-			}
-			// Compare level two services second.
-			if ( in_array( $service['Name'], $level_2_services, true ) ) {
-				if ( ! $this->is_service_valid( $service ) ) {
-					continue;
-				}
-				$this->access_level = 2;
-				// No need to check further.
-				return $this->update_client_session(
-					array(
-						'access_level' => 2,
-						'services'     => $services,
-					)
-				);
-			}
-			// If not level two do we have level one access?
-			if ( in_array( $service['Name'], $level_1_services, true ) ) {
-				if ( ! $this->is_service_valid( $service ) ) {
-					continue;
-				}
-				$this->access_level = 1;
-				// No need to check further.
-				return $this->update_client_session(
-					array(
-						'access_level' => 1,
-						'services'     => $services,
-					)
-				);
-			}
-		}
-
-		return $this->access_level;
+		return 0;
 	}
 
 	/**
@@ -225,6 +176,8 @@ class AccessUtilities extends Client\RetrieveClient {
 	 * Compare Client Contract Status
 	 *
 	 * @since 1.0.0
+     * 
+     * DEPRECIATED: Not in use @since 2.1.1 (maybe earlier).
 	 *
 	 * @param string|array $contract_types from MBO.
 	 *
@@ -249,10 +202,83 @@ class AccessUtilities extends Client\RetrieveClient {
 		return 0;
 	}
 
+    /**
+     * Get Client Valid Membership IDs
+     * 
+     * @since 2.1.1
+     * @param int $client_id MBO client Id.
+     * @return array of IDs of memberships client has.
+     */
+    private function get_client_active_membership_ids( $client_id ){
+		$memberships = $this->get_client_active_memberships( $client_id );
+        $membership_ids = [];
+        foreach ($memberships as $k => $v){
+            $membership_ids[] = $v['MembershipId'];
+        }
+        return $membership_ids;
+    }
+
+    /**
+     * Get Client Contract IDs
+     * 
+     * @since 2.1.1
+     * @param int $client_id MBO client Id.
+     * @return array of IDs of contracts client has.
+     */
+    private function get_client_contract_ids( $client_id ){
+		$contracts = $this->get_client_contracts( $client_id );
+        $contract_ids = [];
+        foreach ($contracts as $k => $v){
+            $contract_ids[] = $v['Id'];
+        }
+        return $contract_ids;
+    }
+
+    /**
+     * Get Client Service IDs
+     * 
+     * @since 2.1.1
+     * @param int $client_id MBO client Id.
+     * @return array of IDs of services client has.
+     */
+    private function get_client_valid_service_ids( $client_id ){
+		$services = $this->get_client_services( $client_id );
+        $service_ids = [];
+        foreach ($services as $k => $service){
+            if (true === $this->is_service_valid($service)) {
+                $service_ids[] = $v['ProductId'];
+            }
+        }
+        return $service_ids;
+    }
+
+    /**
+     * Check Client Access to Level
+     * 
+     * Return true if client has access to any of the subscriptions in this level.
+     * 
+     * @since 2.1.1
+     * @param int $client_id MBO client Id.
+     * @param int $level Index of level +1 in mbo_access_access_levels options array.
+     * @return bool has or does not have access to level
+     */
+    private function check_client_access_to_level( $client_id, $level ) {
+        foreach($this->client_contract_ids as $k => $v){
+            if (in_array($v, $level['access_level_contracts'])) return true;
+        }
+        foreach($this->client_membership_ids as $k => $v){
+            if (in_array($v, $level['access_level_memberships'])) return true;
+        }
+        foreach($this->client_service_ids as $k => $v){
+            if (in_array($v, $level['access_level_services'])) return true;
+        }
+        return false;
+    }
+
 	/**
 	 * Compare Client Purchase Status
 	 *
-	 * @since 2.5.8
+     * @since 2.1.1
 	 *
 	 * return true if purchased items matches one in received array (or string).
 	 *
@@ -282,12 +308,12 @@ class AccessUtilities extends Client\RetrieveClient {
 	/**
 	 * Get Client Access Level
 	 *
-	 * @since 2.5.8
+     * @since 2.1.1
 	 *
 	 * @return int indicating access level of currently logged in client.
 	 */
-	public function get_client_access_level() {
+	public function get_client_access_levels() {
 
-		return $this->access_level;
+		return $this->access_levels;
 	}
 }
