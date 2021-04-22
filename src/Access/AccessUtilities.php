@@ -100,7 +100,6 @@ class AccessUtilities extends Client\RetrieveClient {
 	public function set_client_access_level( $client_id ) {
 
         $this->mindbody_access_levels = carbon_get_theme_option( 'mbo_access_access_levels' );
-		$level_3_contracts = isset( $mz_mbo_access_options['level_3_contracts'] ) ? explode( ',', $mz_mbo_access_options['level_3_contracts'] ) : array();
 
         /*
          * (

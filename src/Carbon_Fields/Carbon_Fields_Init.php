@@ -30,7 +30,7 @@ use MZoo\MzMindbody\Site;
  */
 class Carbon_Fields_Init {
 
-	/**
+    /**
      * Post Listings Array
      * 
      * @since 2.1.1
@@ -130,4 +130,5 @@ class Carbon_Fields_Init {
         }
         return $this->posts_for_options;
 	}
+    }
 }
