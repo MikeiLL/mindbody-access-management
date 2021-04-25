@@ -63,7 +63,7 @@ class AccessUtilities extends Client\RetrieveClient {
 
 		$level_1_contracts = explode( ',', $mz_mbo_access_options['level_1_contracts'] );
 		$level_2_contracts = explode( ',', $mz_mbo_access_options['level_2_contracts'] );
-		$level_3_contracts = explode( ',', $mz_mbo_access_options['level_3_contracts'] );
+		$level_3_contracts = isset( $mz_mbo_access_options['level_3_contracts'] ) ? explode( ',', $mz_mbo_access_options['level_3_contracts'] ) : array();
 		$level_1_contracts = array_map( 'trim', $level_1_contracts );
 		$level_2_contracts = array_map( 'trim', $level_2_contracts );
 		$level_3_contracts = array_map( 'trim', $level_3_contracts );
