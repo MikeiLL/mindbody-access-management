@@ -8,12 +8,14 @@
             // Shortcode atts for current page.
             atts = mz_mbo_access_vars.atts,
             restricted_content = mz_mbo_access_vars.restricted_content,
-            membership_types = atts.membership_types,
-            purchase_types = atts.purchase_types,
-            contract_types = atts.contract_types,
             number_of_mbo_log_access_checks = 0,
             siteID = mz_mbo_access_vars.siteID;
-            console.log(mz_mbo_access_vars.required_access_levels)
+
+            console.log("required access levels:");
+            console.log(mz_mbo_access_vars.required_access_levels);
+            console.log("all access levels:");
+            console.log(mz_mbo_access_vars.all_access_levels);
+
             
             var mz_mindbody_access_state = {
 
@@ -68,7 +70,7 @@
                     mz_mindbody_access_state.content += '<div class="alert alert-warning">' + mz_mindbody_access_state.message + '</div>';
                 
                 } else if (mz_mindbody_access_state.action == 'redirect') {
-            
+
                     mz_mindbody_access_state.content += '<div class="alert alert-success">' + mz_mindbody_access_state.message + '</div>';
                     mz_mindbody_access_state.content += mz_mindbody_access_state.spinner;
                 
@@ -88,7 +90,7 @@
                     mz_mindbody_access_state.content += mz_mindbody_access_state.footer;
                 
                 } else if (mz_mindbody_access_state.action == 'granted') {
-            
+
                     mz_mindbody_access_state.content += '<div class="alert alert-success">' + mz_mindbody_access_state.message + '</div>';
                     mz_mindbody_access_state.content += restricted_content;
                     mz_mindbody_access_state.content += mz_mindbody_access_state.footer;
@@ -152,42 +154,96 @@
                                     mz_mindbody_access_state.logged_in = true;
                                     mz_mindbody_access_state.client_id = json.client_id;
                                     mz_mindbody_access_state.message = json.logged;
-                                    console.log(json.client_access_levels);
-                                    // If there are redirects, this is just a login usage
-                                    /* if ((json.client_access_levels === 1) && (!!atts.level_1_redirect)) {
+                                    
+                                    if ( 0 === json.client_access_levels.length ) {
+                                      // Client has no access.
+                                      if (  null !== mz_mbo_access_vars.denied_redirect && '' !== mz_mbo_access_vars.denied_redirect ) {
+                                        // Something is in the shortcode attribute.
+                                        // Does it seem like a working URL?
+                                        try {
+                                          // Make sure it is at least possibly valid.
+                                          let redirect_url = mz_mbo_access_maybe_redirect(mz_mbo_access_vars.denied_redirect);
+                                          if (redirect_url){
+                                            mz_mindbody_access_state.action = 'redirect';
+                                            mz_mindbody_access_state.message += '<p>' + mz_mbo_access_vars.redirection_message + '</p>';
+                                            render_mbo_access_activity();
+                                            setTimeout(
+                                                function () {
+                                                    window.location.href = redirect_url
+                                                }, 
+                                                3000
+                                            );
+                                          }
+
+                                        } catch(err) {
+                                          // Redirect isn't going to work.
+                                        }
+                                      }
+
+                                      /**
+                                       * Not redirected and no Access.
+                                       */
+                                      mz_mindbody_access_state.action = 'denied';
+                                      mz_mindbody_access_state.message += '</br>';
+                                      mz_mindbody_access_state.message += '<div class="alert alert-warning">'  + mz_mbo_access_vars.atts.denied_message + ':';
+                                      mz_mindbody_access_state.message += '<ul>';
+
+                                      for (let key in mz_mbo_access_vars.required_access_levels) {
+                                        mz_mindbody_access_state.message += '<li>' + mz_mbo_access_vars.required_access_levels[key].access_level_name + '</li>';
+                                      }
+                              
+                                      mz_mindbody_access_state.message += '</ul></div>';
+                                      render_mbo_access_activity();
+
+                                    } // End no access.
+                                    
+                                    /**
+                                     * Loop through shortcode access levels, checking for access.
+                                     * If client has access to a level, see if it's a redirect shortcode
+                                     * and if so redirect.
+                                     */
+                                    for ( i = 0; i < atts.access_levels.length; i++) {
+                                      if (json.client_access_levels.indexOf(atts.access_levels[i]) != -1) {
+                                        // Client has access to this level.
+
+                                        const access_level = mz_mbo_access_vars.all_access_levels[i + 1];
+                                        if ( 1 === parseInt(atts.user_login_redirect) ) {
+                                          if (0 !== access_level.access_level_redirect_post) {
+
+                                            // Does it seem like a working URL?
+                                            try {
+                                              // Make sure it is at least possibly valid.
+                                              let redirect_url = mz_mbo_access_maybe_redirect(access_level.access_level_redirect_post);
+                                              
+                                              if (redirect_url){
                                                 mz_mindbody_access_state.action = 'redirect';
-                                                mz_mindbody_access_state.message += 'Redirecting you to the classes page.';
+                                                mz_mindbody_access_state.message += '<p>' + mz_mbo_access_vars.redirection_message + '</p>';
                                                 render_mbo_access_activity();
                                                 setTimeout(
                                                     function () {
-                                                        window.location.href = atts.level_1_redirect}, 3000
+                                                      window.location.href = redirect_url
+                                                    }, 
+                                                    3000
                                                 );
-                                    
-                                    }  else if (atts.access_levels.indexOf(String(json.client_access_level)) != -1) {
-                                        // This page contains restricted content
-                                        // Check to see if client access level matches one set in shortcode
-                                        mz_mindbody_access_state.action = 'granted';
-                                        render_mbo_access_activity();                            
-                            
-                                    } else {
-                        
-                                        mz_mindbody_access_state.action = 'denied';
-                                        mz_mindbody_access_state.message += '</br>';
-                                        mz_mindbody_access_state.message += '<div class="alert alert-warning">'  + mz_mbo_access_vars.atts.denied_message + ':';
-                                        mz_mindbody_access_state.message += '<ul>';
-                            
-                                        if (mz_mbo_access_vars.required_services && mz_mbo_access_vars.atts.access_levels) {
-                                            for (var i=0; i < mz_mbo_access_vars.atts.access_levels.length; i++) {
-                                                var level = mz_mbo_access_vars.atts.access_levels[i];
-                                                for (var j=0; j < mz_mbo_access_vars.required_services[level].length; j++) {
-                                                    mz_mindbody_access_state.message += '<li>' + mz_mbo_access_vars.required_services[level][j] + '</li>';
-                                                }
+                                              }
+
+                                            } catch(err) {
+                                              // Redirect isn't going to work.
                                             }
-                                        }
-                            
-                                        mz_mindbody_access_state.message += '</ul></div>';
+                                          }
+                                        } // End atts user_login_redirect true.
+
+                                        /**
+                                         * Either not configured to or not able to redirect,
+                                         * so this must be a page with restricted content on it.
+                                         */
+                                        
+                                        mz_mindbody_access_state.action = 'granted';
                                         render_mbo_access_activity();
-                                    } */
+
+                                      } // End has access test.
+                                    } // End atts access levels loop.
+                                    
                         
                                 } else {
                                     mz_mindbody_access_state.action = 'login_failed';
@@ -207,6 +263,32 @@
 
                 }
             );
+            
+            /**
+             * Is Redirect Form
+             * 
+             * @param {string} redirect_url 
+             */
+            function mz_mbo_access_is_redirect_form(redirect_url){
+
+            }
+            
+            /**
+             * Maybe Redirect
+             * @param {string} redirect_url 
+             * @returns string|false if is a valid url string
+             */
+            function mz_mbo_access_maybe_redirect(redirect_url){
+              try {
+                $url = new URL(redirect_url);
+                if ("null" === $url.origin) {
+                  return false;
+                }
+                return $url.href;
+              } catch(err) {
+                return false;
+              }
+            }
         
             /**
              * Check access permissions

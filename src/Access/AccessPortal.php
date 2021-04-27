@@ -79,7 +79,6 @@ class AccessPortal extends AccessUtilities {
 		}
 
 		$access_levels = $this->check_access_permissions( $result['client_id'] );
-        MZ\MZMBO()->helpers->log("ajax_login_check_access_permissions three");
 
 		if ( ! empty($access_levels) ) {
 			$result['client_access_levels'] = $access_levels;

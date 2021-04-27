@@ -123,11 +123,11 @@ class AccessUtilities extends Client\RetrieveClient {
          * )
          */
 		$this->client_contract_ids = $this->get_client_contract_ids( $client_id );
-
+		
 		$this->client_membership_ids = $this->get_client_active_membership_ids( $client_id );
 
 		$this->client_service_ids = $this->get_client_valid_service_ids( $client_id );
-        
+		
         // Populate client access levels with levels client has access to.
         foreach ($this->mindbody_access_levels as $k => $level){
             if (true === $this->check_client_access_to_level($client_id, $level)) {
@@ -247,7 +247,7 @@ class AccessUtilities extends Client\RetrieveClient {
         $service_ids = [];
         foreach ($services as $k => $service){
             if (true === $this->is_service_valid($service)) {
-                $service_ids[] = $v['ProductId'];
+                $service_ids[] = $service['ProductId'];
             }
         }
         return $service_ids;
@@ -260,7 +260,27 @@ class AccessUtilities extends Client\RetrieveClient {
      * 
      * @since 2.1.1
      * @param int $client_id MBO client Id.
-     * @param int $level Index of level +1 in mbo_access_access_levels options array.
+     * @param int $level Indexed at (level +1) in mbo_access_access_levels options array.
+     *
+     * (
+     *    [_type] => access_level
+     *    [access_level_name] => Corporate Member
+     *    [access_level_contracts] => Array
+     *        (
+     *        )
+     *
+     *  [access_level_memberships] => Array
+     *      (
+     *          [0] => 30
+     *      )
+     *
+     *  [access_level_services] => Array
+     *      (
+     *      )
+     *
+     *   [access_level_redirect_post] => http://project.test/?post_type=post&p=20030
+     * )
+     *
      * @return bool has or does not have access to level
      */
     private function check_client_access_to_level( $client_id, $level ) {

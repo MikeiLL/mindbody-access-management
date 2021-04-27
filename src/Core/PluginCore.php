@@ -125,10 +125,10 @@ class PluginCore {
 		$this->set_locale();
 		// Could also define_admin_hooks here.
 		$this->define_public_hooks();
-		$this->register_shortcodes();
 		$this->add_settings_page();
 
 		$this->session = Session\MzAccessSession::instance();
+		$this->register_shortcodes();
 	}
 
 	/**

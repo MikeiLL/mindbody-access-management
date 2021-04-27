@@ -74,7 +74,7 @@ class Carbon_Fields_Init {
 								->add_options( self::get_mbo_services() ),
 							Field::make( 'select', 'access_level_redirect_post', __( 'Redirect Post' ) )
 								->add_options( self::get_posts_for_redirects() )
-								->set_help_text( __("Page to redirect user to if no access granted.", 'mz-mbo-access') )
+								->set_help_text( __("Home page for this access level.", 'mz-mbo-access') )
 								->set_default_value(0)
 						)
 					)->set_help_text( __("Generate Access Levels by Mindbody Subscriptions, Memberships and/or Services.", 'mz-mbo-access') ),
