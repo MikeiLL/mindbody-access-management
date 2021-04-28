@@ -151,7 +151,7 @@
                                     mz_mindbody_access_state.client_id = json.client_id;
                                     mz_mindbody_access_state.message = json.logged;
                                     // If there are redirects, this is just a login usage
-                                    if ((json.client_access_level === 1) && (!!atts.level_1_redirect)) {
+                                    if ((json.client_access_levels === 1) && (!!atts.level_1_redirect)) {
                                                 mz_mindbody_access_state.action = 'redirect';
                                                 mz_mindbody_access_state.message += 'Redirecting you to the classes page.';
                                                 render_mbo_access_activity();

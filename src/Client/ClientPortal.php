@@ -62,6 +62,7 @@ class ClientPortal extends RetrieveClient {
 
 		// Create the MBO Object.
 		$this->get_mbo_results();
+        MZ\MZMBO()->helpers->log("ajax_client_login one");
 
 		// Init message.
 		$result['message'] = '';
