@@ -178,7 +178,7 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 			 * on shortcode access levels within the template.
 			 * Using array_filter to remove empties.
 			 */
-			'required_access_levels'         => $this->atts['access_levels'],
+			'required_access_levels'         => $this->get_shortcode_access_levels(),
 			'has_access'                     => false,
 			'client_name'                    => '',
 			'denied_message'                 => $this->atts['denied_message'],

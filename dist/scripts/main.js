@@ -187,6 +187,7 @@
                                       mz_mindbody_access_state.message += '</br>';
                                       mz_mindbody_access_state.message += '<div class="alert alert-warning">'  + mz_mbo_access_vars.atts.denied_message + ':';
                                       mz_mindbody_access_state.message += '<ul>';
+                                      console.log(mz_mbo_access_vars.required_access_levels);
 
                                       for (let key in mz_mbo_access_vars.required_access_levels) {
                                         mz_mindbody_access_state.message += '<li>' + mz_mbo_access_vars.required_access_levels[key].access_level_name + '</li>';
