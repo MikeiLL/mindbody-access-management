@@ -66,11 +66,11 @@ if ( version_compare( PHP_VERSION, MINIMUM_PHP_VERSION, '<' ) ) {
 		include_once $wp_mbo_access_autoload;
 	}
 
-    // Mozart-managed dependencies.
-    $wp_mbo_access_mozart_autoload = NS\PLUGIN_NAME_DIR . '/src/Mozart/autoload.php';
-    if ( file_exists( $wp_mbo_access_mozart_autoload ) ) {
-        include_once $wp_mbo_access_mozart_autoload;
-    }
+	// Mozart-managed dependencies.
+	$wp_mbo_access_mozart_autoload = NS\PLUGIN_NAME_DIR . '/src/Mozart/autoload.php';
+	if ( file_exists( $wp_mbo_access_mozart_autoload ) ) {
+		include_once $wp_mbo_access_mozart_autoload;
+	}
 
 	if ( ! class_exists( '\MZoo\MzMboAccess\Core\PluginCore' ) ) {
 		add_action( 'admin_notices', NS . 'missing_composer' );

@@ -136,14 +136,14 @@ class SettingsPage {
 		$return .= '<p>' . sprintf( '[%1$s] %2$s [%3$s]', 'mbo-client-access', __( 'Restricted content here between both tags', 'mz-mindbody-api' ), '/mbo-client-access' ) . '</p>';
 		$return .= '<ul>';
 		$return .= '<li><strong>denied_redirect</strong>: ' . __( "((url string) URL to redirect users to who are logged in but don't have access.", 'mz-mindbody-api' ) . '</li>';
-		$return .= '<li><strong>user_login_redirect</strong>: ' . __( "((bool) Set to 1 to use as redirect login to take user to an Access Level designated page.", 'mz-mindbody-api' ) . '</li>';
-		$return .= '<li><strong>form_heading</strong>: ' . sprintf( 
-            /* translators: Notify of default message. */
-                                                                    __( '(string) Default: %2$s%1$s%3$s', 'mz-mindbody-api' ),
-                                                                    __( 'Login with your Mindbody account to access this content.', 'mz-mbo-access' ),
-                                                                    '&quot;',
-                                                                    '&quot;'
-                                                                ) . '</li>';
+		$return .= '<li><strong>user_login_redirect</strong>: ' . __( '((bool) Set to 1 to use as redirect login to take user to an Access Level designated page.', 'mz-mindbody-api' ) . '</li>';
+		$return .= '<li><strong>form_heading</strong>: ' . sprintf(
+			/* translators: Notify of default message. */
+			__( '(string) Default: %2$s%1$s%3$s', 'mz-mindbody-api' ),
+			__( 'Login with your Mindbody account to access this content.', 'mz-mbo-access' ),
+			'&quot;',
+			'&quot;'
+		) . '</li>';
 		$return .= '<li><strong>password_reset_request</strong>: ' . __( '(string) Password Reset button text. Blank string to remove button.', 'mz-mindbody-api' ) . '</li>';
 		$return .= '<li><strong>manage_on_mbo</strong>: ' . __( '(string) Link to MBO Site button text. Blank string to remove button.', 'mz-mindbody-api' ) . '</li>';
 		$return .= '<li><strong>denied_message</strong>: ' . __( '(string) Message preceding list of items required for access.', 'mz-mindbody-api' ) . '</li>';
@@ -163,7 +163,7 @@ class SettingsPage {
 			),
 			'<code>user_login_redirect</code>',
 			'<code>1</code>',
-            '<code>access_levels</code>'
+			'<code>access_levels</code>'
 		);
 		return $return;
 	}

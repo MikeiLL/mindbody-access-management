@@ -127,24 +127,24 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 			array(
 				'siteid'                 => '',
 				'denied_message'         => __( 'Access to this content requires one of', 'mz-mbo-access' ),
-                // Following attr depreciated in favor of form_heading, below.
+				// Following attr depreciated in favor of form_heading, below.
 				'call_to_action'         => __( 'Login with your Mindbody account to access this content.', 'mz-mbo-access' ),
 				'form_heading'           => __( 'Login with your Mindbody account to access this content.', 'mz-mbo-access' ),
 				'access_expired'         => __( 'Looks like your access has expired.', 'mz-mbo-access' ),
 				'denied_redirect'        => '',
-				'access_levels'          => [1],
-                'user_login_redirect'    => 0,
+				'access_levels'          => array( 1 ),
+				'user_login_redirect'    => 0,
 				'manage_on_mbo'          => 'Visit Mindbody Site',
 				'password_reset_request' => __( 'Forgot My Password', 'mz-mbo-access' ),
 			),
 			$atts
 		);
 
-        // Populate Access Levels.
-        $this->mbo_access_levels = carbon_get_theme_option( 'mbo_access_access_levels' );
+		// Populate Access Levels.
+		$this->mbo_access_levels = carbon_get_theme_option( 'mbo_access_access_levels' );
 
-        // Insert zero index element so indexes line up with level numbers.
-        array_unshift($this->mbo_access_levels, 'no-access');
+		// Insert zero index element so indexes line up with level numbers.
+		array_unshift( $this->mbo_access_levels, 'no-access' );
 
 		$this->site_id = ( isset( $atts['siteid'] ) ) ? $atts['siteid'] : MZ\MZMBO()::$basic_options['mz_mindbody_siteID'];
 
@@ -186,28 +186,28 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 			'password_reset_request'         => $this->atts['password_reset_request'],
 		);
 
-        // Above test true? Then this is a content page. Check access permissions now.
+		// Above test true? Then this is a content page. Check access permissions now.
 		// Check client_session for access.
 		$access_utilities = new AccessUtilities();
-		$logged_client = NS\MBO_Access()->get_session()->get( 'MBO_Client' )->mbo_result;
-        if ( ! empty( $logged_client->access_levels ) ) {
-            foreach ( $logged_client->access_levels as $k => $level ) {
-                if ( in_array($level, $this->atts['access_levels'], true ) ) {
-                    $this->template_data['has_access'] = true;
-                    $this->has_access                  = true;
-                    break; // No need to look further.
-                }
-            }
-        }
+		$logged_client    = NS\MBO_Access()->get_session()->get( 'MBO_Client' )->mbo_result;
+		if ( ! empty( $logged_client->access_levels ) ) {
+			foreach ( $logged_client->access_levels as $k => $level ) {
+				if ( in_array( $level, $this->atts['access_levels'], true ) ) {
+					$this->template_data['has_access'] = true;
+					$this->has_access                  = true;
+					break; // No need to look further.
+				}
+			}
+		}
 
-        if ( empty( $logged_client->access_levels ) ) {
-            // Need to ping the api.
-            $client_access_level = $access_utilities->check_access_permissions( $logged_client->ID );
-            if ( in_array( $client_access_level, $this->atts['access_levels'], true ) ) {
-                $this->template_data['has_access'] = true;
-                $this->has_access                  = true;
-            }
-        }
+		if ( empty( $logged_client->access_levels ) ) {
+			// Need to ping the api.
+			$client_access_level = $access_utilities->check_access_permissions( $logged_client->ID );
+			if ( in_array( $client_access_level, $this->atts['access_levels'], true ) ) {
+				$this->template_data['has_access'] = true;
+				$this->has_access                  = true;
+			}
+		}
 
 		if ( ! empty( $logged_client->ID ) ) {
 			$this->template_data['logged_in'] = true;
@@ -284,23 +284,27 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 			'denied_message'           => $this->denied_message,
 			'required_access_levels'   => $this->get_shortcode_access_levels(),
 			'all_access_levels'        => $this->mbo_access_levels,
-			'redirection_message'      => __('Redirecting...', 'mz-mbo-access'),
+			'redirection_message'      => __( 'Redirecting...', 'mz-mbo-access' ),
 		);
 
 		wp_localize_script( 'mz_mbo_access_script', 'mz_mbo_access_vars', $params );
 	}
 
-    /**
-     * Get Shortcode Access Levels
-     * 
-     * Get details about the access levels required for this shortcode content.
-     * 
-     * @since 2.1.1
-     * @return array of access levels for current shortcode configuration.
-     */
-    private function get_shortcode_access_levels(){
-        return array_filter($this->mbo_access_levels, function($level_key){
-            return in_array($level_key, $this->atts['access_levels'], true);
-        }, ARRAY_FILTER_USE_KEY);
-    }
+	/**
+	 * Get Shortcode Access Levels
+	 *
+	 * Get details about the access levels required for this shortcode content.
+	 *
+	 * @since 2.1.1
+	 * @return array of access levels for current shortcode configuration.
+	 */
+	private function get_shortcode_access_levels() {
+		return array_filter(
+			$this->mbo_access_levels,
+			function( $level_key ) {
+				return in_array( $level_key, $this->atts['access_levels'], true );
+			},
+			ARRAY_FILTER_USE_KEY
+		);
+	}
 }

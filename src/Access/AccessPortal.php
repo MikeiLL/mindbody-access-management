@@ -49,7 +49,7 @@ class AccessPortal extends AccessUtilities {
 		// Init message.
 		$result['logged'] = '';
 
-		$result['client_access_levels'] = [];
+		$result['client_access_levels'] = array();
 
 		$result['type'] = 'success';
 
@@ -80,7 +80,7 @@ class AccessPortal extends AccessUtilities {
 
 		$access_levels = $this->check_access_permissions( $result['client_id'] );
 
-		if ( ! empty($access_levels) ) {
+		if ( ! empty( $access_levels ) ) {
 			$result['client_access_levels'] = $access_levels;
 		}
 
@@ -117,16 +117,16 @@ class AccessPortal extends AccessUtilities {
 		// Init message.
 		$result['logged'] = '';
 
-		$result['client_access_level'] = [];
+		$result['client_access_level'] = array();
 
 		$result['type'] = 'error';
 
 		if ( $_REQUEST['client_id'] ) {
-			$access_levels   = $this->check_access_permissions( $_REQUEST['client_id'] );
+			$access_levels  = $this->check_access_permissions( $_REQUEST['client_id'] );
 			$result['type'] = 'success';
 		}
 
-		if ( ! empty($access_levels) ) {
+		if ( ! empty( $access_levels ) ) {
 			$result['client_access_levels'] = $access_levels;
 		}
 
