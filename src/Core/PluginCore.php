@@ -221,9 +221,7 @@ class PluginCore {
         // Load Carbon Fields
         $this->loader->add_action( 'after_setup_theme', $carbon_fields, 'crb_load', 1 );
 		// Add Options page for Mindbody Access Levels.
-		$this->loader->add_action( 'carbon_fields_register_fields', $carbon_fields_init, 'access_levels_page' );
-		// Add Options page for Mindbody Access Levels.
-		$this->loader->add_action( 'carbon_fields_register_fields', $carbon_fields_init, 'access_levels_page' );
+		$this->loader->add_action( 'carbon_fields_register_fields', $carbon_fields, 'access_levels_page' );
 
 		// Start Ajax Access Management.
 		$this->loader->add_action( 'wp_ajax_nopriv_ajax_login_check_access_permissions', $access_portal, 'ajax_login_check_access_permissions' );
