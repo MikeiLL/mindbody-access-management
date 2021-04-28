@@ -217,7 +217,7 @@ class PluginCore {
 	private function define_public_hooks() {
 		$access_portal      = new Access\AccessPortal();
 		$client_portal      = new Client\ClientPortal();
-        $carbon_fields = new Carbon_Fields\Carbon_Fields();
+        $carbon_fields      = new Carbon_Fields\Carbon_Fields_Init();
         // Load Carbon Fields
         $this->loader->add_action( 'after_setup_theme', $carbon_fields, 'crb_load', 1 );
 		// Add Options page for Mindbody Access Levels.
