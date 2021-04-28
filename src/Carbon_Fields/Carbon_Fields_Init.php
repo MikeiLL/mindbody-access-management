@@ -137,5 +137,5 @@ class Carbon_Fields_Init {
             $this->posts_for_options[get_post_permalink($post->ID)] = $post->post_title;
         }
         return $this->posts_for_options;
-	}
+    }
 }
