@@ -63,6 +63,16 @@ class AccessUtilities extends Client\RetrieveClient {
 	private $client_membership_ids = array();
 
 	/**
+	 * Purchase IDs
+	 *
+	 * @since 1.0.5
+	 *
+	 * @access private
+	 * @var array $membership_ids integers indicating valid MBO memberships client has.
+	 */
+	private $client_purchase_ids = array();
+
+	/**
 	 * Mindbody Access Levels
 	 *
 	 * @since 1.0.5
@@ -127,7 +137,7 @@ class AccessUtilities extends Client\RetrieveClient {
 		$this->client_membership_ids = $this->get_client_active_membership_ids( $client_id );
 
 		$this->client_service_ids = $this->get_client_valid_service_ids( $client_id );
-
+        
 		// Populate client access levels with levels client has access to.
 		foreach ( $this->mindbody_access_levels as $k => $level ) {
 			if ( true === $this->check_client_access_to_level( $client_id, $level ) ) {
@@ -138,9 +148,9 @@ class AccessUtilities extends Client\RetrieveClient {
 		$this->update_client_session(
 			array(
 				'access_levels' => $this->client_access_levels,
-				'contracts'     => $this->client_contract_ids,
-				'services'      => $this->client_service_ids,
-				'memberships'   => $this->client_membership_ids,
+				'contract_ids'     => $this->client_contract_ids,
+				'service_ids'      => $this->client_service_ids,
+				'membership_ids'   => $this->client_membership_ids
 			)
 		);
 
@@ -254,6 +264,25 @@ class AccessUtilities extends Client\RetrieveClient {
 	}
 
 	/**
+	 * Get Client Purchase IDs
+	 *
+	 * @since 2.1.1
+	 * @access protected.
+	 * @param int $client_id MBO client Id.
+	 * @return array of IDs of services client has.
+	 */
+	protected function get_client_purchase_ids( $client_id ) {
+		$purchases    = $this->get_client_purchases( $client_id );
+		$purchase_ids = array();
+		foreach ( $purchases as $k => $purchase ) {
+			foreach( $purchase['Sale']['PurchasedItems'] as $k => $item ){
+                $purchase_ids[] = $item['BarcodeId'];
+            }
+		}
+		return $purchase_ids;
+	}
+
+	/**
 	 * Check Client Access to Level
 	 *
 	 * Return true if client has access to any of the subscriptions in this level.
@@ -313,11 +342,11 @@ class AccessUtilities extends Client\RetrieveClient {
 	 *
 	 * @return bool
 	 */
-	public function compare_client_purchase_status( $purchase_types = array() ) {
+	public function compare_client_purchase_status( $client_id, $purchase_types = array() ) {
 
 		$purchase_types = is_array( $purchase_types ) ? $purchase_types : array( $purchase_types );
 
-		$purchases = $this->get_client_purchases();
+		$purchases = $this->get_client_purchases( $client_id );
 
 		if ( false === (bool) $purchases[0]['Sale'] ) {
 			return 0;
