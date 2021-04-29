@@ -132,7 +132,7 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 				'form_heading'           => __( 'Login with your Mindbody account to access this content.', 'mz-mbo-access' ),
 				'access_expired'         => __( 'Looks like your access has expired.', 'mz-mbo-access' ),
 				'denied_redirect'        => '',
-				'access_levels'          => array( 1 ),
+				'access_levels'          => 1,
 				'user_login_redirect'    => 0,
 				'manage_on_mbo'          => 'Visit Mindbody Site',
 				'password_reset_request' => __( 'Forgot My Password', 'mz-mbo-access' ),
@@ -190,6 +190,7 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 		// Check client_session for access.
 		$access_utilities = new AccessUtilities();
 		$logged_client    = NS\MBO_Access()->get_session()->get( 'MBO_Client' )->mbo_result;
+		
 		if ( ! empty( $logged_client->access_levels ) ) {
 			foreach ( $logged_client->access_levels as $k => $level ) {
 				if ( in_array( $level, $this->atts['access_levels'], true ) ) {
