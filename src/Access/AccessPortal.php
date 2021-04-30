@@ -49,7 +49,7 @@ class AccessPortal extends AccessUtilities {
 		// Init message.
 		$result['logged'] = '';
 
-		$result['client_access_level'] = 0;
+		$result['client_access_levels'] = array();
 
 		$result['type'] = 'success';
 
@@ -78,10 +78,10 @@ class AccessPortal extends AccessUtilities {
 			$result['client_id'] = $login['client_id'];
 		}
 
-		$access_level = $this->check_access_permissions( $result['client_id'] );
+		$access_levels = $this->check_access_permissions( $result['client_id'] );
 
-		if ( 0 !== $access_level ) {
-			$result['client_access_level'] = $access_level;
+		if ( ! empty( $access_levels ) ) {
+			$result['client_access_levels'] = $access_levels;
 		}
 
 		if ( ! empty( $_SERVER['HTTP_X_REQUESTED_WITH'] ) &&
@@ -117,17 +117,17 @@ class AccessPortal extends AccessUtilities {
 		// Init message.
 		$result['logged'] = '';
 
-		$result['client_access_level'] = 0;
+		$result['client_access_level'] = array();
 
 		$result['type'] = 'error';
 
 		if ( $_REQUEST['client_id'] ) {
-			$access_level   = $this->check_access_permissions( $_REQUEST['client_id'] );
+			$access_levels  = $this->check_access_permissions( $_REQUEST['client_id'] );
 			$result['type'] = 'success';
 		}
 
-		if ( 0 !== $access_level ) {
-			$result['client_access_level'] = $access_level;
+		if ( ! empty( $access_levels ) ) {
+			$result['client_access_levels'] = $access_levels;
 		}
 
 		if ( ! empty( $_SERVER['HTTP_X_REQUESTED_WITH'] ) &&

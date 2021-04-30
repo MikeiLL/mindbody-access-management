@@ -292,8 +292,6 @@ class RetrieveClient extends Interfaces\Retrieve {
 
 			$new_session = array_merge( $previous_session, $sanitized_additional_info );
 
-			$this->client_logout();
-
 			// If validated, create session variables and store.
 			$client_details = array(
 				'mbo_result' => $new_session,
@@ -393,9 +391,6 @@ class RetrieveClient extends Interfaces\Retrieve {
 		if ( false === $this->verify_mbo_pass() ) {
 			return 3;
 		}
-
-		$credentials['Username'] = $credentials['Username'];
-		$credentials['Password'] = $credentials['Password'];
 
 		return $credentials;
 	}

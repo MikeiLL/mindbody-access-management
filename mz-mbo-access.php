@@ -7,8 +7,8 @@
  * @package MZMBOACCESS
  *
  * @wordpress-plugin
- * Version:         2.1.0
- * Stable tag:      2.1.0
+ * Version:         2.1.1
+ * Stable tag:      2.1.1
  * Author:          mZoo.org
  * Author URI:      http://www.mZoo.org/
  * Plugin URI:      http://www.mzoo.org/
@@ -23,10 +23,6 @@ namespace MZoo\MzMboAccess;
 use MZoo\MzMboAccess as NS;
 use MZoo\MzMindbody;
 use MZoo\MzMindbody\Core as Core;
-
-if ( ! defined( 'WPINC' ) ) {
-	die;
-}
 
 /*
  * TODO consider more eloquent appoach like EDD JILT work!
@@ -43,7 +39,7 @@ define( NS . 'MZ', 'MZoo\MzMindbody' );
 
 define( NS . 'PLUGIN_NAME', 'mz-mbo-access' );
 
-define( NS . 'PLUGIN_VERSION', '2.1.0' );
+define( NS . 'PLUGIN_VERSION', '2.1.1' );
 
 define( NS . 'PLUGIN_NAME_DIR', plugin_dir_path( __FILE__ ) );
 
@@ -68,6 +64,12 @@ if ( version_compare( PHP_VERSION, MINIMUM_PHP_VERSION, '<' ) ) {
 	$wp_mbo_access_autoload = NS\PLUGIN_NAME_DIR . '/vendor/autoload.php';
 	if ( file_exists( $wp_mbo_access_autoload ) ) {
 		include_once $wp_mbo_access_autoload;
+	}
+
+	// Mozart-managed dependencies.
+	$wp_mbo_access_mozart_autoload = NS\PLUGIN_NAME_DIR . '/src/Mozart/autoload.php';
+	if ( file_exists( $wp_mbo_access_mozart_autoload ) ) {
+		include_once $wp_mbo_access_mozart_autoload;
 	}
 
 	if ( ! class_exists( '\MZoo\MzMboAccess\Core\PluginCore' ) ) {
@@ -194,7 +196,7 @@ function activation_failed( $error ) {
  * @return void.
  */
 function deactivate_plugins() {
-	\deactivate_plugins( plugin_basename( __FILE__ ) );
+	deactivate_plugins( plugin_basename( __FILE__ ) );
 	if ( is_admin() && current_user_can( 'activate_plugins' ) ) {
 		?>
 			<div class="notice notice-success is-dismissible"><p>

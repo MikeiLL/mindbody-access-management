@@ -1,10 +1,10 @@
 === MZ MBO Access ===
-Contributors: mikeill
+Contributors: mikeill, sunspotswifi
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=A95ZEELLHGECE
 Tags: mindbody, schedule, calendar, yoga, MBO, mindbodyonline, gym, access, restrict
 Requires at least: 3.0.1
-Tested up to: 5.6
-Stable tag: 2.1.0
+Tested up to: 5.7.1
+Stable tag: 2.1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -49,6 +49,10 @@ Steps to install and configure MZ MBO Access:
 7. Access Granted.
 
 == Changelog ==
+
+= v2.1.1 =
+Refactor use of hooks on activation, deactivation, initialization.
+Add arbitrary number of levels configured by repeater field.
 
 = v2.1.0 =
 More WP Standards compliance.
