@@ -26,9 +26,6 @@
 		  "phpcs --extensions=php src *.php"
 		],
     "fix": ["phpcbf --extensions=php src *.php"],
-    "post-install-cmd": [
-        "\"vendor/bin/mozart\" compose"
-    ],
     "post-update-cmd": [
       "\"vendor/bin/mozart\" compose"
     ]
