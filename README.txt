@@ -1,5 +1,5 @@
 === MZ MBO Access ===
-Contributors: mikeill
+Contributors: mikeill, sunspotswifi
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=A95ZEELLHGECE
 Tags: mindbody, schedule, calendar, yoga, MBO, mindbodyonline, gym, access, restrict
 Requires at least: 3.0.1
