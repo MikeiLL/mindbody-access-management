@@ -593,13 +593,13 @@ class RetrieveClient extends Interfaces\Retrieve {
 	 *
 	 * @return array numeric array of client purchases
 	 */
-	public function get_client_purchases( $client_id ) {
+	public function get_client_purchases( $client_id, $start_date = '2001-01-01T00:00:00' ) {
 
 		// Create the MBO Object.
 		$this->get_mbo_results();
 
 		$result = $this->mb->GetClientPurchases(
-			array( 'ClientId' => $client_id )
+			array( 'ClientId' => $client_id, 'StartDate' => $start_date )
 		); // NOT "UniqueID".
 
 		return $result['Purchases'];
