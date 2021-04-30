@@ -47,7 +47,7 @@ define( NS . 'PLUGIN_NAME_URL', plugin_dir_url( __FILE__ ) );
 
 define( NS . 'PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
 
-define( NS . 'MINIMUM_PHP_VERSION', 7.1 );
+define( NS . 'MINIMUM_PHP_VERSION', 7.4 );
 
 define( NS . 'INIT_LEVEL', 20 );
 
@@ -196,7 +196,7 @@ function activation_failed( $error ) {
  * @return void.
  */
 function deactivate_plugins() {
-	deactivate_plugins( plugin_basename( __FILE__ ) );
+	\deactivate_plugins( plugin_basename( __FILE__ ) );
 	if ( is_admin() && current_user_can( 'activate_plugins' ) ) {
 		?>
 			<div class="notice notice-success is-dismissible"><p>
