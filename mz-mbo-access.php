@@ -47,7 +47,7 @@ define( NS . 'PLUGIN_NAME_URL', plugin_dir_url( __FILE__ ) );
 
 define( NS . 'PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
 
-define( NS . 'MINIMUM_PHP_VERSION', 7.4 );
+define( NS . 'MINIMUM_PHP_VERSION', 7.1 );
 
 define( NS . 'INIT_LEVEL', 20 );
 
