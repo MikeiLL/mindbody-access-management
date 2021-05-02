@@ -50,6 +50,9 @@ Steps to install and configure MZ MBO Access:
 
 == Changelog ==
 
+= v2.1.2 =
+Bugfix: Slash deactivation function.
+
 = v2.1.1 =
 Refactor use of hooks on activation, deactivation, initialization.
 Add arbitrary number of levels configured by repeater field.
