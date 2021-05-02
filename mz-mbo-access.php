@@ -56,7 +56,7 @@ define( NS . 'INIT_LEVEL', 20 );
  */
 if ( version_compare( PHP_VERSION, MINIMUM_PHP_VERSION, '<' ) ) {
 	add_action( 'admin_notices', NS . 'minimum_php_version' );
-	add_action( 'init', __NAMESPACE__ . '\deactivate_plugins', INIT_LEVEL );
+	add_action( 'admin_init', __NAMESPACE__ . '\deactivate_plugins', INIT_LEVEL );
 } else {
 	/**
 	 * Autoload Classes
@@ -74,7 +74,7 @@ if ( version_compare( PHP_VERSION, MINIMUM_PHP_VERSION, '<' ) ) {
 
 	if ( ! class_exists( '\MZoo\MzMboAccess\Core\PluginCore' ) ) {
 		add_action( 'admin_notices', NS . 'missing_composer' );
-		add_action( 'init', __NAMESPACE__ . '\deactivate_plugins', INIT_LEVEL );
+		add_action( 'admin_init', __NAMESPACE__ . '\deactivate_plugins', INIT_LEVEL );
 	} else {
 
 		/**
@@ -232,7 +232,7 @@ function minimum_php_version() {
 function mbo_access_has_mindbody_api() {
 	if ( ! class_exists( MZ . '\Core\MzMindbodyApi' ) ) {
 		activation_failed( __( 'MZ MBO Access requires MZ Mindbody Api.', 'mz-mbo-access' ) );
-		add_action( 'init', __NAMESPACE__ . '\deactivate_plugins', INIT_LEVEL );
+		add_action( 'admin_init', __NAMESPACE__ . '\deactivate_plugins', INIT_LEVEL );
 	} else {
 
 		// Get MzMboAccess Instance.
