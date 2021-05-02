@@ -92,7 +92,8 @@ class Carbon_Fields_Init {
 	 */
 	public static function get_mbo_contracts() {
 		$sale_object = new Sale\RetrieveSale();
-		return $sale_object->get_contracts( true );
+		$contracts = $sale_object->get_contracts( true );
+		return is_array( $contracts) ? $contracts : array();
 	}
 
 	/**
@@ -104,7 +105,8 @@ class Carbon_Fields_Init {
 	 */
 	public static function get_mbo_memberships() {
 		$site_object = new Site\RetrieveSite();
-		return $site_object->get_site_memberships( true );
+		$memberships = $site_object->get_site_memberships( true );
+		return is_array( $memberships ) ? $memberships : array();
 	}
 
 	/**
@@ -116,7 +118,8 @@ class Carbon_Fields_Init {
 	 */
 	public static function get_mbo_services() {
 		$sale_object = new Sale\RetrieveSale();
-		return $sale_object->get_services( true );
+		$services = $sale_object->get_services( true );
+		return is_array( $services ) ? $services : array();
 	}
 
 	/**
