@@ -35,9 +35,9 @@ else :
 			<?php echo '<strong>' . $data->atts['denied_message'] . '</strong>:'; ?>
 				<ul>
 			<?php
-            foreach ( $data->required_access_levels as $level ) {
-                echo '<li>' . $level['access_level_name'] . '</li>';
-            }
+			foreach ( $data->required_access_levels as $level ) {
+				echo '<li>' . $level['access_level_name'] . '</li>';
+			}
 			?>
 				</ul>
 			</div>

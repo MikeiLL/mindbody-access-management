@@ -137,7 +137,7 @@ class AccessUtilities extends Client\RetrieveClient {
 		$this->client_membership_ids = $this->get_client_active_membership_ids( $client_id );
 
 		$this->client_service_ids = $this->get_client_valid_service_ids( $client_id );
-        
+
 		// Populate client access levels with levels client has access to.
 		foreach ( $this->mindbody_access_levels as $k => $level ) {
 			if ( true === $this->check_client_access_to_level( $client_id, $level ) ) {
@@ -147,10 +147,10 @@ class AccessUtilities extends Client\RetrieveClient {
 
 		$this->update_client_session(
 			array(
-				'access_levels' => $this->client_access_levels,
-				'contract_ids'     => $this->client_contract_ids,
-				'service_ids'      => $this->client_service_ids,
-				'membership_ids'   => $this->client_membership_ids
+				'access_levels'  => $this->client_access_levels,
+				'contract_ids'   => $this->client_contract_ids,
+				'service_ids'    => $this->client_service_ids,
+				'membership_ids' => $this->client_membership_ids,
 			)
 		);
 
@@ -275,9 +275,9 @@ class AccessUtilities extends Client\RetrieveClient {
 		$purchases    = $this->get_client_purchases( $client_id );
 		$purchase_ids = array();
 		foreach ( $purchases as $k => $purchase ) {
-			foreach( $purchase['Sale']['PurchasedItems'] as $k => $item ){
-                $purchase_ids[] = $item['BarcodeId'];
-            }
+			foreach ( $purchase['Sale']['PurchasedItems'] as $k => $item ) {
+				$purchase_ids[] = $item['BarcodeId'];
+			}
 		}
 		return $purchase_ids;
 	}
