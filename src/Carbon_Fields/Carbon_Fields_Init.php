@@ -61,7 +61,7 @@ class Carbon_Fields_Init {
 		$container_object = Container\Container::make( 'theme_options', __( 'MBO Access Levels' ) );
 
 		// Only make the calls to populate these fields if on container page.
-		if ( 'crb_carbon_fields_container_mbo_access_levels.php' != $_GET['page'] ) {
+		if ( empty($_GET['page']) || 'crb_carbon_fields_container_mbo_access_levels.php' !== $_GET['page'] ) {
 			return;
 		}
 
