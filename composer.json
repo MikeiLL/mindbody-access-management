@@ -52,7 +52,7 @@
     }
   ],
   "require-dev": {
-    "brianhenryie/strauss": "master",
+    "brianhenryie/strauss": "^0.8.3",
     "squizlabs/php_codesniffer": "*",
     "wp-coding-standards/wpcs": "*"
   },
@@ -70,7 +70,7 @@
         "ericmann/wp-session-manager",
         "ericmann/sessionz"
       ],
-      "delete_vendor_directories": false,
+      "delete_vendor_files": false,
       "override_autoload": {
         "htmlburger/carbon-fields": {
           "psr-4": {
