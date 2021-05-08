@@ -22,6 +22,9 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
+ *
+ * Modified by Mike iLL Kilmer on 08-May-2021 using Strauss.
+ * @see https://github.com/BrianHenryIE/strauss
  */
 
 namespace MZoo\MzMboAccess\Dependencies\Carbon_Fields\Pimple;

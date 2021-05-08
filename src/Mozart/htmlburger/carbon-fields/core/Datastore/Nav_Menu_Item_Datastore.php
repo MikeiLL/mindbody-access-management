@@ -1,4 +1,10 @@
 <?php
+/**
+ * @license GPL-2.0-only
+ *
+ * Modified by Mike iLL Kilmer on 08-May-2021 using Strauss.
+ * @see https://github.com/BrianHenryIE/strauss
+ */
 
 namespace MZoo\MzMboAccess\Dependencies\Carbon_Fields\Datastore;
 
@@ -14,7 +20,7 @@ class Nav_Menu_Item_Datastore extends Post_Meta_Datastore {
 	}
 
 	public function get_clean_field_name( $field ) {
-		$name = ( is_object( $field ) && is_subclass_of( $field, 'Carbon_Fields\\Field\\Field' ) ) ? $field->get_name() : $field;
+		$name = ( is_object( $field ) && is_subclass_of( $field, 'MZoo\\MzMboAccess\\Dependencies\\Carbon_Fields\\Field\\Field' ) ) ? $field->get_name() : $field;
 		$garbage_prefix = $this->get_garbage_prefix();
 		$garbage_prefix_length = strlen( $garbage_prefix );
 
@@ -25,7 +31,7 @@ class Nav_Menu_Item_Datastore extends Post_Meta_Datastore {
 	}
 
 	public function get_dirty_field_name( $field ) {
-		$name = ( is_object( $field ) && is_subclass_of( $field, 'Carbon_Fields\\Field\\Field' ) ) ? $field->get_name() : $field;
+		$name = ( is_object( $field ) && is_subclass_of( $field, 'MZoo\\MzMboAccess\\Dependencies\\Carbon_Fields\\Field\\Field' ) ) ? $field->get_name() : $field;
 		$garbage_prefix = $this->get_garbage_prefix();
 		$garbage_prefix_length = strlen( $garbage_prefix );
 

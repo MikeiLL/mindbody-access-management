@@ -1,4 +1,10 @@
 <?php
+/**
+ * @license GPL-2.0-only
+ *
+ * Modified by Mike iLL Kilmer on 08-May-2021 using Strauss.
+ * @see https://github.com/BrianHenryIE/strauss
+ */
 
 namespace MZoo\MzMboAccess\Dependencies\Carbon_Fields;
 
@@ -382,7 +388,7 @@ final class Carbon_Fields {
 			return new SingleEventListener();
 		};
 
-		$ioc->register( new \MZoo\MzMboAccess\Dependencies\Carbon_Fields\Provider\Container_Condition_Provider() );
+		$ioc->register( new \Carbon_Fields\Provider\Container_Condition_Provider() );
 
 		return $ioc;
 	}

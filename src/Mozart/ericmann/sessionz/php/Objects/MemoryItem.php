@@ -8,12 +8,16 @@
  * @package Sessionz
  * @subpackage Objects
  * @since 1.0.0
+ *
+ * @license MIT
+ * Modified by Mike iLL Kilmer on 08-May-2021 using Strauss.
+ * @see https://github.com/BrianHenryIE/strauss
  */
 namespace MZoo\MzMboAccess\Dependencies\EAMann\Sessionz\Objects;
 
 /**
  * Class MemoryItem
- * @package EAMann\Sessionz\Handlers
+ * @package MZoo\MzMboAccess\Dependencies\EAMann\Sessionz\Handlers
  *
  * @property-read string $data Data enclosed by the item
  * @property-read int    $time Timestamp when the item was created

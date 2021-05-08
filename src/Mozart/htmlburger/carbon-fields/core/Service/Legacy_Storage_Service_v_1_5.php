@@ -1,4 +1,10 @@
 <?php
+/**
+ * @license GPL-2.0-only
+ *
+ * Modified by Mike iLL Kilmer on 08-May-2021 using Strauss.
+ * @see https://github.com/BrianHenryIE/strauss
+ */
 
 namespace MZoo\MzMboAccess\Dependencies\Carbon_Fields\Service;
 
@@ -107,7 +113,7 @@ class Legacy_Storage_Service_v_1_5 extends Service {
 		$permutations = array();
 
 		foreach ( $fields as $field ) {
-			if ( $field instanceof \MZoo\MzMboAccess\Dependencies\Carbon_Fields\Field\Complex_Field ) {
+			if ( $field instanceof \Carbon_Fields\Field\Complex_Field ) {
 				$group_names = $field->get_group_names();
 				foreach ( $group_names as $group_name ) {
 					$group = $field->get_group_by_name( $group_name );
@@ -149,12 +155,12 @@ class Legacy_Storage_Service_v_1_5 extends Service {
 			'table_value_column' => '',
 		);
 
-		if ( $datastore instanceof \MZoo\MzMboAccess\Dependencies\Carbon_Fields\Datastore\Theme_Options_Datastore ) {
+		if ( $datastore instanceof \Carbon_Fields\Datastore\Theme_Options_Datastore ) {
 			$details['prefix'] = '';
 			$details['table_name'] = $wpdb->options;
 			$details['table_key_column'] = 'option_name';
 			$details['table_value_column'] = 'option_value';
-		} else if ( $datastore instanceof \MZoo\MzMboAccess\Dependencies\Carbon_Fields\Datastore\Meta_Datastore ) {
+		} else if ( $datastore instanceof \Carbon_Fields\Datastore\Meta_Datastore ) {
 			$details['table_name'] = $datastore->get_table_name();
 			$details['table_id_column'] = $datastore->get_table_field_name();
 			$details['table_key_column'] = 'meta_key';
@@ -176,7 +182,7 @@ class Legacy_Storage_Service_v_1_5 extends Service {
 		$field_key_pattern = $key_prefix . $field->get_base_name();
 		$comparisons = array();
 
-		if ( $field instanceof \MZoo\MzMboAccess\Dependencies\Carbon_Fields\Field\Complex_Field ) {
+		if ( $field instanceof \Carbon_Fields\Field\Complex_Field ) {
 			$groups = $field->get_group_names();
 			foreach ( $groups as $group_name ) {
 				$underscored_group_name = preg_replace( '/^_{0,1}/', '_', $group_name ); // ensure first character is underscore
@@ -186,7 +192,7 @@ class Legacy_Storage_Service_v_1_5 extends Service {
 			$comparisons[] = ' `' . $key_column . '` = "' . esc_sql( $field_key_pattern ) . '" ';
 		}
 
-		if ( $field instanceof \MZoo\MzMboAccess\Dependencies\Carbon_Fields\Field\Map_Field ) {
+		if ( $field instanceof \Carbon_Fields\Field\Map_Field ) {
 			foreach ( $this->map_keys as $map_key ) {
 				$comparisons[] = ' `' . $key_column . '` = "' . esc_sql( $field_key_pattern . '-' . $map_key ) . '" ';
 			}

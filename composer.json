@@ -1,7 +1,7 @@
 {
   "name": "mikeill/mz-mbo-access",
-	"description": "Grant Client Access Based on Mindbody Online API Credentials",
-	"keywords": [
+  "description": "Grant Client Access Based on Mindbody Online API Credentials",
+  "keywords": [
     "MBO",
     "mindbody",
     "wordpress",
@@ -9,10 +9,10 @@
     "session"
   ],
   "prefer-stable": true,
-	"homepage": "https://github.com/MikeiLL/mz-mbo-access",
-	"license"          : "GPL-2.0-or-later",
-	"minimum-stability": "dev",
-	"authors": [
+  "homepage": "https://github.com/MikeiLL/mz-mbo-access",
+  "license": "GPL-2.0-or-later",
+  "minimum-stability": "dev",
+  "authors": [
     {
       "name": "Mike iLL Kilmer",
       "email": "mike@mzoo.org",
@@ -20,25 +20,30 @@
       "role": "Developer"
     }
   ],
-	"type": "wordpress-plugin",
-	"scripts": {
-		"lint": [
-		  "phpcs --extensions=php src *.php"
-		],
-    "fix": ["phpcbf --extensions=php src *.php"],
+  "type": "wordpress-plugin",
+  "scripts": {
+    "lint": [
+      "phpcs --extensions=php src *.php"
+    ],
+    "fix": [
+      "phpcbf --extensions=php src *.php"
+    ],
+    "strauss": [
+      "vendor/bin/strauss"
+    ],
     "post-update-cmd": [
-      "\"vendor/bin/mozart\" compose"
+      "vendor/bin/strauss"
     ]
-	},
+  },
   "require": {
-		"php": ">=7.1",
-		"ericmann/sessionz": "^0.3",
-		"ericmann/wp-session-manager": "*",
+    "php": ">=7.1",
+    "ericmann/sessionz": "^0.3",
+    "ericmann/wp-session-manager": "*",
     "htmlburger/carbon-fields": "*"
   },
   "repositories": [
     {
-      "url": "https://github.com/brianhenryie/mozart",
+      "url": "https://github.com/brianhenryie/strauss",
       "type": "git"
     },
     {
@@ -46,18 +51,18 @@
       "type": "git"
     }
   ],
-  "require-dev":{
-    "coenjacobs/mozart": "dev-rewrite",
-		"squizlabs/php_codesniffer": "*",
-		"wp-coding-standards/wpcs": "*"
+  "require-dev": {
+    "brianhenryie/strauss": "master",
+    "squizlabs/php_codesniffer": "*",
+    "wp-coding-standards/wpcs": "*"
   },
-	"autoload": {
-		"psr-4": {
-			"MZoo\\MzMboAccess\\": "src"
-		}
-	},
+  "autoload": {
+    "psr-4": {
+      "MZoo\\MzMboAccess\\": "src"
+    }
+  },
   "extra": {
-    "mozart":{
+    "mozart": {
       "dep_namespace": "MZoo\\MzMboAccess\\Dependencies\\",
       "dep_directory": "/src/Mozart/",
       "packages": [

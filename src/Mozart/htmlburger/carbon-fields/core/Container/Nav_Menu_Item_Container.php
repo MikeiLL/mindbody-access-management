@@ -1,4 +1,10 @@
 <?php
+/**
+ * @license GPL-2.0-only
+ *
+ * Modified by Mike iLL Kilmer on 08-May-2021 using Strauss.
+ * @see https://github.com/BrianHenryIE/strauss
+ */
 
 namespace MZoo\MzMboAccess\Dependencies\Carbon_Fields\Container;
 
@@ -159,7 +165,7 @@ class Nav_Menu_Item_Container extends Container {
 	 * Output the container markup
 	 */
 	public function render() {
-		include \MZoo\MzMboAccess\Dependencies\Carbon_Fields\DIR . '/templates/Container/nav_menu_item.php';
+		include \Carbon_Fields\DIR . '/templates/Container/nav_menu_item.php';
 	}
 
 	/**
@@ -224,6 +230,6 @@ class Nav_Menu_Item_Container extends Container {
 	 * Setup custom walker for the Nav Menu entries
 	 */
 	public static function edit_walker() {
-		return 'Carbon_Fields\\Walker\\Nav_Menu_Item_Edit_Walker';
+		return 'MZoo\\MzMboAccess\\Dependencies\\Carbon_Fields\\Walker\\Nav_Menu_Item_Edit_Walker';
 	}
 }

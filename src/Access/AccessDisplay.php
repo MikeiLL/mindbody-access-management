@@ -114,6 +114,9 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 	 */
 	public $mbo_access_levels;
 
+    public function shortcode_with_carbon_fields(){
+    }
+
 	/**
 	 * Handle Shortcode
 	 *
@@ -139,10 +142,13 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 			),
 			$atts
 		);
-
+        
 		// Populate Access Levels.
-		$this->mbo_access_levels = carbon_get_theme_option( 'mbo_access_access_levels' );
+        $this->mbo_access_levels = carbon_get_theme_option( 'mbo_access_access_levels' );
+        MZ\MZMBO()->helpers->print('mbo_access_access_levels');
+        MZ\MZMBO()->helpers->print($this->mbo_access_levels);
 
+		
 		// Insert zero index element so indexes line up with level numbers.
 		array_unshift( $this->mbo_access_levels, 'no-access' );
 

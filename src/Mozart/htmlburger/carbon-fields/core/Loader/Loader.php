@@ -1,4 +1,10 @@
 <?php
+/**
+ * @license GPL-2.0-only
+ *
+ * Modified by Mike iLL Kilmer on 08-May-2021 using Strauss.
+ * @see https://github.com/BrianHenryIE/strauss
+ */
 
 namespace MZoo\MzMboAccess\Dependencies\Carbon_Fields\Loader;
 
@@ -51,16 +57,16 @@ class Loader {
 		add_action( 'wp_ajax_carbon_fields_fetch_association_options', array( $this, 'fetch_association_options' ) );
 
 		# Enable the legacy storage service
-		\MZoo\MzMboAccess\Dependencies\Carbon_Fields\Carbon_Fields::service( 'legacy_storage' )->enable();
+		\Carbon_Fields\Carbon_Fields::service( 'legacy_storage' )->enable();
 
 		# Enable the meta query service
-		\MZoo\MzMboAccess\Dependencies\Carbon_Fields\Carbon_Fields::service( 'meta_query' )->enable();
+		\Carbon_Fields\Carbon_Fields::service( 'meta_query' )->enable();
 
 		# Enable the REST API service
-		\MZoo\MzMboAccess\Dependencies\Carbon_Fields\Carbon_Fields::service( 'rest_api' )->enable();
+		\Carbon_Fields\Carbon_Fields::service( 'rest_api' )->enable();
 
 		# Enable post meta revisions service
-		\MZoo\MzMboAccess\Dependencies\Carbon_Fields\Carbon_Fields::service( 'revisions' )->enable();
+		\Carbon_Fields\Carbon_Fields::service( 'revisions' )->enable();
 
 		# Initialize sidebar manager
 		$this->sidebar_manager->boot();
@@ -226,8 +232,8 @@ class Loader {
 			'config' => array(
 				'locale' => $this->get_ui_translations(),
 				'pagenow' => $pagenow,
-				'compactInput' => \MZoo\MzMboAccess\Dependencies\Carbon_Fields\COMPACT_INPUT,
-				'compactInputKey' => \MZoo\MzMboAccess\Dependencies\Carbon_Fields\COMPACT_INPUT_KEY,
+				'compactInput' => \Carbon_Fields\COMPACT_INPUT,
+				'compactInputKey' => \Carbon_Fields\COMPACT_INPUT_KEY,
 				'revisionsInputKey' => $revisions::CHANGE_KEY,
 			)
 		) ) );
@@ -275,7 +281,7 @@ class Loader {
 		foreach ( $containers as $container ) {
 			$container_data = $container->to_json( true );
 
-			if ( is_a($container, '\\MZoo\MzMboAccess\Dependencies\Carbon_Fields\\Container\\Block_Container', true ) ) {
+			if ( is_a($container, '\\MZoo\\MzMboAccess\\Dependencies\\Carbon_Fields\\Container\\Block_Container', true ) ) {
 				$carbon_data['blocks'][] = $container_data;
 			} else {
 				$carbon_data['containers'][] = $container_data;

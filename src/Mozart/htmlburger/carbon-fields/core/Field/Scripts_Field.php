@@ -1,4 +1,10 @@
 <?php
+/**
+ * @license GPL-2.0-only
+ *
+ * Modified by Mike iLL Kilmer on 08-May-2021 using Strauss.
+ * @see https://github.com/BrianHenryIE/strauss
+ */
 
 namespace MZoo\MzMboAccess\Dependencies\Carbon_Fields\Field;
 
@@ -46,7 +52,7 @@ abstract class Scripts_Field extends Textarea_Field {
 	 * Display the field value in the front-end header.
 	 */
 	public function print_scripts() {
-		$is_valid_datastore = ( $this->get_datastore() instanceof \MZoo\MzMboAccess\Dependencies\Carbon_Fields\Datastore\Theme_Options_Datastore || $this->get_datastore() instanceof \MZoo\MzMboAccess\Dependencies\Carbon_Fields\Datastore\Network_Datastore );
+		$is_valid_datastore = ( $this->get_datastore() instanceof \Carbon_Fields\Datastore\Theme_Options_Datastore || $this->get_datastore() instanceof \Carbon_Fields\Datastore\Network_Datastore );
 		if ( ! $this->get_datastore() || ! $is_valid_datastore ) {
 			return;
 		}

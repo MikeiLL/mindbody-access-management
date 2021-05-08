@@ -1,4 +1,10 @@
 <?php
+/**
+ * @license GPL-2.0-only
+ *
+ * Modified by Mike iLL Kilmer on 08-May-2021 using Strauss.
+ * @see https://github.com/BrianHenryIE/strauss
+ */
 
 namespace MZoo\MzMboAccess\Dependencies\Carbon_Fields\Provider;
 
@@ -42,7 +48,7 @@ class Container_Condition_Provider implements ServiceProviderInterface {
 		$cc_ioc = $ioc['container_conditions'];
 
 		$cc_ioc['boolean'] = $cc_ioc->factory( function() use ( $ioc ) {
-			$condition = new \MZoo\MzMboAccess\Dependencies\Carbon_Fields\Container\Condition\Boolean_Condition();
+			$condition = new \Carbon_Fields\Container\Condition\Boolean_Condition();
 			$condition->set_comparers( array(
 				$ioc['container_condition_comparers']['equality'],
 			) );
@@ -50,42 +56,42 @@ class Container_Condition_Provider implements ServiceProviderInterface {
 		} );
 
 		$cc_ioc['post_id'] = $cc_ioc->factory( function() use ( $ioc ) {
-			$condition = new \MZoo\MzMboAccess\Dependencies\Carbon_Fields\Container\Condition\Post_ID_Condition();
+			$condition = new \Carbon_Fields\Container\Condition\Post_ID_Condition();
 			$condition->set_comparers( $ioc['container_condition_comparer_collections']['generic'] );
 			return $condition;
 		} );
 		$cc_ioc['post_parent_id'] = $cc_ioc->factory( function() use ( $ioc ) {
-			$condition = new \MZoo\MzMboAccess\Dependencies\Carbon_Fields\Container\Condition\Post_Parent_ID_Condition();
+			$condition = new \Carbon_Fields\Container\Condition\Post_Parent_ID_Condition();
 			$condition->set_comparers( $ioc['container_condition_comparer_collections']['generic'] );
 			return $condition;
 		} );
 		$cc_ioc['post_ancestor_id'] = $cc_ioc->factory( function() use ( $ioc ) {
-			$condition = new \MZoo\MzMboAccess\Dependencies\Carbon_Fields\Container\Condition\Post_Ancestor_ID_Condition();
+			$condition = new \Carbon_Fields\Container\Condition\Post_Ancestor_ID_Condition();
 			$condition->set_comparers( $ioc['container_condition_comparer_collections']['array'] );
 			return $condition;
 		} );
 		$cc_ioc['post_type'] = $cc_ioc->factory( function() use ( $ioc ) {
-			$condition = new \MZoo\MzMboAccess\Dependencies\Carbon_Fields\Container\Condition\Post_Type_Condition();
+			$condition = new \Carbon_Fields\Container\Condition\Post_Type_Condition();
 			$condition->set_comparers( $ioc['container_condition_comparer_collections']['nonscalar'] );
 			return $condition;
 		} );
 		$cc_ioc['post_format'] = $cc_ioc->factory( function() use ( $ioc ) {
-			$condition = new \MZoo\MzMboAccess\Dependencies\Carbon_Fields\Container\Condition\Post_Format_Condition();
+			$condition = new \Carbon_Fields\Container\Condition\Post_Format_Condition();
 			$condition->set_comparers( $ioc['container_condition_comparer_collections']['nonscalar'] );
 			return $condition;
 		} );
 		$cc_ioc['post_level'] = $cc_ioc->factory( function() use ( $ioc ) {
-			$condition = new \MZoo\MzMboAccess\Dependencies\Carbon_Fields\Container\Condition\Post_Level_Condition();
+			$condition = new \Carbon_Fields\Container\Condition\Post_Level_Condition();
 			$condition->set_comparers( $ioc['container_condition_comparer_collections']['generic'] );
 			return $condition;
 		} );
 		$cc_ioc['post_template'] = $cc_ioc->factory( function() use ( $ioc ) {
-			$condition = new \MZoo\MzMboAccess\Dependencies\Carbon_Fields\Container\Condition\Post_Template_Condition();
+			$condition = new \Carbon_Fields\Container\Condition\Post_Template_Condition();
 			$condition->set_comparers( $ioc['container_condition_comparer_collections']['nonscalar'] );
 			return $condition;
 		} );
 		$cc_ioc['post_term'] = $cc_ioc->factory( function() use ( $ioc ) {
-			$condition = new \MZoo\MzMboAccess\Dependencies\Carbon_Fields\Container\Condition\Post_Term_Condition( $ioc['wp_toolset'] );
+			$condition = new \Carbon_Fields\Container\Condition\Post_Term_Condition( $ioc['wp_toolset'] );
 			$condition->set_comparers( array(
 				// Only support the custom comparer as this condition has its own comparison methods
 				$ioc['container_condition_comparers']['custom'],
@@ -94,7 +100,7 @@ class Container_Condition_Provider implements ServiceProviderInterface {
 		} );
 
 		$cc_ioc['term'] = $cc_ioc->factory( function() use ( $ioc ) {
-			$condition = new \MZoo\MzMboAccess\Dependencies\Carbon_Fields\Container\Condition\Term_Condition( $ioc['wp_toolset'] );
+			$condition = new \Carbon_Fields\Container\Condition\Term_Condition( $ioc['wp_toolset'] );
 			$condition->set_comparers( array(
 				// Only support the custom comparer as this condition has its own comparison methods
 				$ioc['container_condition_comparers']['custom'],
@@ -102,38 +108,38 @@ class Container_Condition_Provider implements ServiceProviderInterface {
 			return $condition;
 		} );
 		$cc_ioc['term_taxonomy'] = $cc_ioc->factory( function() use ( $ioc ) {
-			$condition = new \MZoo\MzMboAccess\Dependencies\Carbon_Fields\Container\Condition\Term_Taxonomy_Condition();
+			$condition = new \Carbon_Fields\Container\Condition\Term_Taxonomy_Condition();
 			$condition->set_comparers( $ioc['container_condition_comparer_collections']['nonscalar'] );
 			return $condition;
 		} );
 		$cc_ioc['term_level'] = $cc_ioc->factory( function() use ( $ioc ) {
-			$condition = new \MZoo\MzMboAccess\Dependencies\Carbon_Fields\Container\Condition\Term_Level_Condition();
+			$condition = new \Carbon_Fields\Container\Condition\Term_Level_Condition();
 			$condition->set_comparers( $ioc['container_condition_comparer_collections']['generic'] );
 			return $condition;
 		} );
 		$cc_ioc['term_parent'] = $cc_ioc->factory( function() use ( $ioc ) {
-			$condition = new \MZoo\MzMboAccess\Dependencies\Carbon_Fields\Container\Condition\Term_Parent_Condition( $ioc['wp_toolset'] );
+			$condition = new \Carbon_Fields\Container\Condition\Term_Parent_Condition( $ioc['wp_toolset'] );
 			$condition->set_comparers( $ioc['container_condition_comparer_collections']['generic'] );
 			return $condition;
 		} );
 		$cc_ioc['term_ancestor'] = $cc_ioc->factory( function() use ( $ioc ) {
-			$condition = new \MZoo\MzMboAccess\Dependencies\Carbon_Fields\Container\Condition\Term_Ancestor_Condition( $ioc['wp_toolset'] );
+			$condition = new \Carbon_Fields\Container\Condition\Term_Ancestor_Condition( $ioc['wp_toolset'] );
 			$condition->set_comparers( $ioc['container_condition_comparer_collections']['array'] );
 			return $condition;
 		} );
 
 		$cc_ioc['user_id'] = $cc_ioc->factory( function() use ( $ioc ) {
-			$condition = new \MZoo\MzMboAccess\Dependencies\Carbon_Fields\Container\Condition\User_ID_Condition();
+			$condition = new \Carbon_Fields\Container\Condition\User_ID_Condition();
 			$condition->set_comparers( $ioc['container_condition_comparer_collections']['generic'] );
 			return $condition;
 		} );
 		$cc_ioc['user_role'] = $cc_ioc->factory( function() use ( $ioc ) {
-			$condition = new \MZoo\MzMboAccess\Dependencies\Carbon_Fields\Container\Condition\User_Role_Condition();
+			$condition = new \Carbon_Fields\Container\Condition\User_Role_Condition();
 			$condition->set_comparers( $ioc['container_condition_comparer_collections']['array'] );
 			return $condition;
 		} );
 		$cc_ioc['user_capability'] = $cc_ioc->factory( function() use ( $ioc ) {
-			$condition = new \MZoo\MzMboAccess\Dependencies\Carbon_Fields\Container\Condition\User_Capability_Condition();
+			$condition = new \Carbon_Fields\Container\Condition\User_Capability_Condition();
 			$condition->set_comparers( array(
 				// Only support the custom comparer as this condition has its own comparison methods
 				$ioc['container_condition_comparers']['custom'],
@@ -142,23 +148,23 @@ class Container_Condition_Provider implements ServiceProviderInterface {
 		} );
 
 		$cc_ioc['blog_id'] = $cc_ioc->factory( function() use ( $ioc ) {
-			$condition = new \MZoo\MzMboAccess\Dependencies\Carbon_Fields\Container\Condition\Blog_ID_Condition();
+			$condition = new \Carbon_Fields\Container\Condition\Blog_ID_Condition();
 			$condition->set_comparers( $ioc['container_condition_comparer_collections']['generic'] );
 			return $condition;
 		} );
 
 		$cc_ioc['current_user_id'] = $cc_ioc->factory( function() use ( $ioc ) {
-			$condition = new \MZoo\MzMboAccess\Dependencies\Carbon_Fields\Container\Condition\Current_User_ID_Condition();
+			$condition = new \Carbon_Fields\Container\Condition\Current_User_ID_Condition();
 			$condition->set_comparers( $ioc['container_condition_comparer_collections']['generic'] );
 			return $condition;
 		} );
 		$cc_ioc['current_user_role'] = $cc_ioc->factory( function() use ( $ioc ) {
-			$condition = new \MZoo\MzMboAccess\Dependencies\Carbon_Fields\Container\Condition\Current_User_Role_Condition();
+			$condition = new \Carbon_Fields\Container\Condition\Current_User_Role_Condition();
 			$condition->set_comparers( $ioc['container_condition_comparer_collections']['array'] );
 			return $condition;
 		} );
 		$cc_ioc['current_user_capability'] = $cc_ioc->factory( function() use ( $ioc ) {
-			$condition = new \MZoo\MzMboAccess\Dependencies\Carbon_Fields\Container\Condition\Current_User_Capability_Condition();
+			$condition = new \Carbon_Fields\Container\Condition\Current_User_Capability_Condition();
 			$condition->set_comparers( array(
 				// Only support the custom comparer as this condition has its own comparison methods
 				$ioc['container_condition_comparers']['custom'],
@@ -178,27 +184,27 @@ class Container_Condition_Provider implements ServiceProviderInterface {
 		};
 
 		$ioc['container_condition_comparers']['equality'] = function() {
-			return new \MZoo\MzMboAccess\Dependencies\Carbon_Fields\Container\Condition\Comparer\Equality_Comparer();
+			return new \Carbon_Fields\Container\Condition\Comparer\Equality_Comparer();
 		};
 
 		$ioc['container_condition_comparers']['any_equality'] = function() {
-			return new \MZoo\MzMboAccess\Dependencies\Carbon_Fields\Container\Condition\Comparer\Any_Equality_Comparer();
+			return new \Carbon_Fields\Container\Condition\Comparer\Any_Equality_Comparer();
 		};
 
 		$ioc['container_condition_comparers']['contain'] = function() {
-			return new \MZoo\MzMboAccess\Dependencies\Carbon_Fields\Container\Condition\Comparer\Contain_Comparer();
+			return new \Carbon_Fields\Container\Condition\Comparer\Contain_Comparer();
 		};
 
 		$ioc['container_condition_comparers']['any_contain'] = function() {
-			return new \MZoo\MzMboAccess\Dependencies\Carbon_Fields\Container\Condition\Comparer\Any_Contain_Comparer();
+			return new \Carbon_Fields\Container\Condition\Comparer\Any_Contain_Comparer();
 		};
 
 		$ioc['container_condition_comparers']['scalar'] = function() {
-			return new \MZoo\MzMboAccess\Dependencies\Carbon_Fields\Container\Condition\Comparer\Scalar_Comparer();
+			return new \Carbon_Fields\Container\Condition\Comparer\Scalar_Comparer();
 		};
 
 		$ioc['container_condition_comparers']['custom'] = function() {
-			return new \MZoo\MzMboAccess\Dependencies\Carbon_Fields\Container\Condition\Comparer\Custom_Comparer();
+			return new \Carbon_Fields\Container\Condition\Comparer\Custom_Comparer();
 		};
 
 		$ioc['container_condition_comparer_collections'] = function() {
@@ -236,11 +242,11 @@ class Container_Condition_Provider implements ServiceProviderInterface {
 	 */
 	protected static function install_translators( $ioc ) {
 		$ioc['container_condition_translator_array'] = function( $ioc ) {
-			return new \MZoo\MzMboAccess\Dependencies\Carbon_Fields\Container\Fulfillable\Translator\Array_Translator( $ioc['container_condition_factory'] );
+			return new \Carbon_Fields\Container\Fulfillable\Translator\Array_Translator( $ioc['container_condition_factory'] );
 		};
 
 		$ioc['container_condition_translator_json'] = function( $ioc ) {
-			return new \MZoo\MzMboAccess\Dependencies\Carbon_Fields\Container\Fulfillable\Translator\Json_Translator( $ioc['container_condition_factory'] );
+			return new \Carbon_Fields\Container\Fulfillable\Translator\Json_Translator( $ioc['container_condition_factory'] );
 		};
 	}
 

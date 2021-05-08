@@ -1,4 +1,10 @@
 <?php
+/**
+ * @license GPL-2.0-only
+ *
+ * Modified by Mike iLL Kilmer on 08-May-2021 using Strauss.
+ * @see https://github.com/BrianHenryIE/strauss
+ */
 
 namespace MZoo\MzMboAccess\Dependencies\Carbon_Fields\Exception;
 
@@ -39,6 +45,6 @@ class Incorrect_Syntax_Exception extends \Exception {
 		$errors = static::$errors;
 		$plural = count( $errors ) === 1 ? '' : 's';
 
-		include \MZoo\MzMboAccess\Dependencies\Carbon_Fields\DIR . '/templates/Exception/incorrect-syntax.php';
+		include \Carbon_Fields\DIR . '/templates/Exception/incorrect-syntax.php';
 	}
 }

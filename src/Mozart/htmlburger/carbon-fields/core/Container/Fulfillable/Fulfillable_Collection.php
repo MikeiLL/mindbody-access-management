@@ -1,4 +1,10 @@
 <?php
+/**
+ * @license GPL-2.0-only
+ *
+ * Modified by Mike iLL Kilmer on 08-May-2021 using Strauss.
+ * @see https://github.com/BrianHenryIE/strauss
+ */
 
 namespace MZoo\MzMboAccess\Dependencies\Carbon_Fields\Container\Fulfillable;
 
@@ -67,7 +73,7 @@ class Fulfillable_Collection implements Fulfillable {
 	 * @return Fulfillable_Collection
 	 */
 	protected function create_collection() {
-		return \MZoo\MzMboAccess\Dependencies\Carbon_Fields\Carbon_Fields::resolve( 'container_condition_fulfillable_collection' );
+		return \Carbon_Fields\Carbon_Fields::resolve( 'container_condition_fulfillable_collection' );
 	}
 
 	/**

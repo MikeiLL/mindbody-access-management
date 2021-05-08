@@ -1,4 +1,10 @@
 <?php
+/**
+ * @license GPL-2.0-only
+ *
+ * Modified by Mike iLL Kilmer on 08-May-2021 using Strauss.
+ * @see https://github.com/BrianHenryIE/strauss
+ */
 
 namespace MZoo\MzMboAccess\Dependencies\Carbon_Fields;
 
@@ -6,13 +12,13 @@ namespace MZoo\MzMboAccess\Dependencies\Carbon_Fields;
  * Container proxy factory class.
  * Used for shorter namespace access when creating a container.
  *
- * @method static \MZoo\MzMboAccess\Dependencies\Carbon_Fields\Container\Comment_Meta_Container make_comment_meta( string $id, string $name = null )
- * @method static \MZoo\MzMboAccess\Dependencies\Carbon_Fields\Container\Nav_Menu_Item_Container make_nav_menu_item( string $id, string $name = null )
- * @method static \MZoo\MzMboAccess\Dependencies\Carbon_Fields\Container\Network_Container make_network( string $id, string $name = null )
- * @method static \MZoo\MzMboAccess\Dependencies\Carbon_Fields\Container\Post_Meta_Container make_post_meta( string $id, string $name = null )
- * @method static \MZoo\MzMboAccess\Dependencies\Carbon_Fields\Container\Term_Meta_Container make_term_meta( string $id, string $name = null )
- * @method static \MZoo\MzMboAccess\Dependencies\Carbon_Fields\Container\Theme_Options_Container make_theme_options( string $id, string $name = null )
- * @method static \MZoo\MzMboAccess\Dependencies\Carbon_Fields\Container\User_Meta_Container make_user_meta( string $id, string $name = null )
+ * @method static \Carbon_Fields\Container\Comment_Meta_Container make_comment_meta( string $id, string $name = null )
+ * @method static \Carbon_Fields\Container\Nav_Menu_Item_Container make_nav_menu_item( string $id, string $name = null )
+ * @method static \Carbon_Fields\Container\Network_Container make_network( string $id, string $name = null )
+ * @method static \Carbon_Fields\Container\Post_Meta_Container make_post_meta( string $id, string $name = null )
+ * @method static \Carbon_Fields\Container\Term_Meta_Container make_term_meta( string $id, string $name = null )
+ * @method static \Carbon_Fields\Container\Theme_Options_Container make_theme_options( string $id, string $name = null )
+ * @method static \Carbon_Fields\Container\User_Meta_Container make_user_meta( string $id, string $name = null )
  */
 class Container {
 
