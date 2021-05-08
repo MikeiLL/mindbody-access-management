@@ -58,28 +58,34 @@ class Carbon_Fields_Init {
 	 */
 	public function access_levels_page() {
 
-		Container\Container::make( 'theme_options', __( 'MBO Access Levels' ) )
-			->add_fields(
-				array(
-					Field::make( 'complex', 'mbo_access_access_levels', __( 'Access Level' ) )
-					->add_fields(
-						'access_level',
-						array(
-							Field::make( 'text', 'access_level_name', __( 'Name' ) ),
-							Field::make( 'multiselect', 'access_level_contracts', __( 'Mindbody Contracts' ) )
-								->add_options( self::get_mbo_contracts() ),
-							Field::make( 'multiselect', 'access_level_memberships', __( 'Mindbody Memberships' ) )
-								->add_options( self::get_mbo_memberships() ),
-							Field::make( 'multiselect', 'access_level_services', __( 'Mindbody Services' ) )
-								->add_options( self::get_mbo_services() ),
-							Field::make( 'select', 'access_level_redirect_post', __( 'Redirect Post' ) )
-								->add_options( self::get_posts_for_redirects() )
-								->set_help_text( __( 'Home page for this access level.', 'mz-mbo-access' ) )
-								->set_default_value( 0 ),
-						)
-					)->set_help_text( __( 'Generate Access Levels by Mindbody Subscriptions, Memberships and/or Services.', 'mz-mbo-access' ) ),
-				)
-			);
+		$container_object = Container\Container::make( 'theme_options', __( 'MBO Access Levels' ) );
+
+		// Only make the calls to populate these fields if on container page.
+		if ( 'crb_carbon_fields_container_mbo_access_levels.php' != $_GET['page'] ) {
+			return;
+		}
+
+		$container_object->add_fields(
+			array(
+				Field::make( 'complex', 'mbo_access_access_levels', __( 'Access Level' ) )
+				->add_fields(
+					'access_level',
+					array(
+						Field::make( 'text', 'access_level_name', __( 'Name' ) ),
+						Field::make( 'multiselect', 'access_level_contracts', __( 'Mindbody Contracts' ) )
+							->add_options( self::get_mbo_contracts() ),
+						Field::make( 'multiselect', 'access_level_memberships', __( 'Mindbody Memberships' ) )
+							->add_options( self::get_mbo_memberships() ),
+						Field::make( 'multiselect', 'access_level_services', __( 'Mindbody Services' ) )
+							->add_options( self::get_mbo_services() ),
+						Field::make( 'select', 'access_level_redirect_post', __( 'Redirect Post' ) )
+							->add_options( self::get_posts_for_redirects() )
+							->set_help_text( __( 'Home page for this access level.', 'mz-mbo-access' ) )
+							->set_default_value( 0 ),
+					)
+				)->set_help_text( __( 'Generate Access Levels by Mindbody Subscriptions, Memberships and/or Services.', 'mz-mbo-access' ) ),
+			)
+		);
 
 	}
 
@@ -92,8 +98,8 @@ class Carbon_Fields_Init {
 	 */
 	public static function get_mbo_contracts() {
 		$sale_object = new Sale\RetrieveSale();
-		$contracts = $sale_object->get_contracts( true );
-		return is_array( $contracts) ? $contracts : array();
+		$contracts   = $sale_object->get_contracts( true );
+		return is_array( $contracts ) ? $contracts : array();
 	}
 
 	/**
@@ -118,7 +124,7 @@ class Carbon_Fields_Init {
 	 */
 	public static function get_mbo_services() {
 		$sale_object = new Sale\RetrieveSale();
-		$services = $sale_object->get_services( true );
+		$services    = $sale_object->get_services( true );
 		return is_array( $services ) ? $services : array();
 	}
 

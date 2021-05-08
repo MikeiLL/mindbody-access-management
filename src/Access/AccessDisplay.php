@@ -190,7 +190,7 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 		// Check client_session for access.
 		$access_utilities = new AccessUtilities();
 		$logged_client    = NS\MBO_Access()->get_session()->get( 'MBO_Client' )->mbo_result;
-		
+
 		if ( ! empty( $logged_client->access_levels ) ) {
 			foreach ( $logged_client->access_levels as $k => $level ) {
 				if ( in_array( $level, $this->atts['access_levels'], true ) ) {

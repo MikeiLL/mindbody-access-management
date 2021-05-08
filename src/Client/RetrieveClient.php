@@ -594,7 +594,10 @@ class RetrieveClient extends Interfaces\Retrieve {
 		$this->get_mbo_results();
 
 		$result = $this->mb->GetClientPurchases(
-			array( 'ClientId' => $client_id, 'StartDate' => $start_date )
+			array(
+				'ClientId'  => $client_id,
+				'StartDate' => $start_date,
+			)
 		); // NOT "UniqueID".
 
 		return $result['Purchases'];
