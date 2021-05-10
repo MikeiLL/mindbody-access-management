@@ -461,6 +461,8 @@ class RetrieveClient extends Interfaces\Retrieve {
 		$result = $this->mb->GetActiveClientMemberships(
 			array( 'clientId' => $client_id )
 		); // Think this is not UniqueID.
+        
+        if (!array_key_exists('ClientMemberships', $result)) return array();
 
 		return $result['ClientMemberships'];
 	}
@@ -538,6 +540,8 @@ class RetrieveClient extends Interfaces\Retrieve {
 			array( 'clientId' => $client_id )
 		);
 
+        if (!array_key_exists('Contracts', $result)) return array();
+
 		return $result['Contracts'];
 	}
 
@@ -599,6 +603,8 @@ class RetrieveClient extends Interfaces\Retrieve {
 				'StartDate' => $start_date,
 			)
 		); // NOT "UniqueID".
+        
+        if (!array_key_exists('Purchases', $result)) return array();
 
 		return $result['Purchases'];
 	}
@@ -645,6 +651,8 @@ class RetrieveClient extends Interfaces\Retrieve {
 		$result = $this->mb->GetClientServices(
 			array( 'clientId' => $client_id )
 		);
+        
+        if (!array_key_exists('ClientServices', $result)) return array();
 
 		return $result['ClientServices'];
 	}
