@@ -24,11 +24,11 @@ use MZoo\MzMboAccess\Core as Core;
 
 			<div class="row">
 
-				<div class="form-group col-xs-8 col-sm-6">
+				<div class="form-group col-xs-8 col-sm-6" style="margin:0.5em 0;">
 
 					<label for="username">Email</label>
 
-					<input type="email" size="10" class="form-control" id="email" name="email" placeholder="<?php echo esc_html( $data->email ); ?>" required>
+					<input type="email" size="10" class="form-control col-6" id="email" name="email" placeholder="<?php echo esc_html( $data->email ); ?>" required>
 
 				</div>
 
@@ -36,19 +36,19 @@ use MZoo\MzMboAccess\Core as Core;
 
 			<div class="row">
 
-				<div class="form-group col-xs-8 col-sm-6">
+				<div class="form-group col-xs-8 col-sm-6" style="margin:0.5em 0;">
 
 					<label for="password">Password</label>
 
-					<input type="password" size="10" class="form-control" name="password" id="password" placeholder="<?php echo esc_html( $data->password ); ?>" required>
+					<input type="password" size="10" class="form-control col-6" name="password" id="password" placeholder="<?php echo esc_html( $data->password ); ?>" required>
 
 				</div>
 
 			</div>
 
-			<div class="row" style="margin:.5em;">
+			<div class="row" style="margin:0.5em 0;">
 
-				<div class="col-12">
+				<div class="col-12 mb-2">
 
 					<button type="submit" class="btn btn-primary btn-xs">
 						<?php echo esc_html( $data->login ); ?>
@@ -77,7 +77,7 @@ use MZoo\MzMboAccess\Core as Core;
 					<a href="<?php echo esc_html( $mbo_link ); ?>" 
 						class="btn btn-primary btn-xs" 
 						style="text-decoration:none;" 
-						id="MBOSite">
+						id="MBOSite" target="_blank">
 						<?php echo esc_html( $data->manage_on_mbo ); ?>
 					</a>
 
