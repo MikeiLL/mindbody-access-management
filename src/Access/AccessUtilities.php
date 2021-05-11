@@ -174,9 +174,10 @@ class AccessUtilities extends Client\RetrieveClient {
 			$service['ExpirationDate'],
 			wp_timezone()
 		);
-		$now                = new \DateTimeImmutable( 'now', wp_timezone() );
 
-		if ( $service_expiration->date < $now->date ) {
+		$now = new \DateTimeImmutable( 'now', wp_timezone() );
+
+		if ( $service_expiration->format( 'Y-m-d\TH:i:s.v' ) < $now->format( 'Y-m-d\TH:i:s.v' ) ) {
 			return false;
 		}
 
@@ -288,10 +289,10 @@ class AccessUtilities extends Client\RetrieveClient {
 	 * Return true if client has access to any of the subscriptions in this level.
 	 *
 	 * @since 2.1.1
-	 * @param int $client_id MBO client Id.
-	 * @param int $level Indexed at (level +1) in mbo_access_access_levels options array.
 	 *
-	 * (
+	 * @param int $client_id MBO client Id.
+	 * @param int $level level index plus one from mbo_access_access_levels:
+	 *
 	 *    [_type] => access_level
 	 *    [access_level_name] => Corporate Member
 	 *    [access_level_contracts] => Array
@@ -307,8 +308,7 @@ class AccessUtilities extends Client\RetrieveClient {
 	 *      (
 	 *      )
 	 *
-	 *   [access_level_redirect_post] => http://project.test/?post_type=post&p=20030
-	 * )
+	 *   [access_level_redirect_post] => http://project.test/?post_type=post&p=20030.
 	 *
 	 * @return bool has or does not have access to level.
 	 */
@@ -338,6 +338,7 @@ class AccessUtilities extends Client\RetrieveClient {
 	 *
 	 * return true if purchased items matches one in received array (or string).
 	 *
+	 * @param int          $client_id from MBO.
 	 * @param string|array $purchase_types  of purchased items.
 	 *
 	 * @return bool

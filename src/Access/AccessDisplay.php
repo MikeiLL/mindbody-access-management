@@ -114,9 +114,6 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 	 */
 	public $mbo_access_levels;
 
-    public function shortcode_with_carbon_fields(){
-    }
-
 	/**
 	 * Handle Shortcode
 	 *
@@ -142,10 +139,10 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 			),
 			$atts
 		);
-        
+
 		// Populate Access Levels.
-        $this->mbo_access_levels = carbon_get_theme_option( 'mbo_access_access_levels' );
-		
+		$this->mbo_access_levels = carbon_get_theme_option( 'mbo_access_access_levels' );
+
 		// Insert zero index element so indexes line up with level numbers.
 		array_unshift( $this->mbo_access_levels, 'no-access' );
 
@@ -189,7 +186,7 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 			'password_reset_request'         => $this->atts['password_reset_request'],
 		);
 
-        $this->check_client_access();
+		$this->check_client_access();
 
 		$template_loader->set_template_data( $this->template_data );
 		$template_loader->get_template_part( 'access_container' );
@@ -280,30 +277,30 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 		);
 	}
 
-    /**
-     * Check Client Access
-     * 
-     * Check if client is logged in and if so, check access.
-     * 
-     * @since 2.1.5
-     * @return void
-     */
-    private function check_client_access () {
+	/**
+	 * Check Client Access
+	 *
+	 * Check if client is logged in and if so, check access.
+	 *
+	 * @since 2.1.5
+	 * @return void
+	 */
+	private function check_client_access() {
 
 		// Check client_session for access.
 		$access_utilities = new AccessUtilities();
 		$logged_client    = NS\MBO_Access()->get_session()->get( 'MBO_Client' );
 
-        if (! isset($logged_client->mbo_result)){
-            // Client isn't logged in so just return.
-            return;
-        }
+		if ( ! isset( $logged_client->mbo_result ) ) {
+			// Client isn't logged in so just return.
+			return;
+		}
 
-        $logged_client = $logged_client->mbo_result;
+		$logged_client = $logged_client->mbo_result;
 
 		if ( ! empty( $logged_client->access_levels ) ) {
 			foreach ( $logged_client->access_levels as $k => $level ) {
-				if ( in_array( $level, $this->atts['access_levels'], true ) ) {
+				if ( in_array( (int) $level, $this->atts['access_levels'], true ) ) {
 					$this->template_data['has_access'] = true;
 					$this->has_access                  = true;
 					break; // No need to look further.
@@ -327,5 +324,5 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 			$this->template_data['client_name'] = $logged_client->FirstName;
 			// @codingStandardsIgnoreEnd
 		}
-    }
+	}
 }

@@ -12,7 +12,7 @@ use MZoo\MzMboAccess\Core as Core;
 ?>
 	<div id="mzLogInContainer">
 
-		<form role="form" class="form-group" style="margin:1em 0;" data-async id="mzLogIn" data-target="#mzSignUpModal" method="POST">
+		<form role="form" class="form-group" style="margin:1em 0;" data-async id="mzLogIn" method="POST">
 
 			<h3><?php echo esc_html( $data->atts['call_to_action'] ); ?></h3>
 

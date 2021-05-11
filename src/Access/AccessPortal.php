@@ -53,6 +53,8 @@ class AccessPortal extends AccessUtilities {
 
 		$result['type'] = 'success';
 
+		$result['client_id'] = false;
+
 		// Parse the serialized form into an array.
 		$params = array();
 		parse_str( $_REQUEST['form'], $params );
@@ -75,10 +77,14 @@ class AccessPortal extends AccessUtilities {
 
 			$result['logged'] = $login['message'];
 
-			$result['client_id'] = $login['client_id'];
+			if ( ! empty( $login['client_id'] ) ) {
+				$result['client_id'] = $login['client_id'];
+			}
 		}
 
-		$access_levels = $this->check_access_permissions( $result['client_id'] );
+		if ( false !== $result['client_id'] ) {
+			$access_levels = $this->check_access_permissions( $result['client_id'] );
+		}
 
 		if ( ! empty( $access_levels ) ) {
 			$result['client_access_levels'] = $access_levels;

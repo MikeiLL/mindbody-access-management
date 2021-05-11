@@ -50,6 +50,14 @@ Steps to install and configure MZ MBO Access:
 
 == Changelog ==
 
+= v2.1.5 =
+Remove Carbon Fields from strauss/mozart management, as need's to be in
+own namespace in order to not conflict with other instances.
+Return empty arrays from check_mbo methods when checked items not
+present.
+Bugfix: Cast "level" string to int so strict comparison passes.
+Bugfix: Refactor date comparisons, see: https://stackoverflow.com/a/14084301/2223106
+
 = v2.1.4 =
 Only populate Access Levels forms from MBO if on that page.
 

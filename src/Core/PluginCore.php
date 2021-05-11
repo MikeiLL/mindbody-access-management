@@ -126,7 +126,7 @@ class PluginCore {
 		// Could also define_admin_hooks here.
 		$this->define_public_hooks();
 		$this->add_settings_page();
-        // $this->register_shortcodes();
+		// $this->register_shortcodes();
 
 		$this->session = Session\MzAccessSession::instance();
 	}
@@ -218,10 +218,13 @@ class PluginCore {
 		$access_portal = new Access\AccessPortal();
 		$client_portal = new Client\ClientPortal();
 		$carbon_fields = new Carbon_Fields\Carbon_Fields_Init();
-		// Load Carbon Fields
+
+		// Load Carbon Fields.
 		$this->loader->add_action( 'after_setup_theme', $carbon_fields, 'crb_load', 1 );
+
 		// Add Options page for Mindbody Access Levels.
 		$this->loader->add_action( 'carbon_fields_register_fields', $carbon_fields, 'access_levels_page' );
+
 		// Hook into Carbon Fields Fields Registered for shortcode so we have carbon fields option access.
 		$this->loader->add_action( 'carbon_fields_fields_registered', $this, 'register_shortcode' );
 
@@ -321,11 +324,11 @@ class PluginCore {
 	 * Registers the plugins shortcode.
 	 *
 	 * Called _after_ Carbon fields hook so we have access.
-     * 
+	 *
 	 * @access public
 	 */
 	public function register_shortcode() {
 		$access_display = new Access\AccessDisplay();
-		add_shortcode( 'mbo-client-access', array($access_display, 'handle_shortcode') );
+		add_shortcode( 'mbo-client-access', array( $access_display, 'handle_shortcode' ) );
 	}
 }
