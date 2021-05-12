@@ -43,12 +43,16 @@
   },
   "repositories": [
     {
+      "url": "https://github.com/brianhenryie/strauss",
+      "type": "git"
+    },
+    {
       "url": "https://github.com/ericmann/wp-session-manager",
       "type": "git"
     }
   ],
   "require-dev": {
-    "brianhenryie/strauss": "^0.8.6",
+    "brianhenryie/strauss": "^0.8.3",
     "squizlabs/php_codesniffer": "*",
     "wp-coding-standards/wpcs": "*"
   },
@@ -58,14 +62,33 @@
     }
   },
   "extra": {
-    "strauss": {
+    "mozart": {
       "dep_namespace": "MZoo\\MzMboAccess\\Dependencies\\",
       "dep_directory": "/src/Mozart/",
       "packages": [
+        "htmlburger/carbon-fields",
         "ericmann/wp-session-manager",
         "ericmann/sessionz"
       ],
-      "delete_vendor_files": false
+      "delete_vendor_files": false,
+      "override_autoload": {
+        "htmlburger/carbon-fields": {
+          "psr-4": {
+            "Carbon_Fields\\": "core/"
+          },
+          "files": [
+            "config.php",
+            "templates",
+            "assets",
+            "build"
+          ]
+        }
+      },
+      "exclude_from_prefix": {
+        "packages": [
+          "htmlburger/carbon-fields"
+        ]
+      }
     }
   }
 }
