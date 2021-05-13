@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: mindbody, schedule, calendar, yoga, MBO, mindbodyonline, gym, access, restrict
 Requires at least: 3.0.1
 Tested up to: 5.7.1
-Stable tag: 2.1.4
+Stable tag: 2.1.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -57,6 +57,7 @@ Return empty arrays from check_mbo methods when checked items not
 present.
 Bugfix: Cast "level" string to int so strict comparison passes.
 Bugfix: Refactor date comparisons, see: https://stackoverflow.com/a/14084301/2223106
+Simplify default login form.
 
 = v2.1.4 =
 Only populate Access Levels forms from MBO if on that page.
