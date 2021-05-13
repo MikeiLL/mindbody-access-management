@@ -58,6 +58,7 @@ present.
 Bugfix: Cast "level" string to int so strict comparison passes.
 Bugfix: Refactor date comparisons, see: https://stackoverflow.com/a/14084301/2223106
 Simplify default login form.
+Allow users to select from posts or pages for access level redirect.
 
 = v2.1.4 =
 Only populate Access Levels forms from MBO if on that page.
