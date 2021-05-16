@@ -135,7 +135,12 @@ class Carbon_Fields_Init {
 		// Make sure there's an empty entry for default selection.
 		$this->posts_for_options = array( __( 'No Redirect', 'mz-mbo-access' ) );
 
-		$posts = get_posts( array( 'post_type' => ['page', 'post'], 'numberposts' => -1 ) );
+		$posts = get_posts(
+			array(
+				'post_type'   => array( 'page', 'post' ),
+				'numberposts' => -1,
+			)
+		);
 		foreach ( $posts as $k => $post ) {
 			$this->posts_for_options[ get_post_permalink( $post->ID ) ] = $post->post_title;
 		}

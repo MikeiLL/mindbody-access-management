@@ -12,7 +12,7 @@
  * @since 1.0.0
  *
  * @license MIT
- * Modified by Mike iLL Kilmer on 11-May-2021 using Strauss.
+ * Modified by Mike iLL Kilmer on 16-May-2021 using Strauss.
  * @see https://github.com/BrianHenryIE/strauss
  */
 
