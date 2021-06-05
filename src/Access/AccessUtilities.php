@@ -11,10 +11,10 @@ namespace MZoo\MzMboAccess\Access;
 
 use MZoo\MzMboAccess as NS;
 use MZoo\MzMindbody as MZ;
-use MZoo\MzMboAccess\Core as Core;
-use MZoo\MzMboAccess\Client as Client;
-use MZoo\MzMindbody\Common as Common;
-use MZoo\MzMindbody\Common\Interfaces as Interfaces;
+use MZoo\MzMboAccess\Core;
+use MZoo\MzMboAccess\Client;
+use MZoo\MzMindbody\Common;
+use MZoo\MzMindbody\Common\Interfaces;
 
 /**
  * Access Utilities Class
@@ -92,7 +92,18 @@ class AccessUtilities extends Client\RetrieveClient {
 	 */
 	public function check_access_permissions( $client_id ) {
 
-		return $this->set_client_access_level( $client_id );
+		// If client isn't logged in, return empty array.
+		$client_object = new Client\RetrieveClient;
+		$logged_in     = $client_object->check_client_logged();
+		if ( false === $logged_in ) {
+			return array();
+		}
+
+		try {
+			return $this->set_client_access_level( $client_id );
+		} catch ( \Exception $e ) {
+			return $e->getMessage();
+		}
 
 	}
 
@@ -132,11 +143,13 @@ class AccessUtilities extends Client\RetrieveClient {
 		 *
 		 * )
 		 */
-		$this->client_contract_ids = $this->get_client_contract_ids( $client_id );
-
-		$this->client_membership_ids = $this->get_client_active_membership_ids( $client_id );
-
-		$this->client_service_ids = $this->get_client_valid_service_ids( $client_id );
+		try {
+			$this->client_contract_ids   = $this->get_client_contract_ids( $client_id );
+			$this->client_membership_ids = $this->get_client_active_membership_ids( $client_id );
+			$this->client_service_ids    = $this->get_client_valid_service_ids( $client_id );
+		} catch ( \Exception $e ) {
+			return $e->getMessage();
+		}
 
 		// Populate client access levels with levels client has access to.
 		foreach ( $this->mindbody_access_levels as $k => $level ) {
@@ -268,7 +281,7 @@ class AccessUtilities extends Client\RetrieveClient {
 	 * Get Client Purchase IDs
 	 *
 	 * @since 2.1.1
-	 * @access protected.
+	 * @access protected
 	 * @param int $client_id MBO client Id.
 	 * @return array of IDs of services client has.
 	 */

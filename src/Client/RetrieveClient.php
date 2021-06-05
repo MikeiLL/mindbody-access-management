@@ -228,7 +228,7 @@ class RetrieveClient extends Interfaces\Retrieve {
 				)
 			);
 		} catch ( \Exception $e ) {
-			return $e->getMessage();
+			return 'V5 API Error: ' . $e->getMessage();
 		}
 
 		return $result;

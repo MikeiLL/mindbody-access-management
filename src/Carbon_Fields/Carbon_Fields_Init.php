@@ -146,4 +146,5 @@ class Carbon_Fields_Init {
 		}
 		return $this->posts_for_options;
 	}
+
 }

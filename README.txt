@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: mindbody, schedule, calendar, yoga, MBO, mindbodyonline, gym, access, restrict
 Requires at least: 3.0.1
 Tested up to: 5.7.1
-Stable tag: 2.1.5
+Stable tag: 2.1.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -49,6 +49,9 @@ Steps to install and configure MZ MBO Access:
 7. Access Granted.
 
 == Changelog ==
+
+= v2.1.6 =
+Bypass access check for non-logged clients.
 
 = v2.1.5 =
 Remove Carbon Fields from strauss/mozart management, as need's to be in

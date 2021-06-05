@@ -305,8 +305,8 @@
 
 
       /**
-             * Logout of MBO
-             */
+       * Logout of MBO
+       */
       $(document).on(
         'click', "#MBOLogout", function (ev) {
           ev.preventDefault();
@@ -349,8 +349,9 @@
        * Continually Check if Client is Logged in and Update Status
        *
        * This asks server to check if session has been set with client info
+       * every sixty seconds.
        */
-      setInterval(mz_mbo_check_client_logged, 15000);
+      setInterval(mz_mbo_check_client_logged, 60000);
 
       function mz_mbo_check_client_logged() {
         // Only do this up to 1000 times or so so it's not pinging server all day
@@ -360,8 +361,7 @@
           return;
         }
 
-
-        //this will repeat every 15 seconds
+        //this will repeat every minute
         $.ajax(
           {
             dataType: 'json',
@@ -383,13 +383,14 @@
       setInterval(mz_mbo_update_client_access, 3600000);
 
       function mz_mbo_update_client_access() {
-        // Only do this up to 250 times or so
-        number_of_mbo_log_access_checks++;
-        if (number_of_mbo_log_access_checks >= 500) {
+
+        if (!mz_mindbody_access_state.logged_in) {
           return;
         }
 
-        if (!mz_mindbody_access_state.logged_in) {
+        // Only do this up to 250 times or so
+        number_of_mbo_log_access_checks++;
+        if (number_of_mbo_log_access_checks >= 500) {
           return;
         }
 
