@@ -1,8 +1,8 @@
 <?php
 
-namespace MZoo\MzMboAccess\Dependencies\Carbon_Fields\Datastore;
+namespace Carbon_Fields\Datastore;
 
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Field\Field;
+use Carbon_Fields\Field\Field;
 
 /**
  * Abstract meta datastore class.
@@ -62,7 +62,7 @@ abstract class Meta_Datastore extends Key_Value_Datastore {
 		global $wpdb;
 
 		$storage_key_patterns = $this->key_toolset->get_storage_key_deleter_patterns(
-			( $field instanceof \MZoo\MzMboAccess\Dependencies\Carbon_Fields\Field\Complex_Field ),
+			( $field instanceof \Carbon_Fields\Field\Complex_Field ),
 			$field->is_simple_root_field(),
 			$this->get_full_hierarchy_for_field( $field ),
 			$this->get_full_hierarchy_index_for_field( $field )

@@ -1,8 +1,8 @@
 <?php
 
-namespace MZoo\MzMboAccess\Dependencies\Carbon_Fields\Value_Set;
+namespace Carbon_Fields\Value_Set;
 
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Exception\Incorrect_Syntax_Exception;
+use Carbon_Fields\Exception\Incorrect_Syntax_Exception;
 
 /**
  * Class representing a field's value/value_set

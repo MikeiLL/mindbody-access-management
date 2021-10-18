@@ -1,11 +1,11 @@
 <?php
 
-namespace MZoo\MzMboAccess\Dependencies\Carbon_Fields\Container\Fulfillable\Translator;
+namespace Carbon_Fields\Container\Fulfillable\Translator;
 
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Container\Fulfillable\Fulfillable;
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Container\Fulfillable\Fulfillable_Collection;
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Container\Condition\Condition;
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Exception\Incorrect_Syntax_Exception;
+use Carbon_Fields\Container\Fulfillable\Fulfillable;
+use Carbon_Fields\Container\Fulfillable\Fulfillable_Collection;
+use Carbon_Fields\Container\Condition\Condition;
+use Carbon_Fields\Exception\Incorrect_Syntax_Exception;
 
 abstract class Translator {
 

@@ -1,9 +1,9 @@
 <?php
 
-namespace MZoo\MzMboAccess\Dependencies\Carbon_Fields\Container\Condition;
+namespace Carbon_Fields\Container\Condition;
 
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Helper\Helper;
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Exception\Incorrect_Syntax_Exception;
+use Carbon_Fields\Helper\Helper;
+use Carbon_Fields\Exception\Incorrect_Syntax_Exception;
 
 class Factory {
 
@@ -15,7 +15,7 @@ class Factory {
 	/**
 	 * Constructor
 	 *
-	 * @param \MZoo\MzMboAccess\Dependencies\Carbon_Fields\Pimple\Container $ioc
+	 * @param \Carbon_Fields\Pimple\Container $ioc
 	 */
 	public function __construct( $ioc ) {
 		$this->ioc = $ioc;

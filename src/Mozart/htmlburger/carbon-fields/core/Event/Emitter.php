@@ -1,6 +1,6 @@
 <?php
 
-namespace MZoo\MzMboAccess\Dependencies\Carbon_Fields\Event;
+namespace Carbon_Fields\Event;
 
 class Emitter {
 
@@ -105,7 +105,7 @@ class Emitter {
 	 * @return Listener
 	 */
 	public function on( $event, $callable ) {
-		$listener = \MZoo\MzMboAccess\Dependencies\Carbon_Fields\Carbon_Fields::resolve( 'event_persistent_listener' );
+		$listener = \Carbon_Fields\Carbon_Fields::resolve( 'event_persistent_listener' );
 		$listener->set_callable( $callable );
 		return $this->add_listener( $event, $listener );
 	}
@@ -118,7 +118,7 @@ class Emitter {
 	 * @return Listener
 	 */
 	public function once( $event, $callable ) {
-		$listener = \MZoo\MzMboAccess\Dependencies\Carbon_Fields\Carbon_Fields::resolve( 'event_single_event_listener' );
+		$listener = \Carbon_Fields\Carbon_Fields::resolve( 'event_single_event_listener' );
 		$listener->set_callable( $callable );
 		return $this->add_listener( $event, $listener );
 	}

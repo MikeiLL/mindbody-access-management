@@ -1,27 +1,27 @@
 <?php
 
-namespace MZoo\MzMboAccess\Dependencies\Carbon_Fields;
+namespace Carbon_Fields;
 
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Pimple\Container as PimpleContainer;
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Helper\Helper;
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Loader\Loader;
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Container\Repository as ContainerRepository;
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Toolset\Key_Toolset;
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Toolset\WP_Toolset;
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Service\Meta_Query_Service;
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Service\Legacy_Storage_Service_v_1_5;
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Service\Revisions_Service;
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Service\REST_API_Service;
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Libraries\Sidebar_Manager\Sidebar_Manager;
+use Carbon_Fields\Pimple\Container as PimpleContainer;
+use Carbon_Fields\Helper\Helper;
+use Carbon_Fields\Loader\Loader;
+use Carbon_Fields\Container\Repository as ContainerRepository;
+use Carbon_Fields\Toolset\Key_Toolset;
+use Carbon_Fields\Toolset\WP_Toolset;
+use Carbon_Fields\Service\Meta_Query_Service;
+use Carbon_Fields\Service\Legacy_Storage_Service_v_1_5;
+use Carbon_Fields\Service\Revisions_Service;
+use Carbon_Fields\Service\REST_API_Service;
+use Carbon_Fields\Libraries\Sidebar_Manager\Sidebar_Manager;
 
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\REST_API\Router as REST_API_Router;
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\REST_API\Decorator as REST_API_Decorator;
+use Carbon_Fields\REST_API\Router as REST_API_Router;
+use Carbon_Fields\REST_API\Decorator as REST_API_Decorator;
 
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Event\Emitter;
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Event\PersistentListener;
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Event\SingleEventListener;
+use Carbon_Fields\Event\Emitter;
+use Carbon_Fields\Event\PersistentListener;
+use Carbon_Fields\Event\SingleEventListener;
 
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Exception\Incorrect_Syntax_Exception;
+use Carbon_Fields\Exception\Incorrect_Syntax_Exception;
 
 /**
  * Holds a static reference to the ioc container
@@ -382,7 +382,7 @@ final class Carbon_Fields {
 			return new SingleEventListener();
 		};
 
-		$ioc->register( new \MZoo\MzMboAccess\Dependencies\Carbon_Fields\Provider\Container_Condition_Provider() );
+		$ioc->register( new \Carbon_Fields\Provider\Container_Condition_Provider() );
 
 		return $ioc;
 	}

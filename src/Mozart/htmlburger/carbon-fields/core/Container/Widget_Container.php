@@ -1,8 +1,8 @@
 <?php
 
-namespace MZoo\MzMboAccess\Dependencies\Carbon_Fields\Container;
+namespace Carbon_Fields\Container;
 
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Helper\Helper;
+use Carbon_Fields\Helper\Helper;
 
 /**
  * Widget container class
@@ -96,7 +96,7 @@ class Widget_Container extends Container {
 	 * Output the container markup
 	 */
 	public function render() {
-		include \MZoo\MzMboAccess\Dependencies\Carbon_Fields\DIR . '/templates/Container/widget.php';
+		include \Carbon_Fields\DIR . '/templates/Container/widget.php';
 	}
 
 	/**

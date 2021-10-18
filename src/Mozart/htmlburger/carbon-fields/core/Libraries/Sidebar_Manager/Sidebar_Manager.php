@@ -1,6 +1,6 @@
 <?php
 
-namespace MZoo\MzMboAccess\Dependencies\Carbon_Fields\Libraries\Sidebar_Manager;
+namespace Carbon_Fields\Libraries\Sidebar_Manager;
 
 /**
  * This class is responsible for handling custom sidebars.
@@ -174,8 +174,8 @@ class Sidebar_Manager {
 	 * Enqueue the UI scripts.
 	 */
 	public function enqueue_scripts() {
-		wp_enqueue_style( 'carbon-sidebar-manager', \MZoo\MzMboAccess\Dependencies\Carbon_Fields\URL . '/core/Libraries/Sidebar_Manager/assets/css/app.css', array(), \MZoo\MzMboAccess\Dependencies\Carbon_Fields\VERSION );
-		wp_enqueue_script( 'carbon-sidebar-manager', \MZoo\MzMboAccess\Dependencies\Carbon_Fields\URL . '/core/Libraries/Sidebar_Manager/assets/js/app.js', array(), \MZoo\MzMboAccess\Dependencies\Carbon_Fields\VERSION );
+		wp_enqueue_style( 'carbon-sidebar-manager', \Carbon_Fields\URL . '/core/Libraries/Sidebar_Manager/assets/css/app.css', array(), \Carbon_Fields\VERSION );
+		wp_enqueue_script( 'carbon-sidebar-manager', \Carbon_Fields\URL . '/core/Libraries/Sidebar_Manager/assets/js/app.js', array(), \Carbon_Fields\VERSION );
 		wp_localize_script( 'carbon-sidebar-manager', 'crbSidebarl10n',
 			array(
 				'add_sidebar' => __( 'Add Sidebar', 'carbon-fields' ),

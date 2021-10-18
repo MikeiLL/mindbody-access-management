@@ -1,9 +1,9 @@
 <?php
 
-namespace MZoo\MzMboAccess\Dependencies\Carbon_Fields\Datastore;
+namespace Carbon_Fields\Datastore;
 
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Helper\Helper;
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Exception\Incorrect_Syntax_Exception;
+use Carbon_Fields\Helper\Helper;
+use Carbon_Fields\Exception\Incorrect_Syntax_Exception;
 
 /**
  * Base datastore.

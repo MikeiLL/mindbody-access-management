@@ -1,6 +1,6 @@
 <?php
 
-namespace MZoo\MzMboAccess\Dependencies\Carbon_Fields\Container\Fulfillable;
+namespace Carbon_Fields\Container\Fulfillable;
 
 interface Fulfillable {
 

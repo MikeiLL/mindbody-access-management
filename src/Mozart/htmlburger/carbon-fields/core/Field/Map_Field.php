@@ -1,8 +1,8 @@
 <?php
 
-namespace MZoo\MzMboAccess\Dependencies\Carbon_Fields\Field;
+namespace Carbon_Fields\Field;
 
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Value_Set\Value_Set;
+use Carbon_Fields\Value_Set\Value_Set;
 
 /**
  * Google Maps with Address field class.

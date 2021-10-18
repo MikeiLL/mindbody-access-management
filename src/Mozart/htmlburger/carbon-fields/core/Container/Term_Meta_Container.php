@@ -1,9 +1,9 @@
 <?php
 
-namespace MZoo\MzMboAccess\Dependencies\Carbon_Fields\Container;
+namespace Carbon_Fields\Container;
 
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Helper\Helper;
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Datastore\Datastore;
+use Carbon_Fields\Helper\Helper;
+use Carbon_Fields\Datastore\Datastore;
 
 /**
  * Term meta container class.
@@ -163,7 +163,7 @@ class Term_Meta_Container extends Container {
 			$this->set_term_id( $term->term_id );
 		}
 
-		include \MZoo\MzMboAccess\Dependencies\Carbon_Fields\DIR . '/templates/Container/term_meta.php';
+		include \Carbon_Fields\DIR . '/templates/Container/term_meta.php';
 	}
 
 	/**

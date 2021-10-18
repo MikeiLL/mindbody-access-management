@@ -1,9 +1,9 @@
 <?php
 
-namespace MZoo\MzMboAccess\Dependencies\Carbon_Fields\Container\Condition;
+namespace Carbon_Fields\Container\Condition;
 
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Container\Fulfillable\Fulfillable;
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Exception\Incorrect_Syntax_Exception;
+use Carbon_Fields\Container\Fulfillable\Fulfillable;
+use Carbon_Fields\Exception\Incorrect_Syntax_Exception;
 
 /**
  * Base container condition class
@@ -20,7 +20,7 @@ abstract class Condition implements Fulfillable {
 	/**
 	 * Comparers to use for condition checking
 	 *
-	 * @var \MZoo\MzMboAccess\Dependencies\Carbon_Fields\Container\Condition\Comparer\Comparer[]
+	 * @var \Carbon_Fields\Container\Condition\Comparer\Comparer[]
 	 */
 	protected $comparers = array();
 
@@ -57,7 +57,7 @@ abstract class Condition implements Fulfillable {
 	/**
 	 * Get the condition comparers
 	 *
-	 * @return \MZoo\MzMboAccess\Dependencies\Carbon_Fields\Container\Condition\Comparer\Comparer[]
+	 * @return \Carbon_Fields\Container\Condition\Comparer\Comparer[]
 	 */
 	protected function get_comparers() {
 		return $this->comparers;
@@ -66,7 +66,7 @@ abstract class Condition implements Fulfillable {
 	/**
 	 * Set the condition comparers
 	 *
-	 * @param \MZoo\MzMboAccess\Dependencies\Carbon_Fields\Container\Condition\Comparer\Comparer[] $comparers
+	 * @param \Carbon_Fields\Container\Condition\Comparer\Comparer[] $comparers
 	 * @return Condition $this
 	 */
 	public function set_comparers( $comparers ) {

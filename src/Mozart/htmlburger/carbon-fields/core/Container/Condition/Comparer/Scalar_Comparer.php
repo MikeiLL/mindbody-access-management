@@ -1,8 +1,8 @@
 <?php
 
-namespace MZoo\MzMboAccess\Dependencies\Carbon_Fields\Container\Condition\Comparer;
+namespace Carbon_Fields\Container\Condition\Comparer;
 
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Exception\Incorrect_Syntax_Exception;
+use Carbon_Fields\Exception\Incorrect_Syntax_Exception;
 
 class Scalar_Comparer extends Comparer {
 

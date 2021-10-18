@@ -1,6 +1,6 @@
 <?php
 
-namespace MZoo\MzMboAccess\Dependencies\Carbon_Fields\Event;
+namespace Carbon_Fields\Event;
 
 class SingleEventListener extends PersistentListener {
 

@@ -1,10 +1,10 @@
 <?php
 
-namespace MZoo\MzMboAccess\Dependencies\Carbon_Fields\Field;
+namespace Carbon_Fields\Field;
 
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Datastore\Datastore_Interface;
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Value_Set\Value_Set;
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Exception\Incorrect_Syntax_Exception;
+use Carbon_Fields\Datastore\Datastore_Interface;
+use Carbon_Fields\Value_Set\Value_Set;
+use Carbon_Fields\Exception\Incorrect_Syntax_Exception;
 
 /**
  * Complex field class.

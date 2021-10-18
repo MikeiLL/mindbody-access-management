@@ -1,9 +1,9 @@
 <?php
 
-namespace MZoo\MzMboAccess\Dependencies\Carbon_Fields\Container;
+namespace Carbon_Fields\Container;
 
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Datastore\Datastore;
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Exception\Incorrect_Syntax_Exception;
+use Carbon_Fields\Datastore\Datastore;
+use Carbon_Fields\Exception\Incorrect_Syntax_Exception;
 
 /**
  * Theme options container class.

@@ -1,8 +1,8 @@
 <?php
 
-namespace MZoo\MzMboAccess\Dependencies\Carbon_Fields\Toolset;
+namespace Carbon_Fields\Toolset;
 
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Exception\Incorrect_Syntax_Exception;
+use Carbon_Fields\Exception\Incorrect_Syntax_Exception;
 
 /**
  * Provides common tools when dealing with WordPress data such as posts, terms etc.

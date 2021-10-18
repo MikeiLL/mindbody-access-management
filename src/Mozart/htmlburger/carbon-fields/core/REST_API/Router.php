@@ -1,9 +1,9 @@
 <?php
 
-namespace MZoo\MzMboAccess\Dependencies\Carbon_Fields\REST_API;
+namespace Carbon_Fields\REST_API;
 
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Helper\Helper;
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Container\Repository as ContainerRepository;
+use Carbon_Fields\Helper\Helper;
+use Carbon_Fields\Container\Repository as ContainerRepository;
 
 /**
 * Register custom routes for REST API
@@ -310,7 +310,7 @@ class Router {
 		$options      = isset( $_GET['options'] ) ? explode( ';', $_GET['options'] ) : array();
 		$return_value = array();
 
-		/** @var \MZoo\MzMboAccess\Dependencies\Carbon_Fields\Field\Association_Field $field */
+		/** @var \Carbon_Fields\Field\Association_Field $field */
 		$field = Helper::get_field( null, $container_id, $field_id );
 
 		$options = array_map( function ( $option ) {
@@ -354,7 +354,7 @@ class Router {
 		$container_id = $_GET['container_id'];
 		$field_id     = $_GET['field_id'];
 
-		/** @var \MZoo\MzMboAccess\Dependencies\Carbon_Fields\Field\Association_Field $field */
+		/** @var \Carbon_Fields\Field\Association_Field $field */
 		$field = Helper::get_field( null, $container_id, $field_id );
 
 		return $field->get_options( array(

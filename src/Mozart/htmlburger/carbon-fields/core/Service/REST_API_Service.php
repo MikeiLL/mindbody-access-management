@@ -1,9 +1,9 @@
 <?php
 
-namespace MZoo\MzMboAccess\Dependencies\Carbon_Fields\Service;
+namespace Carbon_Fields\Service;
 
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\REST_API\Router;
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\REST_API\Decorator;
+use Carbon_Fields\REST_API\Router;
+use Carbon_Fields\REST_API\Decorator;
 
 /*
  * Service which provides the ability to do meta queries for multi-value fields and nested fields

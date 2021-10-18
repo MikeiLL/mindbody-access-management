@@ -126,9 +126,9 @@ class PluginCore {
 		// Could also define_admin_hooks here.
 		$this->define_public_hooks();
 		$this->add_settings_page();
+		// $this->register_shortcodes();
 
 		$this->session = Session\MzAccessSession::instance();
-		$this->register_shortcodes();
 	}
 
 	/**
@@ -218,10 +218,15 @@ class PluginCore {
 		$access_portal = new Access\AccessPortal();
 		$client_portal = new Client\ClientPortal();
 		$carbon_fields = new Carbon_Fields\Carbon_Fields_Init();
-		// Load Carbon Fields
+
+		// Load Carbon Fields.
 		$this->loader->add_action( 'after_setup_theme', $carbon_fields, 'crb_load', 1 );
+
 		// Add Options page for Mindbody Access Levels.
 		$this->loader->add_action( 'carbon_fields_register_fields', $carbon_fields, 'access_levels_page' );
+
+		// Hook into Carbon Fields Fields Registered for shortcode so we have carbon fields option access.
+		$this->loader->add_action( 'carbon_fields_fields_registered', $this, 'register_shortcode' );
 
 		// Start Ajax Access Management.
 		$this->loader->add_action( 'wp_ajax_nopriv_ajax_login_check_access_permissions', $access_portal, 'ajax_login_check_access_permissions' );
@@ -257,6 +262,7 @@ class PluginCore {
 		// Start Ajax Check Client Logged Status.
 		$this->loader->add_action( 'wp_ajax_nopriv_ajax_check_client_logged', $client_portal, 'ajax_check_client_logged' );
 		$this->loader->add_action( 'wp_ajax_ajax_check_client_logged', $client_portal, 'ajax_check_client_logged' );
+
 	}
 
 
@@ -315,14 +321,14 @@ class PluginCore {
 	}
 
 	/**
-	 * Registers all the plugins shortcodes.
+	 * Registers the plugins shortcode.
 	 *
-	 * - Events - The Events Class which displays events and loads necessary assets.
+	 * Called _after_ Carbon fields hook so we have access.
 	 *
-	 * @access private
+	 * @access public
 	 */
-	private function register_shortcodes() {
+	public function register_shortcode() {
 		$access_display = new Access\AccessDisplay();
-		$access_display->register( 'mbo-client-access' );
+		add_shortcode( 'mbo-client-access', array( $access_display, 'handle_shortcode' ) );
 	}
 }

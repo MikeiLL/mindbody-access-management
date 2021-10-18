@@ -1,10 +1,10 @@
 <?php
 
-namespace MZoo\MzMboAccess\Dependencies\Carbon_Fields\Datastore;
+namespace Carbon_Fields\Datastore;
 
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Helper\Helper;
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Field\Field;
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Exception\Incorrect_Syntax_Exception;
+use Carbon_Fields\Helper\Helper;
+use Carbon_Fields\Field\Field;
+use Carbon_Fields\Exception\Incorrect_Syntax_Exception;
 
 /**
  * Key Value Datastore
@@ -15,7 +15,7 @@ abstract class Key_Value_Datastore extends Datastore {
 	/**
 	 * Key Toolset for key generation and comparison utilities
 	 *
-	 * @var \MZoo\MzMboAccess\Dependencies\Carbon_Fields\Toolset\Key_Toolset
+	 * @var \Carbon_Fields\Toolset\Key_Toolset
 	 */
 	protected $key_toolset;
 
@@ -23,7 +23,7 @@ abstract class Key_Value_Datastore extends Datastore {
 	 * Initialize the datastore.
 	 */
 	public function __construct() {
-		$this->key_toolset = \MZoo\MzMboAccess\Dependencies\Carbon_Fields\Carbon_Fields::resolve( 'key_toolset' );
+		$this->key_toolset = \Carbon_Fields\Carbon_Fields::resolve( 'key_toolset' );
 		parent::__construct();
 	}
 

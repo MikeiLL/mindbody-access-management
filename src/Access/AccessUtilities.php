@@ -11,10 +11,10 @@ namespace MZoo\MzMboAccess\Access;
 
 use MZoo\MzMboAccess as NS;
 use MZoo\MzMindbody as MZ;
-use MZoo\MzMboAccess\Core as Core;
-use MZoo\MzMboAccess\Client as Client;
-use MZoo\MzMindbody\Common as Common;
-use MZoo\MzMindbody\Common\Interfaces as Interfaces;
+use MZoo\MzMboAccess\Core;
+use MZoo\MzMboAccess\Client;
+use MZoo\MzMindbody\Common;
+use MZoo\MzMindbody\Common\Interfaces;
 
 /**
  * Access Utilities Class
@@ -92,7 +92,18 @@ class AccessUtilities extends Client\RetrieveClient {
 	 */
 	public function check_access_permissions( $client_id ) {
 
-		return $this->set_client_access_level( $client_id );
+		// If client isn't logged in, return empty array.
+		$client_object = new Client\RetrieveClient;
+		$logged_in     = $client_object->check_client_logged();
+		if ( false === $logged_in ) {
+			return array();
+		}
+
+		try {
+			return $this->set_client_access_level( $client_id );
+		} catch ( \Exception $e ) {
+			return $e->getMessage();
+		}
 
 	}
 
@@ -132,11 +143,13 @@ class AccessUtilities extends Client\RetrieveClient {
 		 *
 		 * )
 		 */
-		$this->client_contract_ids = $this->get_client_contract_ids( $client_id );
-
-		$this->client_membership_ids = $this->get_client_active_membership_ids( $client_id );
-
-		$this->client_service_ids = $this->get_client_valid_service_ids( $client_id );
+		try {
+			$this->client_contract_ids   = $this->get_client_contract_ids( $client_id );
+			$this->client_membership_ids = $this->get_client_active_membership_ids( $client_id );
+			$this->client_service_ids    = $this->get_client_valid_service_ids( $client_id );
+		} catch ( \Exception $e ) {
+			return $e->getMessage();
+		}
 
 		// Populate client access levels with levels client has access to.
 		foreach ( $this->mindbody_access_levels as $k => $level ) {
@@ -174,9 +187,10 @@ class AccessUtilities extends Client\RetrieveClient {
 			$service['ExpirationDate'],
 			wp_timezone()
 		);
-		$now                = new \DateTimeImmutable( 'now', wp_timezone() );
 
-		if ( $service_expiration->date < $now->date ) {
+		$now = new \DateTimeImmutable( 'now', wp_timezone() );
+
+		if ( $service_expiration->format( 'Y-m-d\TH:i:s.v' ) < $now->format( 'Y-m-d\TH:i:s.v' ) ) {
 			return false;
 		}
 
@@ -267,7 +281,7 @@ class AccessUtilities extends Client\RetrieveClient {
 	 * Get Client Purchase IDs
 	 *
 	 * @since 2.1.1
-	 * @access protected.
+	 * @access protected
 	 * @param int $client_id MBO client Id.
 	 * @return array of IDs of services client has.
 	 */
@@ -288,10 +302,10 @@ class AccessUtilities extends Client\RetrieveClient {
 	 * Return true if client has access to any of the subscriptions in this level.
 	 *
 	 * @since 2.1.1
-	 * @param int $client_id MBO client Id.
-	 * @param int $level Indexed at (level +1) in mbo_access_access_levels options array.
 	 *
-	 * (
+	 * @param int $client_id MBO client Id.
+	 * @param int $level level index plus one from mbo_access_access_levels:
+	 *
 	 *    [_type] => access_level
 	 *    [access_level_name] => Corporate Member
 	 *    [access_level_contracts] => Array
@@ -307,8 +321,7 @@ class AccessUtilities extends Client\RetrieveClient {
 	 *      (
 	 *      )
 	 *
-	 *   [access_level_redirect_post] => http://project.test/?post_type=post&p=20030
-	 * )
+	 *   [access_level_redirect_post] => http://project.test/?post_type=post&p=20030.
 	 *
 	 * @return bool has or does not have access to level.
 	 */
@@ -338,6 +351,7 @@ class AccessUtilities extends Client\RetrieveClient {
 	 *
 	 * return true if purchased items matches one in received array (or string).
 	 *
+	 * @param int          $client_id from MBO.
 	 * @param string|array $purchase_types  of purchased items.
 	 *
 	 * @return bool

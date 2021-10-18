@@ -1,6 +1,6 @@
 <?php
 
-namespace MZoo\MzMboAccess\Dependencies\Carbon_Fields\Service;
+namespace Carbon_Fields\Service;
 
 abstract class Service {
 

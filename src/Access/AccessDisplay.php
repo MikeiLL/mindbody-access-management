@@ -186,37 +186,7 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 			'password_reset_request'         => $this->atts['password_reset_request'],
 		);
 
-		// Above test true? Then this is a content page. Check access permissions now.
-		// Check client_session for access.
-		$access_utilities = new AccessUtilities();
-		$logged_client    = NS\MBO_Access()->get_session()->get( 'MBO_Client' )->mbo_result;
-
-		if ( ! empty( $logged_client->access_levels ) ) {
-			foreach ( $logged_client->access_levels as $k => $level ) {
-				if ( in_array( $level, $this->atts['access_levels'], true ) ) {
-					$this->template_data['has_access'] = true;
-					$this->has_access                  = true;
-					break; // No need to look further.
-				}
-			}
-		}
-
-		if ( empty( $logged_client->access_levels ) ) {
-			// Need to ping the api.
-			$client_access_level = $access_utilities->check_access_permissions( $logged_client->ID );
-			if ( in_array( $client_access_level, $this->atts['access_levels'], true ) ) {
-				$this->template_data['has_access'] = true;
-				$this->has_access                  = true;
-			}
-		}
-
-		if ( ! empty( $logged_client->ID ) ) {
-			$this->template_data['logged_in'] = true;
-			$this->logged_in                  = true;
-			// @codingStandardsIgnoreStart (MBO Naming conventions)
-			$this->template_data['client_name'] = $logged_client->FirstName;
-			// @codingStandardsIgnoreEnd
-		}
+		$this->check_client_access();
 
 		$template_loader->set_template_data( $this->template_data );
 		$template_loader->get_template_part( 'access_container' );
@@ -279,10 +249,8 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 			'atts'                     => $this->atts,
 			'restricted_content'       => $this->restricted_content,
 			'site_id'                  => $this->site_id,
-			'logged_in'                => $this->check_client_logged,
 			'has_access'               => $this->has_access,
 			'denied_redirect'          => $this->atts['denied_redirect'],
-			'denied_message'           => $this->denied_message,
 			'required_access_levels'   => $this->get_shortcode_access_levels(),
 			'all_access_levels'        => $this->mbo_access_levels,
 			'redirection_message'      => __( 'Redirecting...', 'mz-mbo-access' ),
@@ -307,5 +275,54 @@ class AccessDisplay extends Interfaces\ShortcodeScriptLoader {
 			},
 			ARRAY_FILTER_USE_KEY
 		);
+	}
+
+	/**
+	 * Check Client Access
+	 *
+	 * Check if client is logged in and if so, check access.
+	 *
+	 * @since 2.1.5
+	 * @return void
+	 */
+	private function check_client_access() {
+
+		// Check client_session for access.
+		$access_utilities = new AccessUtilities();
+		$logged_client    = NS\MBO_Access()->get_session()->get( 'MBO_Client' );
+
+		if ( ! isset( $logged_client->mbo_result ) ) {
+			// Client isn't logged in so just return.
+			return;
+		}
+
+		$logged_client = $logged_client->mbo_result;
+
+		if ( ! empty( $logged_client->access_levels ) ) {
+			foreach ( $logged_client->access_levels as $k => $level ) {
+				if ( in_array( (int) $level, $this->atts['access_levels'], true ) ) {
+					$this->template_data['has_access'] = true;
+					$this->has_access                  = true;
+					break; // No need to look further.
+				}
+			}
+		}
+
+		if ( empty( $logged_client->access_levels ) ) {
+			// Need to ping the api.
+			$client_access_level = $access_utilities->check_access_permissions( $logged_client->ID );
+			if ( in_array( $client_access_level, $this->atts['access_levels'], true ) ) {
+				$this->template_data['has_access'] = true;
+				$this->has_access                  = true;
+			}
+		}
+
+		if ( ! empty( $logged_client->ID ) ) {
+			$this->template_data['logged_in'] = true;
+			$this->logged_in                  = true;
+			// @codingStandardsIgnoreStart (MBO Naming conventions)
+			$this->template_data['client_name'] = $logged_client->FirstName;
+			// @codingStandardsIgnoreEnd
+		}
 	}
 }

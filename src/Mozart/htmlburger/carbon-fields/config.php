@@ -1,6 +1,6 @@
 <?php
 
-namespace MZoo\MzMboAccess\Dependencies\Carbon_Fields;
+namespace Carbon_Fields;
 
 # Define version constant
 if ( ! defined( __NAMESPACE__ . '\VERSION' ) ) {
@@ -14,7 +14,7 @@ if ( ! defined( __NAMESPACE__ . '\DIR' ) ) {
 
 # Define root URL
 if ( ! defined( __NAMESPACE__ . '\URL' ) ) {
-	define( __NAMESPACE__ . '\URL', Carbon_Fields::directory_to_url( \MZoo\MzMboAccess\Dependencies\Carbon_Fields\DIR ) );
+	define( __NAMESPACE__ . '\URL', Carbon_Fields::directory_to_url( \Carbon_Fields\DIR ) );
 }
 
 # Define whether to compact input fields into a single one to avoid hitting max_input_vars

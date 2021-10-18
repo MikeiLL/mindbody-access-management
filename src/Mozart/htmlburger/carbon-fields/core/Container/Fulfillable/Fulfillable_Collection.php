@@ -1,10 +1,10 @@
 <?php
 
-namespace MZoo\MzMboAccess\Dependencies\Carbon_Fields\Container\Fulfillable;
+namespace Carbon_Fields\Container\Fulfillable;
 
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Container\Condition\Factory;
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Container\Fulfillable\Translator\Array_Translator;
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Exception\Incorrect_Syntax_Exception;
+use Carbon_Fields\Container\Condition\Factory;
+use Carbon_Fields\Container\Fulfillable\Translator\Array_Translator;
+use Carbon_Fields\Exception\Incorrect_Syntax_Exception;
 
 class Fulfillable_Collection implements Fulfillable {
 
@@ -67,7 +67,7 @@ class Fulfillable_Collection implements Fulfillable {
 	 * @return Fulfillable_Collection
 	 */
 	protected function create_collection() {
-		return \MZoo\MzMboAccess\Dependencies\Carbon_Fields\Carbon_Fields::resolve( 'container_condition_fulfillable_collection' );
+		return \Carbon_Fields\Carbon_Fields::resolve( 'container_condition_fulfillable_collection' );
 	}
 
 	/**

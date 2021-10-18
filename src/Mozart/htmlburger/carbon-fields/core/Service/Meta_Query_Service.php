@@ -1,10 +1,10 @@
 <?php
 
-namespace MZoo\MzMboAccess\Dependencies\Carbon_Fields\Service;
+namespace Carbon_Fields\Service;
 
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Container\Repository as ContainerRepository;
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Toolset\Key_Toolset;
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Value_Set\Value_Set;
+use Carbon_Fields\Container\Repository as ContainerRepository;
+use Carbon_Fields\Toolset\Key_Toolset;
+use Carbon_Fields\Value_Set\Value_Set;
 
 /*
  * Service which provides the ability to do meta queries for multi-value fields and nested fields

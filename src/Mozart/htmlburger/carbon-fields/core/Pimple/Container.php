@@ -24,7 +24,7 @@
  * THE SOFTWARE.
  */
 
-namespace MZoo\MzMboAccess\Dependencies\Carbon_Fields\Pimple;
+namespace Carbon_Fields\Pimple;
 
 /**
  * Container main class.

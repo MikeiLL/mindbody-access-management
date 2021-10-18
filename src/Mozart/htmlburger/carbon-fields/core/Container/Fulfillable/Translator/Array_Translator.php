@@ -1,11 +1,11 @@
 <?php
 
-namespace MZoo\MzMboAccess\Dependencies\Carbon_Fields\Container\Fulfillable\Translator;
+namespace Carbon_Fields\Container\Fulfillable\Translator;
 
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Container\Condition\Factory;
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Container\Fulfillable\Fulfillable_Collection;
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Container\Condition\Condition;
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Exception\Incorrect_Syntax_Exception;
+use Carbon_Fields\Container\Condition\Factory;
+use Carbon_Fields\Container\Fulfillable\Fulfillable_Collection;
+use Carbon_Fields\Container\Condition\Condition;
+use Carbon_Fields\Exception\Incorrect_Syntax_Exception;
 
 class Array_Translator extends Translator {
 
@@ -117,7 +117,7 @@ class Array_Translator extends Translator {
 	 */
 	protected function foreign_to_native_fulfillable_collection( $foreign ) {
 		$fulfillable_comparison = isset( $foreign['relation'] ) ? $foreign['relation'] : 'AND';
-		$collection = \MZoo\MzMboAccess\Dependencies\Carbon_Fields\Carbon_Fields::resolve( 'container_condition_fulfillable_collection' );
+		$collection = \Carbon_Fields\Carbon_Fields::resolve( 'container_condition_fulfillable_collection' );
 		foreach ( $foreign as $key => $value ) {
 			if ( $key === 'relation' ) {
 				continue; // ignore the relation key - we are only interested in condition definitions

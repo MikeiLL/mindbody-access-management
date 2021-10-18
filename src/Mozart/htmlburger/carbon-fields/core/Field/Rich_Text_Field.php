@@ -1,6 +1,6 @@
 <?php
 
-namespace MZoo\MzMboAccess\Dependencies\Carbon_Fields\Field;
+namespace Carbon_Fields\Field;
 
 /**
  * WYSIWYG rich text area field class.

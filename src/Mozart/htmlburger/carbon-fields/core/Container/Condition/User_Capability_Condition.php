@@ -1,6 +1,6 @@
 <?php
 
-namespace MZoo\MzMboAccess\Dependencies\Carbon_Fields\Container\Condition;
+namespace Carbon_Fields\Container\Condition;
 
 /**
  * Check if user has a specific capability

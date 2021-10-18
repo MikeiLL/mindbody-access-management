@@ -1,6 +1,6 @@
 <?php
 
-namespace MZoo\MzMboAccess\Dependencies\Carbon_Fields\Walker;
+namespace Carbon_Fields\Walker;
 
 /**
  * Walker for the administration nav menu editing.

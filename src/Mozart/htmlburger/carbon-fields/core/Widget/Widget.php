@@ -1,11 +1,11 @@
 <?php
 
-namespace MZoo\MzMboAccess\Dependencies\Carbon_Fields\Widget;
+namespace Carbon_Fields\Widget;
 
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Helper\Helper;
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Container\Container;
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Datastore\Datastore;
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Exception\Incorrect_Syntax_Exception;
+use Carbon_Fields\Helper\Helper;
+use Carbon_Fields\Container\Container;
+use Carbon_Fields\Datastore\Datastore;
+use Carbon_Fields\Exception\Incorrect_Syntax_Exception;
 
 /**
  * Widget, datastore and container handler class.
@@ -16,7 +16,7 @@ abstract class Widget extends \WP_Widget {
 	/**
 	 * Widget Datastore
 	 *
-	 * @var \MZoo\MzMboAccess\Dependencies\Carbon_Fields\Datastore\Widget_Datastore
+	 * @var \Carbon_Fields\Datastore\Widget_Datastore
 	 */
 	protected $datastore;
 
@@ -61,7 +61,7 @@ abstract class Widget extends \WP_Widget {
 	 * @param string $classname   String of CSS classes
 	 */
 	public function setup( $widget_id, $title, $description, $fields, $classname = '' ) {
-		\MZoo\MzMboAccess\Dependencies\Carbon_Fields\Carbon_Fields::verify_boot();
+		\Carbon_Fields\Carbon_Fields::verify_boot();
 		$widget_id = $this->widget_id_prefix . $widget_id;
 
 		$this->datastore = Datastore::make( 'widget' );
@@ -205,7 +205,7 @@ abstract class Widget extends \WP_Widget {
 	 */
 	public function add_fields( $fields ) {
 		foreach ( $fields as $field ) {
-			if ( ! ( $field instanceof \MZoo\MzMboAccess\Dependencies\Carbon_Fields\Field\Field ) ) {
+			if ( ! ( $field instanceof \Carbon_Fields\Field\Field ) ) {
 				Incorrect_Syntax_Exception::raise( 'Object must be of type Carbon_Fields\\Field\\Field' );
 				return;
 			}

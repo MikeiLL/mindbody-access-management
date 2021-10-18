@@ -1,6 +1,6 @@
 <?php
 
-namespace MZoo\MzMboAccess\Dependencies\Carbon_Fields;
+namespace Carbon_Fields;
 
 /**
  * Block proxy factory class.

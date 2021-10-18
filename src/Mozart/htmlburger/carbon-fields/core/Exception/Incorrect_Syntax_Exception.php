@@ -1,6 +1,6 @@
 <?php
 
-namespace MZoo\MzMboAccess\Dependencies\Carbon_Fields\Exception;
+namespace Carbon_Fields\Exception;
 
 class Incorrect_Syntax_Exception extends \Exception {
 
@@ -39,6 +39,6 @@ class Incorrect_Syntax_Exception extends \Exception {
 		$errors = static::$errors;
 		$plural = count( $errors ) === 1 ? '' : 's';
 
-		include \MZoo\MzMboAccess\Dependencies\Carbon_Fields\DIR . '/templates/Exception/incorrect-syntax.php';
+		include \Carbon_Fields\DIR . '/templates/Exception/incorrect-syntax.php';
 	}
 }

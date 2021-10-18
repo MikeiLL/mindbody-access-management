@@ -1,6 +1,6 @@
 <?php
 
-namespace MZoo\MzMboAccess\Dependencies\Carbon_Fields\Container;
+namespace Carbon_Fields\Container;
 
 /**
  * Broken container class.

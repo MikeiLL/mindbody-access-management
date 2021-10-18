@@ -1,10 +1,10 @@
 <?php
 
-namespace MZoo\MzMboAccess\Dependencies\Carbon_Fields\Field;
+namespace Carbon_Fields\Field;
 
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Helper\Delimiter;
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Helper\Helper;
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Value_Set\Value_Set;
+use Carbon_Fields\Helper\Delimiter;
+use Carbon_Fields\Helper\Helper;
+use Carbon_Fields\Value_Set\Value_Set;
 
 /**
  * Multiselect field class.

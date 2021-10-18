@@ -1,10 +1,10 @@
 <?php
 
-namespace MZoo\MzMboAccess\Dependencies\Carbon_Fields\Container;
+namespace Carbon_Fields\Container;
 
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Helper\Helper;
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Datastore\Datastore;
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Exception\Incorrect_Syntax_Exception;
+use Carbon_Fields\Helper\Helper;
+use Carbon_Fields\Datastore\Datastore;
+use Carbon_Fields\Exception\Incorrect_Syntax_Exception;
 
 /**
  * Nav menu item fields container class.
@@ -159,7 +159,7 @@ class Nav_Menu_Item_Container extends Container {
 	 * Output the container markup
 	 */
 	public function render() {
-		include \MZoo\MzMboAccess\Dependencies\Carbon_Fields\DIR . '/templates/Container/nav_menu_item.php';
+		include \Carbon_Fields\DIR . '/templates/Container/nav_menu_item.php';
 	}
 
 	/**

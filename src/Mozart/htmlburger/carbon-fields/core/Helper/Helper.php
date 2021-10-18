@@ -1,9 +1,9 @@
 <?php
 
-namespace MZoo\MzMboAccess\Dependencies\Carbon_Fields\Helper;
+namespace Carbon_Fields\Helper;
 
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Datastore\Datastore;
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Exception\Incorrect_Syntax_Exception;
+use Carbon_Fields\Datastore\Datastore;
+use Carbon_Fields\Exception\Incorrect_Syntax_Exception;
 use WP_Query;
 
 /**
@@ -17,12 +17,12 @@ class Helper {
 	 * @param  string  $container_type Container type to search in. Optional if $container_id is supplied
 	 * @param  string  $container_id   Container id to search in. Optional if $container_type is supplied
 	 * @param  string  $field_name     Field name to search for
-	 * @return \MZoo\MzMboAccess\Dependencies\Carbon_Fields\Field\Field
+	 * @return \Carbon_Fields\Field\Field
 	 */
 	public static function get_field( $container_type, $container_id, $field_name ) {
-		\MZoo\MzMboAccess\Dependencies\Carbon_Fields\Carbon_Fields::verify_fields_registered();
+		\Carbon_Fields\Carbon_Fields::verify_fields_registered();
 
-		$repository = \MZoo\MzMboAccess\Dependencies\Carbon_Fields\Carbon_Fields::resolve( 'container_repository' );
+		$repository = \Carbon_Fields\Carbon_Fields::resolve( 'container_repository' );
 		if ( $container_id ) {
 			return $repository->get_field_in_container( $field_name, $container_id );
 		}
@@ -37,7 +37,7 @@ class Helper {
 	 * @param  string $container_type Container type to search in. Optional if $container_id is supplied
 	 * @param  string $container_id   Container id to search in. Optional if $container_type is supplied
 	 * @param  string $field_name     Field name to search for
-	 * @return \MZoo\MzMboAccess\Dependencies\Carbon_Fields\Field\Field
+	 * @return \Carbon_Fields\Field\Field
 	 */
 	public static function get_field_clone( $object_id, $container_type, $container_id, $field_name ) {
 		$field = static::get_field( $container_type, $container_id, $field_name );
@@ -108,7 +108,7 @@ class Helper {
 				if ( ! $field ) {
 					return '';
 				}
-				/** @var \MZoo\MzMboAccess\Dependencies\Carbon_Fields\Field\Field $field */
+				/** @var \Carbon_Fields\Field\Field $field */
 				$field->load();
 				return $field->get_formatted_value();
 			}
@@ -137,7 +137,7 @@ class Helper {
 					Incorrect_Syntax_Exception::raise( 'Could not find a field which satisfies the supplied pattern ' . $container_message . ': ' . $field_name );
 					return;
 				}
-				/** @var \MZoo\MzMboAccess\Dependencies\Carbon_Fields\Field\Field $field */
+				/** @var \Carbon_Fields\Field\Field $field */
 				$field->set_value( $value );
 				$field->save();
 			}
@@ -634,7 +634,7 @@ class Helper {
 		$input = ( isset( $_SERVER['REQUEST_METHOD'] ) && $_SERVER['REQUEST_METHOD'] === 'POST' ) ? $_POST : $_GET;
 		$input = stripslashes_deep( $input );
 
-		if ( \MZoo\MzMboAccess\Dependencies\Carbon_Fields\COMPACT_INPUT ) {
+		if ( \Carbon_Fields\COMPACT_INPUT ) {
 			$input = static::expand_compacted_input( $input );
 		}
 
@@ -648,8 +648,8 @@ class Helper {
 	 * @return array
 	 */
 	public static function expand_compacted_input( $input ) {
-		if ( isset( $input[ \MZoo\MzMboAccess\Dependencies\Carbon_Fields\COMPACT_INPUT_KEY ] ) ) {
-			$inputs = $input[ \MZoo\MzMboAccess\Dependencies\Carbon_Fields\COMPACT_INPUT_KEY ];
+		if ( isset( $input[ \Carbon_Fields\COMPACT_INPUT_KEY ] ) ) {
+			$inputs = $input[ \Carbon_Fields\COMPACT_INPUT_KEY ];
 			$input = array_merge( $input, $inputs );
 		}
 		return $input;

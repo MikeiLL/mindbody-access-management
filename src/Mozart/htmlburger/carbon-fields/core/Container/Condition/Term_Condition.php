@@ -1,8 +1,8 @@
 <?php
 
-namespace MZoo\MzMboAccess\Dependencies\Carbon_Fields\Container\Condition;
+namespace Carbon_Fields\Container\Condition;
 
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Toolset\WP_Toolset;
+use Carbon_Fields\Toolset\WP_Toolset;
 
 /**
  * Check for a specific term

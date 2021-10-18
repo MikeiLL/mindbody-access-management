@@ -1,15 +1,15 @@
 <?php
 
-namespace MZoo\MzMboAccess\Dependencies\Carbon_Fields\Container;
+namespace Carbon_Fields\Container;
 
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Carbon_Fields;
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Helper\Helper;
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Field\Field;
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Field\Group_Field;
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Container\Fulfillable\Fulfillable_Collection;
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Datastore\Datastore_Interface;
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Datastore\Datastore_Holder_Interface;
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Exception\Incorrect_Syntax_Exception;
+use Carbon_Fields\Carbon_Fields;
+use Carbon_Fields\Helper\Helper;
+use Carbon_Fields\Field\Field;
+use Carbon_Fields\Field\Group_Field;
+use Carbon_Fields\Container\Fulfillable\Fulfillable_Collection;
+use Carbon_Fields\Datastore\Datastore_Interface;
+use Carbon_Fields\Datastore\Datastore_Holder_Interface;
+use Carbon_Fields\Exception\Incorrect_Syntax_Exception;
 
 /**
  * Base container class.
@@ -143,7 +143,7 @@ abstract class Container implements Datastore_Holder_Interface {
 	/**
 	 * Translator to use when translating conditions to json
 	 *
-	 * @var \MZoo\MzMboAccess\Dependencies\Carbon_Fields\Container\Fulfillable\Translator\Translator
+	 * @var \Carbon_Fields\Container\Fulfillable\Translator\Translator
 	 */
 	protected $condition_translator;
 
@@ -219,7 +219,7 @@ abstract class Container implements Datastore_Holder_Interface {
 	 * @param string                 $title                Title of the container
 	 * @param string                 $type                 Type of the container
 	 * @param Fulfillable_Collection $condition_collection
-	 * @param \MZoo\MzMboAccess\Dependencies\Carbon_Fields\Container\Fulfillable\Translator\Translator $condition_translator
+	 * @param \Carbon_Fields\Container\Fulfillable\Translator\Translator $condition_translator
 	 */
 	public function __construct( $id, $title, $type, $condition_collection, $condition_translator ) {
 		Carbon_Fields::verify_boot();
@@ -553,7 +553,7 @@ abstract class Container implements Datastore_Holder_Interface {
 					$field = clone $f;
 					$field->set_hierarchy_index( $hierarchy_index );
 				} else {
-					if ( ! ( $f instanceof \MZoo\MzMboAccess\Dependencies\Carbon_Fields\Field\Complex_Field ) ) {
+					if ( ! ( $f instanceof \Carbon_Fields\Field\Complex_Field ) ) {
 						return null;
 					}
 

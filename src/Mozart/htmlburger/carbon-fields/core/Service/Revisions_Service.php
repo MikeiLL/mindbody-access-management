@@ -1,8 +1,8 @@
 <?php
 
-namespace MZoo\MzMboAccess\Dependencies\Carbon_Fields\Service;
+namespace Carbon_Fields\Service;
 
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Carbon_Fields;
+use Carbon_Fields\Carbon_Fields;
 
 class Revisions_Service extends Service {
 	const CHANGE_KEY = 'carbon_fields_changed';
@@ -63,7 +63,7 @@ class Revisions_Service extends Service {
 
 	/**
 	 * @param int $post_id
-	 * @param \MZoo\MzMboAccess\Dependencies\Carbon_Fields\Container\Post_Meta_Container $container
+	 * @param \Carbon_Fields\Container\Post_Meta_Container $container
 	 */
 	public function maybe_copy_meta_to_revision( $post_id, $container ) {
 		if ( ! $container || $container->get_revisions_disabled() ) {
@@ -165,12 +165,12 @@ class Revisions_Service extends Service {
 		$repository = Carbon_Fields::resolve( 'container_repository' );
 		$containers = $repository->get_containers( 'post_meta' );
 		$containers = array_filter( $containers, function( $container ) {
-			/** @var \MZoo\MzMboAccess\Dependencies\Carbon_Fields\Container\Post_Meta_Container $container */
+			/** @var \Carbon_Fields\Container\Post_Meta_Container $container */
 			return !$container->get_revisions_disabled();
 		} );
 		$fields = array();
 		foreach ( $containers as $container ) {
-			/** @var \MZoo\MzMboAccess\Dependencies\Carbon_Fields\Container\Post_Meta_Container $container */
+			/** @var \Carbon_Fields\Container\Post_Meta_Container $container */
 			foreach ( $container->get_fields() as $field ) {
 				$fields[ $field->get_name() ] = $field->get_label();
 			}
@@ -206,13 +206,13 @@ class Revisions_Service extends Service {
 	    $repository = Carbon_Fields::resolve( 'container_repository' );
 	    $containers = $repository->get_containers( 'post_meta' );
 	    $containers = array_filter( $containers, function( $container ) {
-		    /** @var \MZoo\MzMboAccess\Dependencies\Carbon_Fields\Container\Post_Meta_Container $container */
+		    /** @var \Carbon_Fields\Container\Post_Meta_Container $container */
 	        return !$container->get_revisions_disabled();
 	    } );
 
 	    $field_keys = array();
 	    foreach ( $containers as $container ) {
-		    /** @var \MZoo\MzMboAccess\Dependencies\Carbon_Fields\Container\Post_Meta_Container $container */
+		    /** @var \Carbon_Fields\Container\Post_Meta_Container $container */
 	        foreach ( $container->get_fields() as $field ) {
 	            $field_keys[] = $field->get_name();
 	        }

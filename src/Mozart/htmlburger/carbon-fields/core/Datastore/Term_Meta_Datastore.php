@@ -1,8 +1,8 @@
 <?php
 
-namespace MZoo\MzMboAccess\Dependencies\Carbon_Fields\Datastore;
+namespace Carbon_Fields\Datastore;
 
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Field\Field;
+use Carbon_Fields\Field\Field;
 
 /**
  * Term meta datastore class.

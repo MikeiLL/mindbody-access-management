@@ -8,6 +8,10 @@
  * @package WP Session Manager
  * @subpackage Objects
  * @since 3.0
+ *
+ * @license GPL-2.0-or-later
+ * Modified by Mike iLL Kilmer on 16-May-2021 using Strauss.
+ * @see https://github.com/BrianHenryIE/strauss
  */
 
 namespace MZoo\MzMboAccess\Dependencies\EAMann\WPSession\Objects;
@@ -15,7 +19,7 @@ namespace MZoo\MzMboAccess\Dependencies\EAMann\WPSession\Objects;
 /**
  * Class Option
  *
- * @package EAMann\WPSession\Objects
+ * @package MZoo\MzMboAccess\Dependencies\EAMann\WPSession\Objects
  *
  * @property-read string $data Data enclosed by the item
  * @property-read int $time Timestamp when the item was created

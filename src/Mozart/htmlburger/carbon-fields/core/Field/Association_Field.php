@@ -1,8 +1,8 @@
 <?php
 
-namespace MZoo\MzMboAccess\Dependencies\Carbon_Fields\Field;
+namespace Carbon_Fields\Field;
 
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Value_Set\Value_Set;
+use Carbon_Fields\Value_Set\Value_Set;
 use WP_Query;
 use WP_Term_Query;
 use WP_User_Query;
@@ -20,7 +20,7 @@ class Association_Field extends Field {
 	/**
 	 * WP_Toolset instance for WP data loading
 	 *
-	 * @var \MZoo\MzMboAccess\Dependencies\Carbon_Fields\Toolset\WP_Toolset
+	 * @var \Carbon_Fields\Toolset\WP_Toolset
 	 */
 	protected $wp_toolset;
 
@@ -78,7 +78,7 @@ class Association_Field extends Field {
 	 * @param string $label Field label
 	 */
 	public function __construct( $type, $name, $label ) {
-		$this->wp_toolset = \MZoo\MzMboAccess\Dependencies\Carbon_Fields\Carbon_Fields::resolve( 'wp_toolset' );
+		$this->wp_toolset = \Carbon_Fields\Carbon_Fields::resolve( 'wp_toolset' );
 		$this->set_value_set( new Value_Set( Value_Set::TYPE_VALUE_SET, array( 'type' => '', 'subtype' => '', 'id' => 0 ) ) );
 		parent::__construct( $type, $name, $label );
 	}

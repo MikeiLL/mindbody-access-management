@@ -1,13 +1,13 @@
 <?php
 
-namespace MZoo\MzMboAccess\Dependencies\Carbon_Fields\Field;
+namespace Carbon_Fields\Field;
 
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Carbon_Fields;
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Datastore\Datastore_Interface;
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Datastore\Datastore_Holder_Interface;
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Value_Set\Value_Set;
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Helper\Helper;
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Exception\Incorrect_Syntax_Exception;
+use Carbon_Fields\Carbon_Fields;
+use Carbon_Fields\Datastore\Datastore_Interface;
+use Carbon_Fields\Datastore\Datastore_Holder_Interface;
+use Carbon_Fields\Value_Set\Value_Set;
+use Carbon_Fields\Helper\Helper;
+use Carbon_Fields\Exception\Incorrect_Syntax_Exception;
 
 /**
  * Base field class.

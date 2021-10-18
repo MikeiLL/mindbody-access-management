@@ -1,6 +1,6 @@
 <?php
 
-namespace MZoo\MzMboAccess\Dependencies\Carbon_Fields\Helper;
+namespace Carbon_Fields\Helper;
 
 /**
  * Color functions

@@ -1,9 +1,9 @@
 <?php
 
-namespace MZoo\MzMboAccess\Dependencies\Carbon_Fields\Container;
+namespace Carbon_Fields\Container;
 
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Helper\Helper;
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Exception\Incorrect_Syntax_Exception;
+use Carbon_Fields\Helper\Helper;
+use Carbon_Fields\Exception\Incorrect_Syntax_Exception;
 
 /**
  * Keeps track of all instantiated containers
@@ -105,7 +105,7 @@ class Repository {
 	 * @param  string                    $field_name
 	 * @param  string                    $container_id
 	 * @param  bool                      $include_nested_fields
-	 * @return \MZoo\MzMboAccess\Dependencies\Carbon_Fields\Field\Field
+	 * @return \Carbon_Fields\Field\Field
 	 */
 	public function get_field_in_container( $field_name, $container_id, $include_nested_fields = true ) {
 		$containers = $this->get_containers();
@@ -133,7 +133,7 @@ class Repository {
 	 * @param  string                    $field_name
 	 * @param  string                    $container_type
 	 * @param  bool                      $include_nested_fields
-	 * @return \MZoo\MzMboAccess\Dependencies\Carbon_Fields\Field\Field
+	 * @return \Carbon_Fields\Field\Field
 	 */
 	public function get_field_in_containers( $field_name, $container_type = null, $include_nested_fields = true ) {
 		$containers = $this->get_containers( $container_type );

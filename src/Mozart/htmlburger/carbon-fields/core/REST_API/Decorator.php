@@ -1,9 +1,9 @@
 <?php
 
-namespace MZoo\MzMboAccess\Dependencies\Carbon_Fields\REST_API;
+namespace Carbon_Fields\REST_API;
 
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Helper\Helper;
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Container\Repository as ContainerRepository;
+use Carbon_Fields\Helper\Helper;
+use Carbon_Fields\Container\Repository as ContainerRepository;
 
 /**
  * Decorate default REST routes with extra information provided by Carbon Fields
@@ -79,7 +79,7 @@ class Decorator {
 	/**
 	 * Get Post Meta Container visibility settings
 	 *
-	 * @param \MZoo\MzMboAccess\Dependencies\Carbon_Fields\Container\Post_Meta_Container $container
+	 * @param \Carbon_Fields\Container\Post_Meta_Container $container
 	 * @return array
 	 */
 	public static function get_post_meta_container_settings( $container ) {
@@ -89,7 +89,7 @@ class Decorator {
 	/**
 	 * Get Term Meta Container visibility settings
 	 *
-	 * @param \MZoo\MzMboAccess\Dependencies\Carbon_Fields\Container\Term_Meta_Container $container
+	 * @param \Carbon_Fields\Container\Term_Meta_Container $container
 	 * @return array
 	 */
 	public static function get_term_meta_container_settings( $container ) {
@@ -99,7 +99,7 @@ class Decorator {
 	/**
 	 * Get User Meta Container visibility settings
 	 *
-	 * @param \MZoo\MzMboAccess\Dependencies\Carbon_Fields\Container\User_Meta_Container $container
+	 * @param \Carbon_Fields\Container\User_Meta_Container $container
 	 * @return string
 	 */
 	public static function get_user_meta_container_settings( $container ) {
@@ -109,7 +109,7 @@ class Decorator {
 	/**
 	 * Get Comment Meta Container visibility settings
 	 *
-	 * @param \MZoo\MzMboAccess\Dependencies\Carbon_Fields\Container\Comment_Meta_Container $container
+	 * @param \Carbon_Fields\Container\Comment_Meta_Container $container
 	 * @return string
 	 */
 	public static function get_comment_meta_container_settings( $container ) {

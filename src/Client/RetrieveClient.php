@@ -125,6 +125,20 @@ class RetrieveClient extends Interfaces\Retrieve {
 
 		$validate_login = $this->validate_client( $valid_credentials );
 
+		if ( ! is_array( $validate_login ) || ! array_key_exists( 'ValidateLoginResult', $validate_login ) ) {
+
+			if ( is_array( $validate_login ) ) {
+				return array(
+					'type'    => 'error',
+					'message' => implode( ', ', $validate_login ),
+				);
+			}
+			return array(
+				'type'    => 'error',
+				'message' => $validate_login,
+			);
+		}
+
 		if ( ! empty( $validate_login['ValidateLoginResult']['GUID'] ) ) {
 			$client_info = $validate_login['ValidateLoginResult']['Client'];
 
@@ -184,7 +198,7 @@ class RetrieveClient extends Interfaces\Retrieve {
 				// Default fallback message.
 				return array(
 					'type'    => 'error',
-					'message' => __( 'Invalid Login', 'mz-mbo-access' ) . '<br/>',
+					'message' => __( 'Invalid Login', 'mz-mbo-access' ),
 				);
 			}
 		}
@@ -203,14 +217,19 @@ class RetrieveClient extends Interfaces\Retrieve {
 	public function validate_client( $validate_login_result ) {
 
 		// Create the MBO Object using API VERSION 5!
+
 		$this->get_mbo_results( 5 );
 
-		$result = $this->mb->ValidateLogin(
-			array(
-				'Username' => $validate_login_result['Username'],
-				'Password' => $validate_login_result['Password'],
-			)
-		);
+		try {
+			$result = $this->mb->ValidateLogin(
+				array(
+					'Username' => $validate_login_result['Username'],
+					'Password' => $validate_login_result['Password'],
+				)
+			);
+		} catch ( \Exception $e ) {
+			return 'V5 API Error: ' . $e->getMessage();
+		}
 
 		return $result;
 	}
@@ -462,6 +481,10 @@ class RetrieveClient extends Interfaces\Retrieve {
 			array( 'clientId' => $client_id )
 		); // Think this is not UniqueID.
 
+		if ( ! array_key_exists( 'ClientMemberships', $result ) ) {
+			return array();
+		}
+
 		return $result['ClientMemberships'];
 	}
 
@@ -538,6 +561,10 @@ class RetrieveClient extends Interfaces\Retrieve {
 			array( 'clientId' => $client_id )
 		);
 
+		if ( ! array_key_exists( 'Contracts', $result ) ) {
+			return array();
+		}
+
 		return $result['Contracts'];
 	}
 
@@ -584,7 +611,8 @@ class RetrieveClient extends Interfaces\Retrieve {
 	 * [Quantity] => 1
 	 *
 	 * @since: 1.0.1
-	 * @param int $client_id for MBO access..
+	 * @param int $client_id for MBO access.
+	 * @param int $start_date Datetime string to send to Mindbody.
 	 *
 	 * @return array numeric array of client purchases
 	 */
@@ -599,6 +627,10 @@ class RetrieveClient extends Interfaces\Retrieve {
 				'StartDate' => $start_date,
 			)
 		); // NOT "UniqueID".
+
+		if ( ! array_key_exists( 'Purchases', $result ) ) {
+			return array();
+		}
 
 		return $result['Purchases'];
 	}
@@ -645,6 +677,10 @@ class RetrieveClient extends Interfaces\Retrieve {
 		$result = $this->mb->GetClientServices(
 			array( 'clientId' => $client_id )
 		);
+
+		if ( ! array_key_exists( 'ClientServices', $result ) ) {
+			return array();
+		}
 
 		return $result['ClientServices'];
 	}

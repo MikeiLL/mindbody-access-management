@@ -1,15 +1,15 @@
 <?php
 
-namespace MZoo\MzMboAccess\Dependencies\Carbon_Fields\Loader;
+namespace Carbon_Fields\Loader;
 
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Container\Repository as ContainerRepository;
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Exception\Incorrect_Syntax_Exception;
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Helper\Helper;
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Libraries\Sidebar_Manager\Sidebar_Manager;
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Pimple\Container as PimpleContainer;
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Service\Legacy_Storage_Service_v_1_5;
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Service\Meta_Query_Service;
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Service\REST_API_Service;
+use Carbon_Fields\Container\Repository as ContainerRepository;
+use Carbon_Fields\Exception\Incorrect_Syntax_Exception;
+use Carbon_Fields\Helper\Helper;
+use Carbon_Fields\Libraries\Sidebar_Manager\Sidebar_Manager;
+use Carbon_Fields\Pimple\Container as PimpleContainer;
+use Carbon_Fields\Service\Legacy_Storage_Service_v_1_5;
+use Carbon_Fields\Service\Meta_Query_Service;
+use Carbon_Fields\Service\REST_API_Service;
 
 /**
  * Loader and main initialization
@@ -38,7 +38,7 @@ class Loader {
 		}
 
 		include_once( dirname( dirname( __DIR__ ) ) . '/config.php' );
-		include_once( \MZoo\MzMboAccess\Dependencies\Carbon_Fields\DIR . '/core/functions.php' );
+		include_once( \Carbon_Fields\DIR . '/core/functions.php' );
 
 		add_action( 'after_setup_theme', array( $this, 'load_textdomain' ), 9999 );
 		add_action( 'init', array( $this, 'trigger_fields_register' ), 0 );
@@ -51,16 +51,16 @@ class Loader {
 		add_action( 'wp_ajax_carbon_fields_fetch_association_options', array( $this, 'fetch_association_options' ) );
 
 		# Enable the legacy storage service
-		\MZoo\MzMboAccess\Dependencies\Carbon_Fields\Carbon_Fields::service( 'legacy_storage' )->enable();
+		\Carbon_Fields\Carbon_Fields::service( 'legacy_storage' )->enable();
 
 		# Enable the meta query service
-		\MZoo\MzMboAccess\Dependencies\Carbon_Fields\Carbon_Fields::service( 'meta_query' )->enable();
+		\Carbon_Fields\Carbon_Fields::service( 'meta_query' )->enable();
 
 		# Enable the REST API service
-		\MZoo\MzMboAccess\Dependencies\Carbon_Fields\Carbon_Fields::service( 'rest_api' )->enable();
+		\Carbon_Fields\Carbon_Fields::service( 'rest_api' )->enable();
 
 		# Enable post meta revisions service
-		\MZoo\MzMboAccess\Dependencies\Carbon_Fields\Carbon_Fields::service( 'revisions' )->enable();
+		\Carbon_Fields\Carbon_Fields::service( 'revisions' )->enable();
 
 		# Initialize sidebar manager
 		$this->sidebar_manager->boot();
@@ -70,7 +70,7 @@ class Loader {
 	 * Load the plugin textdomain.
 	 */
 	public function load_textdomain() {
-		$dir = \MZoo\MzMboAccess\Dependencies\Carbon_Fields\DIR . '/languages/';
+		$dir = \Carbon_Fields\DIR . '/languages/';
 		$domain = 'carbon-fields';
 		$domain_ui = 'carbon-fields-ui';
 		$locale = get_locale();
@@ -172,9 +172,9 @@ class Loader {
 
 		wp_enqueue_style(
 			'carbon-fields-' . $src,
-			\MZoo\MzMboAccess\Dependencies\Carbon_Fields\URL . '/build/' . $context . '/' . $src . $suffix . '.css',
+			\Carbon_Fields\URL . '/build/' . $context . '/' . $src . $suffix . '.css',
 			$deps,
-			\MZoo\MzMboAccess\Dependencies\Carbon_Fields\VERSION
+			\Carbon_Fields\VERSION
 		);
 	}
 
@@ -191,9 +191,9 @@ class Loader {
 
 		wp_enqueue_script(
 			'carbon-fields-' . $src,
-			\MZoo\MzMboAccess\Dependencies\Carbon_Fields\URL . '/build/' . $context . '/' . $src . $suffix . '.js',
+			\Carbon_Fields\URL . '/build/' . $context . '/' . $src . $suffix . '.js',
 			$deps,
-			\MZoo\MzMboAccess\Dependencies\Carbon_Fields\VERSION
+			\Carbon_Fields\VERSION
 		);
 	}
 
@@ -220,14 +220,14 @@ class Loader {
 		wp_add_inline_script( 'carbon-fields-vendor', 'window.cf = window.cf || {}', 'before' );
 		wp_add_inline_script( 'carbon-fields-vendor', sprintf( 'window.cf.preloaded = %s', wp_json_encode( $this->get_json_data() ) ), 'before' );
 
-		$revisions = \MZoo\MzMboAccess\Dependencies\Carbon_Fields\Carbon_Fields::service( 'revisions' );
+		$revisions = \Carbon_Fields\Carbon_Fields::service( 'revisions' );
 
 		wp_localize_script( 'carbon-fields-vendor', 'cf', apply_filters( 'carbon_fields_config', array(
 			'config' => array(
 				'locale' => $this->get_ui_translations(),
 				'pagenow' => $pagenow,
-				'compactInput' => \MZoo\MzMboAccess\Dependencies\Carbon_Fields\COMPACT_INPUT,
-				'compactInputKey' => \MZoo\MzMboAccess\Dependencies\Carbon_Fields\COMPACT_INPUT_KEY,
+				'compactInput' => \Carbon_Fields\COMPACT_INPUT,
+				'compactInputKey' => \Carbon_Fields\COMPACT_INPUT_KEY,
 				'revisionsInputKey' => $revisions::CHANGE_KEY,
 			)
 		) ) );
@@ -275,7 +275,7 @@ class Loader {
 		foreach ( $containers as $container ) {
 			$container_data = $container->to_json( true );
 
-			if ( is_a($container, '\\MZoo\MzMboAccess\Dependencies\Carbon_Fields\\Container\\Block_Container', true ) ) {
+			if ( is_a($container, '\\Carbon_Fields\\Container\\Block_Container', true ) ) {
 				$carbon_data['blocks'][] = $container_data;
 			} else {
 				$carbon_data['containers'][] = $container_data;
@@ -326,7 +326,7 @@ class Loader {
 		$container_id = $_GET['container_id'];
 		$field_name   = $_GET['field_name'];
 
-		/** @var \MZoo\MzMboAccess\Dependencies\Carbon_Fields\Field\Association_Field $field */
+		/** @var \Carbon_Fields\Field\Association_Field $field */
 		$field = Helper::get_field( null, $container_id, $field_name );
 
 		return wp_send_json_success( $field->get_options( array(

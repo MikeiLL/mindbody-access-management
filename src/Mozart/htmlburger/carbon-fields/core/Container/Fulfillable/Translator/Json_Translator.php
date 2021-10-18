@@ -1,8 +1,8 @@
 <?php
 
-namespace MZoo\MzMboAccess\Dependencies\Carbon_Fields\Container\Fulfillable\Translator;
+namespace Carbon_Fields\Container\Fulfillable\Translator;
 
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Container\Fulfillable\Fulfillable;
+use Carbon_Fields\Container\Fulfillable\Fulfillable;
 
 class Json_Translator extends Array_Translator {
 

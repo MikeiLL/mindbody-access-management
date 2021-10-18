@@ -1,6 +1,6 @@
 <?php
 
-namespace MZoo\MzMboAccess\Dependencies\Carbon_Fields\Container\Condition\Comparer;
+namespace Carbon_Fields\Container\Condition\Comparer;
 
 class Any_Equality_Comparer extends Comparer {
 

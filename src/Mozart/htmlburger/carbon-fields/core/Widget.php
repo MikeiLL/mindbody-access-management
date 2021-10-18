@@ -1,8 +1,8 @@
 <?php
 
-namespace MZoo\MzMboAccess\Dependencies\Carbon_Fields;
+namespace Carbon_Fields;
 
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Widget\Widget as Base_Widget;
+use Carbon_Fields\Widget\Widget as Base_Widget;
 
 /**
  * Widget proxy factory class.

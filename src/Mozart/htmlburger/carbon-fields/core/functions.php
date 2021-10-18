@@ -1,7 +1,7 @@
 <?php
 
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Helper\Helper;
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Helper\Color;
+use Carbon_Fields\Helper\Helper;
+use Carbon_Fields\Helper\Color;
 
 if ( ! function_exists( 'carbon_field_exists' ) ) {
 	function carbon_field_exists( $name, $container_type, $container_id = '' ) {

@@ -1,9 +1,9 @@
 <?php
 
-namespace MZoo\MzMboAccess\Dependencies\Carbon_Fields\Datastore;
+namespace Carbon_Fields\Datastore;
 
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Field\Field;
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Exception\Incorrect_Syntax_Exception;
+use Carbon_Fields\Field\Field;
+use Carbon_Fields\Exception\Incorrect_Syntax_Exception;
 
 /**
  * Widget datastore
@@ -77,7 +77,7 @@ class Widget_Datastore extends Key_Value_Datastore {
 	 */
 	public function delete( Field $field ) {
 		$storage_key_patterns = $this->key_toolset->get_storage_key_deleter_patterns(
-			( $field instanceof \MZoo\MzMboAccess\Dependencies\Carbon_Fields\Field\Complex_Field ),
+			( $field instanceof \Carbon_Fields\Field\Complex_Field ),
 			$field->is_simple_root_field(),
 			$this->get_full_hierarchy_for_field( $field ),
 			$this->get_full_hierarchy_index_for_field( $field )

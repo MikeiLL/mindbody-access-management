@@ -1,8 +1,8 @@
 <?php
 
-namespace MZoo\MzMboAccess\Dependencies\Carbon_Fields\Field;
+namespace Carbon_Fields\Field;
 
-use MZoo\MzMboAccess\Dependencies\Carbon_Fields\Helper\Helper;
+use Carbon_Fields\Helper\Helper;
 
 class Sidebar_Field extends Select_Field {
 
