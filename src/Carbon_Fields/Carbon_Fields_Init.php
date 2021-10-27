@@ -76,6 +76,7 @@ class Carbon_Fields_Init {
 								->add_options( self::get_posts_for_redirects() )
 								->set_help_text( __( 'Home page for this access level.', 'mz-mbo-access' ) )
 								->set_default_value( 0 ),
+							Field::make('uniqid', 'access_level_uniqid'),
 						)
 					)->set_help_text( __( 'Generate Access Levels by Mindbody Subscriptions, Memberships and/or Services.', 'mz-mbo-access' ) ),
 				)

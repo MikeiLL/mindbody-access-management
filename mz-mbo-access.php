@@ -7,8 +7,8 @@
  * @package MZMBOACCESS
  *
  * @wordpress-plugin
- * Version:         2.1.6
- * Stable tag:      2.1.6
+ * Version:         2.1.7
+ * Stable tag:      2.1.7
  * Author:          mZoo.org
  * Author URI:      http://www.mZoo.org/
  * Plugin URI:      http://www.mzoo.org/
@@ -58,16 +58,17 @@ if ( version_compare( PHP_VERSION, MINIMUM_PHP_VERSION, '<' ) ) {
 	add_action( 'admin_notices', NS . 'minimum_php_version' );
 	add_action( 'admin_init', __NAMESPACE__ . '\deactivate_plugins', INIT_LEVEL );
 } else {
+
 	/**
 	 * Autoload Classes
 	 */
-	$wp_mbo_access_autoload = NS\PLUGIN_NAME_DIR . '/vendor/autoload.php';
+	$wp_mbo_access_autoload = NS\PLUGIN_NAME_DIR . 'vendor/autoload.php';
 	if ( file_exists( $wp_mbo_access_autoload ) ) {
 		include_once $wp_mbo_access_autoload;
 	}
 
 	// Mozart-managed dependencies.
-	$wp_mbo_access_mozart_autoload = NS\PLUGIN_NAME_DIR . '/src/Mozart/autoload.php';
+	$wp_mbo_access_mozart_autoload = NS\PLUGIN_NAME_DIR . 'src/Mozart/autoload.php';
 	if ( file_exists( $wp_mbo_access_mozart_autoload ) ) {
 		include_once $wp_mbo_access_mozart_autoload;
 	}
@@ -232,6 +233,9 @@ function minimum_php_version() {
 function mbo_access_has_mindbody_api() {
 	if ( ! class_exists( MZ . '\Core\MzMindbodyApi' ) ) {
 		activation_failed( __( 'MZ MBO Access requires MZ Mindbody Api.', 'mz-mbo-access' ) );
+		add_action( 'admin_init', __NAMESPACE__ . '\deactivate_plugins', INIT_LEVEL );
+	} elseif ( ! class_exists( 'Carbon_Field_UniqID\UniqID_Field' ) ) {
+		activation_failed( __( 'MZ MBO On Demand Media requires Carbon Fields Uniqid plugin.', 'mz-mbo-access' ) );
 		add_action( 'admin_init', __NAMESPACE__ . '\deactivate_plugins', INIT_LEVEL );
 	} else {
 

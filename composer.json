@@ -29,10 +29,13 @@
       "phpcbf --extensions=php src *.php"
     ],
     "strauss": [
-      "vendor/bin/strauss"
+        "vendor/bin/strauss"
+    ],
+    "post-install-cmd": [
+        "@strauss"
     ],
     "post-update-cmd": [
-      "vendor/bin/strauss"
+        "@strauss"
     ]
   },
   "require": {
@@ -66,7 +69,6 @@
       "dep_namespace": "MZoo\\MzMboAccess\\Dependencies\\",
       "dep_directory": "/src/Mozart/",
       "packages": [
-        "htmlburger/carbon-fields",
         "ericmann/wp-session-manager",
         "ericmann/sessionz"
       ],
