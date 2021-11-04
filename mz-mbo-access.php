@@ -234,9 +234,6 @@ function mbo_access_has_mindbody_api() {
 	if ( ! class_exists( MZ . '\Core\MzMindbodyApi' ) ) {
 		activation_failed( __( 'MZ MBO Access requires MZ Mindbody Api.', 'mz-mbo-access' ) );
 		add_action( 'admin_init', __NAMESPACE__ . '\deactivate_plugins', INIT_LEVEL );
-	} elseif ( ! class_exists( 'Carbon_Field_UniqID\UniqID_Field' ) ) {
-		activation_failed( __( 'MZ MBO On Demand Media requires Carbon Fields Uniqid plugin.', 'mz-mbo-access' ) );
-		add_action( 'admin_init', __NAMESPACE__ . '\deactivate_plugins', INIT_LEVEL );
 	} else {
 
 		// Get MzMboAccess Instance.

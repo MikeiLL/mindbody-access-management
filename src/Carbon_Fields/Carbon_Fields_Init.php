@@ -57,27 +57,29 @@ class Carbon_Fields_Init {
 	 * @return void
 	 */
 	public function access_levels_page() {
-
+		$field_array = array(
+			Field::make( 'text', 'access_level_name', __( 'Name' ) ),
+			Field::make( 'multiselect', 'access_level_contracts', __( 'Mindbody Contracts' ) )
+				->add_options( self::get_mbo_contracts() ),
+			Field::make( 'multiselect', 'access_level_memberships', __( 'Mindbody Memberships' ) )
+				->add_options( self::get_mbo_memberships() ),
+			Field::make( 'multiselect', 'access_level_services', __( 'Mindbody Services' ) )
+				->add_options( self::get_mbo_services() ),
+			Field::make( 'select', 'access_level_redirect_post', __( 'Redirect Post' ) )
+				->add_options( self::get_posts_for_redirects() )
+				->set_help_text( __( 'Home page for this access level.', 'mz-mbo-access' ) )
+				->set_default_value( 0 ),
+		);
+		if ( class_exists( 'Carbon_Field_UniqID\UniqID_Field' ) ) {
+			array_push( $field_array, Field::make('uniqid', 'access_level_uniqid') );
+		}
 		Container\Container::make( 'theme_options', __( 'MBO Access Levels' ) )
 			->add_fields(
 				array(
 					Field::make( 'complex', 'mbo_access_access_levels', __( 'Access Level' ) )
 					->add_fields(
 						'access_level',
-						array(
-							Field::make( 'text', 'access_level_name', __( 'Name' ) ),
-							Field::make( 'multiselect', 'access_level_contracts', __( 'Mindbody Contracts' ) )
-								->add_options( self::get_mbo_contracts() ),
-							Field::make( 'multiselect', 'access_level_memberships', __( 'Mindbody Memberships' ) )
-								->add_options( self::get_mbo_memberships() ),
-							Field::make( 'multiselect', 'access_level_services', __( 'Mindbody Services' ) )
-								->add_options( self::get_mbo_services() ),
-							Field::make( 'select', 'access_level_redirect_post', __( 'Redirect Post' ) )
-								->add_options( self::get_posts_for_redirects() )
-								->set_help_text( __( 'Home page for this access level.', 'mz-mbo-access' ) )
-								->set_default_value( 0 ),
-							Field::make('uniqid', 'access_level_uniqid'),
-						)
+						$field_array,
 					)->set_help_text( __( 'Generate Access Levels by Mindbody Subscriptions, Memberships and/or Services.', 'mz-mbo-access' ) ),
 				)
 			);
