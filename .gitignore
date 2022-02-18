@@ -2,3 +2,6 @@ vendor
 composer.lock
 .DS_Store
 tests/Test_Options.php
+node_modules
+yarn.lock
+
