@@ -4,4 +4,5 @@ composer.lock
 tests/Test_Options.php
 node_modules
 yarn.lock
+src/Mozart/
 
