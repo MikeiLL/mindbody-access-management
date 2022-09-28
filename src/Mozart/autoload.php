@@ -14,3 +14,7 @@ if ( file_exists( __DIR__ . '/autoload-classmap.php' ) ) {
     }
     unset( $class_map );
 }
+
+if ( file_exists( __DIR__ . '/autoload-files.php' ) ) {
+    require_once __DIR__ . '/autoload-files.php';
+}
