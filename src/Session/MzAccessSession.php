@@ -60,14 +60,23 @@ class MzAccessSession {
 		if ( ! $this->should_start_session() ) {
 			return;
 		}
-		if ( PHP_SESSION_DISABLED !== session_status() && ( ! defined( 'WP_CLI' ) || false === WP_CLI ) ) {
+		if ( PHP_SESSION_DISABLED !== session_status() &&
+        ( ! defined( 'WP_CLI' ) || false === WP_CLI ) &&
+        ( ! defined( 'RUNNING_PHPUNIT' ) || false === RUNNING_PHPUNIT ) ) {
 			add_action( 'wp_loaded', array( $this, 'wp_session_manager_initialize' ), 1, 0 );
-
 			// If we're not in a cron, start the session.
 			if ( ! defined( 'DOING_CRON' ) || false === DOING_CRON ) {
 				add_action( 'wp_loaded', array( $this, 'wp_session_manager_start_session' ), 10, 0 );
 			}
 		}
+	}
+
+
+	/**
+	 * Return our session instance
+	 */
+	public function get_session() {
+		return $this->session;
 	}
 
 
