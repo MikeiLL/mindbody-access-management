@@ -6,6 +6,8 @@
  * @package Mz_MBO_Access
  */
 
+define('RUNNING_PHPUNIT', true);
+
 $_tests_dir = getenv( 'WP_TESTS_DIR' );
 
 if ( ! $_tests_dir ) {
