@@ -60,6 +60,11 @@ class MzAccessSession {
 		if ( ! $this->should_start_session() ) {
 			return;
 		}
+        // There were also issues with running PHPUNIT and getting
+        // Headers already sent warnings, which broke the tests.
+        // May, at some point, want to instantiate the sessions
+        // Separately from main plugin instance using
+        // add_action( 'template_redirect'
 		if ( PHP_SESSION_DISABLED !== session_status() &&
         ( ! defined( 'WP_CLI' ) || false === WP_CLI ) &&
         ( ! defined( 'RUNNING_PHPUNIT' ) || false === RUNNING_PHPUNIT ) ) {
