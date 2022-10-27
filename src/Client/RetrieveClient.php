@@ -9,7 +9,7 @@ namespace MZoo\MzMboAccess\Client;
 
 use MZoo\MzMindbody as MZ;
 use MZoo\MzMboAccess as NS;
-use MZoo\MzMboAccess\Session as Session;
+use MZoo\MzMindbody\Session as Session;
 use MZoo\MzMindbody\Core as Core;
 use MZoo\MzMindbody\Common as Common;
 use MZoo\MzMindbody\Libraries as Libraries;
@@ -85,7 +85,7 @@ class RetrieveClient extends Interfaces\Retrieve {
 	public function __construct() {
 		$this->date_format = Core\MzMindbodyApi::$date_format;
 		$this->time_format = Core\MzMindbodyApi::$time_format;
-		$this->session     = Session\MzAccessSession::instance();
+		$this->session     = Session\MzPhpSession::instance();
 	}
 
 	/**
@@ -114,9 +114,9 @@ class RetrieveClient extends Interfaces\Retrieve {
 			return array(
 				'type'    => 'error',
 				'message' => __(
-					'All Mindbody passwords must 
-                                contain 8 to 15 characters and 
-                                must include both letters and 
+					'All Mindbody passwords must
+                                contain 8 to 15 characters and
+                                must include both letters and
                                 numbers.',
 					'mz-mbo-access'
 				),

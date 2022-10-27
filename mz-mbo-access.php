@@ -39,7 +39,7 @@ define( NS . 'MZ', 'MZoo\MzMindbody' );
 
 define( NS . 'PLUGIN_NAME', 'mz-mbo-access' );
 
-define( NS . 'PLUGIN_VERSION', '2.1.6' );
+define( NS . 'PLUGIN_VERSION', '2.1.7' );
 
 define( NS . 'PLUGIN_NAME_DIR', plugin_dir_path( __FILE__ ) );
 

@@ -50,6 +50,9 @@ Steps to install and configure MZ MBO Access:
 
 == Changelog ==
 
+= v2.1.7 =
+Migrate Session management to parent plugin.
+
 = v2.1.6 =
 Bypass access check for non-logged clients.
 
@@ -109,13 +112,13 @@ Utilize Eric Mann Sessionz more effectively.
 
 = v2.0.2 =
 Remove some debug logging.
-Add new method to return single client details. 
+Add new method to return single client details.
 
 = v2.0.1 =
-Update composer dependencies. 
+Update composer dependencies.
 
 = v2.0.0 =
-Add more client details, including (limited) credit card 
+Add more client details, including (limited) credit card
 
 = v1.0.9 =
 Bugfix: Correct broken code in function that returns main plugin instance!
@@ -157,4 +160,3 @@ Initial release.
 == Notes ==
 
 None yet. Hopefully will work well.
-

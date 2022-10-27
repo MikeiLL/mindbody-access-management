@@ -261,7 +261,7 @@ msgid "Please Login"
 msgstr ""
 
 #: src/Core/PluginCore.php:140 src/Core/PluginCore.php:149
-#: src/Session/MzAccessSession.php:241 src/Session/MzAccessSession.php:250
+#: src/Session/MzPhpSession.php:241 src/Session/MzPhpSession.php:250
 msgid "Cheatin&#8217; huh?"
 msgstr ""
 
@@ -406,7 +406,7 @@ msgstr ""
 msgid "No options are available for this widget."
 msgstr ""
 
-#: src/Session/MzAccessSession.php:227
+#: src/Session/MzPhpSession.php:227
 msgid ""
 "Another plugin is attempting to start a session with WordPress. WP Session "
 "Manager will not work!"

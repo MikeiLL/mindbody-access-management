@@ -15,7 +15,7 @@ use MZoo\MzMindbody as MZ;
 use MZoo\MzMboAccess\Access;
 use MZoo\MzMboAccess\Client;
 use MZoo\MzMboAccess\Backend;
-use MZoo\MzMboAccess\Session;
+use MZoo\MzMindbody\Session;
 use MZoo\MzMboAccess\Carbon_Fields;
 
 /**
@@ -106,7 +106,7 @@ class PluginCore {
 	/**
 	 * Session object
 	 *
-	 * @var    $session MzAccessSession
+	 * @var    $session MzPhpSession
 	 * @access private
 	 */
 	private $session;
@@ -128,7 +128,7 @@ class PluginCore {
 		$this->add_settings_page();
 		// $this->register_shortcodes();
 
-		$this->session = Session\MzAccessSession::instance();
+		$this->session = Session\MzPhpSession::instance();
 	}
 
 	/**

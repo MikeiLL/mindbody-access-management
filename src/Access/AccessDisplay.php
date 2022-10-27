@@ -12,7 +12,7 @@ namespace MZoo\MzMboAccess\Access;
 use MZoo\MzMboAccess as NS;
 use MZoo\MzMindbody as MZ;
 use MZoo\MzMboAccess\Core as Core;
-use MZoo\MzMboAccess\Session as Session;
+use MZoo\MzMindbody\Session as Session;
 use MZoo\MzMboAccess\Client as Client;
 use MZoo\MzMindbody\Site as Site;
 use MZoo\MzMindbody\Common as Common;

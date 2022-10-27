@@ -20,7 +20,6 @@ class MBO_Access_Test_Options {
     public static $_CLIENTID = '';
     // For now you will have to manually add this:
     public static $_CLIENTPASSWORD = '';
-    public static $_OAUTHSECRET = HI1/L05mP5aeRNpYxn9+8OERkHP89Uxvc6bogSKF6lc=
     // Sandbox Sign-in URL https://clients.mindbodyonline.com/ASP/su1.asp?studioid=-99
 }
 ?>
